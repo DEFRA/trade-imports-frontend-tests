@@ -1,3 +1,5 @@
+import { generateAccessibilityReportIndex } from './test/accessibility-checking.js'
+
 import allure from 'allure-commandline'
 
 const debug = process.env.DEBUG
@@ -307,6 +309,7 @@ export const config = {
    * @param {<Object>} results object containing test results
    */
   onComplete: function (exitCode, config, capabilities, results) {
+    generateAccessibilityReportIndex()
     const reportError = new Error('Could not generate Allure report')
     const generation = allure(['generate', 'allure-results', '--clean'])
 
