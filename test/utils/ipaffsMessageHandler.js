@@ -1,7 +1,15 @@
 import { request } from 'undici'
+import { setGlobalDispatcher, ProxyAgent, request } from 'undici'
 import crypto from 'crypto'
 
 export async function sendIpaffsMessage(json) {
+
+  const proxy = process.env.CDP_HTTPS_PROXY
+  
+  if (proxy) {
+    setGlobalDispatcher(new ProxyAgent({ uri: proxy }));
+  }
+
   const url = `https://${process.env.ENVIRONMENT}treinfsb1001.servicebus.windows.net/defra.trade.imports.notification-topic/messages`
 
   const accessToken = createSharedAccessToken(
