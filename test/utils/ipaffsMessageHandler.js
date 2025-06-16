@@ -1,12 +1,9 @@
-import { setGlobalDispatcher, ProxyAgent, request } from 'undici'
+import { ProxyAgent, request } from 'undici'
 import crypto from 'crypto'
 
 export async function sendIpaffsMessage(json) {
   const proxy = process.env.CDP_HTTPS_PROXY
-
-  if (proxy) {
-    setGlobalDispatcher(new ProxyAgent({ uri: proxy }))
-  }
+  let proxyAgent
 
   const url = `https://${process.env.ENVIRONMENT}treinfsb1001.servicebus.windows.net/defra.trade.imports.notification-topic/messages`
 
@@ -18,19 +15,39 @@ export async function sendIpaffsMessage(json) {
 
   const body = typeof json === 'object' ? JSON.stringify(json) : json
 
-  try {
-    const response = await request(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/xml',
-        Authorization: accessToken
-      },
-      body
-    })
+  if (proxy) {
+    proxyAgent = new ProxyAgent({ uri: proxy })
+    try {
+      const response = await request(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/xml',
+          Authorization: accessToken
+        },
+        body,
+        dispatcher: proxyAgent
+      })
 
-    return response
-  } catch (err) {
-    throw new Error(`request failed: ${err.message || err}`)
+      return response
+    } catch (err) {
+      throw new Error(`request failed: ${err.message || err}`)
+    }
+  } else {
+    try {
+      const response = await request(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/xml',
+          Authorization: accessToken
+        },
+        body,
+        dispatcher: proxyAgent
+      })
+
+      return response
+    } catch (err) {
+      throw new Error(`request failed: ${err.message || err}`)
+    }
   }
 }
 
