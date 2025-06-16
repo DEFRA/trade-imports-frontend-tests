@@ -1,8 +1,10 @@
 import { ProxyAgent, request } from 'undici'
+
 import crypto from 'crypto'
 
 export async function sendIpaffsMessage(json) {
   const proxy = process.env.CDP_HTTPS_PROXY
+
   let proxyAgent
 
   const url = `https://${process.env.ENVIRONMENT}treinfsb1001.servicebus.windows.net/defra.trade.imports.notification-topic/messages`
