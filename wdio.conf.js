@@ -1,4 +1,8 @@
-import fs from 'node:fs'
+import { generateAccessibilityReportIndex } from './test/accessibility-checking.js'
+
+import allure from 'allure-commandline'
+import fs from 'fs'
+import path from 'path'
 
 const oneMinute = 60 * 1000
 
@@ -236,10 +240,41 @@ export const config = {
    * @param {<Object>} results object containing test results
    */
   onComplete: function (exitCode, config, capabilities, results) {
-    // !Do Not Remove! Required for test status to show correctly in portal.
+    generateAccessibilityReportIndex()
+    const reportError = new Error('Could not generate Allure report')
+    const generation = allure(['generate', 'allure-results', '--clean'])
     if (results?.failed && results.failed > 0) {
       fs.writeFileSync('FAILED', JSON.stringify(results))
     }
+    return new Promise((resolve, reject) => {
+      const generationTimeout = setTimeout(() => reject(reportError), oneMinute)
+
+      generation.on('exit', function (exitCode) {
+        clearTimeout(generationTimeout)
+
+        if (exitCode !== 0) {
+          return reject(reportError)
+        }
+
+        const srcDir = path.resolve('reports')
+        const destDir = path.resolve('allure-report/accessibility')
+        fs.cpSync(srcDir, destDir, { recursive: true }) // copies all report files
+
+        const allureIndexPath = path.join('allure-report', 'index.html')
+        let html = fs.readFileSync(allureIndexPath, 'utf-8')
+        const accessibilityLink = `<div style="margin: 20px;">
+          <a href="accessibility/index.html" target="_blank" style="font-size: 16px; color: #1d70b8;">
+            View Accessibility Reports
+          </a>
+        </div>`
+
+        html = html.replace('<body>', `<body>${accessibilityLink}`)
+        fs.writeFileSync(allureIndexPath, html)
+
+        allure(['open'])
+        resolve()
+      })
+    })
   }
   /**
    * Gets executed when a refresh happens.

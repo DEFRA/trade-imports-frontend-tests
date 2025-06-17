@@ -17,8 +17,8 @@ class SearchPage extends Page {
   async search(input) {
     await this.searchBoxIsVisible()
     await $('#search-term').setValue(input)
-    await $('#btn-search').waitForDisplayed({ timeout: 3000 })
-    await $('#btn-search').click()
+    await $('.btms-search-icon').waitForDisplayed({ timeout: 3000 })
+    await $('.btms-search-icon').click()
   }
 
   async getSearchErrorText() {

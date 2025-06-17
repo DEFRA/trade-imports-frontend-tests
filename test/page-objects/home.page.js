@@ -7,8 +7,8 @@ class HomePage extends Page {
   }
 
   async login() {
-    await $('#login-link').waitForExist({ timeout: 3000 })
-    await $('#login-link').click()
+    await $('a[href*="/sign-in"]').waitForExist({ timeout: 3000 })
+    await $('a[href*="/sign-in"]').click()
   }
 
   async loginRegisteredUser() {
