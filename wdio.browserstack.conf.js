@@ -91,7 +91,7 @@ export const config = {
         testObservabilityOptions: {
           user: process.env.BROWSERSTACK_USER,
           key: process.env.BROWSERSTACK_KEY,
-          projectName: 'cdp-node-env-test-suite', // should match project in browserstack
+          projectName: 'trade-imports-frontend-tests', // should match project in browserstack
           buildName: `trade-imports-frontend-tests-${process.env.ENVIRONMENT}`
         },
         acceptInsecureCerts: true,
