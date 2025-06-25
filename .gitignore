@@ -13,3 +13,6 @@ allure-results/
 FAILED
 .env
 /reports/
+*.err
+*.log
+logs/
