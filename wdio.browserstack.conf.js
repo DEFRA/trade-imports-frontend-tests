@@ -29,7 +29,7 @@ export const config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: `https://trade-imports-frontend-tests.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
+  baseUrl: `https://btms-portal-frontend.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
 
   // You will need to provide your own BrowserStack credentials.
   // These should be added as secrets to the test suite.
@@ -55,6 +55,30 @@ export const config = {
         browserVersion: 'latest',
         os: 'Windows',
         osVersion: '11'
+      }
+    },
+    {
+      browserName: 'Firefox',
+      'bstack:options': {
+        browserVersion: 'latest',
+        os: 'Windows',
+        osVersion: '11'
+      }
+    },
+    {
+      browserName: 'Edge',
+      'bstack:options': {
+        browserVersion: 'latest',
+        os: 'Windows',
+        osVersion: '11'
+      }
+    },
+    {
+      browserName: 'Safari',
+      'bstack:options': {
+        browserVersion: 'latest',
+        os: 'OS X',
+        osVersion: 'Sequoia'
       }
     }
   ],
@@ -87,9 +111,9 @@ export const config = {
 
   // Number of failures before the test suite bails.
   bail: 0,
-  waitforTimeout: 10000,
+  waitforTimeout: 20000,
   waitforInterval: 200,
-  connectionRetryTimeout: 6000,
+  connectionRetryTimeout: 60000,
   connectionRetryCount: 3,
 
   framework: 'mocha',
