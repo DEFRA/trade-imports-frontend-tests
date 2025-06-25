@@ -6,13 +6,13 @@ import { bootstrap } from 'global-agent'
  * Enable webdriver.io to use the outbound proxy.
  * This is required for the test suite to be able to talk to BrowserStack.
  */
-if (process.env.HTTP_PROXY) {
+if (process.env.CDP_HTTP_PROXY) {
   const dispatcher = new ProxyAgent({
-    uri: process.env.HTTP_PROXY
+    uri: 'http://localhost:3128'
   })
   setGlobalDispatcher(dispatcher)
   bootstrap()
-  global.GLOBAL_AGENT.HTTP_PROXY = process.env.HTTP_PROXY
+  global.GLOBAL_AGENT.HTTP_PROXY = 'http://localhost:3128'
 }
 
 const oneMinute = 60 * 1000
