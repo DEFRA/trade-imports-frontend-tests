@@ -1,8 +1,4 @@
-import { generateAccessibilityReportIndex } from './test/accessibility-checking.js'
-
 import allure from 'allure-commandline'
-import fs from 'fs'
-import path from 'path'
 
 const debug = process.env.DEBUG
 const oneMinute = 60 * 1000
@@ -37,7 +33,7 @@ export const config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ['./test/specs/**/*.e2e.js'],
+  specs: ['./test/specs/**/*checks.e2e.js'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -311,7 +307,6 @@ export const config = {
    * @param {<Object>} results object containing test results
    */
   onComplete: function (exitCode, config, capabilities, results) {
-    generateAccessibilityReportIndex()
     const reportError = new Error('Could not generate Allure report')
     const generation = allure(['generate', 'allure-results', '--clean'])
 
@@ -324,21 +319,6 @@ export const config = {
         if (exitCode !== 0) {
           return reject(reportError)
         }
-
-        const srcDir = path.resolve('reports')
-        const destDir = path.resolve('allure-report/accessibility')
-        fs.cpSync(srcDir, destDir, { recursive: true }) // copies all report files
-
-        const allureIndexPath = path.join('allure-report', 'index.html')
-        let html = fs.readFileSync(allureIndexPath, 'utf-8')
-        const accessibilityLink = `<div style="margin: 20px;">
-          <a href="accessibility/index.html" target="_blank" style="font-size: 16px; color: #1d70b8;">
-            View Accessibility Reports
-          </a>
-        </div>`
-
-        html = html.replace('<body>', `<body>${accessibilityLink}`)
-        fs.writeFileSync(allureIndexPath, html)
 
         allure(['open'])
         resolve()
