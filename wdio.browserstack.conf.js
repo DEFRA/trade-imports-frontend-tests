@@ -103,16 +103,20 @@ export const config = {
     ]
   ],
 
-  execArgv: debug ? ['--inspect'] : [],
+  execArgv: [
+    '--loader',
+    'esm-module-alias/loader',
+    ...(debug ? ['--inspect'] : [])
+  ],
 
   logLevel: debug ? 'debug' : 'info',
 
   // Number of failures before the test suite bails.
   bail: 0,
-  waitforTimeout: 1000,
+  waitforTimeout: 3000,
   waitforInterval: 300,
-  connectionRetryTimeout: 12000,
-  connectionRetryCount: 1,
+  connectionRetryTimeout: 60000,
+  connectionRetryCount: 3,
 
   framework: 'mocha',
 
