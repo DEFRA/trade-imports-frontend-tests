@@ -25,7 +25,7 @@ export const config = {
   // gets prepended directly.
   baseUrl: `https://btms-portal-frontend.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
 
-  user: process.env.BROWSERSTACK_USERNAME,
+  user: process.env.BROWSERSTACK_USER,
   key: process.env.BROWSERSTACK_KEY,
 
   // Tests to run
@@ -85,7 +85,7 @@ export const config = {
       {
         testObservability: true, // Disable if you do not want to use the browserstack test observer functionality
         testObservabilityOptions: {
-          user: process.env.BROWSERSTACK_USERNAME,
+          user: process.env.BROWSERSTACK_USER,
           key: process.env.BROWSERSTACK_KEY,
           projectName: 'trade-imports-frontend-tests',
           buildName: `trade-imports-frontend-tests-${process.env.ENVIRONMENT}`
