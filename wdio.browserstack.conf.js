@@ -85,7 +85,7 @@ export const config = {
       {
         testObservability: true, // Disable if you do not want to use the browserstack test observer functionality
         testObservabilityOptions: {
-          user: process.env.BROWSERSTACK_USER,
+          user: process.env.BROWSERSTACK_USERNAME,
           key: process.env.BROWSERSTACK_KEY,
           projectName: 'trade-imports-frontend-tests',
           buildName: `trade-imports-frontend-tests-${process.env.ENVIRONMENT}`
@@ -94,6 +94,8 @@ export const config = {
         forceLocal: false,
         browserstackLocal: true,
         opts: {
+          // This is where BrowserStack usually downloads to, but by specifying the binarypath it skips trying to download again
+          binarypath: '/root/.browserstack/BrowserStackLocal',
           proxyHost: 'localhost',
           proxyPort: 3128
         }
