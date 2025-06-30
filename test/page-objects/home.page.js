@@ -12,8 +12,12 @@ class HomePage extends Page {
   }
 
   async loginRegisteredUser() {
-    await $('=Log in').waitForExist({ timeout: 3000 })
-    await $('=Log in').click()
+    const loginButtons = await $$('=Log in')
+    await browser.waitUntil(async () => (await loginButtons.length) > 0, {
+      timeout: 3000,
+      timeoutMsg: 'No "Log in" buttons found within 3 seconds.'
+    })
+    await loginButtons[loginButtons.length - 1].click()
   }
 }
 
