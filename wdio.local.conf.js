@@ -12,7 +12,7 @@ if (debug) {
 
 export const config = {
   runner: 'local',
-  specs: ['./test/specs/**/*checks.e2e.js'],
+  specs: ['./test/specs/**/*.e2e.js'],
   exclude: [],
   maxInstances: 1,
   capabilities: debug
