@@ -3,6 +3,8 @@ import { expect } from '@wdio/globals'
 import HomePage from '../page-objects/home.page'
 import SearchPage from 'page-objects/search.page'
 import SearchResultsPage from '../page-objects/searchResultsPage'
+import CustomDeclarationPage from '../page-objects/custom-declaration.page'
+import ChedDeclarationPage from '../page-objects/ched-declaration.page'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 
@@ -22,6 +24,42 @@ describe('Search Results Page', () => {
     await SearchPage.open()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
-    // Assert on Custom Declarationa and CHED IUU
+
+    const customDeclarationCheds = [
+      'CHEDPP.GB.2025.9400002',
+      'CHEDPP.GB.2025.9400002V',
+      'CHEDPP.GB.2025.9400002R'
+    ]
+    for (const ched of customDeclarationCheds) {
+      expect(
+        await CustomDeclarationPage.getAllText('24GBBGBKCDMS895002')
+      ).toContain(ched)
+    }
+
+    const originalChedAndStatus = [
+      'Partially rejected',
+      'Rosa sp.',
+      'Gypsophila sp.',
+      'Hypericum sp.'
+    ]
+    for (const ched of originalChedAndStatus) {
+      expect(
+        await ChedDeclarationPage.getAllText('CHEDPP.GB.2025.9400002')
+      ).toContain(ched)
+    }
+
+    const validChedAndStatus = ['Valid', 'Gypsophila sp.', 'Hypericum sp.']
+    for (const ched of validChedAndStatus) {
+      expect(
+        await ChedDeclarationPage.getAllText('CHEDPP.GB.2025.9400002V')
+      ).toContain(ched)
+    }
+
+    const rejectedChedAndStatus = ['Rejected', 'Rosa sp.']
+    for (const ched of rejectedChedAndStatus) {
+      expect(
+        await ChedDeclarationPage.getAllText('CHEDPP.GB.2025.9400002R')
+      ).toContain(ched)
+    }
   })
 })
