@@ -3,6 +3,8 @@ import { expect } from '@wdio/globals'
 import HomePage from '../page-objects/home.page'
 import SearchPage from 'page-objects/search.page'
 import SearchResultsPage from '../page-objects/searchResultsPage'
+import CustomDeclaration from '../page-objects/custom-declaration.page'
+import chedDeclarationPage from '../page-objects/ched-declaration.page'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 
@@ -20,6 +22,11 @@ describe('Search Results Page for IUU', () => {
     await SearchPage.open()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
-    // Assert on Custom Declarationa and CHED IUU
+    expect(await CustomDeclaration.getIuuDataAuthroty()).toContain(
+      'Release - IUU inspection complete (IUU)'
+    )
+    expect(await chedDeclarationPage.getIuuDataAuthroty()).toContain(
+      'IUU inspection complete (IUU)'
+    )
   })
 })
