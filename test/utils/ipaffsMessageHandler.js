@@ -1,6 +1,18 @@
 import { ProxyAgent, request } from 'undici'
+import { readFile } from 'fs/promises'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
 import crypto from 'crypto'
+
+export async function sendIpaffMessageFromFile(relativePath) {
+  const __filename = fileURLToPath(import.meta.url)
+  const __dirname = path.dirname(__filename)
+  const filePath = path.resolve(__dirname, relativePath)
+  const fileContent = await readFile(filePath, 'utf-8')
+  const json = JSON.parse(fileContent)
+  return await sendIpaffsMessage(json)
+}
 
 export async function sendIpaffsMessage(json) {
   const proxy = process.env.CDP_HTTPS_PROXY

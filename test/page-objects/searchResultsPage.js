@@ -5,9 +5,24 @@ class SearcheResultsPage extends Page {
     return $('.govuk-heading-l')
   }
 
+  get customDeclarationAllResultTextElement() {
+    return $('.btms-details')
+  }
+
+  get ipaffDeclarationAllResultTextElement() {
+    return $('.btms-details')
+  }
+
   async getResultText() {
-    await this.resultTextElement.waitForDisplayed({ timeout: 3000 })
-    return await this.resultTextElement.getText()
+    return await this.getTextFrom(this.resultTextElement)
+  }
+
+  async customDeclarationAllResultText() {
+    return await this.getTextFrom(this.customDeclarationAllResultTextElement)
+  }
+
+  async ipaffDeclarationAllResultText() {
+    return await this.getResultText(this.ipaffDeclarationAllResultTextElement)
   }
 }
 

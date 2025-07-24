@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:oas="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+  <soap:Header>
+    <oas:Security soap:role="system" soap:mustUnderstand="true">
+      <oas:UsernameToken>
+        <oas:Username>systemID=ALVSHMRCCDS,ou=gsi systems,o=defra</oas:Username>
+        <oas:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">password</oas:Password>
+      </oas:UsernameToken>
+    </oas:Security>
+  </soap:Header>
+  <soap:Body>
+    <ALVSClearanceRequest xmlns="http://submitimportdocumenthmrcfacade.types.esb.ws.cara.defra.com">
+      <ServiceHeader>
+        <SourceSystem>CDS</SourceSystem>
+        <DestinationSystem>ALVS</DestinationSystem>
+        <CorrelationId>CDM1895002</CorrelationId>
+        <ServiceCallTimestamp>1730472895002</ServiceCallTimestamp>
+      </ServiceHeader>
+      <Header>
+        <EntryReference>24GBBGBKCDMS895002</EntryReference>
+        <EntryVersionNumber>3</EntryVersionNumber>
+        <PreviousVersionNumber>2</PreviousVersionNumber>
+        <DeclarationUCR>4GB269573944000-PORTACDMS895002</DeclarationUCR>
+        <DeclarationPartNumber />
+        <DeclarationType>F</DeclarationType>
+        <ArrivalDateTime />
+        <SubmitterTURN>GB269573944000</SubmitterTURN>
+        <DeclarantId>GB269573944000</DeclarantId>
+        <DeclarantName>GB269573944000</DeclarantName>
+        <DispatchCountryCode>IT</DispatchCountryCode>
+        <GoodsLocationCode>DEUDEUDEUGVM</GoodsLocationCode>
+        <MasterUCR />
+      </Header>
+      <Item>
+        <ItemNumber>1</ItemNumber>
+        <CustomsProcedureCode>40001CG</CustomsProcedureCode>
+        <TaricCommodityCode>1601009105</TaricCommodityCode>
+        <GoodsDescription>SALSICCIA PURO SUINO 895001</GoodsDescription>
+        <ConsigneeId>GB930101485000</ConsigneeId>
+        <ConsigneeName>GB930101485000</ConsigneeName>
+        <ItemNetMass>96</ItemNetMass>
+        <ItemSupplementaryUnits>0</ItemSupplementaryUnits>
+        <ItemThirdQuantity />
+        <ItemOriginCountryCode>IT</ItemOriginCountryCode>
+        <Document>
+          <DocumentCode>N002</DocumentCode>
+          <DocumentReference>CHEDPP.GB.2025.9400002</DocumentReference>
+          <DocumentStatus>AE</DocumentStatus>
+          <DocumentControl>P</DocumentControl>
+          <DocumentQuantity />
+        </Document>
+        <Check>
+          <CheckCode>H220</CheckCode>
+          <DepartmentCode>HMI</DepartmentCode>
+        </Check>
+      </Item>
+      <Item>
+        <ItemNumber>2</ItemNumber>
+        <CustomsProcedureCode>40001CG</CustomsProcedureCode>
+        <TaricCommodityCode>1601009105</TaricCommodityCode>
+        <GoodsDescription>SALSICCIA PURO SUINO 895001</GoodsDescription>
+        <ConsigneeId>GB930101485000</ConsigneeId>
+        <ConsigneeName>GB930101485000</ConsigneeName>
+        <ItemNetMass>96</ItemNetMass>
+        <ItemSupplementaryUnits>0</ItemSupplementaryUnits>
+        <ItemThirdQuantity />
+        <ItemOriginCountryCode>IT</ItemOriginCountryCode>
+        <Document>
+          <DocumentCode>N002</DocumentCode>
+          <DocumentReference>CHEDPP.GB.2025.9400002V</DocumentReference>
+          <DocumentStatus>AE</DocumentStatus>
+          <DocumentControl>P</DocumentControl>
+          <DocumentQuantity />
+        </Document>
+        <Check>
+          <CheckCode>H220</CheckCode>
+          <DepartmentCode>HMI</DepartmentCode>
+        </Check>
+      </Item>
+      <Item>
+        <ItemNumber>3</ItemNumber>
+        <CustomsProcedureCode>40001CG</CustomsProcedureCode>
+        <TaricCommodityCode>1601009105</TaricCommodityCode>
+        <GoodsDescription>SALSICCIA PURO SUINO 895001</GoodsDescription>
+        <ConsigneeId>GB930101485000</ConsigneeId>
+        <ConsigneeName>GB930101485000</ConsigneeName>
+        <ItemNetMass>96</ItemNetMass>
+        <ItemSupplementaryUnits>0</ItemSupplementaryUnits>
+        <ItemThirdQuantity />
+        <ItemOriginCountryCode>IT</ItemOriginCountryCode>
+        <Document>
+          <DocumentCode>N002</DocumentCode>
+          <DocumentReference>CHEDPP.GB.2025.9400002R</DocumentReference>
+          <DocumentStatus>AE</DocumentStatus>
+          <DocumentControl>P</DocumentControl>
+          <DocumentQuantity />
+        </Document>
+        <Check>
+          <CheckCode>H220</CheckCode>
+          <DepartmentCode>HMI</DepartmentCode>
+        </Check>
+      </Item>
+    </ALVSClearanceRequest>
+  </soap:Body>
+</soap:Envelope>

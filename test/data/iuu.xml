@@ -13,14 +13,14 @@
       <ServiceHeader>
         <SourceSystem>CDS</SourceSystem>
         <DestinationSystem>ALVS</DestinationSystem>
-        <CorrelationId>CDMS704606</CorrelationId>
-        <ServiceCallTimestamp>1730472779006</ServiceCallTimestamp>
+        <CorrelationId>CDM1836026</CorrelationId>
+        <ServiceCallTimestamp>1730472836026</ServiceCallTimestamp>
       </ServiceHeader>
       <Header>
-        <EntryReference>24GBBGBKCDMS704606</EntryReference>
-        <EntryVersionNumber>2</EntryVersionNumber>
-        <PreviousVersionNumber>1</PreviousVersionNumber>
-        <DeclarationUCR>4GB269573944000-PORTACDMS704606</DeclarationUCR>
+        <EntryReference>24GBBGBKCDMS836026</EntryReference>
+        <EntryVersionNumber>3</EntryVersionNumber>
+        <PreviousVersionNumber>2</PreviousVersionNumber>
+        <DeclarationUCR>4GB269573944000-PORTACDMS836026</DeclarationUCR>
         <DeclarationPartNumber />
         <DeclarationType>F</DeclarationType>
         <ArrivalDateTime />
@@ -35,7 +35,7 @@
         <ItemNumber>1</ItemNumber>
         <CustomsProcedureCode>40001CG</CustomsProcedureCode>
         <TaricCommodityCode>1601009105</TaricCommodityCode>
-        <GoodsDescription>SALSICCIA PURO SUINO</GoodsDescription>
+        <GoodsDescription>SALSICCIA PURO SUINO 836021</GoodsDescription>
         <ConsigneeId>GB930101485000</ConsigneeId>
         <ConsigneeName>GB930101485000</ConsigneeName>
         <ItemNetMass>96</ItemNetMass>
@@ -43,15 +43,26 @@
         <ItemThirdQuantity />
         <ItemOriginCountryCode>IT</ItemOriginCountryCode>
         <Document>
-          <DocumentCode>C640</DocumentCode>
-          <DocumentReference>GBCHD2024.1704606</DocumentReference>
+          <DocumentCode>N853</DocumentCode>
+          <DocumentReference>CHEDP.GB.2025.8836026</DocumentReference>
+          <DocumentStatus>AE</DocumentStatus>
+          <DocumentControl>P</DocumentControl>
+          <DocumentQuantity />
+        </Document>
+        <Document>
+          <DocumentCode>C673</DocumentCode>
+          <DocumentReference>GBIUU-VARIOUS</DocumentReference>
           <DocumentStatus>AE</DocumentStatus>
           <DocumentControl>P</DocumentControl>
           <DocumentQuantity />
         </Document>
         <Check>
-          <CheckCode>H221</CheckCode>
-          <DepartmentCode>AHVLA</DepartmentCode>
+          <CheckCode>H222</CheckCode>
+          <DepartmentCode>PHA</DepartmentCode>
+        </Check>
+        <Check>
+          <CheckCode>H224</CheckCode>
+          <DepartmentCode>PHA</DepartmentCode>
         </Check>
       </Item>
     </ALVSClearanceRequest>

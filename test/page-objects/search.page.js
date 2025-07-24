@@ -5,25 +5,34 @@ class SearchPage extends Page {
     return super.open('/search')
   }
 
+  get searchInputField() {
+    return $('#search-term')
+  }
+
+  get searchButton() {
+    return $('.btms-search-icon')
+  }
+
   get searchErrorTextElement() {
     return $('#search-term-error')
   }
 
-  async searchBoxIsVisible() {
-    await $('#search-term').waitForDisplayed({ timeout: 3000 })
-    return await $('#search-term').isDisplayed()
+  get signOut() {
+    return $('=Sign out')
   }
 
   async search(input) {
-    await this.searchBoxIsVisible()
-    await $('#search-term').setValue(input)
-    await $('.btms-search-icon').waitForDisplayed({ timeout: 3000 })
-    await $('.btms-search-icon').click()
+    await this.elementIsDisplayed(this.searchInputField)
+    await this.searchInputField.setValue(input)
+    return await this.clickLink(this.searchButton)
   }
 
   async getSearchErrorText() {
-    await this.searchErrorTextElement.waitForDisplayed({ timeout: 3000 })
-    return await this.searchErrorTextElement.getText()
+    return await this.getTextFrom(this.searchErrorTextElement)
+  }
+
+  async signout() {
+    await this.clickLink(this.signOut)
   }
 }
 
