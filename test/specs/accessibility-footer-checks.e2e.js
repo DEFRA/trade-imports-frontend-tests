@@ -12,8 +12,6 @@ describe('Accessibility Testing', () => {
   before(async () => {
     await initialiseAccessibilityChecking()
     await HomePage.open()
-    await HomePage.login()
-    await HomePage.loginRegisteredUser()
   })
   it('Should check Cookies page for accessibility issues', async () => {
     await FooterPage.clickCookies()
