@@ -39,7 +39,7 @@ export const browserStackCapabilities = [
       resolution: '1920x1080',
       browserVersion: 'latest',
       os: 'OS X',
-      osVersion: 'Sequoia'
+      osVersion: 'Sonoma' // Changed from 'Sequoia'
     }
   }
 ]
