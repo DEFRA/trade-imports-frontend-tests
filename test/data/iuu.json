@@ -1,0 +1,277 @@
+{
+  "id": 7325542,
+  "referenceNumber": "CHEDP.GB.2025.8836026",
+  "version": 1,
+  "lastUpdated": "2025-07-18T15:42:13.706511786Z",
+  "lastUpdatedBy": {
+    "displayName": "Gary Admin-Tester",
+    "userId": "79f6dc68-2144-e911-a96a-000d3a29ba60"
+  },
+  "type": "CVEDP",
+  "status": "VALIDATED",
+  "riskAssessment": {
+    "commodityResults": [
+      {
+        "uniqueId": "2a6fd508-e8ba-471a-8a30-4361ff17d15d",
+        "riskDecision": "INCONCLUSIVE"
+      }
+    ],
+    "assessmentDateTime": "2025-07-18T14:38:20.466403117"
+  },
+  "journeyRiskCategorisation": {
+    "riskLevel": "Medium",
+    "riskLevelMethod": "User",
+    "riskLevelDateTime": "2025-07-18T13:34:39.644"
+  },
+  "isHighRiskEuImport": false,
+  "partOne": {
+    "personResponsible": {
+      "name": "Gary Admin-Tester",
+      "companyId": "767ceb6a-2144-e911-a96c-000d3a29b5de",
+      "companyName": "Defra Test BIP",
+      "address": [
+        "Animal and Plant Health Agency",
+        "Woodham Lane",
+        "New Haw",
+        "Surrey",
+        "Addlestone",
+        "KT15 3NB"
+      ],
+      "country": "GB",
+      "tracesID": 1001,
+      "phone": "020 8225 7295",
+      "email": "DefraTestBIP@anthunt3.33mail.com",
+      "contactId": "79f6dc68-2144-e911-a96a-000d3a29ba60"
+    },
+    "consignor": {
+      "id": "f4208949-b3eb-4a2e-bb4d-3dc5aa02a151",
+      "type": "exporter",
+      "status": "nonapproved",
+      "companyName": "BYConsignor",
+      "address": {
+        "addressLine1": "BYAddressLine1",
+        "city": "BYCity",
+        "postalZipCode": "BY12345",
+        "countryISOCode": "BY",
+        "telephone": "12345678",
+        "email": "BY@gmail.com"
+      },
+      "tracesId": 10087334
+    },
+    "consignee": {
+      "id": "25093316-39d0-489a-b489-529304d51be7",
+      "type": "consignee",
+      "status": "nonapproved",
+      "companyName": "Tee Inc",
+      "address": {
+        "addressLine1": "177 Langport Avenue",
+        "city": "Houston",
+        "postalZipCode": "77889",
+        "countryISOCode": "US",
+        "telephone": "8989900990",
+        "email": "tww@teez.com"
+      },
+      "tracesId": 10104822
+    },
+    "importer": {
+      "id": "25093316-39d0-489a-b489-529304d51be7",
+      "type": "importer",
+      "status": "nonapproved",
+      "companyName": "Tee Inc",
+      "address": {
+        "addressLine1": "177 Langport Avenue",
+        "city": "Houston",
+        "postalZipCode": "77889",
+        "countryISOCode": "US",
+        "telephone": "8989900990",
+        "email": "tww@teez.com"
+      },
+      "tracesId": 10104822
+    },
+    "placeOfDestination": {
+      "id": "25093316-39d0-489a-b489-529304d51be7",
+      "type": "destination",
+      "status": "nonapproved",
+      "companyName": "Tee Inc",
+      "address": {
+        "addressLine1": "177 Langport Avenue",
+        "city": "Houston",
+        "postalZipCode": "77889",
+        "countryISOCode": "US",
+        "telephone": "8989900990",
+        "email": "tww@teez.com"
+      },
+      "tracesId": 10104822
+    },
+    "commodities": {
+      "totalGrossWeight": 10,
+      "totalNetWeight": 1,
+      "numberOfPackages": 1,
+      "temperature": "Ambient",
+      "commodityComplement": [
+        {
+          "commodityID": "03019230",
+          "commodityDescription": "Of a length of 12cm or more but less than 20cm",
+          "complementID": 1,
+          "complementName": "Anguilla anguilla",
+          "speciesID": "53054",
+          "speciesName": "Anguilla anguilla",
+          "speciesTypeName": "Farmed stock",
+          "speciesType": "20",
+          "speciesClass": "53054",
+          "speciesNomination": "Anguilla anguilla"
+        }
+      ],
+      "complementParameterSet": [
+        {
+          "uniqueComplementID": "2a6fd508-e8ba-471a-8a30-4361ff17d15d",
+          "complementID": 1,
+          "speciesID": "53054",
+          "keyDataPair": [
+            { "key": "netweight", "data": "1" },
+            { "key": "number_package", "data": "1" },
+            { "key": "type_package", "data": "Bag" },
+            { "key": "is_catch_certificate_required", "data": "true" }
+          ]
+        }
+      ],
+      "includeNonAblactedAnimals": false,
+      "countryOfOrigin": "AF",
+      "consignedCountry": "AF"
+    },
+    "purpose": {
+      "conformsToEU": true,
+      "internalMarketPurpose": "Human Consumption",
+      "purposeGroup": "For Import"
+    },
+    "pointOfEntry": "GBSEV25",
+    "arrivalDate": "2025-07-21",
+    "arrivalTime": "01:01:00",
+    "transporterDetailsRequired": false,
+    "meansOfTransport": {},
+    "meansOfTransportFromEntryPoint": {
+      "id": "1",
+      "type": "Aeroplane",
+      "document": "1"
+    },
+    "veterinaryInformation": {
+      "establishmentsOfOrigin": [
+        {
+          "id": "02395c7d-5b20-5259-5278-f572e09ea9d4",
+          "name": "Bradaran Moafaq Company",
+          "country": "AF",
+          "types": ["Category 3"],
+          "approvalNumber": "A0018",
+          "section": "Other facility for the collection or handling of animal by-products(unprocessed or untreated materials)"
+        }
+      ],
+      "accompanyingDocuments": [
+        {
+          "documentType": "catchCertificate",
+          "attachmentId": "a64b8807-5841-4e4d-8e90-56df842ae223",
+          "attachmentFilename": "Screenshot 2025-06-03 a.png",
+          "attachmentContentType": "image/png",
+          "uploadUserId": "79f6dc68-2144-e911-a96a-000d3a29ba60",
+          "uploadOrganisationId": "767ceb6a-2144-e911-a96c-000d3a29b5de"
+        },
+        {
+          "documentType": "latestVeterinaryHealthCertificate",
+          "documentReference": "1",
+          "documentIssueDate": "2025-07-18",
+          "attachmentId": "f739ff33-eab5-45ab-bc7f-4d6940783c72",
+          "attachmentFilename": "Screenshot 2025-06-03 a(1).png",
+          "attachmentContentType": "image/png",
+          "uploadUserId": "79f6dc68-2144-e911-a96a-000d3a29ba60",
+          "uploadOrganisationId": "767ceb6a-2144-e911-a96c-000d3a29b5de"
+        },
+        {
+          "documentType": "veterinaryHealthCertificate",
+          "documentReference": "11",
+          "documentIssueDate": "2025-07-18"
+        }
+      ],
+      "catchCertificateAttachments": [
+        {
+          "attachmentId": "a64b8807-5841-4e4d-8e90-56df842ae223",
+          "catchCertificateDetails": [
+            {
+              "catchCertificateId": "7ba561ad-37ff-441b-8ab3-9790fe8f14fa",
+              "catchCertificateReference": "1",
+              "dateOfIssue": "2025-07-18",
+              "flagState": "AX",
+              "species": ["53054"]
+            }
+          ],
+          "numberOfCatchCertificates": 1
+        }
+      ]
+    },
+    "submissionDate": "2025-07-18T13:38:19.118540109Z",
+    "submittedBy": {
+      "displayName": "Gary Admin-Tester",
+      "userId": "79f6dc68-2144-e911-a96a-000d3a29ba60"
+    },
+    "complexCommoditySelected": true,
+    "portOfEntry": "GBSEV",
+    "contactDetails": {
+      "name": "Gary Admin-Tester",
+      "telephone": "020 8225 7295",
+      "email": "defratestbip@anthunt3.33mail.com"
+    },
+    "isCatchCertificateRequired": true,
+    "isGVMSRoute": false,
+    "isChargeable": true,
+    "wasChargeable": true,
+    "billingInformation": {
+      "isConfirmed": true,
+      "emailAddress": "sndb173@grr.la",
+      "phoneNumber": "+447825006321",
+      "postalAddress": {
+        "addressLine1": "THE GARAGE COMPUTER CO LTD, 30817",
+        "county": "GREATER LONDON",
+        "cityOrTown": "LONDON",
+        "postalCode": "W10 4WL"
+      }
+    },
+    "commonUserCharge": { "wasSentToTradeCharge": true },
+    "provideCtcMrn": "NO"
+  },
+  "decisionBy": {
+    "displayName": "Gary Admin-Tester",
+    "userId": "79f6dc68-2144-e911-a96a-000d3a29ba60"
+  },
+  "decisionDate": "2025-07-18T15:42:13.630777838Z",
+  "partTwo": {
+    "decision": {
+      "consignmentAcceptable": true,
+      "decision": "Acceptable for Internal Market",
+      "freeCirculationPurpose": "Human Consumption"
+    },
+    "consignmentCheck": {
+      "documentCheckResult": "Satisfactory",
+      "identityCheckType": "Seal Check",
+      "identityCheckResult": "Satisfactory",
+      "physicalCheckResult": "Satisfactory"
+    },
+    "laboratoryTestsRequired": false,
+    "resealedContainersIncluded": false,
+    "controlAuthority": {
+      "officialVeterinarian": {
+        "firstName": "Gary",
+        "lastName": "Admin-Tester",
+        "email": "DefraTestBIP@anthunt3.33mail.com",
+        "phone": "020 8225 7295",
+        "signed": "2025-07-18T15:42:13.680546425"
+      },
+      "iuuCheckRequired": true,
+      "iuuOption": "IUUOK"
+    },
+    "checkDate": "2025-07-18T01:01:00Z",
+    "inspectionRequired": "Inconclusive"
+  },
+  "partThree": { "sealCheckRequired": false },
+  "etag": "000000000800598D",
+  "riskDecisionLockingTime": "2025-07-20T22:01:00Z",
+  "isRiskDecisionLocked": false,
+  "chedTypeVersion": 1
+}

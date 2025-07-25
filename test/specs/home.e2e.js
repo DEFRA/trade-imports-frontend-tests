@@ -5,10 +5,12 @@ import HomePage from 'page-objects/home.page'
 describe('Home page', () => {
   it('Should be on the "Home" page', async () => {
     await HomePage.open()
-    await expect(browser).toHaveTitle('Home - Border Trade Matching Service')
+    await expect(browser).toHaveTitle(
+      'Border Trade Matching Service - Border Trade Matching Service'
+    )
   })
 
-  it('Shoult be able to see list of registered users', async () => {
+  it('Should be able to see list of registered users', async () => {
     await HomePage.login()
     await expect(browser).toHaveTitle('DEFRA ID Login | cdp-defra-id-stub')
   })

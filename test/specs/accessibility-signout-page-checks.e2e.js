@@ -10,24 +10,17 @@ import SearchPage from 'page-objects/search.page'
 
 describe('Accessibility Testing', () => {
   before(async () => {
-    // Initialize accessibility checking
     await initialiseAccessibilityChecking()
-  })
-  it('Should check Home page for accessibility issues', async () => {
     await HomePage.open()
-    await analyseAccessibility()
-  })
-  it('Should check Search page for accessibility issues', async () => {
     await HomePage.login()
     await HomePage.loginRegisteredUser()
-    await analyseAccessibility()
   })
-  it('Should check Search Resuts page for accessibility issues', async () => {
-    await SearchPage.search('24GBBGBKCDMS704600')
+  it('Should check Sign Out page for accessibility issues', async () => {
+    await SearchPage.signout()
     await analyseAccessibility()
   })
   after(async () => {
-    generateAccessibilityReports('accessibility-tests')
+    generateAccessibilityReports('signout-tests')
     generateAccessibilityReportIndex()
   })
 })

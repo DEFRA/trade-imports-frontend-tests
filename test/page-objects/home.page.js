@@ -6,18 +6,20 @@ class HomePage extends Page {
     return super.open('/')
   }
 
+  get signInLink() {
+    return $('a[href*="/sign-in"]')
+  }
+
+  get signInBasedOnTestEmail() {
+    return $('//tr[th[text()="muddin@equalexperts.com"]]//td//a')
+  }
+
   async login() {
-    await $('a[href*="/sign-in"]').waitForExist({ timeout: 3000 })
-    await $('a[href*="/sign-in"]').click()
+    return await this.clickLink(this.signInLink)
   }
 
   async loginRegisteredUser() {
-    const loginButtons = await $$('=Log in')
-    await browser.waitUntil(async () => (await loginButtons.length) > 0, {
-      timeout: 3000,
-      timeoutMsg: 'No "Log in" buttons found within 3 seconds.'
-    })
-    await loginButtons[loginButtons.length - 1].click()
+    return await this.clickLink(this.signInBasedOnTestEmail)
   }
 }
 

@@ -8,6 +8,20 @@ class Page {
   open(path) {
     return browser.url(path)
   }
+
+  async clickLink(element) {
+    await element.waitForDisplayed({ timeout: 3000 })
+    return await element.click()
+  }
+
+  async getTextFrom(element) {
+    await element.waitForDisplayed({ timeout: 3000 })
+    return await element.getText()
+  }
+
+  async elementIsDisplayed(element) {
+    return await element.waitForDisplayed({ timeout: 3000 })
+  }
 }
 
 export { Page }

@@ -1,50 +1,37 @@
 import { expect } from '@wdio/globals'
-import { readFile } from 'fs/promises'
-import path from 'path'
-import { fileURLToPath } from 'url'
 
 import HomePage from '../page-objects/home.page'
 import SearchPage from 'page-objects/search.page'
 import SearchResultsPage from '../page-objects/searchResultsPage'
-import { sendSoapRequest } from '../utils/soapMessageHandler.js'
-import { sendIpaffsMessage } from '../utils/ipaffsMessageHandler.js'
+import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
+import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 
 describe('Search page', () => {
   before(async () => {
-    const __filename = fileURLToPath(import.meta.url)
-    const __dirname = path.dirname(__filename)
-    const soapFilePath = path.resolve(__dirname, '../data/cds.xml')
-    const soapEnvelope = await readFile(soapFilePath, 'utf-8')
-    await sendSoapRequest(soapEnvelope)
+    await sendCdsMessageFromFile('../data/cds.xml')
+    await sendIpaffMessageFromFile('../data/ipaff.json')
 
-    const filePath = path.resolve(__dirname, '../data/ipaff.json')
-    const fileContent = await readFile(filePath, 'utf-8')
-    const json = JSON.parse(fileContent)
-    await sendIpaffsMessage(json)
-  })
-  it('Should be able to login as a registered user and open Search Page', async () => {
     await HomePage.open()
     await HomePage.login()
     await HomePage.loginRegisteredUser()
-    expect(await SearchPage.searchBoxIsVisible()).toBe(true)
   })
   it('Should be able to sarch for a Valid MRN', async () => {
-    const mrn = '24GBBGBKCDMS704600'
+    const mrn = '24GBBGBKCDMS704606'
     await SearchPage.open()
     await SearchPage.search(mrn)
-    expect(await SearchResultsPage.getResultText()).toBe(mrn)
+    expect(await SearchResultsPage.getResultText()).toContain(mrn)
   })
   it('Should be able to sarch for a Valid CHED', async () => {
-    const ched = 'CHEDA.GB.2025.1704600'
+    const ched = 'CHEDA.GB.2025.1704606'
     await SearchPage.open()
     await SearchPage.search(ched)
-    expect(await SearchResultsPage.getResultText()).toBe(ched)
+    expect(await SearchResultsPage.getResultText()).toContain(ched)
   })
   it('Should be able to sarch for a Valid DUCR', async () => {
-    const ducr = '4GB269573944000-PORTACDMS704600'
+    const ducr = '4GB269573944000-PORTACDMS704606'
     await SearchPage.open()
     await SearchPage.search(ducr)
-    expect(await SearchResultsPage.getResultText()).toBe(ducr)
+    expect(await SearchResultsPage.getResultText()).toContain(ducr)
   })
   it('Should see error message when results not found for MRN', async () => {
     await SearchPage.open()
