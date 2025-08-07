@@ -1,9 +1,10 @@
-import { ProxyAgent, request } from 'undici'
+import { ServiceBusClient } from '@azure/service-bus'
+import { v4 as uuidv4 } from 'uuid'
+import { WebSocket } from 'ws'
+import proxyAgent from 'proxy-agent'
 import { readFile } from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
-
-import crypto from 'crypto'
 
 export async function sendIpaffMessageFromFile(relativePath) {
   const __filename = fileURLToPath(import.meta.url)
@@ -15,67 +16,58 @@ export async function sendIpaffMessageFromFile(relativePath) {
 }
 
 export async function sendIpaffsMessage(json) {
-  const proxy = process.env.CDP_HTTPS_PROXY
+  const connectionString =
+    process.env.ServiceBus__Notifications__ConnectionString
 
-  let proxyAgent
-
-  const url = `https://${process.env.ENVIRONMENT}treinfsb1001.servicebus.windows.net/defra.trade.imports.notification-topic/messages`
-
-  const accessToken = createSharedAccessToken(
-    `https://${process.env.ENVIRONMENT}treinfsb1001.servicebus.windows.net/defra.trade.imports.notification-topic`,
-    'trade-imports',
-    process.env.IPAFFS_KEY
-  )
+  const queueOrTopicName = connectionString.match(/EntityPath=([^;]+)/)[1]
 
   const body = typeof json === 'object' ? JSON.stringify(json) : json
 
-  if (proxy) {
-    proxyAgent = new ProxyAgent({ uri: proxy })
-    try {
-      const response = await request(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/xml',
-          Authorization: accessToken
-        },
-        body,
-        dispatcher: proxyAgent
-      })
+  let sbClient
+  if (globalThis.proxy) {
+    const agent = proxyAgent(globalThis.proxy)
 
-      return response
-    } catch (err) {
-      throw new Error(`request failed: ${err.message || err}`)
-    }
+    sbClient = new ServiceBusClient(connectionString, {
+      webSocketOptions: {
+        webSocket: WebSocket,
+        webSocketConstructorOptions: {
+          agent
+        }
+      }
+    })
   } else {
-    try {
-      const response = await request(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/xml',
-          Authorization: accessToken
-        },
-        body,
-        dispatcher: proxyAgent
-      })
+    sbClient = new ServiceBusClient(connectionString)
+  }
 
-      return response
-    } catch (err) {
-      throw new Error(`request failed: ${err.message || err}`)
+  const sender = sbClient.createSender(queueOrTopicName)
+
+  const requestId = uuidv4().replace(/-/g, '')
+
+  const message = {
+    body: json,
+    applicationProperties: {
+      'x-cdp-request-id': requestId
     }
   }
-}
 
-function createSharedAccessToken(uri, saName, saKey) {
-  if (!uri || !saName || !saKey) {
-    throw new Error('Missing required parameter')
+  try {
+    await sender.sendMessages(message)
+
+    return {
+      requestId,
+      ipaffsBody: body,
+      success: true,
+      timestamp: new Date().toISOString()
+    }
+  } catch (err) {
+    throw new Error(`Request failed: ${err.message || err}`)
+  } finally {
+    try {
+      await sender.close()
+    } catch (closeErr) {}
+
+    try {
+      await sbClient.close()
+    } catch (closeErr) {}
   }
-
-  const encodedUri = encodeURIComponent(uri)
-  const ttl = Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7
-  const stringToSign = `${encodedUri}\n${ttl}`
-  const hmac = crypto.createHmac('sha256', saKey)
-  hmac.update(stringToSign)
-  const signature = encodeURIComponent(hmac.digest('base64'))
-
-  return `SharedAccessSignature sr=${encodedUri}&sig=${signature}&se=${ttl}&skn=${saName}`
 }
