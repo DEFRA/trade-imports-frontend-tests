@@ -7,7 +7,7 @@ class CustomDeclaration extends Page {
   }
 
   get iuuDataAuthroty() {
-    return $('details[aria-label] li[data-authority="IUU"]')
+    return $('details[aria-label] tr[data-authority="IUU"]')
   }
 
   async getAllText(mrn) {
