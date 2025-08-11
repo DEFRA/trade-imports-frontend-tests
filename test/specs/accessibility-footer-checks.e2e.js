@@ -5,7 +5,7 @@ import {
   generateAccessibilityReportIndex
 } from '../accessibility-checking.js'
 
-import HomePage from 'page-objects/home.page'
+import HomePage from '../page-objects/home.page'
 import FooterPage from 'page-objects/footer.page.js'
 
 describe('Accessibility Testing', () => {
