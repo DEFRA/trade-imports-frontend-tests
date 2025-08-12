@@ -20,6 +20,12 @@ export async function sendIpaffMessageFromFile(relativePath) {
 }
 
 export async function sendIpaffsMessage(json) {
+  globalThis.proxy = process.env.CDP_HTTPS_PROXY
+  globalThis.testLogger.info({
+    event: '[IPAFF] Global Proxy value is',
+    proxy: globalThis.proxy
+  })
+
   const connectionString =
     process.env.ServiceBus__Notifications__ConnectionString
 
@@ -48,6 +54,9 @@ export async function sendIpaffsMessage(json) {
 
   let sbClient
   if (globalThis.proxy) {
+    globalThis.testLogger.info({
+      event: '[IPAFF] About to set-up agent using proxy'
+    })
     const agent = proxyAgent(globalThis.proxy)
 
     sbClient = new ServiceBusClient(connectionString, {
@@ -57,6 +66,10 @@ export async function sendIpaffsMessage(json) {
           agent
         }
       }
+    })
+    globalThis.testLogger.info({
+      event: '[IPAFF] ServiceBus client has been set-up',
+      sbClient
     })
   } else {
     globalThis.testLogger.info({
