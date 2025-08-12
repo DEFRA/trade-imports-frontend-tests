@@ -5,8 +5,12 @@ import proxyAgent from 'proxy-agent'
 import { readFile } from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import './logger'
 
 export async function sendIpaffMessageFromFile(relativePath) {
+  globalThis.testLogger.info({
+    event: '[IPAFF] About to send an IPAFF message'
+  })
   const __filename = fileURLToPath(import.meta.url)
   const __dirname = path.dirname(__filename)
   const filePath = path.resolve(__dirname, relativePath)
@@ -19,9 +23,28 @@ export async function sendIpaffsMessage(json) {
   const connectionString =
     process.env.ServiceBus__Notifications__ConnectionString
 
-  const queueOrTopicName = connectionString.match(/EntityPath=([^;]+)/)[1]
+  globalThis.testLogger.info({
+    event: '[IPAFF] Using the following Connection String',
+    connectionString
+  })
 
+  if (!connectionString) {
+    globalThis.testLogger.info({
+      event: '[IPAFF] Connection String is empty'
+    })
+    throw new Error('Request failed: Connection string is EMPTY')
+  }
+
+  const queueOrTopicName = connectionString.match(/EntityPath=([^;]+)/)[1]
+  globalThis.testLogger.info({
+    event: '[IPAFF] Queue or Topic Name is',
+    queueOrTopicName
+  })
   const body = typeof json === 'object' ? JSON.stringify(json) : json
+  globalThis.testLogger.info({
+    event: '[IPAFF] Prepared Message Body is',
+    body
+  })
 
   let sbClient
   if (globalThis.proxy) {
@@ -36,6 +59,9 @@ export async function sendIpaffsMessage(json) {
       }
     })
   } else {
+    globalThis.testLogger.info({
+      event: '[IPAFF] Creating ServiceBus client without a proxy'
+    })
     sbClient = new ServiceBusClient(connectionString)
   }
 
@@ -51,8 +77,14 @@ export async function sendIpaffsMessage(json) {
   }
 
   try {
+    globalThis.testLogger.info({
+      event: '[IPAFF] Attempting to send a message'
+    })
     await sender.sendMessages(message)
 
+    globalThis.testLogger.info({
+      event: '[IPAFF] Successfully sent message to Service Bus'
+    })
     return {
       requestId,
       ipaffsBody: body,
@@ -60,14 +92,31 @@ export async function sendIpaffsMessage(json) {
       timestamp: new Date().toISOString()
     }
   } catch (err) {
+    globalThis.testLogger.info({
+      event: '[IPAFF] Unable to send the message'
+    })
     throw new Error(`Request failed: ${err.message || err}`)
   } finally {
     try {
       await sender.close()
-    } catch (closeErr) {}
+      globalThis.testLogger.info({
+        event: '[IPAFF] Successfully closed the sender'
+      })
+    } catch (closeErr) {
+      globalThis.testLogger.info({
+        event: '[IPAFF] Error when trying to close the sender'
+      })
+    }
 
     try {
       await sbClient.close()
-    } catch (closeErr) {}
+      globalThis.testLogger.info({
+        event: '[IPAFF] Successfully closed the ServiceBus Client'
+      })
+    } catch (closeErr) {
+      globalThis.testLogger.info({
+        event: '[IPAFF] Error closing the ServiceBus cilent'
+      })
+    }
   }
 }

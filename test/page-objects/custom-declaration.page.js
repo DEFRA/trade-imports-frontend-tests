@@ -1,4 +1,4 @@
-import { Page } from 'page-objects/page'
+import { Page } from './page.js'
 import { $ } from '@wdio/globals'
 
 class CustomDeclaration extends Page {
@@ -7,7 +7,7 @@ class CustomDeclaration extends Page {
   }
 
   get iuuDataAuthroty() {
-    return $('details[aria-label] li[data-authority="IUU"]')
+    return $('details[aria-label] tr[data-authority="IUU"]')
   }
 
   async getAllText(mrn) {

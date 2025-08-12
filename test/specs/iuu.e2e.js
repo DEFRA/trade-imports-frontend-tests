@@ -1,10 +1,10 @@
 import { expect } from '@wdio/globals'
 
-import HomePage from '../page-objects/home.page'
-import SearchPage from 'page-objects/search.page'
-import SearchResultsPage from '../page-objects/searchResultsPage'
-import CustomDeclaration from '../page-objects/custom-declaration.page'
-import chedDeclarationPage from '../page-objects/ched-declaration.page'
+import HomePage from '../page-objects/home.page.js'
+import SearchPage from '../page-objects/search.page.js'
+import SearchResultsPage from '../page-objects/searchResultsPage.js'
+import CustomDeclaration from '../page-objects/custom-declaration.page.js'
+import chedDeclarationPage from '../page-objects/ched-declaration.page.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 
