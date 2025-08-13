@@ -17,10 +17,10 @@
         <ServiceCallTimestamp>1730472836026</ServiceCallTimestamp>
       </ServiceHeader>
       <Header>
-        <EntryReference>24GBBGBKCDMS836026</EntryReference>
+        <EntryReference>24GBBGBKCDMS836027</EntryReference>
         <EntryVersionNumber>3</EntryVersionNumber>
         <PreviousVersionNumber>2</PreviousVersionNumber>
-        <DeclarationUCR>4GB269573944000-PORTACDMS836026</DeclarationUCR>
+        <DeclarationUCR>4GB269573944000-PORTACDMS836027</DeclarationUCR>
         <DeclarationPartNumber />
         <DeclarationType>F</DeclarationType>
         <ArrivalDateTime />
@@ -44,7 +44,7 @@
         <ItemOriginCountryCode>IT</ItemOriginCountryCode>
         <Document>
           <DocumentCode>N853</DocumentCode>
-          <DocumentReference>CHEDP.GB.2025.8836026</DocumentReference>
+          <DocumentReference>CHEDP.GB.2025.1006001</DocumentReference>
           <DocumentStatus>AE</DocumentStatus>
           <DocumentControl>P</DocumentControl>
           <DocumentQuantity />

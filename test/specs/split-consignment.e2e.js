@@ -20,19 +20,19 @@ describe('Search Results Page', () => {
     await HomePage.loginRegisteredUser()
   })
   it('Should be able to sarch for a Valid MRN and see IUU Checks', async () => {
-    const mrn = '24GBBGBKCDMS895002'
+    const mrn = '24GBBGBKCDMS895003'
     await SearchPage.open()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
 
     const customDeclarationCheds = [
-      'CHEDPP.GB.2025.9400002',
-      'CHEDPP.GB.2025.9400002V',
-      'CHEDPP.GB.2025.9400002R'
+      'CHEDPP.GB.2025.1010002',
+      'CHEDPP.GB.2025.1010002V',
+      'CHEDPP.GB.2025.1010002R'
     ]
     for (const ched of customDeclarationCheds) {
       expect(
-        await CustomDeclarationPage.getAllText('24GBBGBKCDMS895002')
+        await CustomDeclarationPage.getAllText('24GBBGBKCDMS895003')
       ).toContain(ched)
     }
 
@@ -44,21 +44,21 @@ describe('Search Results Page', () => {
     ]
     for (const ched of originalChedAndStatus) {
       expect(
-        await ChedDeclarationPage.getAllText('CHEDPP.GB.2025.9400002')
+        await ChedDeclarationPage.getAllText('CHEDPP.GB.2025.1010002')
       ).toContain(ched)
     }
 
     const validChedAndStatus = ['Valid', 'Gypsophila sp.', 'Hypericum sp.']
     for (const ched of validChedAndStatus) {
       expect(
-        await ChedDeclarationPage.getAllText('CHEDPP.GB.2025.9400002V')
+        await ChedDeclarationPage.getAllText('CHEDPP.GB.2025.1010002V')
       ).toContain(ched)
     }
 
     const rejectedChedAndStatus = ['Rejected', 'Rosa sp.']
     for (const ched of rejectedChedAndStatus) {
       expect(
-        await ChedDeclarationPage.getAllText('CHEDPP.GB.2025.9400002R')
+        await ChedDeclarationPage.getAllText('CHEDPP.GB.2025.1010002R')
       ).toContain(ched)
     }
   })

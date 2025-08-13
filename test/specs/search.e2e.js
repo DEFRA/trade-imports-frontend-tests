@@ -16,19 +16,19 @@ describe('Search page', () => {
     await HomePage.loginRegisteredUser()
   })
   it('Should be able to sarch for a Valid MRN', async () => {
-    const mrn = '24GBBGBKCDMS704606'
+    const mrn = '24GBBGBKCDMS704607'
     await SearchPage.open()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
   })
   it('Should be able to sarch for a Valid CHED', async () => {
-    const ched = 'CHEDA.GB.2025.1704606'
+    const ched = 'CHEDA.GB.2025.1004607'
     await SearchPage.open()
     await SearchPage.search(ched)
     expect(await SearchResultsPage.getResultText()).toContain(ched)
   })
   it('Should be able to sarch for a Valid DUCR', async () => {
-    const ducr = '4GB269573944000-PORTACDMS704606'
+    const ducr = '4GB269573944000-PORTACDMS704607'
     await SearchPage.open()
     await SearchPage.search(ducr)
     expect(await SearchResultsPage.getResultText()).toContain(ducr)

@@ -17,10 +17,10 @@
         <ServiceCallTimestamp>1730472779006</ServiceCallTimestamp>
       </ServiceHeader>
       <Header>
-        <EntryReference>24GBBGBKCDMS704606</EntryReference>
+        <EntryReference>24GBBGBKCDMS704607</EntryReference>
         <EntryVersionNumber>2</EntryVersionNumber>
         <PreviousVersionNumber>1</PreviousVersionNumber>
-        <DeclarationUCR>4GB269573944000-PORTACDMS704606</DeclarationUCR>
+        <DeclarationUCR>4GB269573944000-PORTACDMS704607</DeclarationUCR>
         <DeclarationPartNumber />
         <DeclarationType>F</DeclarationType>
         <ArrivalDateTime />
@@ -44,7 +44,7 @@
         <ItemOriginCountryCode>IT</ItemOriginCountryCode>
         <Document>
           <DocumentCode>C640</DocumentCode>
-          <DocumentReference>GBCHD2024.1704606</DocumentReference>
+          <DocumentReference>GBCHD2024.1004607</DocumentReference>
           <DocumentStatus>AE</DocumentStatus>
           <DocumentControl>P</DocumentControl>
           <DocumentQuantity />

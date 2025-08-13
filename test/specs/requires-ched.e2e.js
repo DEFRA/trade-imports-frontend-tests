@@ -14,7 +14,7 @@ describe('Search Results Page for Requires CHED', () => {
     await HomePage.loginRegisteredUser()
   })
   it('Should be able to sarch for a Valid MRN and see Replace CHED status', async () => {
-    const mrn = '25GBAZ34DF56882006'
+    const mrn = '25GBAZ34DF56882007'
     await SearchPage.open()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
