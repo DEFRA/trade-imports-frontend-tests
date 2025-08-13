@@ -17,10 +17,10 @@
         <ServiceCallTimestamp>1730472895002</ServiceCallTimestamp>
       </ServiceHeader>
       <Header>
-        <EntryReference>24GBBGBKCDMS895002</EntryReference>
+        <EntryReference>24GBBGBKCDMS895003</EntryReference>
         <EntryVersionNumber>3</EntryVersionNumber>
         <PreviousVersionNumber>2</PreviousVersionNumber>
-        <DeclarationUCR>4GB269573944000-PORTACDMS895002</DeclarationUCR>
+        <DeclarationUCR>4GB269573944000-PORTACDMS895003</DeclarationUCR>
         <DeclarationPartNumber />
         <DeclarationType>F</DeclarationType>
         <ArrivalDateTime />
@@ -44,7 +44,7 @@
         <ItemOriginCountryCode>IT</ItemOriginCountryCode>
         <Document>
           <DocumentCode>N002</DocumentCode>
-          <DocumentReference>CHEDPP.GB.2025.9400002</DocumentReference>
+          <DocumentReference>CHEDPP.GB.2025.1010002</DocumentReference>
           <DocumentStatus>AE</DocumentStatus>
           <DocumentControl>P</DocumentControl>
           <DocumentQuantity />
@@ -67,7 +67,7 @@
         <ItemOriginCountryCode>IT</ItemOriginCountryCode>
         <Document>
           <DocumentCode>N002</DocumentCode>
-          <DocumentReference>CHEDPP.GB.2025.9400002V</DocumentReference>
+          <DocumentReference>CHEDPP.GB.2025.1010002V</DocumentReference>
           <DocumentStatus>AE</DocumentStatus>
           <DocumentControl>P</DocumentControl>
           <DocumentQuantity />
@@ -90,7 +90,7 @@
         <ItemOriginCountryCode>IT</ItemOriginCountryCode>
         <Document>
           <DocumentCode>N002</DocumentCode>
-          <DocumentReference>CHEDPP.GB.2025.9400002R</DocumentReference>
+          <DocumentReference>CHEDPP.GB.2025.1010002R</DocumentReference>
           <DocumentStatus>AE</DocumentStatus>
           <DocumentControl>P</DocumentControl>
           <DocumentQuantity />

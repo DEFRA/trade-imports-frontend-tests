@@ -18,7 +18,7 @@ describe('Search Results Page for IUU', () => {
     await HomePage.loginRegisteredUser()
   })
   it('Should be able to sarch for a Valid MRN and see IUU Checks', async () => {
-    const mrn = '24GBBGBKCDMS836026'
+    const mrn = '24GBBGBKCDMS836027'
     await SearchPage.open()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
