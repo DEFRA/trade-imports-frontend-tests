@@ -8,7 +8,7 @@ import ChedDeclarationPage from '../page-objects/ched-declaration.page'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 
-describe('Search Results Page', () => {
+describe('Search Results Page for Split Consignment', () => {
   before(async () => {
     await sendCdsMessageFromFile('../data/split-consignment.xml')
     await sendIpaffMessageFromFile('../data/split-consignment.json')
@@ -17,6 +17,7 @@ describe('Search Results Page', () => {
 
     await HomePage.open()
     await HomePage.login()
+    await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
   })
   it('Should be able to sarch for a Valid MRN and see IUU Checks', async () => {

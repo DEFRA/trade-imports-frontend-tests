@@ -35,7 +35,10 @@ export const config = {
   execArgv,
   logLevel: debug ? 'debug' : 'info',
   bail: 1,
-  baseUrl: `https://btms-portal-frontend.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
+  baseUrl:
+    process.env.ENVIRONMENT === 'local'
+      ? 'http://localhost:3000'
+      : `https://btms-portal-frontend.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`,
   waitforTimeout: 10000,
   waitforInterval: 200,
   connectionRetryTimeout: 120000,

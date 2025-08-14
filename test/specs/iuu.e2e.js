@@ -15,6 +15,7 @@ describe('Search Results Page for IUU', () => {
 
     await HomePage.open()
     await HomePage.login()
+    await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
   })
   it('Should be able to sarch for a Valid MRN and see IUU Checks', async () => {

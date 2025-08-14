@@ -13,6 +13,7 @@ describe('Accessibility Testing', () => {
     await initialiseAccessibilityChecking()
     await HomePage.open()
     await HomePage.login()
+    await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
   })
   it('Should check Sign Out page for accessibility issues', async () => {
