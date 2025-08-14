@@ -7,7 +7,10 @@ import AccessibilityPage from '../page-objects/accessibility.page.js'
 describe('Footer Links Checks', () => {
   it('Should see footer links on "home" page', async () => {
     await HomePage.open()
-    // assertions
+    expect(await FooterPage.getAllLinkText()).toContain('Cookies')
+    expect(await FooterPage.getAllLinkText()).toContain(
+      'Accessibility statement'
+    )
   })
   it('Should see footer links on "how to sign" in page', async () => {
     await HomePage.login()
