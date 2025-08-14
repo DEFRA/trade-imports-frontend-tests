@@ -12,6 +12,7 @@ describe('Home page', () => {
 
   it('Should be able to see list of registered users', async () => {
     await HomePage.login()
+    await HomePage.gatewayLogin()
     await expect(browser).toHaveTitle('DEFRA ID Login | cdp-defra-id-stub')
   })
 })

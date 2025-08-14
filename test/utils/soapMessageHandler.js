@@ -12,7 +12,13 @@ export async function sendCdsMessageFromFile(relativePath) {
 }
 
 export async function sendSoapRequest(soapEnvelope) {
-  const url = `https://btms-gateway.${process.env.ENVIRONMENT}.cdp-int.defra.cloud/ITSW/CDS/SubmitImportDocumentCDSFacadeService`
+  let url
+
+  if (process.env.ENVIRONMENT === 'local') {
+    url = `http://localhost:8080/ITSW/CDS/SubmitImportDocumentCDSFacadeService`
+  } else {
+    url = `https://btms-gateway.${process.env.ENVIRONMENT}.cdp-int.defra.cloud/ITSW/CDS/SubmitImportDocumentCDSFacadeService`
+  }
 
   try {
     const response = await request(url, {

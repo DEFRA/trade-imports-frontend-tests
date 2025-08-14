@@ -13,6 +13,7 @@ describe('Search page', () => {
 
     await HomePage.open()
     await HomePage.login()
+    await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
   })
   it('Should be able to sarch for a Valid MRN', async () => {
