@@ -40,6 +40,21 @@ Copy `.env.example` to `.env` and fill out the configuration.
 
 ### Running local tests
 
+To run the tests locally, you will first need to clone `btms-local-environment` and run the following command:
+
+```bash
+docker compose up -d
+```
+
+Next, in this repository you will need to add/update your local `.env` file with the following values:
+
+```bash
+ENVIRONMENT=local
+ServiceBus__Notifications__ConnectionString=<get_this_from_imports_process_terminal_via_cdp>
+```
+
+And lastly, run the following command and this should run the tests locally
+
 ```bash
 npm run test:local
 ```
