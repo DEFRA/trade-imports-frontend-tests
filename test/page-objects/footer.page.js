@@ -10,12 +10,20 @@ class FooterPage extends Page {
     return $('=Accessibility statement')
   }
 
+  get allLinkText() {
+    return $('ul[class="govuk-footer__inline-list"]')
+  }
+
   async clickCookies() {
     return await this.clickLink(this.cookiesLink)
   }
 
   async clickAccessibility() {
     return await this.clickLink(this.accessibilityLink)
+  }
+
+  async getAllLinkText() {
+    return await this.getTextFrom(this.allLinkText)
   }
 }
 
