@@ -10,10 +10,18 @@ import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 
 describe('Search Results Page for Split Consignment', () => {
   before(async () => {
-    await sendCdsMessageFromFile('../data/split-consignment.xml')
-    await sendIpaffMessageFromFile('../data/split-consignment.json')
-    await sendIpaffMessageFromFile('../data/split-consignmentV.json')
-    await sendIpaffMessageFromFile('../data/split-consignmentR.json')
+    await sendCdsMessageFromFile(
+      '../data/split-consignment/split-consignment.xml'
+    )
+    await sendIpaffMessageFromFile(
+      '../data/split-consignment/split-consignment.json'
+    )
+    await sendIpaffMessageFromFile(
+      '../data/split-consignment/split-consignmentV.json'
+    )
+    await sendIpaffMessageFromFile(
+      '../data/split-consignment/split-consignmentR.json'
+    )
 
     await HomePage.open()
     await HomePage.login()

@@ -7,7 +7,7 @@ import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 
 describe('Search Results Page for Requires CHED', () => {
   before(async () => {
-    await sendCdsMessageFromFile('../data/requires-ched.xml')
+    await sendCdsMessageFromFile('../data/requires-ched/requires-ched.xml')
 
     await HomePage.open()
     await HomePage.login()

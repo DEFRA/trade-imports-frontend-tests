@@ -8,8 +8,8 @@ import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 
 describe('Search page', () => {
   before(async () => {
-    await sendCdsMessageFromFile('../data/cds.xml')
-    await sendIpaffMessageFromFile('../data/ipaff.json')
+    await sendCdsMessageFromFile('../data/search/cds.xml')
+    await sendIpaffMessageFromFile('../data/search/ipaff.json')
 
     await HomePage.open()
     await HomePage.login()
@@ -17,19 +17,19 @@ describe('Search page', () => {
     await HomePage.loginRegisteredUser()
   })
   it('Should be able to sarch for a Valid MRN', async () => {
-    const mrn = '24GBBGBKCDMS704607'
+    const mrn = '24GBBGBKCDMS704608'
     await SearchPage.open()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
   })
   it('Should be able to sarch for a Valid CHED', async () => {
-    const ched = 'CHEDA.GB.2025.1004607'
+    const ched = 'CHEDA.GB.2025.1004608'
     await SearchPage.open()
     await SearchPage.search(ched)
     expect(await SearchResultsPage.getResultText()).toContain(ched)
   })
   it('Should be able to sarch for a Valid DUCR', async () => {
-    const ducr = '4GB269573944000-PORTACDMS704607'
+    const ducr = '4GB269573944000-PORTACDMS704608'
     await SearchPage.open()
     await SearchPage.search(ducr)
     expect(await SearchResultsPage.getResultText()).toContain(ducr)
