@@ -13,14 +13,14 @@
       <ServiceHeader>
         <SourceSystem>CDS</SourceSystem>
         <DestinationSystem>ALVS</DestinationSystem>
-        <CorrelationId>CDMS704606</CorrelationId>
-        <ServiceCallTimestamp>1730472779006</ServiceCallTimestamp>
+        <CorrelationId>CDMS704608</CorrelationId>
+        <ServiceCallTimestamp>1730472779008</ServiceCallTimestamp>
       </ServiceHeader>
       <Header>
-        <EntryReference>24GBBGBKCDMS704607</EntryReference>
+        <EntryReference>24GBBGBKCDMS704608</EntryReference>
         <EntryVersionNumber>2</EntryVersionNumber>
         <PreviousVersionNumber>1</PreviousVersionNumber>
-        <DeclarationUCR>4GB269573944000-PORTACDMS704607</DeclarationUCR>
+        <DeclarationUCR>4GB269573944000-PORTACDMS704608</DeclarationUCR>
         <DeclarationPartNumber />
         <DeclarationType>F</DeclarationType>
         <ArrivalDateTime />
@@ -38,13 +38,13 @@
         <GoodsDescription>SALSICCIA PURO SUINO</GoodsDescription>
         <ConsigneeId>GB930101485000</ConsigneeId>
         <ConsigneeName>GB930101485000</ConsigneeName>
-        <ItemNetMass>96</ItemNetMass>
-        <ItemSupplementaryUnits>0</ItemSupplementaryUnits>
+        <ItemNetMass>50</ItemNetMass>
+        <ItemSupplementaryUnits>100</ItemSupplementaryUnits>
         <ItemThirdQuantity />
         <ItemOriginCountryCode>IT</ItemOriginCountryCode>
         <Document>
           <DocumentCode>C640</DocumentCode>
-          <DocumentReference>GBCHD2024.1004607</DocumentReference>
+          <DocumentReference>GBCHD2024.1004608</DocumentReference>
           <DocumentStatus>AE</DocumentStatus>
           <DocumentControl>P</DocumentControl>
           <DocumentQuantity />

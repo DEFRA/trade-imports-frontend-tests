@@ -10,8 +10,8 @@ import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 
 describe('Search Results Page for IUU', () => {
   before(async () => {
-    await sendCdsMessageFromFile('../data/iuu.xml')
-    await sendIpaffMessageFromFile('../data/iuu.json')
+    await sendCdsMessageFromFile('../data/iuu/iuu.xml')
+    await sendIpaffMessageFromFile('../data/iuu/iuu.json')
 
     await HomePage.open()
     await HomePage.login()
