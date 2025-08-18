@@ -3,6 +3,7 @@ import { expect } from '@wdio/globals'
 import HomePage from '../page-objects/home.page'
 import SearchPage from 'page-objects/search.page'
 import SearchResultsPage from '../page-objects/searchResultsPage'
+import CustomDeclarationPage from '../page-objects/custom-declaration.page'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 
@@ -11,8 +12,7 @@ describe('Search page', () => {
     await sendCdsMessageFromFile('../data/search/cds.xml')
     await sendIpaffMessageFromFile('../data/search/ipaff.json')
 
-    await HomePage.open()
-    await HomePage.login()
+    await SearchPage.open() // Testing Redirection
     await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
   })
@@ -27,6 +27,13 @@ describe('Search page', () => {
     await SearchPage.open()
     await SearchPage.search(ched)
     expect(await SearchResultsPage.getResultText()).toContain(ched)
+
+    const customDeclarationCheds = ['CHED Status', 'New']
+    for (const ched of customDeclarationCheds) {
+      expect(
+        await CustomDeclarationPage.getAllText('CHEDA.GB.2025.1004608')
+      ).toContain(ched)
+    }
   })
   it('Should be able to sarch for a Valid DUCR', async () => {
     const ducr = '4GB269573944000-PORTACDMS704608'
