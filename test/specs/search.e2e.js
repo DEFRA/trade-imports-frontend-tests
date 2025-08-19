@@ -45,28 +45,35 @@ describe('Search page', () => {
     await SearchPage.open()
     await SearchPage.search('24GBBGBKCDMS704000')
     expect(await SearchPage.getSearchErrorText()).toContain(
-      'This MRN, CHED or DUCR reference cannot be found'
+      '24GBBGBKCDMS704000 cannot be found'
     )
   })
   it('Should see error message when results not found for CHED', async () => {
     await SearchPage.open()
     await SearchPage.search('CHEDA.GB.2025.1704000')
     expect(await SearchPage.getSearchErrorText()).toContain(
-      'This MRN, CHED or DUCR reference cannot be found'
+      'CHEDA.GB.2025.1704000 cannot be found'
     )
   })
   it('Should see error message when results not found for DUCR', async () => {
     await SearchPage.open()
     await SearchPage.search('4GB269573944000-PORTACDMS704000')
     expect(await SearchPage.getSearchErrorText()).toContain(
-      'This MRN, CHED or DUCR reference cannot be found'
+      '4GB269573944000-PORTACDMS704000 cannot be found'
     )
   })
   it('Should see error message when invalid search term provided', async () => {
     await SearchPage.open()
     await SearchPage.search('bad search term')
     expect(await SearchPage.getSearchErrorText()).toContain(
-      'You must enter a valid MRN, CHED or DUCR'
+      'Enter an MRN, CHED or DUCR reference in the correct format'
+    )
+  })
+  it('Should see error message when searching for empty search term', async () => {
+    await SearchPage.open()
+    await SearchPage.search('')
+    expect(await SearchPage.getSearchErrorText()).toContain(
+      'Enter an MRN, CHED or DUCR'
     )
   })
 })
