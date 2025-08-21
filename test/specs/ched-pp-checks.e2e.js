@@ -22,19 +22,19 @@ describe('Search Results Page for CHED-PP', () => {
     await HomePage.loginRegisteredUser()
   })
   it('Should be able to sarch for a Valid MRN and see CHED-PP Document References', async () => {
-    const mrn = '24GBBGBKCDMS965011'
+    const mrn = '24GBBGBKCDMS965012'
     await SearchPage.open()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
 
     const customDeclarationCheds = [
-      'CHEDPP.GB.2025.1005013',
-      'CHEDPP.GB.2025.1005014',
-      'CHEDPP.GB.2025.1005015'
+      'CHEDPP.GB.2025.1005020',
+      'CHEDPP.GB.2025.1005021',
+      'CHEDPP.GB.2025.1005022'
     ]
     for (const ched of customDeclarationCheds) {
       expect(
-        await CustomDeclarationPage.getAllText('24GBBGBKCDMS965011')
+        await CustomDeclarationPage.getAllText('24GBBGBKCDMS965012')
       ).toContain(ched)
     }
   })

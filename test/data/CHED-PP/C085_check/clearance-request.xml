@@ -17,7 +17,7 @@
                 <ServiceCallTimestamp>2025-05-20T04:00:01.001</ServiceCallTimestamp>
             </ServiceHeader>
             <Header>
-                <EntryReference>24GBBGBKCDMS965011</EntryReference>
+                <EntryReference>24GBBGBKCDMS965012</EntryReference>
                 <EntryVersionNumber>1</EntryVersionNumber>
                 <DeclarationUCR>4GB979990102001-0965-010</DeclarationUCR>
                 <DeclarationType>S</DeclarationType>
@@ -38,21 +38,21 @@
                 <ItemOriginCountryCode>MA</ItemOriginCountryCode>
                 <Document>
                     <DocumentCode>9115</DocumentCode>
-                    <DocumentReference>CHEDPP.GB.2025.1005013</DocumentReference>
+                    <DocumentReference>CHEDPP.GB.2025.1005020</DocumentReference>
                     <DocumentStatus>AE</DocumentStatus>
                     <DocumentControl>P</DocumentControl>
                     <DocumentQuantity />
                 </Document>
                 <Document>
                     <DocumentCode>C085</DocumentCode>
-                    <DocumentReference>CHEDPP.GB.2025.1005014</DocumentReference>
+                    <DocumentReference>CHEDPP.GB.2025.1005021</DocumentReference>
                     <DocumentStatus>AE</DocumentStatus>
                     <DocumentControl>P</DocumentControl>
                     <DocumentQuantity />
                 </Document>
                 <Document>
                     <DocumentCode>N851</DocumentCode>
-                    <DocumentReference>CHEDPP.GB.2025.1005015</DocumentReference>
+                    <DocumentReference>CHEDPP.GB.2025.1005022</DocumentReference>
                     <DocumentStatus>AE</DocumentStatus>
                     <DocumentControl>P</DocumentControl>
                     <DocumentQuantity />
