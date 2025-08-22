@@ -7,7 +7,7 @@ class Ched extends Page {
   }
 
   get iuuDataAuthroty() {
-    return $('details[aria-label] li[data-ched-authority="IUU"]')
+    return $$('details[aria-label] li[data-ched-authority="IUU"]')[1]
   }
 
   async getAllText(ched) {
