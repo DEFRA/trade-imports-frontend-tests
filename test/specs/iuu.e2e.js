@@ -24,10 +24,10 @@ describe('Search Results Page for IUU', () => {
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
     expect(await CustomDeclaration.getIuuDataAuthroty()).toContain(
-      'Release - IUU inspection complete (IUU)'
+      'Release - IUU inspection complete'
     )
     expect(await chedDeclarationPage.getIuuDataAuthroty()).toContain(
-      'IUU inspection complete (IUU)'
+      'IUU inspection complete'
     )
   })
 })
