@@ -17,7 +17,7 @@ describe('Home page', () => {
 
   it('Shoult be able to use Todays filter', async () => {
     const currentDate = new Date()
-    const day = String(currentDate.getDate()).padStart(2, '0')
+    const day = String(currentDate.getDate())
     const month = currentDate.toLocaleString('default', { month: 'long' })
     const year = currentDate.getFullYear()
     const hours = String(currentDate.getHours()).padStart(2, '0')
