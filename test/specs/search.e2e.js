@@ -17,13 +17,13 @@ describe('Search page', () => {
     await HomePage.loginRegisteredUser()
   })
   it('Should be able to sarch for a Valid MRN', async () => {
-    const mrn = '24GBBGBKCDMS704608'
+    const mrn = '24GBBGBKCDMS704709'
     await SearchPage.open()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
   })
   it('Should be able to sarch for a Valid CHED', async () => {
-    const ched = 'CHEDA.GB.2025.1004608'
+    const ched = 'CHEDA.GB.2025.1024310'
     await SearchPage.open()
     await SearchPage.search(ched)
     expect(await SearchResultsPage.getResultText()).toContain(ched)
@@ -31,12 +31,12 @@ describe('Search page', () => {
     const customDeclarationCheds = ['CHED Status', 'New']
     for (const ched of customDeclarationCheds) {
       expect(
-        await CustomDeclarationPage.getAllText('CHEDA.GB.2025.1004608')
+        await CustomDeclarationPage.getAllText('CHEDA.GB.2025.1024310')
       ).toContain(ched)
     }
   })
   it('Should be able to sarch for a Valid DUCR', async () => {
-    const ducr = '4GB269573944000-PORTACDMS704608'
+    const ducr = '4GB269573944000-PORTACDMS704709'
     await SearchPage.open()
     await SearchPage.search(ducr)
     expect(await SearchResultsPage.getResultText()).toContain(ducr)
