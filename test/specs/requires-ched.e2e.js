@@ -5,7 +5,7 @@ import SearchPage from 'page-objects/search.page'
 import SearchResultsPage from '../page-objects/searchResultsPage'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 
-describe.skip('Search Results Page for Requires CHED', () => {
+describe('Search Results Page for Requires CHED', () => {
   before(async () => {
     await sendCdsMessageFromFile('../data/requires-ched/requires-ched.xml')
 
