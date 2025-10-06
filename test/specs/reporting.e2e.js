@@ -1,7 +1,6 @@
 import { browser, expect } from '@wdio/globals'
-
-import HomePage from 'page-objects/home.page'
-import ReportingPage from 'page-objects/reporting.page'
+import HomePage from '../page-objects/home.page'
+import ReportingPage from '../page-objects/reporting.page'
 
 describe('Home page', () => {
   it('Should be on the "Reporting" page', async () => {
@@ -38,5 +37,10 @@ describe('Home page', () => {
   it('should display chart view and matches chart', async () => {
     await ReportingPage.openChartTab()
     expect(await ReportingPage.matchesChartIsVisible()).toBe(true)
+  })
+
+  it('should open summary tab and see matches section', async () => {
+    await ReportingPage.openSummaryTab()
+    expect(await ReportingPage.matchesSectionIsVisible()).toBe(true)
   })
 })

@@ -29,7 +29,12 @@ class ReportingPage extends Page {
     return $('section[aria-labelledby="notifications-summary-heading"]')
   }
 
-  // New: Chart tab and chart section selectors
+  // Summary view tab selector
+  get summaryTab() {
+    return $('#tab_summary-view')
+  }
+
+  // Chart tab and chart section selectors
   get chartTab() {
     return $('#tab_charts-view')
   }
@@ -62,7 +67,10 @@ class ReportingPage extends Page {
     return await this.elementIsDisplayed(this.notifications)
   }
 
-  // New: Chart tab actions
+  async openSummaryTab() {
+    await this.clickLink(this.summaryTab)
+  }
+
   async openChartTab() {
     await this.clickLink(this.chartTab)
   }
