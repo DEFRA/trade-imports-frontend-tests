@@ -65,4 +65,59 @@ describe('Home page', () => {
     expect(chartNoMatches).toEqual(summaryNoMatches)
     expect(chartTotal).toEqual(summaryTotal)
   })
+
+  it('should have the same releases numbers on summary and chart tabs', async () => {
+    await ReportingPage.lastMonthFilter()
+    await ReportingPage.openSummaryTab()
+    const summaryAuto = await ReportingPage.getReleasesAutoSummaryValue()
+    const summaryManual = await ReportingPage.getReleasesManualSummaryValue()
+    const summaryTotal = await ReportingPage.getReleasesTotalSummaryValue()
+
+    await ReportingPage.openChartTab()
+    const chartAuto = await ReportingPage.getReleasesAutoChartValue()
+    const chartManual = await ReportingPage.getReleasesManualChartValue()
+    const chartTotal = await ReportingPage.getReleasesTotalChartValue()
+
+    expect(chartAuto).toEqual(summaryAuto)
+    expect(chartManual).toEqual(summaryManual)
+    expect(chartTotal).toEqual(summaryTotal)
+  })
+
+  it('should have the same unique clearance request numbers on summary and chart tabs', async () => {
+    await ReportingPage.lastMonthFilter()
+    await ReportingPage.openSummaryTab()
+    const summaryUnique = await ReportingPage.getUniqueClearancesSummaryValue()
+    const summaryTotal =
+      await ReportingPage.getUniqueClearancesTotalSummaryValue()
+
+    await ReportingPage.openChartTab()
+    const chartUnique = await ReportingPage.getUniqueClearancesChartValue()
+    const chartTotal = await ReportingPage.getUniqueClearancesTotalChartValue()
+
+    expect(chartUnique).toEqual(summaryUnique)
+    expect(chartTotal).toEqual(summaryTotal)
+  })
+
+  it('should have the same CHED type numbers on summary and chart tabs', async () => {
+    await ReportingPage.lastMonthFilter()
+    await ReportingPage.openSummaryTab()
+    const summaryA = await ReportingPage.getChedASummaryValue()
+    const summaryP = await ReportingPage.getChedPSummaryValue()
+    const summaryPP = await ReportingPage.getChedPPSummaryValue()
+    const summaryD = await ReportingPage.getChedDSummaryValue()
+    const summaryTotal = await ReportingPage.getChedTotalSummaryValue()
+
+    await ReportingPage.openChartTab()
+    const chartA = await ReportingPage.getChedAChartValue()
+    const chartP = await ReportingPage.getChedPChartValue()
+    const chartPP = await ReportingPage.getChedPPChartValue()
+    const chartD = await ReportingPage.getChedDChartValue()
+    const chartTotal = await ReportingPage.getChedTotalChartValue()
+
+    expect(chartA).toEqual(summaryA)
+    expect(chartP).toEqual(summaryP)
+    expect(chartPP).toEqual(summaryPP)
+    expect(chartD).toEqual(summaryD)
+    expect(chartTotal).toEqual(summaryTotal)
+  })
 })
