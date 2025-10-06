@@ -43,4 +43,26 @@ describe('Home page', () => {
     await ReportingPage.openSummaryTab()
     expect(await ReportingPage.matchesSectionIsVisible()).toBe(true)
   })
+
+  it('should have the same matches, no matches, and total numbers on summary and chart tabs', async () => {
+    // Apply the last month filter before running the comparison
+    await ReportingPage.lastMonthFilter()
+
+    // Go to summary tab and get numbers using page object methods
+    await ReportingPage.openSummaryTab()
+    const summaryMatches = await ReportingPage.getSummaryMatches()
+    const summaryNoMatches = await ReportingPage.getSummaryNoMatches()
+    const summaryTotal = await ReportingPage.getSummaryTotal()
+
+    // Go to chart tab and get numbers using page object methods
+    await ReportingPage.openChartTab()
+    const chartMatches = await ReportingPage.getChartMatches()
+    const chartNoMatches = await ReportingPage.getChartNoMatches()
+    const chartTotal = await ReportingPage.getChartTotal()
+
+    // Compare values
+    expect(chartMatches).toEqual(summaryMatches)
+    expect(chartNoMatches).toEqual(summaryNoMatches)
+    expect(chartTotal).toEqual(summaryTotal)
+  })
 })
