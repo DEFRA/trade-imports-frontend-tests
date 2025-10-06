@@ -14,7 +14,7 @@ class ReportingPage extends Page {
   }
 
   get matches() {
-    return $('section[aria-labelledby="matches"]')
+    return $('section[aria-labelledby="matches-summary-heading"]')
   }
 
   get releases() {

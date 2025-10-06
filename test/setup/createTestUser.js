@@ -15,16 +15,25 @@ const testUser = {
 export async function ensureTestUserExists() {
   const emailRow = await HomePage.signInBasedOnTestEmail
   const exists = await emailRow.isExisting()
-  if (!exists) {
+
+  // Check if the page is already at the registration form (no users exist)
+  const emailInput = await $('#email')
+  const registrationFormVisible = await emailInput.isExisting()
+
+  if (!exists || registrationFormVisible) {
     await createTestUser(testUser)
   }
 }
 
 async function createTestUser(user) {
-  const registrationLink = await $(
-    'a.govuk-link[href="/cdp-defra-id-stub/register"]'
-  )
-  await registrationLink.click()
+  // If not already at registration form, click registration link
+  const emailInput = await $('#email')
+  if (!(await emailInput.isExisting())) {
+    const registrationLink = await $(
+      'a.govuk-link[href="/cdp-defra-id-stub/register"]'
+    )
+    await registrationLink.click()
+  }
 
   // Fill registration form
   await $('#email').setValue(user.email)
@@ -41,9 +50,7 @@ async function createTestUser(user) {
   await $('button[type="submit"].govuk-button').click() // Add relationship button
 
   // Finish setup
-  const finishLink = await $(
-    'a.govuk-link[href*="/cdp-defra-id-stub/register/"][href$="/summary"]'
-  )
+  const finishLink = await $('=Finish')
   await finishLink.click()
 
   // Navigate back to login page
