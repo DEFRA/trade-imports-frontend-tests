@@ -18,15 +18,24 @@ class ReportingPage extends Page {
   }
 
   get releases() {
-    return $('section[aria-labelledby="releases"]')
+    return $('section[aria-labelledby="releases-summary-heading"]')
   }
 
   get clearanceRequests() {
-    return $('section[aria-labelledby="clearanceRequests"]')
+    return $('section[aria-labelledby="clearanceRequests-summary-heading"]')
   }
 
   get notifications() {
-    return $('section[aria-labelledby="notifications"]')
+    return $('section[aria-labelledby="notifications-summary-heading"]')
+  }
+
+  // New: Chart tab and chart section selectors
+  get chartTab() {
+    return $('#tab_charts-view')
+  }
+
+  get matchesChartHeading() {
+    return $('#matches-charts-heading')
   }
 
   async todayFilter() {
@@ -42,15 +51,24 @@ class ReportingPage extends Page {
   }
 
   async releasesSectionIsVisible() {
-    return await this.elementIsDisplayed(this.matches)
+    return await this.elementIsDisplayed(this.releases)
   }
 
   async clearanceRequestSectionIsVisible() {
-    return await this.elementIsDisplayed(this.matches)
+    return await this.elementIsDisplayed(this.clearanceRequests)
   }
 
   async notificationSectionIsVisible() {
-    return await this.elementIsDisplayed(this.matches)
+    return await this.elementIsDisplayed(this.notifications)
+  }
+
+  // New: Chart tab actions
+  async openChartTab() {
+    await this.clickLink(this.chartTab)
+  }
+
+  async matchesChartIsVisible() {
+    return await this.elementIsDisplayed(this.matchesChartHeading)
   }
 }
 

@@ -34,4 +34,9 @@ describe('Home page', () => {
     expect(await ReportingPage.clearanceRequestSectionIsVisible()).toBe(true)
     expect(await ReportingPage.notificationSectionIsVisible()).toBe(true)
   })
+
+  it('should display chart view and matches chart', async () => {
+    await ReportingPage.openChartTab()
+    expect(await ReportingPage.matchesChartIsVisible()).toBe(true)
+  })
 })
