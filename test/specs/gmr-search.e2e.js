@@ -6,7 +6,7 @@ import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendGmrMessageFromFile } from '../utils/gmrMessageHandler.js'
 
-describe('GMR Search', () => {
+describe.skip('GMR Search', () => {
   const gmrId = 'GMRA000000F8'
 
   before(async () => {

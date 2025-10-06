@@ -1,5 +1,6 @@
 import { Page } from './page.js'
 import { $ } from '@wdio/globals'
+import { ensureTestUserExists } from '../setup/createTestUser.js'
 
 class HomePage extends Page {
   open() {
@@ -19,7 +20,7 @@ class HomePage extends Page {
   }
 
   get signInBasedOnTestEmail() {
-    return $('//tr[th[text()="muddin@equalexperts.com"]]//td//a')
+    return $('//tr[th[text()="front-end-tests@testexample.com"]]//td//a')
   }
 
   async login() {
@@ -32,6 +33,7 @@ class HomePage extends Page {
   }
 
   async loginRegisteredUser() {
+    await ensureTestUserExists()
     return await this.clickLink(this.signInBasedOnTestEmail)
   }
 }
