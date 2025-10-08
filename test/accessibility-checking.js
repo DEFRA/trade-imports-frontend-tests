@@ -16,22 +16,33 @@ export async function analyseAccessibility(suffix) {
   try {
     await wcagChecker.analyse(browser, suffix)
   } catch (err) {
-    // Detect the specific serialization error
     if (err.message && err.message.includes('[object Object]')) {
-      // Attempt a manual fallback if needed
+      const reportDir = './reports'
+      if (!fs.existsSync(reportDir)) {
+        fs.mkdirSync(reportDir, { recursive: true })
+      }
       const jsonViolations = await browser.execute(() => {
         try {
-          return JSON.stringify(window.violations || [])
+          if (typeof window.violations === 'undefined') {
+            return JSON.stringify({ error: 'window.violations is undefined' })
+          }
+          return JSON.stringify(window.violations)
         } catch (e) {
-          return JSON.stringify({ error: 'unable to stringify violations' })
+          return JSON.stringify({ error: e.message })
         }
       })
+      // Handle null / undefined response from browser
+      const safeData =
+        typeof jsonViolations === 'string'
+          ? jsonViolations
+          : JSON.stringify({ error: 'No data returned from browser.execute' })
+
       fs.writeFileSync(
-        path.join('./reports', `violations-${suffix || 'unknown'}.json`),
-        jsonViolations
+        path.join(reportDir, `violations-${suffix || 'unknown'}.json`),
+        safeData
       )
     } else {
-      throw err // rethrow unknown errors
+      throw err
     }
   }
 }
