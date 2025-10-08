@@ -13,7 +13,27 @@ export async function initialiseAccessibilityChecking() {
 }
 
 export async function analyseAccessibility(suffix) {
-  await wcagChecker.analyse(browser, suffix)
+  try {
+    await wcagChecker.analyse(browser, suffix)
+  } catch (err) {
+    // Detect the specific serialization error
+    if (err.message && err.message.includes('[object Object]')) {
+      // Attempt a manual fallback if needed
+      const jsonViolations = await browser.execute(() => {
+        try {
+          return JSON.stringify(window.violations || [])
+        } catch (e) {
+          return JSON.stringify({ error: 'unable to stringify violations' })
+        }
+      })
+      fs.writeFileSync(
+        path.join('./reports', `violations-${suffix || 'unknown'}.json`),
+        jsonViolations
+      )
+    } else {
+      throw err // rethrow unknown errors
+    }
+  }
 }
 
 export function generateAccessibilityReports(filePrefix) {
