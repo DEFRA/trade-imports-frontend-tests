@@ -3,7 +3,7 @@ import HomePage from '../page-objects/home.page.js'
 import LatestActivityPage from '../page-objects/latest-activity.page'
 
 describe('Latest Activity Page', () => {
-  it('should display BTMS, CDS, and IPAFFS headers and all message rows', async () => {
+  it('should display BTMS, CDS, and IPAFFS headers, all message rows, and valid date fields', async () => {
     await HomePage.open()
     await HomePage.login()
     await HomePage.gatewayLogin()
@@ -16,5 +16,6 @@ describe('Latest Activity Page', () => {
     expect(await LatestActivityPage.isClearanceRequestVisible()).toBe(true)
     expect(await LatestActivityPage.isFinalisationVisible()).toBe(true)
     expect(await LatestActivityPage.isNotificationVisible()).toBe(true)
+    expect(await LatestActivityPage.areAllDatesValid()).toBe(true)
   })
 })

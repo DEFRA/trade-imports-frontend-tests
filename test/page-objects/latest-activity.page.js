@@ -6,7 +6,6 @@ class LatestActivityPage extends Page {
     return super.open('/latest-activity')
   }
 
-  // --- Getters ---
   get btmsHeader() {
     return $('h2.govuk-heading-m=BTMS')
   }
@@ -43,7 +42,30 @@ class LatestActivityPage extends Page {
     )
   }
 
-  // --- Actions ---
+  get btmsDecisionDate() {
+    return $(
+      '//table[@aria-label="Latest activity for BTMS"]//td[text()="Decision"]/following-sibling::td[1]'
+    )
+  }
+
+  get cdsClearanceRequestDate() {
+    return $(
+      '//table[@aria-label="Latest activity for CDS"]//td[text()="Clearance request"]/following-sibling::td[1]'
+    )
+  }
+
+  get cdsFinalisationDate() {
+    return $(
+      '//table[@aria-label="Latest activity for CDS"]//td[text()="Finalisation"]/following-sibling::td[1]'
+    )
+  }
+
+  get ipaffsNotificationDate() {
+    return $(
+      '//table[@aria-label="Latest activity for IPAFFS"]//td[text()="Notification"]/following-sibling::td[1]'
+    )
+  }
+
   async isBtmsHeaderVisible() {
     return await this.btmsHeader.isDisplayed()
   }
@@ -70,6 +92,21 @@ class LatestActivityPage extends Page {
 
   async isNotificationVisible() {
     return await this.notificationRow.isDisplayed()
+  }
+
+  async isValidDate(element) {
+    const dateText = await element.getText()
+    return !isNaN(Date.parse(dateText))
+  }
+
+  async areAllDatesValid() {
+    const results = await Promise.all([
+      this.isValidDate(this.btmsDecisionDate),
+      this.isValidDate(this.cdsClearanceRequestDate),
+      this.isValidDate(this.cdsFinalisationDate),
+      this.isValidDate(this.ipaffsNotificationDate)
+    ])
+    return results.every(Boolean)
   }
 }
 
