@@ -1,7 +1,10 @@
 import { Page } from './page.js'
 
 class ReportingPage extends Page {
-  // --- Getters ---
+  get navReportingLink() {
+    return $('a.govuk-service-navigation__link[href="/reporting"]')
+  }
+
   get todayLink() {
     return $('.btms-reporting-filters a')
   }
@@ -339,6 +342,10 @@ class ReportingPage extends Page {
 
   async getChedTotalChartValue() {
     return Number(await this.chedTotalChart.getText())
+  }
+
+  async clickNavReportingLink() {
+    await this.clickLink(this.navReportingLink)
   }
 }
 

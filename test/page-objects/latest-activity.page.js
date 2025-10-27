@@ -6,6 +6,10 @@ class LatestActivityPage extends Page {
     return super.open('/latest-activity')
   }
 
+  get navLatestActivityLink() {
+    return $('a.govuk-service-navigation__link[href="/latest-activity"]')
+  }
+
   get btmsHeader() {
     return $('h2.govuk-heading-m=BTMS')
   }
@@ -107,6 +111,10 @@ class LatestActivityPage extends Page {
       this.isValidDate(this.ipaffsNotificationDate)
     ])
     return results.every(Boolean)
+  }
+
+  async clickNavLatestActivityLink() {
+    await this.clickLink(this.navLatestActivityLink)
   }
 }
 

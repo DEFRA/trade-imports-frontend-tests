@@ -21,6 +21,10 @@ class SearchPage extends Page {
     return $('=Sign out')
   }
 
+  get navSearchLink() {
+    return $('a.govuk-service-navigation__link[href="/search"]')
+  }
+
   async search(input) {
     await this.elementIsDisplayed(this.searchInputField)
     await this.searchInputField.setValue(input)
@@ -33,6 +37,10 @@ class SearchPage extends Page {
 
   async signout() {
     await this.clickLink(this.signOut)
+  }
+
+  async clickNavSearchLink() {
+    await this.clickLink(this.navSearchLink)
   }
 }
 

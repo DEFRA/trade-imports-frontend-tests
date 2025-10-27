@@ -8,7 +8,7 @@ describe('Reporting page', () => {
     await HomePage.login()
     await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
-    await ReportingPage.open()
+    await ReportingPage.clickNavReportingLink()
     await expect(browser).toHaveTitle(
       'BTMS reporting data - Border Trade Matching Service'
     )
