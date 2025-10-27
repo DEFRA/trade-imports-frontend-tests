@@ -8,7 +8,7 @@ describe('Latest Activity Page', () => {
     await HomePage.login()
     await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
-    await LatestActivityPage.open()
+    await LatestActivityPage.clickNavLatestActivityLink()
     expect(await LatestActivityPage.isBtmsHeaderVisible()).toBe(true)
     expect(await LatestActivityPage.isCdsHeaderVisible()).toBe(true)
     expect(await LatestActivityPage.isIpaffsHeaderVisible()).toBe(true)
