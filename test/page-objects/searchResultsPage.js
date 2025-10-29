@@ -1,6 +1,10 @@
 import { Page } from './page.js'
 
 class SearcheResultsPage extends Page {
+  get cdsStatusElement() {
+    return $('.btms-customs-declaration-summary .govuk-tag--yellow')
+  }
+
   get resultTextElement() {
     return $('.govuk-heading-l')
   }
@@ -23,6 +27,10 @@ class SearcheResultsPage extends Page {
 
   async ipaffDeclarationAllResultText() {
     return await this.getResultText(this.ipaffDeclarationAllResultTextElement)
+  }
+
+  async getCdsStatus() {
+    return (await this.cdsStatusElement.getText()).trim()
   }
 }
 

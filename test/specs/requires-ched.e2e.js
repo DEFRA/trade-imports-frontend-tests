@@ -22,5 +22,9 @@ describe('Search Results Page for Requires CHED', () => {
     expect(await SearchResultsPage.customDeclarationAllResultText()).toContain(
       'Requires CHED'
     )
+
+    expect(await SearchResultsPage.getCdsStatus()).toBe(
+      'In progress - Awaiting trader'
+    )
   })
 })
