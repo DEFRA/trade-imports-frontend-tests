@@ -37,5 +37,9 @@ describe('Search Results Page for CHED-PP', () => {
         await CustomDeclarationPage.getAllText('24GBBGBKCDMS965012')
       ).toContain(ched)
     }
+
+    expect(await SearchResultsPage.getCdsStatus()).toBe(
+      'In progress - Awaiting IPAFFS'
+    )
   })
 })

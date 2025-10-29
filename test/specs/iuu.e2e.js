@@ -29,5 +29,8 @@ describe('Search Results Page for IUU', () => {
     expect(await chedDeclarationPage.getIuuDataAuthroty()).toContain(
       'IUU inspection complete'
     )
+    expect(await SearchResultsPage.getCdsStatus()).toBe(
+      'In progress - Awaiting CDS'
+    )
   })
 })
