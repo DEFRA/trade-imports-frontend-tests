@@ -13,11 +13,11 @@
             <ServiceHeader>
                 <SourceSystem>CDS</SourceSystem>
                 <DestinationSystem>ALVS</DestinationSystem>
-                <CorrelationId>35546965010</CorrelationId>
+                <CorrelationId>35546965015</CorrelationId>
                 <ServiceCallTimestamp>2025-05-20T04:00:01.001</ServiceCallTimestamp>
             </ServiceHeader>
             <Header>
-                <EntryReference>24GBBGBKCDMS965012</EntryReference>
+                <EntryReference>24GBBGBKCDMS965015</EntryReference>
                 <EntryVersionNumber>1</EntryVersionNumber>
                 <DeclarationUCR>4GB979990102001-0965-010</DeclarationUCR>
                 <DeclarationType>S</DeclarationType>
@@ -38,21 +38,21 @@
                 <ItemOriginCountryCode>MA</ItemOriginCountryCode>
                 <Document>
                     <DocumentCode>9115</DocumentCode>
-                    <DocumentReference>CHEDPP.GB.2025.1005020</DocumentReference>
+                    <DocumentReference>CHEDPP.GB.2025.1050050</DocumentReference>
                     <DocumentStatus>AE</DocumentStatus>
                     <DocumentControl>P</DocumentControl>
                     <DocumentQuantity />
                 </Document>
                 <Document>
                     <DocumentCode>C085</DocumentCode>
-                    <DocumentReference>CHEDPP.GB.2025.1005021</DocumentReference>
+                    <DocumentReference>CHEDPP.GB.2025.1050051</DocumentReference>
                     <DocumentStatus>AE</DocumentStatus>
                     <DocumentControl>P</DocumentControl>
                     <DocumentQuantity />
                 </Document>
                 <Document>
                     <DocumentCode>N851</DocumentCode>
-                    <DocumentReference>CHEDPP.GB.2025.1005022</DocumentReference>
+                    <DocumentReference>CHEDPP.GB.2025.1050052</DocumentReference>
                     <DocumentStatus>AE</DocumentStatus>
                     <DocumentControl>P</DocumentControl>
                     <DocumentQuantity />
