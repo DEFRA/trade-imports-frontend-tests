@@ -1,6 +1,7 @@
 import { expect } from '@wdio/globals'
 import HomePage from '../page-objects/home.page'
 import SearchPage from 'page-objects/search.page'
+import SearchResultsPage from '../page-objects/searchResultsPage.js'
 import GmrSearchResultsPage from '../page-objects/gmr-search-results.page.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
@@ -40,7 +41,6 @@ describe('GMR Search', () => {
       'Linked customs declarations'
     )
     const mrnData = await GmrSearchResultsPage.getLinkedMrnData()
-    // Explicit expectations per row
     const expectedRows = [
       {
         mrn: '24GBBGBKCDMS001003',
@@ -60,6 +60,11 @@ describe('GMR Search', () => {
       expect(actual.cdsStatus).toBe(exp.cdsStatus)
       expect(actual.btmsDecision).toBe(exp.btmsDecision)
     })
+
+    await GmrSearchResultsPage.clickFirstLinkedMrn()
+    expect(await SearchResultsPage.getCdsStatus()).toContain(
+      'In progress - Awaiting IPAFFS'
+    )
   })
 
   it('should show no linked customs rows for an invalid GMR', async () => {

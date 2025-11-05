@@ -8,7 +8,6 @@ class GmrSearchResultsPage extends Page {
     )
   }
 
-  // --- Getters ---
   get headingElement() {
     return $('h1.govuk-heading-l')
   }
@@ -39,7 +38,12 @@ class GmrSearchResultsPage extends Page {
     )
   }
 
-  // --- Methods ---
+  get firstMrnAnchor() {
+    return $(
+      'table.govuk-table tbody.govuk-table__body tr.govuk-table__row:first-child td.govuk-table__cell a'
+    )
+  }
+
   async getDisplayedGmr() {
     const text = await this.headingElement.getText()
     return text.replace(/Showing result for/i, '').trim()
@@ -89,14 +93,12 @@ class GmrSearchResultsPage extends Page {
     return (await this.linkedCustomsHeadingElement.getText()).trim()
   }
 
-  // New helper to parse MRN rows (anchor link or tooltip unknown variant)
   async getLinkedMrnData() {
     const rows = await this.linkedCustomsTableRows
     const results = []
     for (const row of rows) {
       const cells = await row.$$('td.govuk-table__cell')
       if (!Array.isArray(cells) || cells.length < 3) continue
-      // MRN extraction: try anchor first
       let mrn = ''
       const anchor = await cells[0].$('a')
       if (await anchor.isExisting()) {
@@ -104,7 +106,6 @@ class GmrSearchResultsPage extends Page {
       } else {
         const unknownWrapper = await cells[0].$('.tooltiplink')
         if (await unknownWrapper.isExisting()) {
-          // Use aria-describedby attribute (matches MRN) or first line of text
           mrn =
             (await unknownWrapper.getAttribute('aria-describedby'))?.trim() ||
             (await unknownWrapper.getText()).split(/\n/)[0].trim()
@@ -124,6 +125,11 @@ class GmrSearchResultsPage extends Page {
 
   async getLinkedMrns() {
     return (await this.getLinkedMrnData()).map((r) => r.mrn)
+  }
+
+  async clickFirstLinkedMrn() {
+    await this.elementIsDisplayed(this.firstMrnAnchor)
+    await this.clickLink(this.firstMrnAnchor)
   }
 }
 
