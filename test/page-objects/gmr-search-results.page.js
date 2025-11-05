@@ -45,12 +45,11 @@ class GmrSearchResultsPage extends Page {
   }
 
   async getDisplayedGmr() {
-    const text = await this.headingElement.getText()
-    return text.replace(/Showing result for/i, '').trim()
+    return this.getTextFrom(this.headingElement)
   }
 
   async getVehicleRegistrationNumber() {
-    return (await this.vehicleVrnValue.getText()).trim()
+    return this.getTextFrom(this.vehicleVrnValue)
   }
 
   async getTrailerRegistrationNumbers() {
@@ -82,7 +81,7 @@ class GmrSearchResultsPage extends Page {
   }
 
   async getVehicleDetailsHeading() {
-    return (await this.vehicleDetailsHeadingElement.getText()).trim()
+    return this.getTextFrom(this.vehicleDetailsHeadingElement)
   }
 
   async getPageTitle() {
@@ -90,7 +89,7 @@ class GmrSearchResultsPage extends Page {
   }
 
   async getLinkedCustomsHeading() {
-    return (await this.linkedCustomsHeadingElement.getText()).trim()
+    return this.getTextFrom(this.linkedCustomsHeadingElement)
   }
 
   async getLinkedMrnData() {

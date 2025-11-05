@@ -21,25 +21,33 @@ describe('GMR Search', () => {
     await HomePage.loginRegisteredUser()
   })
 
-  it('should display correct results when navigating directly to a valid GMR results page', async () => {
+  it('should display correct headings on the GMR results page', async () => {
     await GmrSearchResultsPage.open(gmrId)
-    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(gmrId)
+    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
+      `Showing result for\n${gmrId}`
+    )
     expect(await GmrSearchResultsPage.getPageTitle()).toBe(
       `Showing result for ${gmrId} - Border Trade Matching Service`
     )
     expect(await GmrSearchResultsPage.getVehicleDetailsHeading()).toBe(
       'Vehicle details'
     )
+    expect(await GmrSearchResultsPage.getLinkedCustomsHeading()).toBe(
+      'Linked customs declarations'
+    )
+  })
+
+  it('should display correct vehicle details for a valid GMR', async () => {
+    await GmrSearchResultsPage.open(gmrId)
     expect(await GmrSearchResultsPage.getVehicleRegistrationNumber()).toBe(
       'DN05 VDB'
     )
     expect(
       (await GmrSearchResultsPage.getTrailerRegistrationNumbers()).sort()
     ).toEqual(['V013 WKS', 'YT08 NYD'].sort())
+  })
 
-    expect(await GmrSearchResultsPage.getLinkedCustomsHeading()).toBe(
-      'Linked customs declarations'
-    )
+  it('should display correct linked customs declaration details for a valid GMR', async () => {
     const mrnData = await GmrSearchResultsPage.getLinkedMrnData()
     const expectedRows = [
       {
@@ -60,7 +68,10 @@ describe('GMR Search', () => {
       expect(actual.cdsStatus).toBe(exp.cdsStatus)
       expect(actual.btmsDecision).toBe(exp.btmsDecision)
     })
+  })
 
+  it('should navigate to the correct customs declaration when clicking a linked MRN', async () => {
+    await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickFirstLinkedMrn()
     expect(await SearchResultsPage.getCdsStatus()).toContain(
       'In progress - Awaiting IPAFFS'
