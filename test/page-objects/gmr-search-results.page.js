@@ -62,18 +62,7 @@ class GmrSearchResultsPage extends Page {
   }
 
   async getLinkedCustomsRows() {
-    const rows = await this.linkedCustomsTableRows
-    const results = []
-    for (const row of rows) {
-      const cells = await row.$$('td.govuk-table__cell')
-      if (Array.isArray(cells) && cells.length >= 3) {
-        const mrn = (await cells[0].getText()).trim()
-        const cdsStatus = (await cells[1].getText()).trim()
-        const btmsDecision = (await cells[2].getText()).trim()
-        results.push({ mrn, cdsStatus, btmsDecision })
-      }
-    }
-    return results
+    return this.getLinkedMrnData()
   }
 
   async getCdsStatusForMrn(mrn) {
@@ -98,6 +87,43 @@ class GmrSearchResultsPage extends Page {
 
   async getLinkedCustomsHeading() {
     return (await this.linkedCustomsHeadingElement.getText()).trim()
+  }
+
+  // New helper to parse MRN rows (anchor link or tooltip unknown variant)
+  async getLinkedMrnData() {
+    const rows = await this.linkedCustomsTableRows
+    const results = []
+    for (const row of rows) {
+      const cells = await row.$$('td.govuk-table__cell')
+      if (!Array.isArray(cells) || cells.length < 3) continue
+      // MRN extraction: try anchor first
+      let mrn = ''
+      const anchor = await cells[0].$('a')
+      if (await anchor.isExisting()) {
+        mrn = (await anchor.getText()).trim()
+      } else {
+        const unknownWrapper = await cells[0].$('.tooltiplink')
+        if (await unknownWrapper.isExisting()) {
+          // Use aria-describedby attribute (matches MRN) or first line of text
+          mrn =
+            (await unknownWrapper.getAttribute('aria-describedby'))?.trim() ||
+            (await unknownWrapper.getText()).split(/\n/)[0].trim()
+        } else {
+          mrn = (await cells[0].getText()).trim().split(/\n/)[0]
+        }
+      }
+      const statusSpan = await cells[1].$('span.govuk-tag')
+      const cdsStatus = (await statusSpan.isExisting())
+        ? (await statusSpan.getText()).trim()
+        : (await cells[1].getText()).trim()
+      const btmsDecision = (await cells[2].getText()).trim()
+      results.push({ mrn, cdsStatus, btmsDecision })
+    }
+    return results
+  }
+
+  async getLinkedMrns() {
+    return (await this.getLinkedMrnData()).map((r) => r.mrn)
   }
 }
 

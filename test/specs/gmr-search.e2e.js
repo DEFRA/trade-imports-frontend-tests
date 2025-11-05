@@ -39,8 +39,27 @@ describe('GMR Search', () => {
     expect(await GmrSearchResultsPage.getLinkedCustomsHeading()).toBe(
       'Linked customs declarations'
     )
-    const rows = await GmrSearchResultsPage.getLinkedCustomsRows()
-    expect(rows.length).toBeGreaterThan(0)
+    const mrnData = await GmrSearchResultsPage.getLinkedMrnData()
+    // Explicit expectations per row
+    const expectedRows = [
+      {
+        mrn: '24GBBGBKCDMS001003',
+        cdsStatus: 'In progress - Awaiting IPAFFS',
+        btmsDecision: 'Hold - Decision not given'
+      },
+      {
+        mrn: '24GBBGBKCDMS001004',
+        cdsStatus: 'Unknown',
+        btmsDecision: 'Unknown'
+      }
+    ]
+    expect(mrnData.length).toBe(expectedRows.length)
+    expectedRows.forEach((exp, idx) => {
+      const actual = mrnData[idx]
+      expect(actual.mrn).toBe(exp.mrn)
+      expect(actual.cdsStatus).toBe(exp.cdsStatus)
+      expect(actual.btmsDecision).toBe(exp.btmsDecision)
+    })
   })
 
   it('should show no linked customs rows for an invalid GMR', async () => {
