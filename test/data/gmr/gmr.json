@@ -1,34 +1,37 @@
 {
-  "GmrId": "GMRA000000F8",
-  "HaulierEori": "GB5380138094988",
-  "State": "CHECKED_IN",
-  "InspectionRequired": null,
-  "ReportToLocations": null,
-  "UpdatedDateTime": "2025-06-17T15:00:00.425Z",
-  "Direction": "UK_INBOUND",
-  "HaulierType": "RMG",
-  "IsUnaccompanied": true,
-  "VehicleRegNum": "WICXEB",
-  "TrailerRegistrationNums": ["IIWSI1", "YRSVQM"],
-  "ContainerReferenceNums": null,
-  "PlannedCrossing": {
-    "RouteId": "19",
-    "LocalDateTimeOfDeparture": "2025-02-13T14:25"
+  "gmrId": "GMRA10000002",
+  "haulierEORI": "GB1196193155298",
+  "state": "OPEN",
+  "inspectionRequired": null,
+  "reportToLocations": null,
+  "updatedDateTime": "2025-10-30T19:00:00.353Z",
+  "direction": "UK_INBOUND",
+  "haulierType": "NATO_MOD",
+  "isUnaccompanied": true,
+  "vehicleRegNum": "DN05 VDB",
+  "trailerRegistrationNums": ["V013 WKS", "YT08 NYD"],
+  "containerReferenceNums": null,
+  "actualCrossing": {
+    "localDateTimeOfArrival": "2025-04-28T19:00",
+    "routeId": "19"
   },
-  "CheckedInCrossing": {
-    "RouteId": "19",
-    "LocalDateTimeOfArrival": "2025-02-13T14:25"
+  "checkedInCrossing": {
+    "localDateTimeOfArrival": "2025-04-28T19:00",
+    "routeId": "19"
   },
-  "ActualCrossing": null,
-  "Declarations": {
-    "Transits": [
+  "plannedCrossing": {
+    "localDateTimeOfDeparture": "2025-04-28T19:00",
+    "routeId": "19"
+  },
+  "declarations": {
+    "transits": [
       {
-        "Id": "24GBBGBKCDMS704710"
+        "id": "24GBBGBKCDMS001002"
       }
     ],
-    "Customs": [
+    "customs": [
       {
-        "Id": "24GBBGBKCDMS704710"
+        "id": "24GBBGBKCDMS001002"
       }
     ]
   }
