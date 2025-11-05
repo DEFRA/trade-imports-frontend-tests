@@ -7,7 +7,7 @@ import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendGmrMessageFromFile } from '../utils/gmrMessageHandler.js'
 
 describe('GMR Search', () => {
-  const gmrId = 'GMRA10000002'
+  const gmrId = 'GMRA10000003'
 
   before(async () => {
     await sendCdsMessageFromFile('../data/gmr/clearance-gmr.xml')
@@ -26,15 +26,21 @@ describe('GMR Search', () => {
     expect(await GmrSearchResultsPage.getPageTitle()).toBe(
       `Showing result for ${gmrId} - Border Trade Matching Service`
     )
-
-    const rows = await GmrSearchResultsPage.getLinkedCustomsRows()
-    expect(rows.length).toBeGreaterThan(0)
+    expect(await GmrSearchResultsPage.getVehicleDetailsHeading()).toBe(
+      'Vehicle details'
+    )
     expect(await GmrSearchResultsPage.getVehicleRegistrationNumber()).toBe(
       'DN05 VDB'
     )
     expect(
       (await GmrSearchResultsPage.getTrailerRegistrationNumbers()).sort()
     ).toEqual(['V013 WKS', 'YT08 NYD'].sort())
+
+    expect(await GmrSearchResultsPage.getLinkedCustomsHeading()).toBe(
+      'Linked customs declarations'
+    )
+    const rows = await GmrSearchResultsPage.getLinkedCustomsRows()
+    expect(rows.length).toBeGreaterThan(0)
   })
 
   it('should show no linked customs rows for an invalid GMR', async () => {

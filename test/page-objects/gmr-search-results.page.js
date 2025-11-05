@@ -13,6 +13,10 @@ class GmrSearchResultsPage extends Page {
     return $('h1.govuk-heading-l')
   }
 
+  get vehicleDetailsHeadingElement() {
+    return $('h2.govuk-heading-m=Vehicle details')
+  }
+
   get vehicleVrnValue() {
     return $(
       '//h2[normalize-space()="Vehicle details"]/following::dl[1]//dt[normalize-space()="Vehicle Registration Number (VRN)"]/following-sibling::dd//span[contains(@class,"gmr-number-plate__front")]'
@@ -27,6 +31,12 @@ class GmrSearchResultsPage extends Page {
 
   get linkedCustomsTableRows() {
     return $$('table.govuk-table tbody.govuk-table__body tr.govuk-table__row')
+  }
+
+  get linkedCustomsHeadingElement() {
+    return $(
+      '//h3[contains(@class,"govuk-heading-m") and contains(@class,"govuk-!-margin-top-3") and normalize-space()="Linked customs declarations"]'
+    )
   }
 
   // --- Methods ---
@@ -78,8 +88,16 @@ class GmrSearchResultsPage extends Page {
     return found ? found.btmsDecision : undefined
   }
 
+  async getVehicleDetailsHeading() {
+    return (await this.vehicleDetailsHeadingElement.getText()).trim()
+  }
+
   async getPageTitle() {
     return (await browser.getTitle()).trim()
+  }
+
+  async getLinkedCustomsHeading() {
+    return (await this.linkedCustomsHeadingElement.getText()).trim()
   }
 }
 
