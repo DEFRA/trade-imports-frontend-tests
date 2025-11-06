@@ -13,14 +13,14 @@
       <ServiceHeader>
         <SourceSystem>CDS</SourceSystem>
         <DestinationSystem>ALVS</DestinationSystem>
-        <CorrelationId>CDMS704713</CorrelationId>
-        <ServiceCallTimestamp>1730472779713</ServiceCallTimestamp>
+        <CorrelationId>CDMS704711</CorrelationId>
+        <ServiceCallTimestamp>2025-11-05T09:01:00.5553237Z</ServiceCallTimestamp>
       </ServiceHeader>
       <Header>
-        <EntryReference>24GBBGBKCDMS001003</EntryReference>
+        <EntryReference>24GBBGBKCDMS001001</EntryReference>
         <EntryVersionNumber>2</EntryVersionNumber>
         <PreviousVersionNumber>1</PreviousVersionNumber>
-        <DeclarationUCR>4GB269573944000-PORTACDMS704713</DeclarationUCR>
+        <DeclarationUCR>4GB269573944000-PORTACDMS704711</DeclarationUCR>
         <DeclarationPartNumber />
         <DeclarationType>F</DeclarationType>
         <ArrivalDateTime />
@@ -44,7 +44,7 @@
         <ItemOriginCountryCode>IT</ItemOriginCountryCode>
         <Document>
           <DocumentCode>C640</DocumentCode>
-          <DocumentReference>CHEDA.GB.2025.1024323</DocumentReference>
+          <DocumentReference>CHEDA.GB.2025.1024321</DocumentReference>
           <DocumentStatus>AE</DocumentStatus>
           <DocumentControl>P</DocumentControl>
           <DocumentQuantity />

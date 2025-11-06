@@ -8,7 +8,7 @@ import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendGmrMessageFromFile } from '../utils/gmrMessageHandler.js'
 
 describe('GMR Search', () => {
-  const gmrId = 'GMRA10000003'
+  const gmrId = 'GMRA10000001'
 
   before(async () => {
     await sendCdsMessageFromFile('../data/gmr/clearance-gmr.xml')
@@ -51,12 +51,12 @@ describe('GMR Search', () => {
     const mrnData = await GmrSearchResultsPage.getLinkedMrnData()
     const expectedRows = [
       {
-        mrn: '24GBBGBKCDMS001003',
+        mrn: '24GBBGBKCDMS001001',
         cdsStatus: 'In progress - Awaiting IPAFFS',
         btmsDecision: 'Hold - Decision not given'
       },
       {
-        mrn: '24GBBGBKCDMS001002',
+        mrn: '24GBBGBKCDMS001009',
         cdsStatus: 'Unknown',
         btmsDecision: 'Unknown'
       }
@@ -78,11 +78,19 @@ describe('GMR Search', () => {
     )
   })
 
-  it('should show no linked customs rows for an invalid GMR', async () => {
+  it('should show error message saying valid GMR not found', async () => {
     const invalidGmr = 'GMRA000000XX'
     await GmrSearchResultsPage.open(invalidGmr)
     expect(await SearchPage.getSearchErrorText()).toContain(
       `${invalidGmr} cannot be found`
+    )
+  })
+
+  it('should show error message GMR format is not valid', async () => {
+    const invalidGmr = 'GMR1000000XX'
+    await GmrSearchResultsPage.open(invalidGmr)
+    expect(await SearchPage.getSearchErrorText()).toContain(
+      `Enter an MRN, CHED or DUCR reference in the correct format`
     )
   })
 })
