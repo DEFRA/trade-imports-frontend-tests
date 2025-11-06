@@ -4,7 +4,7 @@ class GmrSearchResultsPage extends Page {
   // Open the GMR results page for a specific search term (GMR ID)
   open(searchTerm) {
     return super.open(
-      `/gmr-results?searchTerm=${encodeURIComponent(searchTerm)}`
+      `/gmr-search-result?searchTerm=${encodeURIComponent(searchTerm)}`
     )
   }
 
@@ -18,13 +18,13 @@ class GmrSearchResultsPage extends Page {
 
   get vehicleVrnValue() {
     return $(
-      '//h2[normalize-space()="Vehicle details"]/following::dl[1]//dt[normalize-space()="Vehicle Registration Number (VRN)"]/following-sibling::dd//span[contains(@class,"gmr-number-plate__front")]'
+      "//span[contains(@class,'vehicle-number-plate--front') and starts-with(@aria-label,'Vehicle registration number')]"
     )
   }
 
   get trailerRegistrationSpans() {
     return $$(
-      '//h2[normalize-space()="Vehicle details"]/following::dl[1]//dt[normalize-space()="Trailer Registration Number (TRN)"]/following-sibling::dd//span[contains(@class,"gmr-number-plate__rear")]'
+      "//span[contains(@class,'vehicle-number-plate--rear') and starts-with(@aria-label,'Trailer registration number ')]"
     )
   }
 
@@ -33,9 +33,7 @@ class GmrSearchResultsPage extends Page {
   }
 
   get linkedCustomsHeadingElement() {
-    return $(
-      '//h3[contains(@class,"govuk-heading-m") and contains(@class,"govuk-!-margin-top-3") and normalize-space()="Linked customs declarations"]'
-    )
+    return $('h3.govuk-heading-m=Linked customs declarations')
   }
 
   get firstMrnAnchor() {

@@ -24,17 +24,14 @@
     "routeId": "19"
   },
   "declarations": {
-    "transits": [
+    "customs": [
       {
         "id": "24GBBGBKCDMS001003"
       }
     ],
-    "customs": [
+    "transits": [
       {
-        "id": "24GBBGBKCDMS001003"
-      },
-      {
-        "id": "24GBBGBKCDMS001004"
+        "id": "24GBBGBKCDMS001002"
       }
     ]
   }

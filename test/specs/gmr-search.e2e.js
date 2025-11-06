@@ -56,7 +56,7 @@ describe('GMR Search', () => {
         btmsDecision: 'Hold - Decision not given'
       },
       {
-        mrn: '24GBBGBKCDMS001004',
+        mrn: '24GBBGBKCDMS001002',
         cdsStatus: 'Unknown',
         btmsDecision: 'Unknown'
       }
