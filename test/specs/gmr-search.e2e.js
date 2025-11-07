@@ -8,7 +8,7 @@ import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendGmrMessageFromFile } from '../utils/gmrMessageHandler.js'
 
 describe('GMR Search', () => {
-  const gmrId = 'GMRA10000001'
+  const gmrId = 'GMRA11350001'
 
   before(async () => {
     await sendCdsMessageFromFile('../data/gmr/clearance-gmr.xml')
@@ -51,12 +51,12 @@ describe('GMR Search', () => {
     const mrnData = await GmrSearchResultsPage.getLinkedMrnData()
     const expectedRows = [
       {
-        mrn: '24GBBGBKCDMS001001',
+        mrn: '24GBBGBKCDMS135001',
         cdsStatus: 'In progress - Awaiting IPAFFS',
         btmsDecision: 'Hold - Decision not given'
       },
       {
-        mrn: '24GBBGBKCDMS001009',
+        mrn: '24GBBGBKCDMS13500Z',
         cdsStatus: 'Unknown',
         btmsDecision: 'Unknown'
       }
