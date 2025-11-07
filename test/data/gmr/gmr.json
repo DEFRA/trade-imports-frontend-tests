@@ -1,5 +1,5 @@
 {
-  "gmrId": "GMRA10000001",
+  "gmrId": "GMRA11350001",
   "haulierEORI": "GB1196193155298",
   "state": "OPEN",
   "inspectionRequired": null,
@@ -26,12 +26,12 @@
   "declarations": {
     "customs": [
       {
-        "id": "24GBBGBKCDMS001001"
+        "id": "24GBBGBKCDMS135001"
       }
     ],
     "transits": [
       {
-        "id": "24GBBGBKCDMS001009"
+        "id": "24GBBGBKCDMS13500Z"
       }
     ]
   }

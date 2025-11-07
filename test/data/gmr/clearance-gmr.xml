@@ -17,7 +17,7 @@
         <ServiceCallTimestamp>2025-11-05T09:01:00.5553237Z</ServiceCallTimestamp>
       </ServiceHeader>
       <Header>
-        <EntryReference>24GBBGBKCDMS001001</EntryReference>
+        <EntryReference>24GBBGBKCDMS135001</EntryReference>
         <EntryVersionNumber>2</EntryVersionNumber>
         <PreviousVersionNumber>1</PreviousVersionNumber>
         <DeclarationUCR>4GB269573944000-PORTACDMS704711</DeclarationUCR>
@@ -44,7 +44,7 @@
         <ItemOriginCountryCode>IT</ItemOriginCountryCode>
         <Document>
           <DocumentCode>C640</DocumentCode>
-          <DocumentReference>CHEDA.GB.2025.1024321</DocumentReference>
+          <DocumentReference>CHEDA.GB.2025.1013501</DocumentReference>
           <DocumentStatus>AE</DocumentStatus>
           <DocumentControl>P</DocumentControl>
           <DocumentQuantity />
