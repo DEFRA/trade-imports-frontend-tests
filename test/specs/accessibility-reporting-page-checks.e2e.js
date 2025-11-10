@@ -18,6 +18,7 @@ describe('Accessibility Testing', () => {
   })
   it('Should check Reporting page for accessibility issues', async () => {
     await ReportingPage.open()
+    await ReportingPage.lastMonthFilter()
     await analyseAccessibility()
   })
   after(async () => {
