@@ -22,7 +22,7 @@ describe('GMR Search', () => {
   })
 
   it('should display correct headings on the GMR results page', async () => {
-    await GmrSearchResultsPage.open(gmrId)
+    await SearchPage.search(gmrId)
     expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
       `Showing result for\n${gmrId}`
     )
