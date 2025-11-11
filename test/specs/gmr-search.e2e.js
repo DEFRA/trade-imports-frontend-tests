@@ -21,11 +21,14 @@ describe('GMR Search', () => {
     await HomePage.loginRegisteredUser()
   })
 
-  it('should display correct headings on the GMR results page', async () => {
+  it('should be able search for a valid GMR via Search Page', async () => {
     await SearchPage.search(gmrId)
     expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
       `Showing result for\n${gmrId}`
     )
+  })
+
+  it('should display correct headings on the GMR results page', async () => {
     expect(await GmrSearchResultsPage.getPageTitle()).toBe(
       `Showing result for ${gmrId} - Border Trade Matching Service`
     )
