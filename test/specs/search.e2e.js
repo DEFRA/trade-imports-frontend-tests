@@ -3,6 +3,7 @@ import { expect } from '@wdio/globals'
 import HomePage from '../page-objects/home.page'
 import SearchPage from 'page-objects/search.page'
 import SearchResultsPage from '../page-objects/searchResultsPage'
+import GmrSearchResultsPage from '../page-objects/gmr-search-results.page.js'
 import CustomDeclarationPage from '../page-objects/custom-declaration.page'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
@@ -74,6 +75,20 @@ describe('Search page', () => {
     await SearchPage.search('')
     expect(await SearchPage.getSearchErrorText()).toContain(
       'Enter an MRN, CHED or DUCR'
+    )
+  })
+  it('should show error message saying valid GMR not found', async () => {
+    const invalidGmr = 'GMRA000000XX'
+    await GmrSearchResultsPage.open(invalidGmr)
+    expect(await SearchPage.getSearchErrorText()).toContain(
+      `${invalidGmr} cannot be found`
+    )
+  })
+  it('should show error message GMR format is not valid', async () => {
+    const invalidGmr = 'GMR1000000XX'
+    await GmrSearchResultsPage.open(invalidGmr)
+    expect(await SearchPage.getSearchErrorText()).toContain(
+      `Enter an MRN, CHED or DUCR reference in the correct format`
     )
   })
 })
