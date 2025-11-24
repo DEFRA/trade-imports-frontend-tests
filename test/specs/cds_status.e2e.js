@@ -29,6 +29,11 @@ describe('GMR Search', () => {
     await sendIpaffMessageFromFile(
       '../data/cds_status/0-man-released-ched.json'
     )
+    await sendIpaffMessageFromFile('../data/cds_status/1-released-ched.json')
+    await sendIpaffMessageFromFile(
+      '../data/cds_status/2-kings-warehouse-ched.json'
+    )
+    await sendIpaffMessageFromFile('../data/cds_status/7-mss-ched.json')
     await sendIpaffMessageFromFile(
       '../data/cds_status/9-awaiting-ipaff-ched.json'
     )
@@ -44,6 +49,12 @@ describe('GMR Search', () => {
       '../data/cds_status/0-man-released-fin.xml',
       true
     )
+    await sendCdsMessageFromFile('../data/cds_status/1-released-fin.xml', true)
+    await sendCdsMessageFromFile(
+      '../data/cds_status/2-kings-warehouse-fin.xml',
+      true
+    )
+    await sendCdsMessageFromFile('../data/cds_status/7-mss-fin.xml', true)
 
     await HomePage.open()
     await HomePage.login()
