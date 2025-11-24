@@ -26,6 +26,9 @@
   "declarations": {
     "customs": [
       {
+        "id": "24GBBGBKCDMS128000"
+      },
+      {
         "id": "24GBBGBKCDMS128001"
       },
       {
@@ -57,14 +60,11 @@
       },
       {
         "id": "24GBBGBKCDMS128011"
-      },
-      {
-        "id": "24GBBGBKCDMS128012"
       }
     ],
     "transits": [
       {
-        "id": "24GBBGBKCDMS135000"
+        "id": "24GBBGBKCDMS128012"
       }
     ]
   }
