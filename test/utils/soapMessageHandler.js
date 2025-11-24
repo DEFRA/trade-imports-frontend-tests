@@ -3,21 +3,33 @@ import { readFile } from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-export async function sendCdsMessageFromFile(relativePath) {
+export async function sendCdsMessageFromFile(
+  relativePath,
+  isFinalised = false
+) {
+  await new Promise((resolve) => setTimeout(resolve, 2000))
   const __filename = fileURLToPath(import.meta.url)
   const __dirname = path.dirname(__filename)
   const soapFilePath = path.resolve(__dirname, relativePath)
   const soapEnvelope = await readFile(soapFilePath, 'utf-8')
-  return await sendSoapRequest(soapEnvelope)
+  return await sendSoapRequest(soapEnvelope, isFinalised)
 }
 
-export async function sendSoapRequest(soapEnvelope) {
+export async function sendSoapRequest(soapEnvelope, isFinalised = false) {
   let url
 
-  if (process.env.ENVIRONMENT === 'local') {
-    url = `http://localhost:8080/ITSW/CDS/SubmitImportDocumentCDSFacadeService`
+  if (!isFinalised) {
+    if (process.env.ENVIRONMENT === 'local') {
+      url = `http://localhost:8080/ITSW/CDS/SubmitImportDocumentCDSFacadeService`
+    } else {
+      url = `https://btms-gateway.${process.env.ENVIRONMENT}.cdp-int.defra.cloud/ITSW/CDS/SubmitImportDocumentCDSFacadeService`
+    }
   } else {
-    url = `https://btms-gateway.${process.env.ENVIRONMENT}.cdp-int.defra.cloud/ITSW/CDS/SubmitImportDocumentCDSFacadeService`
+    if (process.env.ENVIRONMENT === 'local') {
+      url = `http://localhost:8080/ITSW/CDS/NotifyFinalisedStateCDSFacadeService`
+    } else {
+      url = `https://btms-gateway.${process.env.ENVIRONMENT}.cdp-int.defra.cloud/ITSW/CDS/NotifyFinalisedStateCDSFacadeService`
+    }
   }
 
   try {

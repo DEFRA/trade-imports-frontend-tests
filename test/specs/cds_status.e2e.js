@@ -25,15 +25,24 @@ describe('GMR Search', () => {
     await sendCdsMessageFromFile('../data/cds_status/11-after-arrival-cr.xml')
     await sendCdsMessageFromFile('../data/cds_status/12-awaiting-cds-cr.xml')
 
-    // The following IPAFFS messages are optional depending on the test data setup
+    // Post CHEDS
+    await sendIpaffMessageFromFile(
+      '../data/cds_status/0-man-released-ched.json'
+    )
     await sendIpaffMessageFromFile(
       '../data/cds_status/9-awaiting-ipaff-ched.json'
     )
     await sendIpaffMessageFromFile(
-      '../data/cds_status/12-awaiting-cds-ched.json'
+      '../data/cds_status/10-in-progress-ched.json'
     )
     await sendIpaffMessageFromFile(
-      '../data/cds_status/10-in-progress-ched.json'
+      '../data/cds_status/12-awaiting-cds-ched.json'
+    )
+
+    // POST Finalisations
+    await sendCdsMessageFromFile(
+      '../data/cds_status/0-man-released-fin.xml',
+      true
     )
 
     await HomePage.open()
