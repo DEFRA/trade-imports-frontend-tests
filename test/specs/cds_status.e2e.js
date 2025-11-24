@@ -87,16 +87,72 @@ describe('GMR Search', () => {
     )
   })
 
-  it.skip('should display correct linked customs declaration details for a valid GMR', async () => {
+  it('should display correct linked customs declaration details for a valid GMR', async () => {
     const mrnData = await GmrSearchResultsPage.getLinkedMrnData()
     const expectedRows = [
       {
-        mrn: '24GBBGBKCDMS135001',
+        mrn: '24GBBGBKCDMS128006',
+        cdsStatus: 'In progress - Awaiting trader',
+        btmsDecision: 'No match - CHED cannot be found'
+      },
+      {
+        mrn: '24GBBGBKCDMS128009',
         cdsStatus: 'In progress - Awaiting IPAFFS',
         btmsDecision: 'Hold - Decision not given'
       },
       {
-        mrn: '24GBBGBKCDMS13500Z',
+        mrn: '24GBBGBKCDMS128012',
+        cdsStatus: 'In progress - Awaiting CDS',
+        btmsDecision: 'Release - Inspection complete T5 procedure'
+      },
+      {
+        mrn: '24GBBGBKCDMS128010',
+        cdsStatus: 'In progress',
+        btmsDecision:
+          'Data Error - Unexpected data - transit, transhipment or specific warehouse'
+      },
+      {
+        mrn: '24GBBGBKCDMS128000',
+        cdsStatus: 'Finalised - Manually released',
+        btmsDecision: 'Release - Inspection complete T5 procedure'
+      },
+      {
+        mrn: '24GBBGBKCDMS128001',
+        cdsStatus: 'Finalised - Released',
+        btmsDecision: 'Release - Inspection complete T5 procedure'
+      },
+      {
+        mrn: '24GBBGBKCDMS128011',
+        cdsStatus: 'Finalised - Cancelled after arrival',
+        btmsDecision: 'No match - CHED cancelled'
+      },
+      {
+        mrn: '24GBBGBKCDMS128008',
+        cdsStatus: 'Finalised - Cancelled while pre-lodged',
+        btmsDecision: 'No match - CHED cancelled'
+      },
+      {
+        mrn: '24GBBGBKCDMS128005',
+        cdsStatus: 'Finalised - Destroyed',
+        btmsDecision: 'Refuse - Destroy'
+      },
+      {
+        mrn: '24GBBGBKCDMS128004',
+        cdsStatus: 'Finalised - Seized',
+        btmsDecision: 'Refuse - Destroy'
+      },
+      {
+        mrn: '24GBBGBKCDMS128002',
+        cdsStatus: 'Finalised - Released to King’s warehouse',
+        btmsDecision: 'Release - Inspection complete T5 procedure'
+      },
+      {
+        mrn: '24GBBGBKCDMS128007',
+        cdsStatus: 'Finalised - Transferred to MSS',
+        btmsDecision: 'Release - Inspection complete T5 procedure'
+      },
+      {
+        mrn: '24GBBGBKCDMS128003',
         cdsStatus: 'Unknown',
         btmsDecision: 'Unknown'
       }
@@ -110,11 +166,99 @@ describe('GMR Search', () => {
     })
   })
 
-  it.skip('should navigate to the correct customs declaration when clicking a linked MRN', async () => {
+  it('should navigate to the correct customs declaration for Finalised - Manually released', async () => {
+    const targetMrn = '24GBBGBKCDMS128000'
+    const expectedStatus = 'Finalised - Manually released'
     await GmrSearchResultsPage.open(gmrId)
-    await GmrSearchResultsPage.clickFirstLinkedMrn()
-    expect(await SearchResultsPage.getCdsStatus()).toContain(
-      'In progress - Awaiting IPAFFS'
-    )
+    await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
+    expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
+  })
+
+  it('should navigate to the correct customs declaration for Finalised - Released', async () => {
+    const targetMrn = '24GBBGBKCDMS128001'
+    const expectedStatus = 'Finalised - Released'
+    await GmrSearchResultsPage.open(gmrId)
+    await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
+    expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
+  })
+
+  it('should navigate to the correct customs declaration for Finalised - Released to King’s warehouse', async () => {
+    const targetMrn = '24GBBGBKCDMS128002'
+    const expectedStatus = 'Finalised - Released to King’s warehouse'
+    await GmrSearchResultsPage.open(gmrId)
+    await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
+    expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
+  })
+
+  it('should navigate to the correct customs declaration for Finalised - Seized', async () => {
+    const targetMrn = '24GBBGBKCDMS128004'
+    const expectedStatus = 'Finalised - Seized'
+    await GmrSearchResultsPage.open(gmrId)
+    await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
+    expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
+  })
+
+  it('should navigate to the correct customs declaration for Finalised - Destroyed', async () => {
+    const targetMrn = '24GBBGBKCDMS128005'
+    const expectedStatus = 'Finalised - Destroyed'
+    await GmrSearchResultsPage.open(gmrId)
+    await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
+    expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
+  })
+
+  it('should navigate to the correct customs declaration for In progress - Awaiting trader', async () => {
+    const targetMrn = '24GBBGBKCDMS128006'
+    const expectedStatus = 'In progress - Awaiting trader'
+    await GmrSearchResultsPage.open(gmrId)
+    await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
+    expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
+  })
+
+  it('should navigate to the correct customs declaration for Finalised - Transferred to MSS', async () => {
+    const targetMrn = '24GBBGBKCDMS128007'
+    const expectedStatus = 'Finalised - Transferred to MSS'
+    await GmrSearchResultsPage.open(gmrId)
+    await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
+    expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
+  })
+
+  it('should navigate to the correct customs declaration for Finalised - Cancelled while pre-lodged', async () => {
+    const targetMrn = '24GBBGBKCDMS128008'
+    const expectedStatus = 'Finalised - Cancelled while pre-lodged'
+    await GmrSearchResultsPage.open(gmrId)
+    await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
+    expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
+  })
+
+  it('should navigate to the correct customs declaration for In progress - Awaiting IPAFFS', async () => {
+    const targetMrn = '24GBBGBKCDMS128009'
+    const expectedStatus = 'In progress - Awaiting IPAFFS'
+    await GmrSearchResultsPage.open(gmrId)
+    await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
+    expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
+  })
+
+  it('should navigate to the correct customs declaration for In progress', async () => {
+    const targetMrn = '24GBBGBKCDMS128010'
+    const expectedStatus = 'In progress'
+    await GmrSearchResultsPage.open(gmrId)
+    await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
+    expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
+  })
+
+  it('should navigate to the correct customs declaration for Finalised - Cancelled after arrival', async () => {
+    const targetMrn = '24GBBGBKCDMS128011'
+    const expectedStatus = 'Finalised - Cancelled after arrival'
+    await GmrSearchResultsPage.open(gmrId)
+    await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
+    expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
+  })
+
+  it('should navigate to the correct customs declaration for In progress - Awaiting CDS', async () => {
+    const targetMrn = '24GBBGBKCDMS128012'
+    const expectedStatus = 'In progress - Awaiting CDS'
+    await GmrSearchResultsPage.open(gmrId)
+    await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
+    expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
   })
 })

@@ -1,8 +1,20 @@
 import { Page } from './page.js'
 
-class SearcheResultsPage extends Page {
-  get cdsStatusElement() {
-    return $('.btms-customs-declaration-summary .govuk-tag--yellow')
+class SearchResultsPage extends Page {
+  get customsDeclarationSummary() {
+    return $('.btms-customs-declaration-summary')
+  }
+
+  get cdsStatusTagCandidates() {
+    // Different statuses may render different coloured tags.
+    return $$(
+      [
+        '.btms-customs-declaration-summary .govuk-tag--yellow',
+        '.btms-customs-declaration-summary .govuk-tag--green',
+        '.btms-customs-declaration-summary .govuk-tag--red',
+        '.btms-customs-declaration-summary .govuk-tag--grey'
+      ].join(', ')
+    )
   }
 
   get resultTextElement() {
@@ -30,8 +42,18 @@ class SearcheResultsPage extends Page {
   }
 
   async getCdsStatus() {
-    return (await this.cdsStatusElement.getText()).trim()
+    const tags = await this.cdsStatusTagCandidates
+    for (const tag of tags) {
+      if (await tag.isExisting()) {
+        const text = (await tag.getText()).trim()
+        if (text) return text
+      }
+    }
+    // Fallback: attempt to read raw text from summary container
+    if (await this.customsDeclarationSummary.isExisting()) {
+      return (await this.customsDeclarationSummary.getText()).trim()
+    }
+    return ''
   }
 }
-
-export default new SearcheResultsPage()
+export default new SearchResultsPage()

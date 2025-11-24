@@ -11,7 +11,7 @@ export async function sendIpaffMessageFromFile(relativePath) {
   globalThis.testLogger.info({
     event: '[IPAFF] About to send an IPAFF message'
   })
-  await new Promise((resolve) => setTimeout(resolve, 2000))
+  await new Promise((resolve) => setTimeout(resolve, 200))
   const __filename = fileURLToPath(import.meta.url)
   const __dirname = path.dirname(__filename)
   const filePath = path.resolve(__dirname, relativePath)

@@ -128,6 +128,21 @@ class GmrSearchResultsPage extends Page {
     await this.elementIsDisplayed(this.firstMrnAnchor)
     await this.clickLink(this.firstMrnAnchor)
   }
+
+  async clickLinkedMrn(mrn) {
+    const rows = await this.linkedCustomsTableRows
+    for (const row of rows) {
+      const anchor = await row.$('td.govuk-table__cell a')
+      if (!(await anchor.isExisting())) continue
+      const text = (await anchor.getText()).trim()
+      if (text === mrn) {
+        await this.elementIsDisplayed(anchor)
+        await this.clickLink(anchor)
+        return
+      }
+    }
+    throw new Error(`Linked MRN ${mrn} not found or not clickable`)
+  }
 }
 
 export default new GmrSearchResultsPage()
