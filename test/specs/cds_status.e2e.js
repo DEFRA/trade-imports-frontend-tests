@@ -29,6 +29,12 @@ describe('GMR Search', () => {
     await sendIpaffMessageFromFile(
       '../data/cds_status/9-awaiting-ipaff-ched.json'
     )
+    await sendIpaffMessageFromFile(
+      '../data/cds_status/12-awaiting-cds-ched.json'
+    )
+    await sendIpaffMessageFromFile(
+      '../data/cds_status/10-in-progress-ched.json'
+    )
 
     await HomePage.open()
     await HomePage.login()
