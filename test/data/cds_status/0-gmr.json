@@ -1,0 +1,71 @@
+{
+  "gmrId": "GMRA12280001",
+  "haulierEORI": "GB1196193155298",
+  "state": "OPEN",
+  "inspectionRequired": null,
+  "reportToLocations": null,
+  "updatedDateTime": "2025-10-30T19:00:00.353Z",
+  "direction": "UK_INBOUND",
+  "haulierType": "NATO_MOD",
+  "isUnaccompanied": true,
+  "vehicleRegNum": "DN05 VDB",
+  "trailerRegistrationNums": ["V013 WKS", "YT08 NYD"],
+  "containerReferenceNums": null,
+  "actualCrossing": {
+    "localDateTimeOfArrival": "2025-04-28T19:00",
+    "routeId": "19"
+  },
+  "checkedInCrossing": {
+    "localDateTimeOfArrival": "2025-04-28T19:00",
+    "routeId": "19"
+  },
+  "plannedCrossing": {
+    "localDateTimeOfDeparture": "2025-04-28T19:00",
+    "routeId": "19"
+  },
+  "declarations": {
+    "customs": [
+      {
+        "id": "24GBBGBKCDMS128001"
+      },
+      {
+        "id": "24GBBGBKCDMS128002"
+      },
+      {
+        "id": "24GBBGBKCDMS128003"
+      },
+      {
+        "id": "24GBBGBKCDMS128004"
+      },
+      {
+        "id": "24GBBGBKCDMS128005"
+      },
+      {
+        "id": "24GBBGBKCDMS128006"
+      },
+      {
+        "id": "24GBBGBKCDMS128007"
+      },
+      {
+        "id": "24GBBGBKCDMS128008"
+      },
+      {
+        "id": "24GBBGBKCDMS128009"
+      },
+      {
+        "id": "24GBBGBKCDMS128010"
+      },
+      {
+        "id": "24GBBGBKCDMS128011"
+      },
+      {
+        "id": "24GBBGBKCDMS128012"
+      }
+    ],
+    "transits": [
+      {
+        "id": "24GBBGBKCDMS135000"
+      }
+    ]
+  }
+}
