@@ -7,7 +7,7 @@ import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendGmrMessageFromFile } from '../utils/gmrMessageHandler.js'
 
-describe('GMR Search', () => {
+describe('CDS Status on GMR and Search Results Page', () => {
   const gmrId = 'GMRA12280001'
 
   const statusColorMap = {
