@@ -12,8 +12,15 @@ class SearchResultsPage extends Page {
         '.btms-customs-declaration-summary .govuk-tag--yellow',
         '.btms-customs-declaration-summary .govuk-tag--green',
         '.btms-customs-declaration-summary .govuk-tag--red',
-        '.btms-customs-declaration-summary .govuk-tag--grey'
+        '.btms-customs-declaration-summary .govuk-tag--grey',
+        '.btms-customs-declaration-summary .govuk-tag--blue'
       ].join(', ')
+    )
+  }
+
+  get cdsStatusTagElement() {
+    return $(
+      '.btms-customs-declaration-summary .govuk-tag[class*="govuk-tag--"]'
     )
   }
 
@@ -54,6 +61,21 @@ class SearchResultsPage extends Page {
       return (await this.customsDeclarationSummary.getText()).trim()
     }
     return ''
+  }
+
+  async getCdsStatusTagColor() {
+    await this.customsDeclarationSummary.waitForExist({ timeout: 5000 })
+    const el = await this.cdsStatusTagElement
+    if (!(await el.isExisting())) return ''
+    const classes = (await el.getAttribute('class'))?.split(/\s+/) || []
+    const colorClass = classes.find((c) => c.startsWith('govuk-tag--'))
+    return colorClass ? colorClass.replace('govuk-tag--', '') : ''
+  }
+
+  async getCdsStatusWithColor() {
+    const text = await this.getCdsStatus()
+    const color = await this.getCdsStatusTagColor()
+    return { text, color }
   }
 }
 export default new SearchResultsPage()
