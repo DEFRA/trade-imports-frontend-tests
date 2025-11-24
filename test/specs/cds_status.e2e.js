@@ -33,6 +33,8 @@ describe('GMR Search', () => {
     await sendIpaffMessageFromFile(
       '../data/cds_status/2-kings-warehouse-ched.json'
     )
+    await sendIpaffMessageFromFile('../data/cds_status/4-seized-ched.json')
+    await sendIpaffMessageFromFile('../data/cds_status/5-destroyed-ched.json')
     await sendIpaffMessageFromFile('../data/cds_status/7-mss-ched.json')
     await sendIpaffMessageFromFile(
       '../data/cds_status/8-while-pre-loged-ched.json'
@@ -60,6 +62,8 @@ describe('GMR Search', () => {
       '../data/cds_status/2-kings-warehouse-fin.xml',
       true
     )
+    await sendCdsMessageFromFile('../data/cds_status/4-seized-fin.xml', true)
+    await sendCdsMessageFromFile('../data/cds_status/5-destroyed-fin.xml', true)
     await sendCdsMessageFromFile('../data/cds_status/7-mss-fin.xml', true)
     await sendCdsMessageFromFile(
       '../data/cds_status/8-while-pre-loged-fin.xml',
