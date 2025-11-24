@@ -7,7 +7,6 @@ export async function sendCdsMessageFromFile(
   relativePath,
   isFinalised = false
 ) {
-  await new Promise((resolve) => setTimeout(resolve, 200))
   const __filename = fileURLToPath(import.meta.url)
   const __dirname = path.dirname(__filename)
   const soapFilePath = path.resolve(__dirname, relativePath)
@@ -15,7 +14,11 @@ export async function sendCdsMessageFromFile(
   return await sendSoapRequest(soapEnvelope, isFinalised)
 }
 
-export async function sendSoapRequest(soapEnvelope, isFinalised = false) {
+export async function sendSoapRequest(
+  soapEnvelope,
+  isFinalised = false,
+  retryOptions = {}
+) {
   let url
 
   if (!isFinalised) {
@@ -32,23 +35,57 @@ export async function sendSoapRequest(soapEnvelope, isFinalised = false) {
     }
   }
 
-  try {
-    const response = await request(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/xml' },
-      body: soapEnvelope
-    })
+  const {
+    timeoutMs = 15000,
+    intervalMs = 300,
+    fatalStatusCodes = [400, 401, 403, 404],
+    maxAttempts = Math.ceil(timeoutMs / intervalMs)
+  } = retryOptions
 
-    if (response.statusCode !== 200) {
+  const start = Date.now()
+  let attempt = 0
+  let lastError
+
+  while (attempt < maxAttempts) {
+    attempt++
+    try {
+      const response = await request(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/xml' },
+        body: soapEnvelope
+      })
+
+      if (response.statusCode === 200) {
+        await response.body.text()
+        return response
+      }
+
       const bodyText = await response.body.text()
-      throw new Error(
-        `BTMS Gateway returned status ${response.statusCode}: ${bodyText}`
+      if (fatalStatusCodes.includes(response.statusCode)) {
+        throw new Error(
+          `BTMS Gateway fatal status ${response.statusCode}: ${bodyText}`
+        )
+      }
+      lastError = new Error(
+        `Attempt ${attempt} non-200 (${response.statusCode}): ${bodyText}`
       )
+    } catch (err) {
+      lastError = new Error(
+        `Attempt ${attempt} failed: ${err.message || String(err)}`
+      )
+      if (err.message && /fatal status/.test(err.message)) {
+        throw lastError
+      }
     }
 
-    await response.body.text()
-    return response
-  } catch (err) {
-    throw new Error(`SOAP request failed: ${err.message || err}`)
+    const elapsed = Date.now() - start
+    if (elapsed + intervalMs >= timeoutMs) {
+      break
+    }
+    await new Promise((resolve) => setTimeout(resolve, intervalMs))
   }
+
+  throw new Error(
+    `SOAP request did not succeed after ${attempt} attempts within ${timeoutMs}ms. Last error: ${lastError?.message}`
+  )
 }

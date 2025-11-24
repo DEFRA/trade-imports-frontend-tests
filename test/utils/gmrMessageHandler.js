@@ -11,7 +11,6 @@ export async function sendGmrMessageFromFile(relativePath) {
   globalThis.testLogger.info({
     event: '[GMR] About to send a GMR message'
   })
-  await new Promise((resolve) => setTimeout(resolve, 200))
   const __filename = fileURLToPath(import.meta.url)
   const __dirname = path.dirname(__filename)
   const filePath = path.resolve(__dirname, relativePath)
@@ -20,7 +19,7 @@ export async function sendGmrMessageFromFile(relativePath) {
   return await sendGmrMessage(json)
 }
 
-export async function sendGmrMessage(json) {
+export async function sendGmrMessage(json, retryOptions = {}) {
   globalThis.proxy = process.env.CDP_HTTPS_PROXY
   if (globalThis.proxy) {
     globalThis.testLogger.info({
@@ -92,26 +91,57 @@ export async function sendGmrMessage(json) {
     }
   }
 
+  const {
+    timeoutMs = 15000,
+    intervalMs = 500,
+    maxAttempts = Math.ceil(timeoutMs / intervalMs)
+  } = retryOptions
+  const start = Date.now()
+  let attempt = 0
+  let lastError
   try {
-    globalThis.testLogger.info({
-      event: '[GMR] Attempting to send a message'
-    })
-    await sender.sendMessages(message)
-
-    globalThis.testLogger.info({
-      event: '[GMR] Successfully sent message to Service Bus'
-    })
-    return {
-      requestId,
-      gmrBody: body,
-      success: true,
-      timestamp: new Date().toISOString()
+    while (attempt < maxAttempts) {
+      attempt++
+      try {
+        globalThis.testLogger.info({
+          event: '[GMR] Attempting to send a message',
+          attempt,
+          maxAttempts
+        })
+        await sender.sendMessages(message)
+        globalThis.testLogger.info({
+          event: '[GMR] Successfully sent message to Service Bus',
+          attempt
+        })
+        return {
+          requestId,
+          gmrBody: body,
+          success: true,
+          attempts: attempt,
+          timestamp: new Date().toISOString()
+        }
+      } catch (err) {
+        lastError = err
+        globalThis.testLogger.info({
+          event: '[GMR] Send attempt failed',
+          attempt,
+          error: err.message || String(err)
+        })
+        const elapsed = Date.now() - start
+        if (elapsed + intervalMs >= timeoutMs) {
+          break
+        }
+        await new Promise((resolve) => setTimeout(resolve, intervalMs))
+      }
     }
-  } catch (err) {
     globalThis.testLogger.info({
-      event: '[GMR] Unable to send the message'
+      event: '[GMR] All attempts exhausted',
+      attempts: attempt,
+      lastError: lastError?.message
     })
-    throw new Error(`Request failed: ${err.message || err}`)
+    throw new Error(
+      `GMR message send failed after ${attempt} attempts within ${timeoutMs}ms: ${lastError?.message || lastError}`
+    )
   } finally {
     try {
       await sender.close()
@@ -123,7 +153,6 @@ export async function sendGmrMessage(json) {
         event: '[GMR] Error when trying to close the sender'
       })
     }
-
     try {
       await sbClient.close()
       globalThis.testLogger.info({
