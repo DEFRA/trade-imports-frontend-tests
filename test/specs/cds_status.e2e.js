@@ -35,10 +35,16 @@ describe('GMR Search', () => {
     )
     await sendIpaffMessageFromFile('../data/cds_status/7-mss-ched.json')
     await sendIpaffMessageFromFile(
+      '../data/cds_status/8-while-pre-loged-ched.json'
+    )
+    await sendIpaffMessageFromFile(
       '../data/cds_status/9-awaiting-ipaff-ched.json'
     )
     await sendIpaffMessageFromFile(
       '../data/cds_status/10-in-progress-ched.json'
+    )
+    await sendIpaffMessageFromFile(
+      '../data/cds_status/11-after-arrival-ched.json'
     )
     await sendIpaffMessageFromFile(
       '../data/cds_status/12-awaiting-cds-ched.json'
@@ -55,6 +61,14 @@ describe('GMR Search', () => {
       true
     )
     await sendCdsMessageFromFile('../data/cds_status/7-mss-fin.xml', true)
+    await sendCdsMessageFromFile(
+      '../data/cds_status/8-while-pre-loged-fin.xml',
+      true
+    )
+    await sendCdsMessageFromFile(
+      '../data/cds_status/11-after-arrival-fin.xml',
+      true
+    )
 
     await HomePage.open()
     await HomePage.login()
