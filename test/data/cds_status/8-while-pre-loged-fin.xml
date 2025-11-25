@@ -15,11 +15,11 @@
             <ServiceHeader>
                 <SourceSystem>CDS</SourceSystem>
                 <DestinationSystem>ALVS</DestinationSystem>
-                <CorrelationId>1128008</CorrelationId>
+                <CorrelationId>2128008</CorrelationId>
                 <ServiceCallTimestamp>2025-11-05T09:20:00.5553237Z</ServiceCallTimestamp>
             </ServiceHeader>
             <Header>
-                <EntryReference>24GBBGBKCDMS128008</EntryReference>
+                <EntryReference>24GBBGBKCDMA128008</EntryReference>
                 <EntryVersionNumber>2</EntryVersionNumber>
                 <DecisionNumber>2</DecisionNumber>
                 <FinalState>2</FinalState>

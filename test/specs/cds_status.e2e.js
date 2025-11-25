@@ -8,7 +8,7 @@ import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendGmrMessageFromFile } from '../utils/gmrMessageHandler.js'
 
 describe('CDS Status on GMR and Search Results Page', () => {
-  const gmrId = 'GMRA12280001'
+  const gmrId = 'GMRA1228A001'
 
   const statusColorMap = {
     'In progress - Awaiting trader': 'yellow',
@@ -105,80 +105,80 @@ describe('CDS Status on GMR and Search Results Page', () => {
     const mrnData = await GmrSearchResultsPage.getLinkedMrnData()
     const expectedRows = [
       {
-        mrn: '24GBBGBKCDMS128006',
+        mrn: '24GBBGBKCDMA128006',
         cdsStatus: 'In progress - Awaiting trader',
         btmsDecision: 'No match - CHED cannot be found',
         tagColor: statusColorMap['In progress - Awaiting trader']
       },
       {
-        mrn: '24GBBGBKCDMS128009',
+        mrn: '24GBBGBKCDMA128009',
         cdsStatus: 'In progress - Awaiting IPAFFS',
         btmsDecision: 'Hold - Decision not given',
         tagColor: statusColorMap['In progress - Awaiting IPAFFS']
       },
       {
-        mrn: '24GBBGBKCDMS128012',
+        mrn: '24GBBGBKCDMA128012',
         cdsStatus: 'In progress - Awaiting CDS',
         btmsDecision: 'Release - Inspection complete T5 procedure',
         tagColor: statusColorMap['In progress - Awaiting CDS']
       },
       {
-        mrn: '24GBBGBKCDMS128010',
+        mrn: '24GBBGBKCDMA128010',
         cdsStatus: 'In progress',
         btmsDecision:
           'Data Error - Unexpected data - transit, transhipment or specific warehouse',
         tagColor: statusColorMap['In progress']
       },
       {
-        mrn: '24GBBGBKCDMS128000',
+        mrn: '24GBBGBKCDMA128000',
         cdsStatus: 'Finalised - Manually released',
         btmsDecision: 'Release - Inspection complete T5 procedure',
         tagColor: statusColorMap['Finalised - Manually released']
       },
       {
-        mrn: '24GBBGBKCDMS128001',
+        mrn: '24GBBGBKCDMA128001',
         cdsStatus: 'Finalised - Released',
         btmsDecision: 'Release - Inspection complete T5 procedure',
         tagColor: statusColorMap['Finalised - Released']
       },
       {
-        mrn: '24GBBGBKCDMS128011',
+        mrn: '24GBBGBKCDMA128011',
         cdsStatus: 'Finalised - Cancelled after arrival',
         btmsDecision: 'No match - CHED cancelled',
         tagColor: statusColorMap['Finalised - Cancelled after arrival']
       },
       {
-        mrn: '24GBBGBKCDMS128008',
+        mrn: '24GBBGBKCDMA128008',
         cdsStatus: 'Finalised - Cancelled while pre-lodged',
         btmsDecision: 'No match - CHED cancelled',
         tagColor: statusColorMap['Finalised - Cancelled while pre-lodged']
       },
       {
-        mrn: '24GBBGBKCDMS128005',
+        mrn: '24GBBGBKCDMA128005',
         cdsStatus: 'Finalised - Destroyed',
         btmsDecision: 'Refuse - Destroy',
         tagColor: statusColorMap['Finalised - Destroyed']
       },
       {
-        mrn: '24GBBGBKCDMS128004',
+        mrn: '24GBBGBKCDMA128004',
         cdsStatus: 'Finalised - Seized',
         btmsDecision: 'Refuse - Destroy',
         tagColor: statusColorMap['Finalised - Seized']
       },
       {
-        mrn: '24GBBGBKCDMS128002',
+        mrn: '24GBBGBKCDMA128002',
         cdsStatus: 'Finalised - Released to King’s warehouse',
         btmsDecision: 'Release - Inspection complete T5 procedure',
         tagColor: statusColorMap['Finalised - Released to King’s warehouse']
       },
       {
-        mrn: '24GBBGBKCDMS128007',
+        mrn: '24GBBGBKCDMA128007',
         cdsStatus: 'Finalised - Transferred to MSS',
         btmsDecision: 'Release - Inspection complete T5 procedure',
         tagColor: statusColorMap['Finalised - Transferred to MSS']
       },
       {
-        mrn: '24GBBGBKCDMS128003',
+        mrn: '24GBBGBKCDMA128003',
         cdsStatus: 'Unknown',
         btmsDecision: 'Unknown',
         tagColor: statusColorMap.Unknown
@@ -195,7 +195,7 @@ describe('CDS Status on GMR and Search Results Page', () => {
   })
 
   it('should navigate to the correct customs declaration for Finalised - Manually released', async () => {
-    const targetMrn = '24GBBGBKCDMS128000'
+    const targetMrn = '24GBBGBKCDMA128000'
     const expectedStatus = 'Finalised - Manually released'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
@@ -206,7 +206,7 @@ describe('CDS Status on GMR and Search Results Page', () => {
   })
 
   it('should navigate to the correct customs declaration for Finalised - Released', async () => {
-    const targetMrn = '24GBBGBKCDMS128001'
+    const targetMrn = '24GBBGBKCDMA128001'
     const expectedStatus = 'Finalised - Released'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
@@ -217,7 +217,7 @@ describe('CDS Status on GMR and Search Results Page', () => {
   })
 
   it('should navigate to the correct customs declaration for Finalised - Released to King’s warehouse', async () => {
-    const targetMrn = '24GBBGBKCDMS128002'
+    const targetMrn = '24GBBGBKCDMA128002'
     const expectedStatus = 'Finalised - Released to King’s warehouse'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
@@ -225,7 +225,7 @@ describe('CDS Status on GMR and Search Results Page', () => {
   })
 
   it('should navigate to the correct customs declaration for Finalised - Seized', async () => {
-    const targetMrn = '24GBBGBKCDMS128004'
+    const targetMrn = '24GBBGBKCDMA128004'
     const expectedStatus = 'Finalised - Seized'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
@@ -236,7 +236,7 @@ describe('CDS Status on GMR and Search Results Page', () => {
   })
 
   it('should navigate to the correct customs declaration for Finalised - Destroyed', async () => {
-    const targetMrn = '24GBBGBKCDMS128005'
+    const targetMrn = '24GBBGBKCDMA128005'
     const expectedStatus = 'Finalised - Destroyed'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
@@ -247,7 +247,7 @@ describe('CDS Status on GMR and Search Results Page', () => {
   })
 
   it('should navigate to the correct customs declaration for In progress - Awaiting trader', async () => {
-    const targetMrn = '24GBBGBKCDMS128006'
+    const targetMrn = '24GBBGBKCDMA128006'
     const expectedStatus = 'In progress - Awaiting trader'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
@@ -258,7 +258,7 @@ describe('CDS Status on GMR and Search Results Page', () => {
   })
 
   it('should navigate to the correct customs declaration for Finalised - Transferred to MSS', async () => {
-    const targetMrn = '24GBBGBKCDMS128007'
+    const targetMrn = '24GBBGBKCDMA128007'
     const expectedStatus = 'Finalised - Transferred to MSS'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
@@ -266,7 +266,7 @@ describe('CDS Status on GMR and Search Results Page', () => {
   })
 
   it('should navigate to the correct customs declaration for Finalised - Cancelled while pre-lodged', async () => {
-    const targetMrn = '24GBBGBKCDMS128008'
+    const targetMrn = '24GBBGBKCDMA128008'
     const expectedStatus = 'Finalised - Cancelled while pre-lodged'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
@@ -277,7 +277,7 @@ describe('CDS Status on GMR and Search Results Page', () => {
   })
 
   it('should navigate to the correct customs declaration for In progress - Awaiting IPAFFS', async () => {
-    const targetMrn = '24GBBGBKCDMS128009'
+    const targetMrn = '24GBBGBKCDMA128009'
     const expectedStatus = 'In progress - Awaiting IPAFFS'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
@@ -288,7 +288,7 @@ describe('CDS Status on GMR and Search Results Page', () => {
   })
 
   it('should navigate to the correct customs declaration for In progress', async () => {
-    const targetMrn = '24GBBGBKCDMS128010'
+    const targetMrn = '24GBBGBKCDMA128010'
     const expectedStatus = 'In progress'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
@@ -299,7 +299,7 @@ describe('CDS Status on GMR and Search Results Page', () => {
   })
 
   it('should navigate to the correct customs declaration for Finalised - Cancelled after arrival', async () => {
-    const targetMrn = '24GBBGBKCDMS128011'
+    const targetMrn = '24GBBGBKCDMA128011'
     const expectedStatus = 'Finalised - Cancelled after arrival'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
@@ -310,7 +310,7 @@ describe('CDS Status on GMR and Search Results Page', () => {
   })
 
   it('should navigate to the correct customs declaration for In progress - Awaiting CDS', async () => {
-    const targetMrn = '24GBBGBKCDMS128012'
+    const targetMrn = '24GBBGBKCDMA128012'
     const expectedStatus = 'In progress - Awaiting CDS'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)

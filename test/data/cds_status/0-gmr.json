@@ -1,5 +1,5 @@
 {
-  "gmrId": "GMRA12280001",
+  "gmrId": "GMRA1228A001",
   "haulierEORI": "GB1196193155298",
   "state": "OPEN",
   "inspectionRequired": null,
@@ -26,45 +26,45 @@
   "declarations": {
     "customs": [
       {
-        "id": "24GBBGBKCDMS128000"
+        "id": "24GBBGBKCDMA128000"
       },
       {
-        "id": "24GBBGBKCDMS128001"
+        "id": "24GBBGBKCDMA128001"
       },
       {
-        "id": "24GBBGBKCDMS128002"
+        "id": "24GBBGBKCDMA128002"
       },
       {
-        "id": "24GBBGBKCDMS128003"
+        "id": "24GBBGBKCDMA128003"
       },
       {
-        "id": "24GBBGBKCDMS128004"
+        "id": "24GBBGBKCDMA128004"
       },
       {
-        "id": "24GBBGBKCDMS128005"
+        "id": "24GBBGBKCDMA128005"
       },
       {
-        "id": "24GBBGBKCDMS128006"
+        "id": "24GBBGBKCDMA128006"
       },
       {
-        "id": "24GBBGBKCDMS128007"
+        "id": "24GBBGBKCDMA128007"
       },
       {
-        "id": "24GBBGBKCDMS128008"
+        "id": "24GBBGBKCDMA128008"
       },
       {
-        "id": "24GBBGBKCDMS128009"
+        "id": "24GBBGBKCDMA128009"
       },
       {
-        "id": "24GBBGBKCDMS128010"
+        "id": "24GBBGBKCDMA128010"
       },
       {
-        "id": "24GBBGBKCDMS128011"
+        "id": "24GBBGBKCDMA128011"
       }
     ],
     "transits": [
       {
-        "id": "24GBBGBKCDMS128012"
+        "id": "24GBBGBKCDMA128012"
       }
     ]
   }

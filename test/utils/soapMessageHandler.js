@@ -25,13 +25,13 @@ export async function sendSoapRequest(
     if (process.env.ENVIRONMENT === 'local') {
       url = `http://localhost:8080/ITSW/CDS/SubmitImportDocumentCDSFacadeService`
     } else {
-      url = `https://btms-gateway.${process.env.ENVIRONMENT}.cdp-int.defra.cloud/ITSW/CDS/SubmitImportDocumentCDSFacadeService`
+      url = `https://btms-gateway.api.${process.env.ENVIRONMENT}.cdp-int.defra.cloud/ITSW/CDS/SubmitImportDocumentCDSFacadeService`
     }
   } else {
     if (process.env.ENVIRONMENT === 'local') {
       url = `http://localhost:8080/ITSW/CDS/NotifyFinalisedStateCDSFacadeService`
     } else {
-      url = `https://btms-gateway.${process.env.ENVIRONMENT}.cdp-int.defra.cloud/ITSW/CDS/NotifyFinalisedStateCDSFacadeService`
+      url = `https://btms-gateway.api.${process.env.ENVIRONMENT}.cdp-int.defra.cloud/ITSW/CDS/NotifyFinalisedStateCDSFacadeService`
     }
   }
 
