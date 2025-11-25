@@ -12,8 +12,7 @@ class SearchResultsPage extends Page {
         '.btms-customs-declaration-summary .govuk-tag--yellow',
         '.btms-customs-declaration-summary .govuk-tag--green',
         '.btms-customs-declaration-summary .govuk-tag--red',
-        '.btms-customs-declaration-summary .govuk-tag--grey',
-        '.btms-customs-declaration-summary .govuk-tag--blue'
+        '.btms-customs-declaration-summary .govuk-tag--grey'
       ].join(', ')
     )
   }
