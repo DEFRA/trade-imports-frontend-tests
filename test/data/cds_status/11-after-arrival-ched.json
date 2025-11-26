@@ -1,0 +1,340 @@
+{
+  "id": 20579,
+  "referenceNumber": "CHEDA.GB.2025.1112811",
+  "version": 2,
+  "lastUpdated": "2025-11-13T09:30:00.5553237Z",
+  "lastUpdatedBy": {
+    "displayName": "Gary Admin-Tester",
+    "userId": "79f6dc68-2144-e911-a96a-000d3a29ba60"
+  },
+  "type": "CVEDA",
+  "status": "CANCELLED",
+  "riskAssessment": {
+    "commodityResults": [
+      {
+        "riskDecision": "REQUIRED",
+        "uniqueId": "2a1ede05-def2-4443-ba8c-4ce3833be081"
+      }
+    ],
+    "assessmentDateTime": "2024-07-01T12:10:36.311593883"
+  },
+  "isHighRiskEuImport": true,
+  "partOne": {
+    "personResponsible": {
+      "name": "Andrew Inspector-Tester",
+      "companyId": "767ceb6a-2144-e911-a96c-000d3a29b5de",
+      "companyName": "Defra Test BIP",
+      "address": [
+        "Animal and Plant Health Agency",
+        "Woodham Lane",
+        "New Haw",
+        "Surrey",
+        "Addlestone",
+        "KT15 3NB"
+      ],
+      "country": "GB",
+      "tracesID": 1001,
+      "phone": "020 8225 7295",
+      "email": "DefraTestBIP@anthunt3.33mail.com",
+      "contactId": "79f6dc68-2144-e911-a96a-000d3a29ba60"
+    },
+    "consignor": {
+      "id": "87ed5f0a-478f-4e3e-86e7-0f0afd0a18ff",
+      "type": "exporter",
+      "status": "nonapproved",
+      "companyName": "perf-consignor-company-name",
+      "address": {
+        "addressLine1": "perf-consignor-address-line-1",
+        "city": "perf-consignor-city",
+        "postalZipCode": "AB1 1AB",
+        "countryISOCode": "AF",
+        "telephone": "0123456789",
+        "email": "perf@test.com"
+      },
+      "tracesId": 10000004
+    },
+    "consignee": {
+      "id": "6df1c798-79e2-498b-90d1-1af2cd75b5e0",
+      "type": "destination",
+      "status": "nonapproved",
+      "companyName": "perf-consignee-company-name",
+      "address": {
+        "addressLine1": "perf-consignor-address-line-1",
+        "city": "perf-consignee-city",
+        "postalZipCode": "AB1 1AB",
+        "countryISOCode": "AF",
+        "telephone": "0123456789",
+        "email": "perf@test.com"
+      },
+      "tracesId": 10000036
+    },
+    "importer": {
+      "id": "6df1c798-79e2-498b-90d1-1af2cd75b5e0",
+      "type": "destination",
+      "status": "nonapproved",
+      "companyName": "perf-consignee-company-name",
+      "address": {
+        "addressLine1": "perf-consignor-address-line-1",
+        "city": "perf-consignee-city",
+        "postalZipCode": "AB1 1AB",
+        "countryISOCode": "AF",
+        "telephone": "0123456789",
+        "email": "perf@test.com"
+      },
+      "tracesId": 10000036
+    },
+    "placeOfDestination": {
+      "id": "6df1c798-79e2-498b-90d1-1af2cd75b5e0",
+      "type": "destination",
+      "status": "nonapproved",
+      "companyName": "perf-consignee-company-name",
+      "address": {
+        "addressLine1": "perf-consignor-address-line-1",
+        "city": "perf-consignee-city",
+        "postalZipCode": "AB1 1AB",
+        "countryISOCode": "AF",
+        "telephone": "0123456789",
+        "email": "perf@test.com"
+      },
+      "tracesId": 10000036
+    },
+    "cphNumber": "673",
+    "commodities": {
+      "numberOfPackages": 737,
+      "numberOfAnimals": 492,
+      "commodityComplement": [
+        {
+          "commodityID": "0103",
+          "commodityDescription": "Live swine",
+          "complementID": 1,
+          "complementName": "Sus scrofa domesticus",
+          "speciesID": "3015",
+          "speciesName": "Sus scrofa domesticus",
+          "speciesTypeName": "Domestic",
+          "speciesType": "16",
+          "speciesClass": "3015",
+          "speciesNomination": "Sus scrofa domesticus"
+        }
+      ],
+      "complementParameterSet": [
+        {
+          "uniqueComplementID": "2a1ede05-def2-4443-ba8c-4ce3833be081",
+          "complementID": 1,
+          "speciesID": "3015",
+          "keyDataPair": [
+            {
+              "key": "number_package",
+              "data": "737"
+            },
+            {
+              "key": "number_animal",
+              "data": "492"
+            }
+          ],
+          "identifiers": [
+            {
+              "speciesNumber": 1,
+              "data": {
+                "ear_tag": "Deserunt neque tempo"
+              }
+            }
+          ]
+        }
+      ],
+      "includeNonAblactedAnimals": false,
+      "countryOfOrigin": "FR",
+      "isLowRiskArticle72Country": false,
+      "animalsCertifiedAs": "Approved"
+    },
+    "purpose": {
+      "internalMarketPurpose": "Slaughter",
+      "purposeGroup": "For Import"
+    },
+    "pointOfEntry": "GBAPHA1A",
+    "arrivalDate": "2025-12-21",
+    "arrivalTime": "22:00:00",
+    "transporter": {
+      "id": "daaf4a1d-003b-4b51-920f-e8c06a17f12d",
+      "type": "commercial transporter - user added",
+      "status": "nonapproved",
+      "companyName": "company-name",
+      "approvalNumber": "AA/12345",
+      "address": {
+        "addressLine1": "address-line-1",
+        "city": "city-or-town",
+        "countryISOCode": "PR",
+        "telephone": "078471727271",
+        "email": "test@test.com"
+      },
+      "tracesId": 10000023
+    },
+    "meansOfTransport": {},
+    "meansOfTransportFromEntryPoint": {
+      "id": "Possimus asperiores",
+      "type": "Road Vehicle",
+      "document": "Eaque vel labore qui"
+    },
+    "veterinaryInformation": {
+      "accompanyingDocuments": [
+        {
+          "documentType": "airWaybill",
+          "documentReference": "Maiores ut doloremqu",
+          "documentIssueDate": "1978-07-05"
+        },
+        {
+          "documentType": "latestVeterinaryHealthCertificate",
+          "documentReference": "Eius nulla quis corr",
+          "documentIssueDate": "2009-03-12"
+        },
+        {
+          "documentType": "airWaybill",
+          "documentReference": "Maiores ut doloremqu",
+          "documentIssueDate": "1978-07-05"
+        },
+        {
+          "documentType": "airWaybill",
+          "documentReference": "Maiores ut doloremqu",
+          "documentIssueDate": "1978-07-05"
+        },
+        {
+          "documentType": "airWaybill",
+          "documentReference": "Maiores ut doloremqu",
+          "documentIssueDate": "1978-07-05"
+        },
+        {
+          "documentType": "airWaybill",
+          "documentReference": "Maiores ut doloremqu",
+          "documentIssueDate": "1978-07-05"
+        },
+        {
+          "documentType": "airWaybill",
+          "documentReference": "Maiores ut doloremqu",
+          "documentIssueDate": "1978-07-05"
+        },
+        {
+          "documentType": "airWaybill",
+          "documentReference": "Maiores ut doloremqu",
+          "documentIssueDate": "1978-07-05"
+        },
+        {
+          "documentType": "airWaybill",
+          "documentReference": "Maiores ut doloremqu",
+          "documentIssueDate": "1978-07-05"
+        },
+        {
+          "documentType": "airWaybill",
+          "documentReference": "Maiores ut doloremqu",
+          "documentIssueDate": "1978-07-05"
+        },
+        {
+          "documentType": "airWaybill",
+          "documentReference": "Maiores ut doloremqu",
+          "documentIssueDate": "1978-07-05"
+        },
+        {
+          "documentType": "airWaybill",
+          "documentReference": "Maiores ut doloremqu",
+          "documentIssueDate": "1978-07-05"
+        },
+        {
+          "documentType": "airWaybill",
+          "documentReference": "Maiores ut doloremqu",
+          "documentIssueDate": "1978-07-05"
+        }
+      ]
+    },
+    "route": {
+      "transitingStates": ["AL"]
+    },
+    "submissionDate": "2024-07-01T11:10:36.131953967Z",
+    "submittedBy": {
+      "displayName": "Andrew Inspector-Tester",
+      "userId": "79f6dc68-2144-e911-a96a-000d3a29ba60"
+    },
+    "complexCommoditySelected": true,
+    "portOfEntry": "GBABD",
+    "isGVMSRoute": false
+  },
+  "partTwo": {
+    "decision": {
+      "decision": "Acceptable for Internal Market"
+    },
+    "consignmentCheck": {
+      "euStandard": "Not Set",
+      "nationalRequirements": "Not Set",
+      "additionalGuarantees": "Not Set"
+    },
+    "impactOfTransportOnAnimals": {
+      "numberOfDeadAnimalsUnit": "number",
+      "numberOfUnfitAnimalsUnit": "number"
+    },
+    "consignmentValidation": [
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/decision/consignmentacceptable",
+        "message": "What is the decision for this consignment"
+      },
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/consignmentcheck/physicalcheckresult",
+        "message": "Physical check result"
+      },
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/consignmentcheck/documentcheckresult",
+        "message": "Documentary check"
+      },
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/consignmentcheck/welfarecheck",
+        "message": "Welfare check"
+      },
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/consignmentcheck/identitycheckresult",
+        "message": "Complete identity check details"
+      },
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/laboratorytestsrequired",
+        "message": "Are laboratory tests required"
+      },
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/consignmentcheck/numberofanimalschecked",
+        "message": "Animal number checked"
+      }
+    ],
+    "inspectionRequired": "Required"
+  },
+  "partThree": {
+    "sealCheckRequired": false
+  },
+  "consignmentValidation": [
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/consignmentcheck/documentcheckresult",
+      "message": "Documentary check"
+    },
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/consignmentcheck/welfarecheck",
+      "message": "Welfare check"
+    },
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/laboratorytestsrequired",
+      "message": "Are laboratory tests required"
+    },
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/decision/consignmentacceptable",
+      "message": "What is the decision for this consignment"
+    },
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/consignmentcheck/identitycheckresult",
+      "message": "Complete identity check details"
+    },
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/consignmentcheck/physicalcheckresult",
+      "message": "Physical check result"
+    },
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/consignmentcheck/numberofanimalschecked",
+      "message": "Animal number checked"
+    }
+  ],
+  "etag": "0000000000000ABD",
+  "riskDecisionLockingTime": "2025-12-21T20:00:00Z",
+  "isRiskDecisionLocked": false,
+  "chedTypeVersion": 1
+}

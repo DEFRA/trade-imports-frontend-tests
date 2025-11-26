@@ -19,7 +19,7 @@ export async function sendIpaffMessageFromFile(relativePath) {
   return await sendIpaffsMessage(json)
 }
 
-export async function sendIpaffsMessage(json) {
+export async function sendIpaffsMessage(json, retryOptions = {}) {
   globalThis.proxy = process.env.CDP_HTTPS_PROXY
   globalThis.testLogger.info({
     event: '[IPAFF] Global Proxy value is',
@@ -89,26 +89,57 @@ export async function sendIpaffsMessage(json) {
     }
   }
 
+  const {
+    timeoutMs = 15000,
+    intervalMs = 500,
+    maxAttempts = Math.ceil(timeoutMs / intervalMs)
+  } = retryOptions
+  const start = Date.now()
+  let attempt = 0
+  let lastError
   try {
-    globalThis.testLogger.info({
-      event: '[IPAFF] Attempting to send a message'
-    })
-    await sender.sendMessages(message)
-
-    globalThis.testLogger.info({
-      event: '[IPAFF] Successfully sent message to Service Bus'
-    })
-    return {
-      requestId,
-      ipaffsBody: body,
-      success: true,
-      timestamp: new Date().toISOString()
+    while (attempt < maxAttempts) {
+      attempt++
+      try {
+        globalThis.testLogger.info({
+          event: '[IPAFF] Attempting to send a message',
+          attempt,
+          maxAttempts
+        })
+        await sender.sendMessages(message)
+        globalThis.testLogger.info({
+          event: '[IPAFF] Successfully sent message to Service Bus',
+          attempt
+        })
+        return {
+          requestId,
+          ipaffsBody: body,
+          success: true,
+          attempts: attempt,
+          timestamp: new Date().toISOString()
+        }
+      } catch (err) {
+        lastError = err
+        globalThis.testLogger.info({
+          event: '[IPAFF] Send attempt failed',
+          attempt,
+          error: err.message || String(err)
+        })
+        const elapsed = Date.now() - start
+        if (elapsed + intervalMs >= timeoutMs) {
+          break
+        }
+        await new Promise((resolve) => setTimeout(resolve, intervalMs))
+      }
     }
-  } catch (err) {
     globalThis.testLogger.info({
-      event: '[IPAFF] Unable to send the message'
+      event: '[IPAFF] All attempts exhausted',
+      attempts: attempt,
+      lastError: lastError?.message
     })
-    throw new Error(`Request failed: ${err.message || err}`)
+    throw new Error(
+      `IPAFF message send failed after ${attempt} attempts within ${timeoutMs}ms: ${lastError?.message || lastError}`
+    )
   } finally {
     try {
       await sender.close()

@@ -1,0 +1,285 @@
+{
+  "id": 94872,
+  "referenceNumber": "CHEDA.GB.2025.1112809",
+  "version": 1,
+  "lastUpdated": "2025-11-19T09:10:00.5553237Z",
+  "lastUpdatedBy": {
+    "displayName": "Michael Scott",
+    "userId": "ebc98b54-834c-e911-a96a-000d3a29ba60"
+  },
+  "type": "CVEDA",
+  "status": "SUBMITTED",
+  "riskAssessment": {
+    "commodityResults": [
+      {
+        "riskDecision": "INCONCLUSIVE",
+        "uniqueId": "4b34dd69-fd63-403b-b152-4d51fd81069d"
+      }
+    ],
+    "assessmentDateTime": "2025-03-19T17:47:57.708495806"
+  },
+  "isHighRiskEuImport": false,
+  "partOne": {
+    "personResponsible": {
+      "name": "Michael Scott",
+      "companyName": "Michael Scott",
+      "address": ["34 GREYSTONE PARK, CREWE, CHESHIRE EAST, CW1 2AL"],
+      "country": "GB",
+      "tracesID": 1001,
+      "phone": "01234566234",
+      "email": "test14@hghumankainos.33mail.com",
+      "contactId": "ebc98b54-834c-e911-a96a-000d3a29ba60"
+    },
+    "consignor": {
+      "id": "e28196c9-4860-436b-8b7d-d4231adf294d",
+      "type": "exporter",
+      "status": "nonapproved",
+      "companyName": "Linus George Ltd",
+      "address": {
+        "addressLine1": "681 High St",
+        "addressLine2": "Suite 986",
+        "addressLine3": "Building 1",
+        "city": "Sunnyvale",
+        "postalZipCode": "52384",
+        "countryISOCode": "GB-ENG",
+        "telephone": "01197 629790",
+        "email": "peakperformance@example.com"
+      },
+      "tracesId": 10233329
+    },
+    "consignee": {
+      "id": "8ba40aab-f9eb-42fc-bb78-798af5d3c9b5",
+      "type": "consignee",
+      "status": "nonapproved",
+      "companyName": "Peak Performance",
+      "address": {
+        "addressLine1": "258 High St",
+        "addressLine2": "Suite 778",
+        "addressLine3": "Building 10",
+        "city": "Lakeside",
+        "postalZipCode": "25001",
+        "countryISOCode": "GB-ENG",
+        "telephone": "01349 136424",
+        "email": "peakperformance@sample.com"
+      },
+      "tracesId": 10233330
+    },
+    "importer": {
+      "id": "8ba40aab-f9eb-42fc-bb78-798af5d3c9b5",
+      "type": "importer",
+      "status": "nonapproved",
+      "companyName": "Peak Performance",
+      "address": {
+        "addressLine1": "258 High St",
+        "addressLine2": "Suite 778",
+        "addressLine3": "Building 10",
+        "city": "Lakeside",
+        "postalZipCode": "25001",
+        "countryISOCode": "GB-ENG",
+        "telephone": "01349 136424",
+        "email": "peakperformance@sample.com"
+      },
+      "tracesId": 10233330
+    },
+    "placeOfDestination": {
+      "id": "8ba40aab-f9eb-42fc-bb78-798af5d3c9b5",
+      "type": "destination",
+      "status": "nonapproved",
+      "companyName": "Peak Performance",
+      "address": {
+        "addressLine1": "258 High St",
+        "addressLine2": "Suite 778",
+        "addressLine3": "Building 10",
+        "city": "Lakeside",
+        "postalZipCode": "25001",
+        "countryISOCode": "GB-ENG",
+        "telephone": "01349 136424",
+        "email": "peakperformance@sample.com"
+      },
+      "tracesId": 10233330
+    },
+    "commodities": {
+      "numberOfPackages": 1,
+      "numberOfAnimals": 2,
+      "commodityComplement": [
+        {
+          "commodityID": "0101",
+          "commodityDescription": "Live horses, asses, mules and hinnies",
+          "complementID": 1,
+          "complementName": "Equus asinus",
+          "speciesID": "242089",
+          "speciesName": "Equus asinus",
+          "speciesType": "2",
+          "speciesClass": "147603",
+          "speciesNomination": "Equus asinus"
+        }
+      ],
+      "complementParameterSet": [
+        {
+          "uniqueComplementID": "4b34dd69-fd63-403b-b152-4d51fd81069d",
+          "complementID": 1,
+          "speciesID": "242089",
+          "keyDataPair": [
+            {
+              "key": "number_package",
+              "data": "1"
+            },
+            {
+              "key": "number_animal",
+              "data": "2"
+            }
+          ]
+        }
+      ],
+      "includeNonAblactedAnimals": false,
+      "countryOfOrigin": "AO",
+      "isLowRiskArticle72Country": false,
+      "animalsCertifiedAs": "Approved"
+    },
+    "purpose": {
+      "internalMarketPurpose": "Breeding",
+      "purposeGroup": "For Import"
+    },
+    "pointOfEntry": "GBLGW4",
+    "arrivalDate": "2025-08-27",
+    "arrivalTime": "20:30:00",
+    "transporter": {
+      "id": "4d83172d-4ac6-461d-8b6d-bcbc62e0faa2",
+      "type": "private transporter",
+      "status": "nonapproved",
+      "companyName": "Peak Performance",
+      "address": {
+        "addressLine1": "266 Market St",
+        "addressLine2": "Suite 42",
+        "addressLine3": "Building 7",
+        "city": "Springfield",
+        "postalZipCode": "42974",
+        "countryISOCode": "GB-ENG",
+        "telephone": "01665 316651",
+        "email": "greensystems@example.com"
+      },
+      "tracesId": 10233331
+    },
+    "meansOfTransport": {},
+    "meansOfTransportFromEntryPoint": {
+      "id": "F12345",
+      "type": "Railway Wagon",
+      "document": "certificate"
+    },
+    "estimatedJourneyTimeInMinutes": 60,
+    "veterinaryInformation": {
+      "accompanyingDocuments": [
+        {
+          "documentType": "latestVeterinaryHealthCertificate",
+          "documentReference": "REF-124",
+          "documentIssueDate": "2023-03-04",
+          "attachmentId": "4cf08da8-b921-4b0b-ad14-f9ccaf97b19a",
+          "attachmentFilename": "example.png",
+          "attachmentContentType": "image/png",
+          "uploadUserId": "ebc98b54-834c-e911-a96a-000d3a29ba60"
+        }
+      ]
+    },
+    "route": {
+      "transitingStates": ["FR"]
+    },
+    "submissionDate": "2025-03-18T17:47:57.426510387Z",
+    "submittedBy": {
+      "displayName": "Michael Scott",
+      "userId": "ebc98b54-834c-e911-a96a-000d3a29ba60"
+    },
+    "complexCommoditySelected": true,
+    "nominatedContacts": [
+      {
+        "name": "Test Name",
+        "telephone": "01234567890",
+        "email": "testemailfordefra@defratest.com"
+      }
+    ],
+    "isGVMSRoute": false,
+    "provideCtcMrn": "NO",
+    "storeTransporterContact": "YES"
+  },
+  "partTwo": {
+    "decision": {
+      "decision": "Acceptable for Internal Market"
+    },
+    "consignmentCheck": {
+      "euStandard": "Not Set",
+      "nationalRequirements": "Not Set",
+      "additionalGuarantees": "Not Set"
+    },
+    "impactOfTransportOnAnimals": {
+      "numberOfDeadAnimalsUnit": "number",
+      "numberOfUnfitAnimalsUnit": "number"
+    },
+    "consignmentValidation": [
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/decision/consignmentacceptable",
+        "message": "What is the decision for this consignment"
+      },
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/consignmentcheck",
+        "message": "Documentary check"
+      },
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/consignmentcheck/physicalcheckresult",
+        "message": "Physical check result"
+      },
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/consignmentcheck/welfarecheck",
+        "message": "Welfare check"
+      },
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/consignmentcheck/identitycheckresult",
+        "message": "Complete identity check details"
+      },
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/laboratorytestsrequired",
+        "message": "Are laboratory tests required"
+      },
+      {
+        "field": "uk/gov/defra/tracesx/notificationschema/representation/parttwo/consignmentcheck/numberofanimalschecked",
+        "message": "Animal number checked"
+      }
+    ],
+    "inspectionRequired": "Inconclusive"
+  },
+  "partThree": {
+    "sealCheckRequired": false
+  },
+  "consignmentValidation": [
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/consignmentcheck/welfarecheck",
+      "message": "Welfare check"
+    },
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/laboratorytestsrequired",
+      "message": "Are laboratory tests required"
+    },
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/decision/consignmentacceptable",
+      "message": "What is the decision for this consignment"
+    },
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/consignmentcheck/identitycheckresult",
+      "message": "Complete identity check details"
+    },
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/consignmentcheck/physicalcheckresult",
+      "message": "Physical check result"
+    },
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/consignmentcheck",
+      "message": "Documentary check"
+    },
+    {
+      "field": "uk/gov/defra/tracesx/notificationschema/representation/notification/parttwo/consignmentcheck/numberofanimalschecked",
+      "message": "Animal number checked"
+    }
+  ],
+  "etag": "00000000001A3ACB",
+  "riskDecisionLockingTime": "2025-08-27T17:30:00Z",
+  "isRiskDecisionLocked": false,
+  "chedTypeVersion": 2
+}
