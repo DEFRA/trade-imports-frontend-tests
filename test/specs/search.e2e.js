@@ -67,14 +67,14 @@ describe('Search page', () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search('bad search term')
     expect(await SearchPage.getSearchErrorText()).toContain(
-      'Enter an MRN, CHED or DUCR reference in the correct format'
+      'Enter an MRN, CHED, GMR or DUCR reference in the correct format'
     )
   })
   it('Should see error message when searching for empty search term', async () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search('')
     expect(await SearchPage.getSearchErrorText()).toContain(
-      'Enter an MRN, CHED or DUCR'
+      'Enter an MRN, CHED, GMR or DUCR'
     )
   })
   it('should show error message saying valid GMR not found', async () => {
@@ -88,7 +88,7 @@ describe('Search page', () => {
     const invalidGmr = 'GMR1000000XX'
     await GmrSearchResultsPage.open(invalidGmr)
     expect(await SearchPage.getSearchErrorText()).toContain(
-      `Enter an MRN, CHED or DUCR reference in the correct format`
+      `Enter an MRN, CHED, GMR or DUCR reference in the correct format`
     )
   })
 })

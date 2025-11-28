@@ -93,7 +93,7 @@ describe('GMR Search', () => {
     const invalidGmr = 'GMR1000000XX'
     await GmrSearchResultsPage.open(invalidGmr)
     expect(await SearchPage.getSearchErrorText()).toContain(
-      `Enter an MRN, CHED or DUCR reference in the correct format`
+      `Enter an MRN, CHED, GMR or DUCR reference in the correct format`
     )
   })
 })
