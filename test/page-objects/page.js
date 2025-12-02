@@ -5,8 +5,10 @@ class Page {
     return $('h1')
   }
 
-  open(path) {
-    return browser.url(path)
+  async open(path) {
+    const result = browser.url(path)
+    await browser.takeScreenshot()
+    return result
   }
 
   async clickLink(element) {
