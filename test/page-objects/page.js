@@ -6,7 +6,7 @@ class Page {
   }
 
   async open(path) {
-    const result = browser.url(path)
+    const result = await browser.url(path)
     await browser.takeScreenshot()
     return result
   }
