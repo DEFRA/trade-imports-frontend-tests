@@ -8,7 +8,7 @@ import {
 import HomePage from '../page-objects/home.page'
 import FooterPage from 'page-objects/footer.page.js'
 
-describe('Accessibility Testing', () => {
+describe('Accessibility Testing for Footer Tests', () => {
   before(async () => {
     await initialiseAccessibilityChecking()
     await HomePage.open()
