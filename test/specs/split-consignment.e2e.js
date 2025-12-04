@@ -32,6 +32,7 @@ describe('Search Results Page for Split Consignment', () => {
     const mrn = '24GBBGBKCDMS895003'
     await SearchPage.open()
     await SearchPage.search(mrn)
+    await browser.takeScreenshot()
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
 
     const customDeclarationCheds = [
