@@ -72,7 +72,7 @@ export const config = {
   ],
   mochaOpts: {
     ui: 'bdd',
-    timeout: debug ? oneHour : 60000
+    timeout: debug ? oneHour : 120000
   },
   afterTest: async function (_, __, ___) {
     await browser.takeScreenshot()
