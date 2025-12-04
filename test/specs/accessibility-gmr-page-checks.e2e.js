@@ -11,7 +11,7 @@ import { sendGmrMessageFromFile } from '../utils/gmrMessageHandler.js'
 import HomePage from 'page-objects/home.page'
 import GmrSearchResultsPage from '../page-objects/gmr-search-results.page.js'
 
-describe('Accessibility Testing', () => {
+describe('Accessibility Testing for GMR Page', () => {
   const gmrId = 'GMRA11350001'
 
   before(async () => {

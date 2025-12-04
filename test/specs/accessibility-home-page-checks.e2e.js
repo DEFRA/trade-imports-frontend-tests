@@ -7,7 +7,7 @@ import {
 
 import HomePage from 'page-objects/home.page'
 
-describe('Accessibility Testing', () => {
+describe('Accessibility Testing for Home Page', () => {
   before(async () => {
     await initialiseAccessibilityChecking()
   })

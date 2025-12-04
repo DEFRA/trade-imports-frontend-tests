@@ -8,7 +8,7 @@ import {
 import HomePage from 'page-objects/home.page'
 import LatestActivityPage from '../page-objects/latest-activity.page'
 
-describe('Accessibility Testing', () => {
+describe('Accessibility Testing for Latest Activity', () => {
   before(async () => {
     await initialiseAccessibilityChecking()
     await HomePage.open()

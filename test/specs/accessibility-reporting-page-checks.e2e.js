@@ -8,7 +8,7 @@ import {
 import HomePage from 'page-objects/home.page'
 import ReportingPage from 'page-objects/reporting.page'
 
-describe('Accessibility Testing', () => {
+describe('Accessibility Testing for Reporting Page', () => {
   before(async () => {
     await initialiseAccessibilityChecking()
     await HomePage.open()
