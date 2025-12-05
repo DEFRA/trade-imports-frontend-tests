@@ -7,7 +7,7 @@ const dispatcher = new ProxyAgent({
 })
 setGlobalDispatcher(dispatcher)
 bootstrap()
-global.GLOBAL_AGENT.HTTP_PROXY = process.env.HTTP_PROXY
+global.GLOBAL_AGENT.HTTP_PROXY = 'http://localhost:3128'
 
 browserstackConfig.services[0][1].opts = {
   binarypath: '/root/.browserstack/BrowserStackLocal',

@@ -20,7 +20,7 @@ export async function sendGmrMessageFromFile(relativePath) {
 }
 
 export async function sendGmrMessage(json, retryOptions = {}) {
-  globalThis.proxy = process.env.HTTP_PROXY
+  globalThis.proxy = process.env.CDP_HTTPS_PROXY
   if (globalThis.proxy) {
     globalThis.testLogger.info({
       event: '[GMR] Global Proxy value is',
