@@ -23,14 +23,12 @@ describe('GMR Search', () => {
 
   it('should be able search for a valid GMR via Search Page', async () => {
     await SearchPage.search(gmrId)
-    await browser.takeScreenshot()
     expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
       `Showing result for\n${gmrId}`
     )
   })
 
   it('should display correct headings on the GMR results page', async () => {
-    await browser.takeScreenshot()
     expect(await GmrSearchResultsPage.getPageTitle()).toBe(
       `Showing result for ${gmrId} - Border Trade Matching Service`
     )
@@ -44,7 +42,6 @@ describe('GMR Search', () => {
 
   it('should display correct vehicle details for a valid GMR', async () => {
     await GmrSearchResultsPage.open(gmrId)
-    await browser.takeScreenshot()
     expect(await GmrSearchResultsPage.getVehicleRegistrationNumber()).toBe(
       'DN05 VDB'
     )
@@ -67,7 +64,6 @@ describe('GMR Search', () => {
         btmsDecision: 'Unknown'
       }
     ]
-    await browser.takeScreenshot()
     expect(mrnData.length).toBe(expectedRows.length)
     expectedRows.forEach((exp, idx) => {
       const actual = mrnData[idx]
@@ -80,7 +76,6 @@ describe('GMR Search', () => {
   it('should navigate to the correct customs declaration when clicking a linked MRN', async () => {
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickFirstLinkedMrn()
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toContain(
       'In progress - Awaiting IPAFFS'
     )
@@ -89,7 +84,6 @@ describe('GMR Search', () => {
   it('should show error message saying valid GMR not found', async () => {
     const invalidGmr = 'GMRA000000XX'
     await GmrSearchResultsPage.open(invalidGmr)
-    await browser.takeScreenshot()
     expect(await SearchPage.getSearchErrorText()).toContain(
       `${invalidGmr} cannot be found`
     )
@@ -98,7 +92,6 @@ describe('GMR Search', () => {
   it('should show error message GMR format is not valid', async () => {
     const invalidGmr = 'GMR1000000XX'
     await GmrSearchResultsPage.open(invalidGmr)
-    await browser.takeScreenshot()
     expect(await SearchPage.getSearchErrorText()).toContain(
       `Enter an MRN, CHED, GMR or DUCR reference in the correct format`
     )

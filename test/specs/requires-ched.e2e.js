@@ -18,7 +18,6 @@ describe('Search Results Page for Requires CHED', () => {
     const mrn = '25GBAZ34DF56882007'
     await SearchPage.open()
     await SearchPage.search(mrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
     expect(await SearchResultsPage.customDeclarationAllResultText()).toContain(
       'Requires CHED'

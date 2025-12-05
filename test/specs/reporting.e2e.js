@@ -9,7 +9,6 @@ describe('Reporting page', () => {
     await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
     await ReportingPage.clickNavReportingLink()
-    await browser.takeScreenshot()
     await expect(browser).toHaveTitle(
       'BTMS reporting data - Border Trade Matching Service'
     )
@@ -25,12 +24,10 @@ describe('Reporting page', () => {
 
     const expectedDateTime = `${day} ${month} ${year} at ${hours}:${minutes}`
     await ReportingPage.todayFilter()
-    await browser.takeScreenshot()
     expect(await ReportingPage.filterResult()).toContain(expectedDateTime)
   })
 
   it('Should be able to see all sections', async () => {
-    await browser.takeScreenshot()
     expect(await ReportingPage.matchesSectionIsVisible()).toBe(true)
     expect(await ReportingPage.releasesSectionIsVisible()).toBe(true)
     expect(await ReportingPage.clearanceRequestSectionIsVisible()).toBe(true)
@@ -39,13 +36,11 @@ describe('Reporting page', () => {
 
   it('should display chart view and matches chart', async () => {
     await ReportingPage.openChartTab()
-    await browser.takeScreenshot()
     expect(await ReportingPage.matchesChartIsVisible()).toBe(true)
   })
 
   it('should open summary tab and see matches section', async () => {
     await ReportingPage.openSummaryTab()
-    await browser.takeScreenshot()
     expect(await ReportingPage.matchesSectionIsVisible()).toBe(true)
   })
 
@@ -65,7 +60,6 @@ describe('Reporting page', () => {
     const chartNoMatches = await ReportingPage.getChartNoMatches()
     const chartTotal = await ReportingPage.getChartTotal()
 
-    await browser.takeScreenshot()
     // Compare values
     expect(chartMatches).toEqual(summaryMatches)
     expect(chartNoMatches).toEqual(summaryNoMatches)
@@ -84,7 +78,6 @@ describe('Reporting page', () => {
     const chartManual = await ReportingPage.getReleasesManualChartValue()
     const chartTotal = await ReportingPage.getReleasesTotalChartValue()
 
-    await browser.takeScreenshot()
     expect(chartAuto).toEqual(summaryAuto)
     expect(chartManual).toEqual(summaryManual)
     expect(chartTotal).toEqual(summaryTotal)
@@ -101,7 +94,6 @@ describe('Reporting page', () => {
     const chartUnique = await ReportingPage.getUniqueClearancesChartValue()
     const chartTotal = await ReportingPage.getUniqueClearancesTotalChartValue()
 
-    await browser.takeScreenshot()
     expect(chartUnique).toEqual(summaryUnique)
     expect(chartTotal).toEqual(summaryTotal)
   })
@@ -122,7 +114,6 @@ describe('Reporting page', () => {
     const chartD = await ReportingPage.getChedDChartValue()
     const chartTotal = await ReportingPage.getChedTotalChartValue()
 
-    await browser.takeScreenshot()
     expect(chartA).toEqual(summaryA)
     expect(chartP).toEqual(summaryP)
     expect(chartPP).toEqual(summaryPP)

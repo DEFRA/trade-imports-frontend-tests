@@ -96,7 +96,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
 
   it('should be able search for a valid GMR via Search Page', async () => {
     await SearchPage.search(gmrId)
-    await browser.takeScreenshot()
     expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
       `Showing result for\n${gmrId}`
     )
@@ -185,7 +184,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
         tagColor: statusColorMap.Unknown
       }
     ]
-    await browser.takeScreenshot()
     expect(mrnData.length).toBe(expectedRows.length)
     expectedRows.forEach((exp, idx) => {
       const actual = mrnData[idx]
@@ -201,7 +199,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
     const expectedStatus = 'Finalised - Manually released'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
@@ -213,7 +210,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
     const expectedStatus = 'Finalised - Released'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
@@ -225,7 +221,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
     const expectedStatus = 'Finalised - Released to King’s warehouse'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
   })
 
@@ -234,7 +229,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
     const expectedStatus = 'Finalised - Seized'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
@@ -246,7 +240,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
     const expectedStatus = 'Finalised - Destroyed'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
@@ -258,7 +251,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
     const expectedStatus = 'In progress - Awaiting trader'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
@@ -270,7 +262,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
     const expectedStatus = 'Finalised - Transferred to MSS'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
   })
 
@@ -279,7 +270,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
     const expectedStatus = 'Finalised - Cancelled while pre-lodged'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
@@ -291,7 +281,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
     const expectedStatus = 'In progress - Awaiting IPAFFS'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
@@ -303,7 +292,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
     const expectedStatus = 'In progress'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
@@ -315,7 +303,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
     const expectedStatus = 'Finalised - Cancelled after arrival'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
@@ -327,7 +314,6 @@ describe('CDS Status on GMR and Search Results Page', () => {
     const expectedStatus = 'In progress - Awaiting CDS'
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
