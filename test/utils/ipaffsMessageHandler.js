@@ -20,7 +20,7 @@ export async function sendIpaffMessageFromFile(relativePath) {
 }
 
 export async function sendIpaffsMessage(json, retryOptions = {}) {
-  globalThis.proxy = process.env.HTTP_PROXY
+  globalThis.proxy = process.env.CDP_HTTPS_PROXY
   globalThis.testLogger.info({
     event: '[IPAFF] Global Proxy value is',
     proxy: globalThis.proxy
