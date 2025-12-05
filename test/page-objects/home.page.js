@@ -24,18 +24,15 @@ class HomePage extends Page {
   }
 
   async login() {
-    await browser.takeScreenshot()
     return await this.clickLink(this.signInLink)
   }
 
   async gatewayLogin() {
-    await browser.takeScreenshot()
     await this.clickLink(this.gatewayRadioButton)
     return await this.clickLink(this.chooseSignInButton)
   }
 
   async loginRegisteredUser() {
-    await browser.takeScreenshot()
     await ensureTestUserExists()
     return await this.clickLink(this.signInBasedOnTestEmail)
   }

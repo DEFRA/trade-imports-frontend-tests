@@ -25,7 +25,6 @@ describe('Search Results Page for CHED-PP', () => {
     const mrn = '24GBBGBKCDMS965015'
     await SearchPage.open()
     await SearchPage.search(mrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
 
     const customDeclarationCheds = [

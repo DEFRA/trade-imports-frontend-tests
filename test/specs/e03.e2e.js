@@ -20,7 +20,6 @@ describe('Search Results Page for E03', () => {
     const mrn = '24GBBGBKCDMS704712'
     await SearchPage.open()
     await SearchPage.search(mrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getCdsStatus()).toBe('In progress')
   })
 })

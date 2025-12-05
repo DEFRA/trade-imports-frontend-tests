@@ -22,7 +22,6 @@ describe('Search Results Page for IUU', () => {
     const mrn = '24GBBGBKCDMS836050'
     await SearchPage.open()
     await SearchPage.search(mrn)
-    await browser.takeScreenshot()
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
     expect(await CustomDeclaration.getIuuDataAuthroty()).toContain(
       'Release - IUU inspection complete'
