@@ -1,5 +1,9 @@
 import { browser } from '@wdio/globals'
 
-export const context = {
-  platform: `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
+class Context {
+  get platform() {
+    return `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
+  }
 }
+
+export default new Context()
