@@ -1,4 +1,5 @@
 import allure from 'allure-commandline'
+import { addTag } from '@wdio/allure-reporter'
 
 const debug = process.env.DEBUG
 const oneMinute = 60 * 1000
@@ -58,6 +59,11 @@ export const config = {
   mochaOpts: {
     ui: 'bdd',
     timeout: debug ? oneHour : 60000
+  },
+  beforeTest: async function () {
+    addTag(
+      `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
+    )
   },
   afterTest: async function (
     test,

@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import { browserStackCapabilities } from './wdio.browserstack.capabilities.js'
+import { addTag } from '@wdio/allure-reporter'
 
 const debug = process.env.DEBUG
 const oneHour = 60 * 60 * 1000
@@ -73,6 +74,11 @@ export const config = {
   mochaOpts: {
     ui: 'bdd',
     timeout: debug ? oneHour : 120000
+  },
+  beforeTest: async function () {
+    addTag(
+      `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
+    )
   },
   afterTest: async function (_, __, ___) {
     await browser.takeScreenshot()
