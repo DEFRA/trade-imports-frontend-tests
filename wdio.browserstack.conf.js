@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import { browserStackCapabilities } from './wdio.browserstack.capabilities.js'
-import { addTag } from '@wdio/allure-reporter'
+import { addSubSuite } from '@wdio/allure-reporter'
 
 const debug = process.env.DEBUG
 const oneHour = 60 * 60 * 1000
@@ -76,7 +76,7 @@ export const config = {
     timeout: debug ? oneHour : 120000
   },
   beforeTest: async function () {
-    addTag(
+    addSubSuite(
       `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
     )
   },
