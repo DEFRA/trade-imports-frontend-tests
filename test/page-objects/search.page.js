@@ -42,6 +42,10 @@ class SearchPage extends Page {
   async clickNavSearchLink() {
     await this.clickLink(this.navSearchLink)
   }
+
+  async sessionActive() {
+    return await this.signOut.isExisting()
+  }
 }
 
 export default new SearchPage()

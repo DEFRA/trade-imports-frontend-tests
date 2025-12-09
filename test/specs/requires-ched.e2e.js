@@ -10,9 +10,12 @@ describe('Search Results Page for Requires CHED', () => {
     await sendCdsMessageFromFile('../data/requires-ched/requires-ched.xml')
 
     await HomePage.open()
-    await HomePage.login()
-    await HomePage.gatewayLogin()
-    await HomePage.loginRegisteredUser()
+
+    if (!(await SearchPage.sessionActive())) {
+      await HomePage.login()
+      await HomePage.gatewayLogin()
+      await HomePage.loginRegisteredUser()
+    }
   })
   it('Should be able to sarch for a Valid MRN and see Replace CHED status', async () => {
     const mrn = '25GBAZ34DF56882007'

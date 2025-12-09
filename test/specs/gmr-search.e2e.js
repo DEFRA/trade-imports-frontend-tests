@@ -16,9 +16,12 @@ describe('GMR Search', () => {
     await sendGmrMessageFromFile('../data/gmr/gmr.json')
 
     await HomePage.open()
-    await HomePage.login()
-    await HomePage.gatewayLogin()
-    await HomePage.loginRegisteredUser()
+
+    if (!(await SearchPage.sessionActive())) {
+      await HomePage.login()
+      await HomePage.gatewayLogin()
+      await HomePage.loginRegisteredUser()
+    }
   })
 
   it('should be able search for a valid GMR via Search Page', async () => {

@@ -12,9 +12,12 @@ describe('Search Results Page for E03', () => {
     await sendIpaffMessageFromFile('../data/e03/e03.json')
 
     await HomePage.open()
-    await HomePage.login()
-    await HomePage.gatewayLogin()
-    await HomePage.loginRegisteredUser()
+
+    if (!(await SearchPage.sessionActive())) {
+      await HomePage.login()
+      await HomePage.gatewayLogin()
+      await HomePage.loginRegisteredUser()
+    }
   })
   it('Should assert on the CDS status for E03', async () => {
     const mrn = '24GBBGBKCDMS704712'
