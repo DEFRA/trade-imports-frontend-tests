@@ -1,5 +1,5 @@
 import allure from 'allure-commandline'
-import { addSubSuite } from '@wdio/allure-reporter'
+import { addArgument, addSubSuite } from '@wdio/allure-reporter'
 
 const debug = process.env.DEBUG
 const oneMinute = 60 * 1000
@@ -62,6 +62,10 @@ export const config = {
   },
   beforeTest: async function () {
     addSubSuite(
+      `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
+    )
+    addArgument(
+      'platform',
       `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
     )
   },

@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import { browserStackCapabilities } from './wdio.browserstack.capabilities.js'
-import { addSubSuite } from '@wdio/allure-reporter'
+import { addArgument, addSubSuite } from '@wdio/allure-reporter'
 
 const debug = process.env.DEBUG
 const oneHour = 60 * 60 * 1000
@@ -77,6 +77,10 @@ export const config = {
   },
   beforeTest: async function () {
     addSubSuite(
+      `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
+    )
+    addArgument(
+      'platform',
       `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
     )
   },
