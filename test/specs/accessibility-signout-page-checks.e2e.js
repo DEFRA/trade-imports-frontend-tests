@@ -12,9 +12,12 @@ describe('Accessibility Testing for Signout Page', () => {
   before(async () => {
     await initialiseAccessibilityChecking()
     await HomePage.open()
-    await HomePage.login()
-    await HomePage.gatewayLogin()
-    await HomePage.loginRegisteredUser()
+
+    if (!(await SearchPage.sessionActive())) {
+      await HomePage.login()
+      await HomePage.gatewayLogin()
+      await HomePage.loginRegisteredUser()
+    }
   })
   it('Should check Sign Out page for accessibility issues', async () => {
     await SearchPage.signout()

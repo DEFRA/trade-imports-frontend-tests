@@ -14,9 +14,12 @@ describe('Search Results Page for IUU', () => {
     await sendIpaffMessageFromFile('../data/iuu/iuu.json')
 
     await HomePage.open()
-    await HomePage.login()
-    await HomePage.gatewayLogin()
-    await HomePage.loginRegisteredUser()
+
+    if (!(await SearchPage.sessionActive())) {
+      await HomePage.login()
+      await HomePage.gatewayLogin()
+      await HomePage.loginRegisteredUser()
+    }
   })
   it('Should be able to sarch for a Valid MRN and see IUU Checks', async () => {
     const mrn = '24GBBGBKCDMS836050'

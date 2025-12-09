@@ -17,9 +17,12 @@ describe('Search Results Page for CHED-PP', () => {
     await sendIpaffMessageFromFile('../data/CHED-PP/C085_check/N851-ched.json')
 
     await HomePage.open()
-    await HomePage.login()
-    await HomePage.gatewayLogin()
-    await HomePage.loginRegisteredUser()
+
+    if (!(await SearchPage.sessionActive())) {
+      await HomePage.login()
+      await HomePage.gatewayLogin()
+      await HomePage.loginRegisteredUser()
+    }
   })
   it('Should be able to sarch for a Valid MRN and see CHED-PP Document References', async () => {
     const mrn = '24GBBGBKCDMS965015'

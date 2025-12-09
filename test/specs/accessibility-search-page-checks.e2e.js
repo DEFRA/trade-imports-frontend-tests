@@ -12,11 +12,14 @@ describe('Accessibility Testing for Search Page', () => {
   before(async () => {
     await initialiseAccessibilityChecking()
     await HomePage.open()
-    await HomePage.login()
-    await HomePage.gatewayLogin()
+
+    if (!(await SearchPage.sessionActive())) {
+      await HomePage.login()
+      await HomePage.gatewayLogin()
+      await HomePage.loginRegisteredUser()
+    }
   })
   it('Should check Search page for accessibility issues', async () => {
-    await HomePage.loginRegisteredUser()
     await analyseAccessibility()
   })
   it('Should check Search Resuts page for accessibility issues', async () => {

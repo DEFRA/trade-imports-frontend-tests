@@ -10,6 +10,7 @@ import { sendGmrMessageFromFile } from '../utils/gmrMessageHandler.js'
 
 import HomePage from 'page-objects/home.page'
 import GmrSearchResultsPage from '../page-objects/gmr-search-results.page.js'
+import SearchPage from 'page-objects/search.page.js'
 
 describe('Accessibility Testing for GMR Page', () => {
   const gmrId = 'GMRA11350001'
@@ -21,9 +22,12 @@ describe('Accessibility Testing for GMR Page', () => {
 
     await initialiseAccessibilityChecking()
     await HomePage.open()
-    await HomePage.login()
-    await HomePage.gatewayLogin()
-    await HomePage.loginRegisteredUser()
+
+    if (!(await SearchPage.sessionActive())) {
+      await HomePage.login()
+      await HomePage.gatewayLogin()
+      await HomePage.loginRegisteredUser()
+    }
   })
   it('Should check GMR page for accessibility issues', async () => {
     await GmrSearchResultsPage.open(gmrId)

@@ -1,20 +1,25 @@
 import { browser, expect } from '@wdio/globals'
 import HomePage from '../page-objects/home.page'
 import ReportingPage from '../page-objects/reporting.page'
+import SearchPage from 'page-objects/search.page.js'
 
 describe('Reporting page', () => {
   it('Should be on the "Reporting" page', async () => {
     await HomePage.open()
-    await HomePage.login()
-    await HomePage.gatewayLogin()
-    await HomePage.loginRegisteredUser()
+
+    if (!(await SearchPage.sessionActive())) {
+      await HomePage.login()
+      await HomePage.gatewayLogin()
+      await HomePage.loginRegisteredUser()
+    }
+
     await ReportingPage.clickNavReportingLink()
     await expect(browser).toHaveTitle(
       'BTMS reporting data - Border Trade Matching Service'
     )
   })
 
-  it('Shoult be able to use Todays filter', async () => {
+  it('Should be able to use Todays filter', async () => {
     const currentDate = new Date()
     const day = String(currentDate.getDate())
     const month = currentDate.toLocaleString('default', { month: 'long' })
