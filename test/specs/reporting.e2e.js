@@ -19,17 +19,64 @@ describe('Reporting page', () => {
     )
   })
 
-  it('Should be able to use Todays filter', async () => {
+  it('Should be able to use Today filter', async () => {
     const currentDate = new Date()
     const day = String(currentDate.getDate())
     const month = currentDate.toLocaleString('default', { month: 'long' })
     const year = currentDate.getFullYear()
-    const hours = String(currentDate.getHours()).padStart(2, '0')
-    const minutes = String(currentDate.getMinutes()).padStart(2, '0')
 
-    const expectedDateTime = `${day} ${month} ${year} at ${hours}:${minutes}`
+    const expectedReportPeriod = `${day} ${month} ${year} at 00:00 to ${day} ${month} ${year} at`
     await ReportingPage.todayFilter()
-    expect(await ReportingPage.filterResult()).toContain(expectedDateTime)
+    expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
+  })
+
+  it('Should be able to use Yesterday filter', async () => {
+    const yesterdayDate = new Date(new Date().setDate(new Date().getDate() - 1))
+    const yesterdayDay = String(yesterdayDate.getDate())
+    const yesterdayMonth = yesterdayDate.toLocaleString('default', {
+      month: 'long'
+    })
+    const yesterdayYear = yesterdayDate.getFullYear()
+
+    const expectedReportPeriod = `${yesterdayDay} ${yesterdayMonth} ${yesterdayYear} at 00:00 to ${yesterdayDay} ${yesterdayMonth} ${yesterdayYear} at 23:59`
+    await ReportingPage.yesterdayFilter()
+    expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
+  })
+
+  it('Should be able to use Last week filter', async () => {
+    const currentDate = new Date()
+    const day = String(currentDate.getDate())
+    const month = currentDate.toLocaleString('default', { month: 'long' })
+    const year = currentDate.getFullYear()
+    const lastWeekDate = new Date(new Date().setDate(currentDate.getDate() - 6))
+    const lastWeekDay = String(lastWeekDate.getDate())
+    const lastWeekMonth = lastWeekDate.toLocaleString('default', {
+      month: 'long'
+    })
+    const lastWeekYear = lastWeekDate.getFullYear()
+
+    const expectedReportPeriod = `${lastWeekDay} ${lastWeekMonth} ${lastWeekYear} at 00:00 to ${day} ${month} ${year} at `
+    await ReportingPage.lastWeekFilter()
+    expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
+  })
+
+  it('Should be able to use Last month filter', async () => {
+    const currentDate = new Date()
+    const day = String(currentDate.getDate())
+    const month = currentDate.toLocaleString('default', { month: 'long' })
+    const year = currentDate.getFullYear()
+    const lastMonthDate = new Date(
+      new Date().setDate(currentDate.getDate() - 29)
+    )
+    const lastMonthDay = String(lastMonthDate.getDate())
+    const lastMonthMonth = lastMonthDate.toLocaleString('default', {
+      month: 'long'
+    })
+    const lastMonthYear = lastMonthDate.getFullYear()
+
+    const expectedReportPeriod = `${lastMonthDay} ${lastMonthMonth} ${lastMonthYear} at 00:00 to ${day} ${month} ${year} at `
+    await ReportingPage.lastMonthFilter()
+    expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
   })
 
   it('Should be able to see all sections', async () => {
