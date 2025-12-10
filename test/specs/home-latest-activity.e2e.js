@@ -6,6 +6,12 @@ import SearchPage from 'page-objects/search.page.js'
 describe('Home and Latest Activity Page', () => {
   it('Should be on the "Home" page', async () => {
     await HomePage.open()
+
+    if (await SearchPage.sessionActive()) {
+      await SearchPage.signout()
+      await HomePage.open()
+    }
+
     await expect(browser).toHaveTitle(
       'Border Trade Matching Service - Border Trade Matching Service'
     )

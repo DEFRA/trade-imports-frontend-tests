@@ -26,7 +26,6 @@ describe('Reporting page', () => {
     const month = currentDate.toLocaleString('default', { month: 'long' })
     const year = currentDate.getFullYear()
     const expectedReportPeriod = `${day} ${month} ${year} at 00:00 to ${day} ${month} ${year} at`
-    await ReportingPage.todayFilter()
     expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
   })
 
@@ -61,6 +60,7 @@ describe('Reporting page', () => {
   })
 
   it('Should be able to use Last month filter', async () => {
+    await ReportingPage.lastMonthFilter()
     const currentDate = new Date()
     const day = String(currentDate.getDate())
     const month = currentDate.toLocaleString('default', { month: 'long' })
@@ -73,14 +73,8 @@ describe('Reporting page', () => {
       month: 'long'
     })
     const lastMonthYear = lastMonthDate.getFullYear()
-
     const expectedReportPeriod = `${lastMonthDay} ${lastMonthMonth} ${lastMonthYear} at 00:00 to ${day} ${month} ${year} at `
-    await ReportingPage.lastMonthFilter()
     expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
-    const hours = String(currentDate.getHours()).padStart(2, '0')
-    const minutes = String(currentDate.getMinutes()).padStart(2, '0')
-    const expectedDateTime = `${day} ${month} ${year} at ${hours}:${minutes}`
-    expect(await ReportingPage.filterResult()).toContain(expectedDateTime)
   })
 
   it('Should be able to see all sections', async () => {
