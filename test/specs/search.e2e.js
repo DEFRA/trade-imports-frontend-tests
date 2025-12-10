@@ -15,8 +15,14 @@ describe('Search page', () => {
   before(async () => {
     await sendCdsMessageFromFile('../data/search/cds.xml')
     await sendCdsMessageFromFile('../data/gmr/clearance-gmr.xml')
+    await sendCdsMessageFromFile(
+      '../data/CHED-PP/C085_check/clearance-request.xml'
+    )
     await sendIpaffMessageFromFile('../data/search/ipaff.json')
     await sendIpaffMessageFromFile('../data/gmr/ipaff-gmr.json')
+    await sendIpaffMessageFromFile('../data/CHED-PP/C085_check/9115-ched.json')
+    await sendIpaffMessageFromFile('../data/CHED-PP/C085_check/CO85-ched.json')
+    await sendIpaffMessageFromFile('../data/CHED-PP/C085_check/N851-ched.json')
     await sendGmrMessageFromFile('../data/gmr/gmr.json')
 
     await SearchPage.open() // Testing Redirection
@@ -52,15 +58,12 @@ describe('Search page', () => {
     expect(await SearchResultsPage.getResultText()).toContain(ducr)
   })
 
-  it('should be able search for a valid GMR via Search Page', async () => {
+  it('should be able to search for a valid GMR and check GMR headings', async () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(gmrId)
     expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
       `Showing result for\n${gmrId}`
     )
-  })
-
-  it('should display correct headings on the GMR results page', async () => {
     expect(await GmrSearchResultsPage.getPageTitle()).toBe(
       `Showing result for ${gmrId} - Border Trade Matching Service`
     )
@@ -73,7 +76,8 @@ describe('Search page', () => {
   })
 
   it('should display correct vehicle details for a valid GMR', async () => {
-    await GmrSearchResultsPage.open(gmrId)
+    await SearchPage.clickNavSearchLink()
+    await SearchPage.search(gmrId)
     expect(await GmrSearchResultsPage.getVehicleRegistrationNumber()).toBe(
       'DN05 VDB'
     )
@@ -105,10 +109,33 @@ describe('Search page', () => {
     })
   })
 
-  it('should navigate to the correct customs declaration when clicking a linked MRN', async () => {
-    await GmrSearchResultsPage.open(gmrId)
+  it('should navigate to the correct customs declaration when clicking a linked MRN from GMR page', async () => {
+    await SearchPage.clickNavSearchLink()
+    await SearchPage.search(gmrId)
     await GmrSearchResultsPage.clickFirstLinkedMrn()
     expect(await SearchResultsPage.getCdsStatus()).toContain(
+      'In progress - Awaiting IPAFFS'
+    )
+  })
+
+  it('Should be able to sarch for a Valid MRN and see CHED-PP Document References', async () => {
+    const mrn = '24GBBGBKCDMS965015'
+    await SearchPage.open()
+    await SearchPage.search(mrn)
+    expect(await SearchResultsPage.getResultText()).toContain(mrn)
+
+    const customDeclarationCheds = [
+      'CHEDPP.GB.2025.1050050',
+      'CHEDPP.GB.2025.1050051',
+      'CHEDPP.GB.2025.1050052'
+    ]
+    for (const ched of customDeclarationCheds) {
+      expect(
+        await CustomDeclarationPage.getAllText('24GBBGBKCDMS965015')
+      ).toContain(ched)
+    }
+
+    expect(await SearchResultsPage.getCdsStatus()).toBe(
       'In progress - Awaiting IPAFFS'
     )
   })
@@ -153,17 +180,19 @@ describe('Search page', () => {
     )
   })
 
-  it('should show error message saying valid GMR not found', async () => {
+  it('should see error message saying valid GMR not found', async () => {
     const invalidGmr = 'GMRA000000XX'
-    await GmrSearchResultsPage.open(invalidGmr)
+    await SearchPage.clickNavSearchLink()
+    await SearchPage.search(invalidGmr)
     expect(await SearchPage.getSearchErrorText()).toContain(
       `${invalidGmr} cannot be found`
     )
   })
 
-  it('should show error message GMR format is not valid', async () => {
+  it('should see error message GMR format is not valid', async () => {
     const invalidGmr = 'GMR1000000XX'
-    await GmrSearchResultsPage.open(invalidGmr)
+    await SearchPage.clickNavSearchLink()
+    await SearchPage.search(invalidGmr)
     expect(await SearchPage.getSearchErrorText()).toContain(
       `Enter an MRN, CHED, GMR or DUCR reference in the correct format`
     )
