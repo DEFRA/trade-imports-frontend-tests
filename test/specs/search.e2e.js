@@ -18,11 +18,15 @@ describe('Search page', () => {
     await sendCdsMessageFromFile(
       '../data/CHED-PP/C085_check/clearance-request.xml'
     )
+    await sendCdsMessageFromFile('../data/e03/e03.xml')
+
     await sendIpaffMessageFromFile('../data/search/ipaff.json')
     await sendIpaffMessageFromFile('../data/gmr/ipaff-gmr.json')
     await sendIpaffMessageFromFile('../data/CHED-PP/C085_check/9115-ched.json')
     await sendIpaffMessageFromFile('../data/CHED-PP/C085_check/CO85-ched.json')
     await sendIpaffMessageFromFile('../data/CHED-PP/C085_check/N851-ched.json')
+    await sendIpaffMessageFromFile('../data/e03/e03.json')
+
     await sendGmrMessageFromFile('../data/gmr/gmr.json')
 
     await SearchPage.open() // Testing Redirection
@@ -138,6 +142,18 @@ describe('Search page', () => {
     expect(await SearchResultsPage.getCdsStatus()).toBe(
       'In progress - Awaiting IPAFFS'
     )
+  })
+
+  it('Should assert on the CDS status for E03', async () => {
+    const mrn = '24GBBGBKCDMS704712'
+    await SearchPage.open()
+    await SearchPage.search(mrn)
+    expect(await SearchResultsPage.getCdsStatus()).toContain('In progress')
+    const allText = await SearchResultsPage.customDeclarationAllResultText()
+    const normalised = allText.replace(/\s+/g, ' ').trim()
+    const expectedSnippet =
+      'Data error - Unexpected data - transit, transhipment or specific warehouse'
+    expect(normalised).toContain(expectedSnippet)
   })
 
   it('Should see error message when results not found for MRN', async () => {
