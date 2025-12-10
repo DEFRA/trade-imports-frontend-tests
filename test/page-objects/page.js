@@ -6,7 +6,9 @@ class Page {
   }
 
   async open(path) {
-    return await browser.url(path)
+    const result = await browser.url(path)
+    await browser.takeScreenshot()
+    return result
   }
 
   async clickLink(element) {

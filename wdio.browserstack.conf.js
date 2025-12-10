@@ -15,7 +15,6 @@ export const config = {
   specs: ['./test/specs/**/*.js'],
   exclude: [],
   maxInstances: 3,
-  maxInstancesPerCapability: 1,
   commonCapabilities: {
     'bstack:options': {
       buildName: `trade-imports-frontend-tests-${process.env.ENVIRONMENT}`
