@@ -6,7 +6,19 @@ class ReportingPage extends Page {
   }
 
   get todayLink() {
-    return $('.btms-reporting-filters a')
+    return $('=Today')
+  }
+
+  get yesterdayLink() {
+    return $('=Yesterday')
+  }
+
+  get lastWeekLink() {
+    return $('=Last week')
+  }
+
+  get lastMonthLink() {
+    return $('=Last month')
   }
 
   get filterResultText() {
@@ -63,10 +75,6 @@ class ReportingPage extends Page {
 
   get totalTileChart() {
     return $('#charts-view .btms-tile .total ~ .govuk-heading-l')
-  }
-
-  get lastMonthLink() {
-    return $('=Last month')
   }
 
   // Releases tiles (Summary tab)
@@ -202,6 +210,14 @@ class ReportingPage extends Page {
 
   async todayFilter() {
     return await this.clickLink(this.todayLink)
+  }
+
+  async yesterdayFilter() {
+    return await this.clickLink(this.yesterdayLink)
+  }
+
+  async lastWeekFilter() {
+    return await this.clickLink(this.lastWeekLink)
   }
 
   async lastMonthFilter() {
