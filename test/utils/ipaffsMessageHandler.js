@@ -16,6 +16,7 @@ export async function sendIpaffMessageFromFile(relativePath) {
   const filePath = path.resolve(__dirname, relativePath)
   const fileContent = await readFile(filePath, 'utf-8')
   const json = JSON.parse(fileContent)
+  await new Promise((resolve) => setTimeout(resolve, 500))
   return await sendIpaffsMessage(json)
 }
 

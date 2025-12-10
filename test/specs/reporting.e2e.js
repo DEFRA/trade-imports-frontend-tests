@@ -19,14 +19,13 @@ describe('Reporting page', () => {
     )
   })
 
-  it('Should be able to use Today filter', async () => {
+  it('Shoult be able to use Todays filter', async () => {
+    await ReportingPage.todayFilter()
     const currentDate = new Date()
     const day = String(currentDate.getDate())
     const month = currentDate.toLocaleString('default', { month: 'long' })
     const year = currentDate.getFullYear()
-
     const expectedReportPeriod = `${day} ${month} ${year} at 00:00 to ${day} ${month} ${year} at`
-    await ReportingPage.todayFilter()
     expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
   })
 
@@ -61,6 +60,7 @@ describe('Reporting page', () => {
   })
 
   it('Should be able to use Last month filter', async () => {
+    await ReportingPage.lastMonthFilter()
     const currentDate = new Date()
     const day = String(currentDate.getDate())
     const month = currentDate.toLocaleString('default', { month: 'long' })
@@ -73,9 +73,7 @@ describe('Reporting page', () => {
       month: 'long'
     })
     const lastMonthYear = lastMonthDate.getFullYear()
-
     const expectedReportPeriod = `${lastMonthDay} ${lastMonthMonth} ${lastMonthYear} at 00:00 to ${day} ${month} ${year} at `
-    await ReportingPage.lastMonthFilter()
     expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
   })
 
