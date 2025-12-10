@@ -1,7 +1,6 @@
 import { expect } from '@wdio/globals'
 import HomePage from '../page-objects/home.page.js'
 import LatestActivityPage from '../page-objects/latest-activity.page.js'
-import LatestActivityPage from '../page-objects/latest-activity.page'
 import SearchPage from 'page-objects/search.page.js'
 
 describe('Home and Latest Activity Page', () => {

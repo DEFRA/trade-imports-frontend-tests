@@ -19,18 +19,12 @@ describe('Reporting page', () => {
     )
   })
 
-<<<<<<< HEAD
-  it('Should be able to use Today filter', async () => {
-=======
   it('Shoult be able to use Todays filter', async () => {
     await ReportingPage.todayFilter()
->>>>>>> CDMS-626: Possible fix for unstable reporting date test and merging search test with gmr search
     const currentDate = new Date()
     const day = String(currentDate.getDate())
     const month = currentDate.toLocaleString('default', { month: 'long' })
     const year = currentDate.getFullYear()
-<<<<<<< HEAD
-
     const expectedReportPeriod = `${day} ${month} ${year} at 00:00 to ${day} ${month} ${year} at`
     await ReportingPage.todayFilter()
     expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
@@ -83,12 +77,10 @@ describe('Reporting page', () => {
     const expectedReportPeriod = `${lastMonthDay} ${lastMonthMonth} ${lastMonthYear} at 00:00 to ${day} ${month} ${year} at `
     await ReportingPage.lastMonthFilter()
     expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
-=======
     const hours = String(currentDate.getHours()).padStart(2, '0')
     const minutes = String(currentDate.getMinutes()).padStart(2, '0')
     const expectedDateTime = `${day} ${month} ${year} at ${hours}:${minutes}`
     expect(await ReportingPage.filterResult()).toContain(expectedDateTime)
->>>>>>> CDMS-626: Possible fix for unstable reporting date test and merging search test with gmr search
   })
 
   it('Should be able to see all sections', async () => {
