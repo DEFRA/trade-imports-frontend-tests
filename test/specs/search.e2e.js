@@ -28,10 +28,12 @@ describe('Search page', () => {
     await sendIpaffMessageFromFile('../data/e03/e03.json')
 
     await sendGmrMessageFromFile('../data/gmr/gmr.json')
-
-    await SearchPage.open() // Testing Redirection
-    await HomePage.gatewayLogin()
-    await HomePage.loginRegisteredUser()
+    await HomePage.open()
+    if (!(await SearchPage.sessionActive())) {
+      await HomePage.login()
+      await HomePage.gatewayLogin()
+      await HomePage.loginRegisteredUser()
+    }
   })
 
   it('Should be able to sarch for a Valid MRN', async () => {
