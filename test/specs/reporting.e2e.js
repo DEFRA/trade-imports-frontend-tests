@@ -4,7 +4,7 @@ import ReportingPage from '../page-objects/reporting.page'
 import SearchPage from 'page-objects/search.page.js'
 
 describe('Reporting page', () => {
-  it('Should be on the "Reporting" page', async () => {
+  it('Should see the correct heading on the "Reporting" page', async () => {
     await HomePage.open()
 
     if (!(await SearchPage.sessionActive())) {
@@ -19,7 +19,7 @@ describe('Reporting page', () => {
     )
   })
 
-  it('Shoult be able to use Todays filter', async () => {
+  it('Should be able to use Todays filter and see time period updated', async () => {
     await ReportingPage.todayFilter()
     const currentDate = new Date()
     const day = String(currentDate.getDate())
@@ -29,7 +29,7 @@ describe('Reporting page', () => {
     expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
   })
 
-  it('Should be able to use Yesterday filter', async () => {
+  it('Should be able to use Yesterday filter and see time period updated', async () => {
     const yesterdayDate = new Date(new Date().setDate(new Date().getDate() - 1))
     const yesterdayDay = String(yesterdayDate.getDate())
     const yesterdayMonth = yesterdayDate.toLocaleString('default', {
@@ -42,7 +42,7 @@ describe('Reporting page', () => {
     expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
   })
 
-  it('Should be able to use Last week filter', async () => {
+  it('Should be able to use Last week filter and see time period updated', async () => {
     const currentDate = new Date()
     const day = String(currentDate.getDate())
     const month = currentDate.toLocaleString('default', { month: 'long' })
@@ -59,7 +59,7 @@ describe('Reporting page', () => {
     expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
   })
 
-  it('Should be able to use Last month filter', async () => {
+  it('Should be able to use Last month filter and see time period updated', async () => {
     await ReportingPage.lastMonthFilter()
     const currentDate = new Date()
     const day = String(currentDate.getDate())
@@ -77,24 +77,23 @@ describe('Reporting page', () => {
     expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
   })
 
-  it('Should be able to see all sections', async () => {
+  it('Should be able to see all Summary sections under Summary tab', async () => {
+    await ReportingPage.openSummaryTab()
     expect(await ReportingPage.matchesSectionIsVisible()).toBe(true)
     expect(await ReportingPage.releasesSectionIsVisible()).toBe(true)
     expect(await ReportingPage.clearanceRequestSectionIsVisible()).toBe(true)
     expect(await ReportingPage.notificationSectionIsVisible()).toBe(true)
   })
 
-  it('should display chart view and matches chart', async () => {
+  it('Should be able to see all Charts sections under Chart tab', async () => {
     await ReportingPage.openChartTab()
     expect(await ReportingPage.matchesChartIsVisible()).toBe(true)
+    expect(await ReportingPage.releasesChartIsVisible()).toBe(true)
+    expect(await ReportingPage.clearancesChartIsVisible()).toBe(true)
+    expect(await ReportingPage.notificationsChartIsVisible()).toBe(true)
   })
 
-  it('should open summary tab and see matches section', async () => {
-    await ReportingPage.openSummaryTab()
-    expect(await ReportingPage.matchesSectionIsVisible()).toBe(true)
-  })
-
-  it('should have the same matches, no matches, and total numbers on summary and chart tabs', async () => {
+  it('should see the same Matches, No Matches, and Total Matches for both Summary and Chart tabs', async () => {
     // Apply the last month filter before running the comparison
     await ReportingPage.lastMonthFilter()
 
@@ -111,12 +110,12 @@ describe('Reporting page', () => {
     const chartTotal = await ReportingPage.getChartTotal()
 
     // Compare values
-    expect(chartMatches).toEqual(summaryMatches)
-    expect(chartNoMatches).toEqual(summaryNoMatches)
-    expect(chartTotal).toEqual(summaryTotal)
+    expect(summaryMatches).toEqual(chartMatches)
+    expect(summaryNoMatches).toEqual(chartNoMatches)
+    expect(summaryTotal).toEqual(chartTotal)
   })
 
-  it('should have the same releases numbers on summary and chart tabs', async () => {
+  it('should see the same Automatic, Manual, and Total Releases for the Summary and Chart tabs', async () => {
     await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()
     const summaryAuto = await ReportingPage.getReleasesAutoSummaryValue()
@@ -128,12 +127,12 @@ describe('Reporting page', () => {
     const chartManual = await ReportingPage.getReleasesManualChartValue()
     const chartTotal = await ReportingPage.getReleasesTotalChartValue()
 
-    expect(chartAuto).toEqual(summaryAuto)
-    expect(chartManual).toEqual(summaryManual)
-    expect(chartTotal).toEqual(summaryTotal)
+    expect(summaryAuto).toEqual(chartAuto)
+    expect(summaryManual).toEqual(chartManual)
+    expect(summaryTotal).toEqual(chartTotal)
   })
 
-  it('should have the same unique clearance request numbers on summary and chart tabs', async () => {
+  it('should see the same Unique Clearance and Total Clearance for the Summary and Chart tabs', async () => {
     await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()
     const summaryUnique = await ReportingPage.getUniqueClearancesSummaryValue()
@@ -144,11 +143,11 @@ describe('Reporting page', () => {
     const chartUnique = await ReportingPage.getUniqueClearancesChartValue()
     const chartTotal = await ReportingPage.getUniqueClearancesTotalChartValue()
 
-    expect(chartUnique).toEqual(summaryUnique)
-    expect(chartTotal).toEqual(summaryTotal)
+    expect(summaryUnique).toEqual(chartUnique)
+    expect(summaryTotal).toEqual(chartTotal)
   })
 
-  it('should have the same CHED type numbers on summary and chart tabs', async () => {
+  it('should see the same CHED-A, CHED-P, CHED-PP, CHED-D and Total CHEDS for the Summary and Chart tabs', async () => {
     await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()
     const summaryA = await ReportingPage.getChedASummaryValue()
@@ -164,10 +163,10 @@ describe('Reporting page', () => {
     const chartD = await ReportingPage.getChedDChartValue()
     const chartTotal = await ReportingPage.getChedTotalChartValue()
 
-    expect(chartA).toEqual(summaryA)
-    expect(chartP).toEqual(summaryP)
-    expect(chartPP).toEqual(summaryPP)
-    expect(chartD).toEqual(summaryD)
-    expect(chartTotal).toEqual(summaryTotal)
+    expect(summaryA).toEqual(chartA)
+    expect(summaryP).toEqual(chartP)
+    expect(summaryPP).toEqual(chartPP)
+    expect(summaryD).toEqual(chartD)
+    expect(summaryTotal).toEqual(chartTotal)
   })
 })

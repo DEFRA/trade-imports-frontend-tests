@@ -53,6 +53,18 @@ class ReportingPage extends Page {
     return $('#matches-charts-heading')
   }
 
+  get releasesChartHeading() {
+    return $('#releases-charts-heading')
+  }
+
+  get clearancesChartHeading() {
+    return $('#clearanceRequests-charts-heading')
+  }
+
+  get notificationsChartHeading() {
+    return $('#notifications-charts-heading')
+  }
+
   get matchesTileSummary() {
     return $('.btms-tile .key.match ~ .govuk-heading-l')
   }
@@ -254,6 +266,18 @@ class ReportingPage extends Page {
 
   async matchesChartIsVisible() {
     return await this.elementIsDisplayed(this.matchesChartHeading)
+  }
+
+  async releasesChartIsVisible() {
+    return await this.elementIsDisplayed(this.releasesChartHeading)
+  }
+
+  async clearancesChartIsVisible() {
+    return await this.elementIsDisplayed(this.clearancesChartHeading)
+  }
+
+  async notificationsChartIsVisible() {
+    return await this.elementIsDisplayed(this.notificationsChartHeading)
   }
 
   async getSummaryMatches() {
