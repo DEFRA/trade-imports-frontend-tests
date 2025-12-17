@@ -170,6 +170,18 @@ class ReportingPage extends Page {
     )
   }
 
+  get releasesAutoSummaryPercentage() {
+    return $(
+      'section[aria-labelledby="releases-summary-heading"] .btms-tile .key.automatic ~ .btms-percentage'
+    )
+  }
+
+  get releasesManualSummaryPercentage() {
+    return $(
+      'section[aria-labelledby="releases-summary-heading"] .btms-tile .key.manual ~ .btms-percentage'
+    )
+  }
+
   get releasesTotalSummary() {
     return $(
       'section[aria-labelledby="releases-summary-heading"] .btms-tile .total ~ .govuk-heading-l'
@@ -204,6 +216,18 @@ class ReportingPage extends Page {
   get releasesManualChart() {
     return $(
       '#charts-view section[aria-labelledby="releases-charts-heading"] .btms-tile .key.manual ~ .govuk-heading-l'
+    )
+  }
+
+  get releasesAutoChartPercentage() {
+    return $(
+      '#charts-view section[aria-labelledby="releases-charts-heading"] .btms-tile .key.automatic ~ .btms-percentage'
+    )
+  }
+
+  get releasesManualChartPercentage() {
+    return $(
+      '#charts-view section[aria-labelledby="releases-charts-heading"] .btms-tile .key.manual ~ .btms-percentage'
     )
   }
 
@@ -529,6 +553,16 @@ class ReportingPage extends Page {
     return Number(await this.releasesManualSummary.getText())
   }
 
+  async getReleasesAutoSummaryPercentageValue() {
+    const text = await this.getTextFrom(this.releasesAutoSummaryPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
+  }
+
+  async getReleasesManualSummaryPercentageValue() {
+    const text = await this.getTextFrom(this.releasesManualSummaryPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
+  }
+
   async getReleasesTotalSummaryValue() {
     return Number(await this.releasesTotalSummary.getText())
   }
@@ -551,6 +585,16 @@ class ReportingPage extends Page {
 
   async getReleasesManualChartValue() {
     return Number(await this.releasesManualChart.getText())
+  }
+
+  async getReleasesAutoChartPercentageValue() {
+    const text = await this.getTextFrom(this.releasesAutoChartPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
+  }
+
+  async getReleasesManualChartPercentageValue() {
+    const text = await this.getTextFrom(this.releasesManualChartPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
   }
 
   async getReleasesTotalChartValue() {

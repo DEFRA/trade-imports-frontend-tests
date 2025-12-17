@@ -148,6 +148,24 @@ describe('Reporting page', () => {
     expect(summaryTotal).toEqual(chartTotal)
   })
 
+  it('should show the same Automatic and Manual release percentages on Summary and Chart tabs', async () => {
+    await ReportingPage.lastMonthFilter()
+    await ReportingPage.openSummaryTab()
+    const summaryAutoPct =
+      await ReportingPage.getReleasesAutoSummaryPercentageValue()
+    const summaryManualPct =
+      await ReportingPage.getReleasesManualSummaryPercentageValue()
+
+    await ReportingPage.openChartTab()
+    const chartAutoPct =
+      await ReportingPage.getReleasesAutoChartPercentageValue()
+    const chartManualPct =
+      await ReportingPage.getReleasesManualChartPercentageValue()
+
+    expect(summaryAutoPct).toEqual(chartAutoPct)
+    expect(summaryManualPct).toEqual(chartManualPct)
+  })
+
   it('should see the same Unique Clearance and Total Clearance for the Summary and Chart tabs', async () => {
     await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()
