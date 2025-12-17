@@ -5,6 +5,7 @@ class ReportingPage extends Page {
     return $('a.govuk-service-navigation__link[href="/reporting"]')
   }
 
+  // Filter links
   get todayLink() {
     return $('=Today')
   }
@@ -25,6 +26,16 @@ class ReportingPage extends Page {
     return $('.govuk-grid-column-three-quarters .govuk-heading-s')
   }
 
+  // Tabs
+  get summaryTab() {
+    return $('#tab_summary-view')
+  }
+
+  get chartTab() {
+    return $('#tab_charts-view')
+  }
+
+  // Summary Tab Sections
   get matches() {
     return $('section[aria-labelledby="matches-summary-heading"]')
   }
@@ -41,14 +52,7 @@ class ReportingPage extends Page {
     return $('section[aria-labelledby="notifications-summary-heading"]')
   }
 
-  get summaryTab() {
-    return $('#tab_summary-view')
-  }
-
-  get chartTab() {
-    return $('#tab_charts-view')
-  }
-
+  // Chart Tab Headings
   get matchesChartHeading() {
     return $('#matches-charts-heading')
   }
@@ -65,6 +69,19 @@ class ReportingPage extends Page {
     return $('#notifications-charts-heading')
   }
 
+  // Matches tiles (Summary tab)
+  get matchesTileHeading() {
+    return $('.btms-tile .match')
+  }
+
+  get noMatchesTileHeading() {
+    return $('.btms-tile .nomatch')
+  }
+
+  get totalTileHeading() {
+    return $('.btms-tile .total')
+  }
+
   get matchesTileSummary() {
     return $('.btms-tile .key.match ~ .govuk-heading-l')
   }
@@ -75,6 +92,19 @@ class ReportingPage extends Page {
 
   get totalTileSummary() {
     return $('.btms-tile .total ~ .govuk-heading-l')
+  }
+
+  // Matches tiles (Chart tab)
+  get matchesTileChartHeading() {
+    return $('#charts-view .btms-tile .key.match')
+  }
+
+  get noMatchesTileChartHeading() {
+    return $('#charts-view .btms-tile .key.nomatch')
+  }
+
+  get totalTileChartHeading() {
+    return $('#charts-view .btms-tile .total')
   }
 
   get matchesTileChart() {
@@ -90,6 +120,24 @@ class ReportingPage extends Page {
   }
 
   // Releases tiles (Summary tab)
+  get releasesAutoHeading() {
+    return $(
+      'section[aria-labelledby="releases-summary-heading"] .btms-tile .key.automatic'
+    )
+  }
+
+  get releasesManualHeading() {
+    return $(
+      'section[aria-labelledby="releases-summary-heading"] .btms-tile .key.manual'
+    )
+  }
+
+  get releasesTotalHeading() {
+    return $(
+      'section[aria-labelledby="releases-summary-heading"] .btms-tile .total'
+    )
+  }
+
   get releasesAutoSummary() {
     return $(
       'section[aria-labelledby="releases-summary-heading"] .btms-tile .key.automatic ~ .govuk-heading-l'
@@ -109,6 +157,24 @@ class ReportingPage extends Page {
   }
 
   // Releases tiles (Chart tab)
+  get releasesAutoChartHeading() {
+    return $(
+      '#charts-view section[aria-labelledby="releases-charts-heading"] .btms-tile .key.automatic'
+    )
+  }
+
+  get releasesManualChartHeading() {
+    return $(
+      '#charts-view section[aria-labelledby="releases-charts-heading"] .btms-tile .key.manual'
+    )
+  }
+
+  get releasesTotalChartHeading() {
+    return $(
+      '#charts-view section[aria-labelledby="releases-charts-heading"] .btms-tile .total'
+    )
+  }
+
   get releasesAutoChart() {
     return $(
       '#charts-view section[aria-labelledby="releases-charts-heading"] .btms-tile .key.automatic ~ .govuk-heading-l'
@@ -140,7 +206,31 @@ class ReportingPage extends Page {
     )
   }
 
+  get uniqueClearancesHeading() {
+    return $(
+      'section[aria-labelledby="clearanceRequests-summary-heading"] .btms-tile .key.unique'
+    )
+  }
+
+  get uniqueClearancesTotalHeading() {
+    return $(
+      'section[aria-labelledby="clearanceRequests-summary-heading"] .btms-tile .total'
+    )
+  }
+
   // Unique clearance tiles (Chart tab)
+  get uniqueClearancesChartHeading() {
+    return $(
+      '#charts-view section[aria-labelledby="clearanceRequests-charts-heading"] .btms-tile .key.unique'
+    )
+  }
+
+  get uniqueClearancesTotalChartHeading() {
+    return $(
+      '#charts-view section[aria-labelledby="clearanceRequests-charts-heading"] .btms-tile .total'
+    )
+  }
+
   get uniqueClearancesChart() {
     return $(
       '#charts-view section[aria-labelledby="clearanceRequests-charts-heading"] .btms-tile .key.unique ~ .govuk-heading-l'
@@ -184,7 +274,67 @@ class ReportingPage extends Page {
     )
   }
 
+  get chedAHeading() {
+    return $(
+      'section[aria-labelledby="notifications-summary-heading"] .btms-tile .key.cheda'
+    )
+  }
+
+  get chedPHeading() {
+    return $(
+      'section[aria-labelledby="notifications-summary-heading"] .btms-tile .key.chedp'
+    )
+  }
+
+  get chedPPHeading() {
+    return $(
+      'section[aria-labelledby="notifications-summary-heading"] .btms-tile .key.chedpp'
+    )
+  }
+
+  get chedDHeading() {
+    return $(
+      'section[aria-labelledby="notifications-summary-heading"] .btms-tile .key.chedd'
+    )
+  }
+
+  get chedTotalHeading() {
+    return $(
+      'section[aria-labelledby="notifications-summary-heading"] .btms-tile .total'
+    )
+  }
+
   // CHED notifications tiles (Chart tab)
+  get chedAChartHeading() {
+    return $(
+      '#charts-view section[aria-labelledby="notifications-charts-heading"] .btms-tile .key.cheda'
+    )
+  }
+
+  get chedPChartHeading() {
+    return $(
+      '#charts-view section[aria-labelledby="notifications-charts-heading"] .btms-tile .key.chedp'
+    )
+  }
+
+  get chedPPChartHeading() {
+    return $(
+      '#charts-view section[aria-labelledby="notifications-charts-heading"] .btms-tile .key.chedpp'
+    )
+  }
+
+  get chedDChartHeading() {
+    return $(
+      '#charts-view section[aria-labelledby="notifications-charts-heading"] .btms-tile .key.chedd'
+    )
+  }
+
+  get chedTotalChartHeading() {
+    return $(
+      '#charts-view section[aria-labelledby="notifications-charts-heading"] .btms-tile .total'
+    )
+  }
+
   get chedAChart() {
     return $(
       '#charts-view section[aria-labelledby="notifications-charts-heading"] .btms-tile .key.cheda ~ .govuk-heading-l'
@@ -215,7 +365,6 @@ class ReportingPage extends Page {
     )
   }
 
-  // --- Async methods ---
   open() {
     return super.open('/reporting')
   }
@@ -292,6 +441,18 @@ class ReportingPage extends Page {
     return Number(await this.totalTileSummary.getText())
   }
 
+  async getSummaryMatchesHeading() {
+    return Number(await this.matchesTileHeading.getText())
+  }
+
+  async getSummaryNoMatchesHeading() {
+    return Number(await this.noMatchesTileHeading.getText())
+  }
+
+  async getSummaryTotalHeading() {
+    return Number(await this.totalTileHeading.getText())
+  }
+
   async getChartMatches() {
     return Number(await this.matchesTileChart.getText())
   }
@@ -302,6 +463,18 @@ class ReportingPage extends Page {
 
   async getChartTotal() {
     return Number(await this.totalTileChart.getText())
+  }
+
+  async getChartMatchesHeading() {
+    return Number(await this.matchesTileChartHeading.getText())
+  }
+
+  async getChartNoMatchesHeading() {
+    return Number(await this.noMatchesTileChartHeading.getText())
+  }
+
+  async getChartTotalHeading() {
+    return Number(await this.totalTileChartHeading.getText())
   }
 
   async getReleasesAutoSummaryValue() {
@@ -316,6 +489,18 @@ class ReportingPage extends Page {
     return Number(await this.releasesTotalSummary.getText())
   }
 
+  async getReleasesAutoSummaryHeading() {
+    return Number(await this.releasesAutoHeading.getText())
+  }
+
+  async getReleasesManualSummaryHeading() {
+    return Number(await this.releasesManualHeading.getText())
+  }
+
+  async getReleasesTotalSummaryHeading() {
+    return Number(await this.releasesTotalHeading.getText())
+  }
+
   async getReleasesAutoChartValue() {
     return Number(await this.releasesAutoChart.getText())
   }
@@ -328,6 +513,18 @@ class ReportingPage extends Page {
     return Number(await this.releasesTotalChart.getText())
   }
 
+  async getReleasesAutoChartHeading() {
+    return Number(await this.releasesAutoChartHeading.getText())
+  }
+
+  async getReleasesManualChartHeading() {
+    return Number(await this.releasesManualChartHeading.getText())
+  }
+
+  async getReleasesTotalChartHeading() {
+    return Number(await this.releasesTotalChartHeading.getText())
+  }
+
   async getUniqueClearancesSummaryValue() {
     return Number(await this.uniqueClearancesSummary.getText())
   }
@@ -336,12 +533,28 @@ class ReportingPage extends Page {
     return Number(await this.uniqueClearancesTotalSummary.getText())
   }
 
+  async getUniqueClearancesSummaryHeading() {
+    return Number(await this.uniqueClearancesHeading.getText())
+  }
+
+  async getUniqueClearancesTotalSummaryHeading() {
+    return Number(await this.uniqueClearancesTotalHeading.getText())
+  }
+
   async getUniqueClearancesChartValue() {
     return Number(await this.uniqueClearancesChart.getText())
   }
 
   async getUniqueClearancesTotalChartValue() {
     return Number(await this.uniqueClearancesTotalChart.getText())
+  }
+
+  async getUniqueClearancesChartHeading() {
+    return Number(await this.uniqueClearancesChartHeading.getText())
+  }
+
+  async getUniqueClearancesTotalChartHeading() {
+    return Number(await this.uniqueClearancesTotalChartHeading.getText())
   }
 
   async getChedASummaryValue() {
@@ -364,6 +577,26 @@ class ReportingPage extends Page {
     return Number(await this.chedTotalSummary.getText())
   }
 
+  async getChedAHeading() {
+    return Number(await this.chedAHeading.getText())
+  }
+
+  async getChedPHeading() {
+    return Number(await this.chedPHeading.getText())
+  }
+
+  async getChedPPHeading() {
+    return Number(await this.chedPPHeading.getText())
+  }
+
+  async getChedDHeading() {
+    return Number(await this.chedDHeading.getText())
+  }
+
+  async getChedTotalHeading() {
+    return Number(await this.chedTotalHeading.getText())
+  }
+
   async getChedAChartValue() {
     return Number(await this.chedAChart.getText())
   }
@@ -382,6 +615,26 @@ class ReportingPage extends Page {
 
   async getChedTotalChartValue() {
     return Number(await this.chedTotalChart.getText())
+  }
+
+  async getChedAChartHeading() {
+    return Number(await this.chedAChartHeading.getText())
+  }
+
+  async getChedPChartHeading() {
+    return Number(await this.chedPChartHeading.getText())
+  }
+
+  async getChedPPChartHeading() {
+    return Number(await this.chedPPChartHeading.getText())
+  }
+
+  async getChedDChartHeading() {
+    return Number(await this.chedDChartHeading.getText())
+  }
+
+  async getChedTotalChartHeading() {
+    return Number(await this.chedTotalChartHeading.getText())
   }
 
   async clickNavReportingLink() {

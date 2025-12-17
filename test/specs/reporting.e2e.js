@@ -169,4 +169,94 @@ describe('Reporting page', () => {
     expect(summaryD).toEqual(chartD)
     expect(summaryTotal).toEqual(chartTotal)
   })
+
+  it('Should see all headings matching between Summary and Chart tabs', async () => {
+    await ReportingPage.openSummaryTab()
+    const summaryTabMatchesHeading =
+      await ReportingPage.getSummaryMatchesHeading()
+    const summaryTabNoMatchesHeading =
+      await ReportingPage.getSummaryNoMatchesHeading()
+    const summaryTabTotalHeading = await ReportingPage.getSummaryTotalHeading()
+
+    const summaryTabAutoReleaseHeading =
+      await ReportingPage.getReleasesAutoSummaryHeading()
+    const summaryTabManualReleaseHeading =
+      await ReportingPage.getReleasesManualSummaryHeading()
+    const summaryTabTotalReleaseHeading =
+      await ReportingPage.getReleasesTotalSummaryHeading()
+
+    const summaryTabUniqueClearancesHeading =
+      await ReportingPage.getUniqueClearancesSummaryHeading()
+    const summaryTabUniqueClearancesTotalHeading =
+      await ReportingPage.getUniqueClearancesTotalSummaryHeading()
+
+    const summaryTabChedAHeading = await ReportingPage.getChedAHeading()
+    const summaryTabChedPHeading = await ReportingPage.getChedPHeading()
+    const summaryTabChedPPHeading = await ReportingPage.getChedPPHeading()
+    const summaryTabChedDHeading = await ReportingPage.getChedDHeading()
+    const summaryTabChedTotalHeading = await ReportingPage.getChedTotalHeading()
+
+    await ReportingPage.openChartTab()
+    const chartTabMatchesHeading = await ReportingPage.getChartMatchesHeading()
+    const chartTabNoMatchesHeading =
+      await ReportingPage.getChartNoMatchesHeading()
+    const chartTabTotalHeading = await ReportingPage.getChartTotalHeading()
+
+    const chartTabAutoReleaseHeading =
+      await ReportingPage.getReleasesAutoChartHeading()
+    const chartTabManualReleaseHeading =
+      await ReportingPage.getReleasesManualChartHeading()
+    const chartTabTotalReleaseHeading =
+      await ReportingPage.getReleasesTotalChartHeading()
+
+    const chartTabUniqueClearancesHeading =
+      await ReportingPage.getUniqueClearancesChartHeading()
+    const chartTabUniqueClearancesTotalHeading =
+      await ReportingPage.getUniqueClearancesTotalChartHeading()
+
+    const chartTabChedAHeading = await ReportingPage.getChedAChartHeading()
+    const chartTabChedPHeading = await ReportingPage.getChedPChartHeading()
+    const chartTabChedPPHeading = await ReportingPage.getChedPPChartHeading()
+    const chartTabChedDHeading = await ReportingPage.getChedDChartHeading()
+    const chartTabChedTotalHeading =
+      await ReportingPage.getChedTotalChartHeading()
+
+    expect(summaryTabMatchesHeading).toEqual('Matches')
+    expect(summaryTabNoMatchesHeading).toEqual('No matches')
+    expect(summaryTabTotalHeading).toEqual('Total')
+
+    expect(summaryTabAutoReleaseHeading).toEqual('Automatic')
+    expect(summaryTabManualReleaseHeading).toEqual('Manual')
+    expect(summaryTabTotalReleaseHeading).toEqual('Total')
+
+    expect(summaryTabUniqueClearancesHeading).toEqual('Unique clearances')
+    expect(summaryTabUniqueClearancesTotalHeading).toEqual('Total')
+
+    expect(summaryTabChedAHeading).toEqual('CHED A')
+    expect(summaryTabChedPHeading).toEqual('CHED P')
+    expect(summaryTabChedPPHeading).toEqual('CHED PP')
+    expect(summaryTabChedDHeading).toEqual('CHED D')
+    expect(summaryTabChedTotalHeading).toEqual('Total')
+
+    expect(summaryTabMatchesHeading).toEqual(chartTabMatchesHeading)
+    expect(summaryTabNoMatchesHeading).toEqual(chartTabNoMatchesHeading)
+    expect(summaryTabTotalHeading).toEqual(chartTabTotalHeading)
+
+    expect(summaryTabAutoReleaseHeading).toEqual(chartTabAutoReleaseHeading)
+    expect(summaryTabManualReleaseHeading).toEqual(chartTabManualReleaseHeading)
+    expect(summaryTabTotalReleaseHeading).toEqual(chartTabTotalReleaseHeading)
+
+    expect(summaryTabUniqueClearancesHeading).toEqual(
+      chartTabUniqueClearancesHeading
+    )
+    expect(summaryTabUniqueClearancesTotalHeading).toEqual(
+      chartTabUniqueClearancesTotalHeading
+    )
+
+    expect(summaryTabChedAHeading).toEqual(chartTabChedAHeading)
+    expect(summaryTabChedPHeading).toEqual(chartTabChedPHeading)
+    expect(summaryTabChedPPHeading).toEqual(chartTabChedPPHeading)
+    expect(summaryTabChedDHeading).toEqual(chartTabChedDHeading)
+    expect(summaryTabChedTotalHeading).toEqual(chartTabChedTotalHeading)
+  })
 })
