@@ -115,6 +115,22 @@ describe('Reporting page', () => {
     expect(summaryTotal).toEqual(chartTotal)
   })
 
+  it('should show the same Matches and No matches percentages on Summary and Chart tabs', async () => {
+    await ReportingPage.lastMonthFilter()
+
+    await ReportingPage.openSummaryTab()
+    const summaryMatchesPct = await ReportingPage.getSummaryMatchesPercentage()
+    const summaryNoMatchesPct =
+      await ReportingPage.getSummaryNoMatchesPercentage()
+
+    await ReportingPage.openChartTab()
+    const chartMatchesPct = await ReportingPage.getChartMatchesPercentage()
+    const chartNoMatchesPct = await ReportingPage.getChartNoMatchesPercentage()
+
+    expect(summaryMatchesPct).toEqual(chartMatchesPct)
+    expect(summaryNoMatchesPct).toEqual(chartNoMatchesPct)
+  })
+
   it('should see the same Automatic, Manual, and Total Releases for the Summary and Chart tabs', async () => {
     await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()

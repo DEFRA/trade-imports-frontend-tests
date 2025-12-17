@@ -86,8 +86,18 @@ class ReportingPage extends Page {
     return $('.btms-tile .key.match ~ .govuk-heading-l')
   }
 
+  get matchesTilePercentage() {
+    return $(
+      'section[aria-labelledby="matches-summary-heading"] .btms-tile .btms-percentage'
+    )
+  }
+
   get noMatchesTileSummary() {
     return $('.btms-tile .key.nomatch ~ .govuk-heading-l')
+  }
+
+  get noMatchesTilePercentage() {
+    return $('.btms-tile .key.nomatch ~ .btms-percentage')
   }
 
   get totalTileSummary() {
@@ -111,8 +121,18 @@ class ReportingPage extends Page {
     return $('#charts-view .btms-tile .key.match ~ .govuk-heading-l')
   }
 
+  get matchesTileChartPercentage() {
+    return $(
+      '#charts-view section[aria-labelledby="matches-charts-heading"] .btms-tile .btms-percentage'
+    )
+  }
+
   get noMatchesTileChart() {
     return $('#charts-view .btms-tile .key.nomatch ~ .govuk-heading-l')
+  }
+
+  get noMatchesTileChartPercentage() {
+    return $('#charts-view .btms-tile .key.nomatch ~ .btms-percentage')
   }
 
   get totalTileChart() {
@@ -433,8 +453,20 @@ class ReportingPage extends Page {
     return Number(await this.matchesTileSummary.getText())
   }
 
+  async getSummaryMatchesPercentage() {
+    const text = await this.getTextFrom(this.matchesTilePercentage)
+    const numeric = parseFloat(text.replace(/[^0-9.]/g, ''))
+    return numeric
+  }
+
   async getSummaryNoMatches() {
     return Number(await this.noMatchesTileSummary.getText())
+  }
+
+  async getSummaryNoMatchesPercentage() {
+    const text = await this.getTextFrom(this.noMatchesTilePercentage)
+    const numeric = parseFloat(text.replace(/[^0-9.]/g, ''))
+    return numeric
   }
 
   async getSummaryTotal() {
@@ -457,8 +489,20 @@ class ReportingPage extends Page {
     return Number(await this.matchesTileChart.getText())
   }
 
+  async getChartMatchesPercentage() {
+    const text = await this.getTextFrom(this.matchesTileChartPercentage)
+    const numeric = parseFloat(text.replace(/[^0-9.]/g, ''))
+    return numeric
+  }
+
   async getChartNoMatches() {
     return Number(await this.noMatchesTileChart.getText())
+  }
+
+  async getChartNoMatchesPercentage() {
+    const text = await this.getTextFrom(this.noMatchesTileChartPercentage)
+    const numeric = parseFloat(text.replace(/[^0-9.]/g, ''))
+    return numeric
   }
 
   async getChartTotal() {
