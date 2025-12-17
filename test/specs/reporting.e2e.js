@@ -181,6 +181,19 @@ describe('Reporting page', () => {
     expect(summaryTotal).toEqual(chartTotal)
   })
 
+  it('should show the same Unique clearances percentage on Summary and Chart tabs', async () => {
+    await ReportingPage.lastMonthFilter()
+    await ReportingPage.openSummaryTab()
+    const summaryUniquePct =
+      await ReportingPage.getUniqueClearancesSummaryPercentageValue()
+
+    await ReportingPage.openChartTab()
+    const chartUniquePct =
+      await ReportingPage.getUniqueClearancesChartPercentageValue()
+
+    expect(summaryUniquePct).toEqual(chartUniquePct)
+  })
+
   it('should see the same CHED-A, CHED-P, CHED-PP, CHED-D and Total CHEDS for the Summary and Chart tabs', async () => {
     await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()
@@ -202,6 +215,26 @@ describe('Reporting page', () => {
     expect(summaryPP).toEqual(chartPP)
     expect(summaryD).toEqual(chartD)
     expect(summaryTotal).toEqual(chartTotal)
+  })
+
+  it('should show the same CHED A/P/PP/D percentages on Summary and Chart tabs', async () => {
+    await ReportingPage.lastMonthFilter()
+    await ReportingPage.openSummaryTab()
+    const summaryAPct = await ReportingPage.getChedASummaryPercentageValue()
+    const summaryPPct = await ReportingPage.getChedPSummaryPercentageValue()
+    const summaryPPPct = await ReportingPage.getChedPPSummaryPercentageValue()
+    const summaryDPct = await ReportingPage.getChedDSummaryPercentageValue()
+
+    await ReportingPage.openChartTab()
+    const chartAPct = await ReportingPage.getChedAChartPercentageValue()
+    const chartPPct = await ReportingPage.getChedPChartPercentageValue()
+    const chartPPPct = await ReportingPage.getChedPPChartPercentageValue()
+    const chartDPct = await ReportingPage.getChedDChartPercentageValue()
+
+    expect(summaryAPct).toEqual(chartAPct)
+    expect(summaryPPct).toEqual(chartPPct)
+    expect(summaryPPPct).toEqual(chartPPPct)
+    expect(summaryDPct).toEqual(chartDPct)
   })
 
   it('Should see all headings matching between Summary and Chart tabs', async () => {

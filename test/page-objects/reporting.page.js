@@ -244,6 +244,12 @@ class ReportingPage extends Page {
     )
   }
 
+  get uniqueClearancesSummaryPercentage() {
+    return $(
+      'section[aria-labelledby="clearanceRequests-summary-heading"] .btms-tile .key.unique ~ .btms-percentage'
+    )
+  }
+
   get uniqueClearancesTotalSummary() {
     return $(
       'section[aria-labelledby="clearanceRequests-summary-heading"] .btms-tile .total ~ .govuk-heading-l'
@@ -281,6 +287,12 @@ class ReportingPage extends Page {
     )
   }
 
+  get uniqueClearancesChartPercentage() {
+    return $(
+      '#charts-view section[aria-labelledby="clearanceRequests-charts-heading"] .btms-tile .key.unique ~ .btms-percentage'
+    )
+  }
+
   get uniqueClearancesTotalChart() {
     return $(
       '#charts-view section[aria-labelledby="clearanceRequests-charts-heading"] .btms-tile .total ~ .govuk-heading-l'
@@ -294,9 +306,21 @@ class ReportingPage extends Page {
     )
   }
 
+  get chedASummaryPercentage() {
+    return $(
+      'section[aria-labelledby="notifications-summary-heading"] .btms-tile .key.cheda ~ .btms-percentage'
+    )
+  }
+
   get chedPSummary() {
     return $(
       'section[aria-labelledby="notifications-summary-heading"] .btms-tile .key.chedp ~ .govuk-heading-l'
+    )
+  }
+
+  get chedPSummaryPercentage() {
+    return $(
+      'section[aria-labelledby="notifications-summary-heading"] .btms-tile .key.chedp ~ .btms-percentage'
     )
   }
 
@@ -306,9 +330,21 @@ class ReportingPage extends Page {
     )
   }
 
+  get chedPPSummaryPercentage() {
+    return $(
+      'section[aria-labelledby="notifications-summary-heading"] .btms-tile .key.chedpp ~ .btms-percentage'
+    )
+  }
+
   get chedDSummary() {
     return $(
       'section[aria-labelledby="notifications-summary-heading"] .btms-tile .key.chedd ~ .govuk-heading-l'
+    )
+  }
+
+  get chedDSummaryPercentage() {
+    return $(
+      'section[aria-labelledby="notifications-summary-heading"] .btms-tile .key.chedd ~ .btms-percentage'
     )
   }
 
@@ -385,9 +421,21 @@ class ReportingPage extends Page {
     )
   }
 
+  get chedAChartPercentage() {
+    return $(
+      '#charts-view section[aria-labelledby="notifications-charts-heading"] .btms-tile .key.cheda ~ .btms-percentage'
+    )
+  }
+
   get chedPChart() {
     return $(
       '#charts-view section[aria-labelledby="notifications-charts-heading"] .btms-tile .key.chedp ~ .govuk-heading-l'
+    )
+  }
+
+  get chedPChartPercentage() {
+    return $(
+      '#charts-view section[aria-labelledby="notifications-charts-heading"] .btms-tile .key.chedp ~ .btms-percentage'
     )
   }
 
@@ -397,9 +445,21 @@ class ReportingPage extends Page {
     )
   }
 
+  get chedPPChartPercentage() {
+    return $(
+      '#charts-view section[aria-labelledby="notifications-charts-heading"] .btms-tile .key.chedpp ~ .btms-percentage'
+    )
+  }
+
   get chedDChart() {
     return $(
       '#charts-view section[aria-labelledby="notifications-charts-heading"] .btms-tile .key.chedd ~ .govuk-heading-l'
+    )
+  }
+
+  get chedDChartPercentage() {
+    return $(
+      '#charts-view section[aria-labelledby="notifications-charts-heading"] .btms-tile .key.chedd ~ .btms-percentage'
     )
   }
 
@@ -617,6 +677,11 @@ class ReportingPage extends Page {
     return Number(await this.uniqueClearancesSummary.getText())
   }
 
+  async getUniqueClearancesSummaryPercentageValue() {
+    const text = await this.getTextFrom(this.uniqueClearancesSummaryPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
+  }
+
   async getUniqueClearancesTotalSummaryValue() {
     return Number(await this.uniqueClearancesTotalSummary.getText())
   }
@@ -631,6 +696,11 @@ class ReportingPage extends Page {
 
   async getUniqueClearancesChartValue() {
     return Number(await this.uniqueClearancesChart.getText())
+  }
+
+  async getUniqueClearancesChartPercentageValue() {
+    const text = await this.getTextFrom(this.uniqueClearancesChartPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
   }
 
   async getUniqueClearancesTotalChartValue() {
@@ -649,16 +719,36 @@ class ReportingPage extends Page {
     return Number(await this.chedASummary.getText())
   }
 
+  async getChedASummaryPercentageValue() {
+    const text = await this.getTextFrom(this.chedASummaryPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
+  }
+
   async getChedPSummaryValue() {
     return Number(await this.chedPSummary.getText())
+  }
+
+  async getChedPSummaryPercentageValue() {
+    const text = await this.getTextFrom(this.chedPSummaryPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
   }
 
   async getChedPPSummaryValue() {
     return Number(await this.chedPPSummary.getText())
   }
 
+  async getChedPPSummaryPercentageValue() {
+    const text = await this.getTextFrom(this.chedPPSummaryPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
+  }
+
   async getChedDSummaryValue() {
     return Number(await this.chedDSummary.getText())
+  }
+
+  async getChedDSummaryPercentageValue() {
+    const text = await this.getTextFrom(this.chedDSummaryPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
   }
 
   async getChedTotalSummaryValue() {
@@ -689,16 +779,36 @@ class ReportingPage extends Page {
     return Number(await this.chedAChart.getText())
   }
 
+  async getChedAChartPercentageValue() {
+    const text = await this.getTextFrom(this.chedAChartPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
+  }
+
   async getChedPChartValue() {
     return Number(await this.chedPChart.getText())
+  }
+
+  async getChedPChartPercentageValue() {
+    const text = await this.getTextFrom(this.chedPChartPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
   }
 
   async getChedPPChartValue() {
     return Number(await this.chedPPChart.getText())
   }
 
+  async getChedPPChartPercentageValue() {
+    const text = await this.getTextFrom(this.chedPPChartPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
+  }
+
   async getChedDChartValue() {
     return Number(await this.chedDChart.getText())
+  }
+
+  async getChedDChartPercentageValue() {
+    const text = await this.getTextFrom(this.chedDChartPercentage)
+    return parseFloat(text.replace(/[^0-9.]/g, ''))
   }
 
   async getChedTotalChartValue() {
