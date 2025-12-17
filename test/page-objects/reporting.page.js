@@ -442,15 +442,15 @@ class ReportingPage extends Page {
   }
 
   async getSummaryMatchesHeading() {
-    return Number(await this.matchesTileHeading.getText())
+    return await this.getTextFrom(this.matchesTileHeading)
   }
 
   async getSummaryNoMatchesHeading() {
-    return Number(await this.noMatchesTileHeading.getText())
+    return await this.getTextFrom(this.noMatchesTileHeading)
   }
 
   async getSummaryTotalHeading() {
-    return Number(await this.totalTileHeading.getText())
+    return await this.getTextFrom(this.totalTileHeading)
   }
 
   async getChartMatches() {
@@ -466,15 +466,15 @@ class ReportingPage extends Page {
   }
 
   async getChartMatchesHeading() {
-    return Number(await this.matchesTileChartHeading.getText())
+    return await this.getTextFrom(this.matchesTileChartHeading)
   }
 
   async getChartNoMatchesHeading() {
-    return Number(await this.noMatchesTileChartHeading.getText())
+    return await this.getTextFrom(this.noMatchesTileChartHeading)
   }
 
   async getChartTotalHeading() {
-    return Number(await this.totalTileChartHeading.getText())
+    return await this.getTextFrom(this.totalTileChartHeading)
   }
 
   async getReleasesAutoSummaryValue() {
@@ -490,15 +490,15 @@ class ReportingPage extends Page {
   }
 
   async getReleasesAutoSummaryHeading() {
-    return Number(await this.releasesAutoHeading.getText())
+    return await this.getTextFrom(this.releasesAutoHeading)
   }
 
   async getReleasesManualSummaryHeading() {
-    return Number(await this.releasesManualHeading.getText())
+    return await this.getTextFrom(this.releasesManualHeading)
   }
 
   async getReleasesTotalSummaryHeading() {
-    return Number(await this.releasesTotalHeading.getText())
+    return await this.getTextFrom(this.releasesTotalHeading)
   }
 
   async getReleasesAutoChartValue() {
@@ -514,15 +514,15 @@ class ReportingPage extends Page {
   }
 
   async getReleasesAutoChartHeading() {
-    return Number(await this.releasesAutoChartHeading.getText())
+    return await this.getTextFrom(this.releasesAutoChartHeading)
   }
 
   async getReleasesManualChartHeading() {
-    return Number(await this.releasesManualChartHeading.getText())
+    return await this.getTextFrom(this.releasesManualChartHeading)
   }
 
   async getReleasesTotalChartHeading() {
-    return Number(await this.releasesTotalChartHeading.getText())
+    return await this.getTextFrom(this.releasesTotalChartHeading)
   }
 
   async getUniqueClearancesSummaryValue() {
@@ -534,11 +534,11 @@ class ReportingPage extends Page {
   }
 
   async getUniqueClearancesSummaryHeading() {
-    return Number(await this.uniqueClearancesHeading.getText())
+    return await this.getTextFrom(this.uniqueClearancesHeading)
   }
 
   async getUniqueClearancesTotalSummaryHeading() {
-    return Number(await this.uniqueClearancesTotalHeading.getText())
+    return await this.getTextFrom(this.uniqueClearancesTotalHeading)
   }
 
   async getUniqueClearancesChartValue() {
@@ -550,11 +550,11 @@ class ReportingPage extends Page {
   }
 
   async getUniqueClearancesChartHeading() {
-    return Number(await this.uniqueClearancesChartHeading.getText())
+    return await this.getTextFrom(this.uniqueClearancesChartHeading)
   }
 
   async getUniqueClearancesTotalChartHeading() {
-    return Number(await this.uniqueClearancesTotalChartHeading.getText())
+    return await this.getTextFrom(this.uniqueClearancesTotalChartHeading)
   }
 
   async getChedASummaryValue() {
@@ -578,23 +578,23 @@ class ReportingPage extends Page {
   }
 
   async getChedAHeading() {
-    return Number(await this.chedAHeading.getText())
+    return await this.getTextFrom(this.chedAHeading)
   }
 
   async getChedPHeading() {
-    return Number(await this.chedPHeading.getText())
+    return await this.getTextFrom(this.chedPHeading)
   }
 
   async getChedPPHeading() {
-    return Number(await this.chedPPHeading.getText())
+    return await this.getTextFrom(this.chedPPHeading)
   }
 
   async getChedDHeading() {
-    return Number(await this.chedDHeading.getText())
+    return await this.getTextFrom(this.chedDHeading)
   }
 
   async getChedTotalHeading() {
-    return Number(await this.chedTotalHeading.getText())
+    return await this.getTextFrom(this.chedTotalHeading)
   }
 
   async getChedAChartValue() {
@@ -618,23 +618,23 @@ class ReportingPage extends Page {
   }
 
   async getChedAChartHeading() {
-    return Number(await this.chedAChartHeading.getText())
+    return await this.getTextFrom(this.chedAChartHeading)
   }
 
   async getChedPChartHeading() {
-    return Number(await this.chedPChartHeading.getText())
+    return await this.getTextFrom(this.chedPChartHeading)
   }
 
   async getChedPPChartHeading() {
-    return Number(await this.chedPPChartHeading.getText())
+    return await this.getTextFrom(this.chedPPChartHeading)
   }
 
   async getChedDChartHeading() {
-    return Number(await this.chedDChartHeading.getText())
+    return await this.getTextFrom(this.chedDChartHeading)
   }
 
   async getChedTotalChartHeading() {
-    return Number(await this.chedTotalChartHeading.getText())
+    return await this.getTextFrom(this.chedTotalChartHeading)
   }
 
   async clickNavReportingLink() {
