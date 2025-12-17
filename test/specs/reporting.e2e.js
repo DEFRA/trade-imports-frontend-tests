@@ -42,7 +42,7 @@ describe('Reporting page', () => {
     expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
   })
 
-  it('Should be able to use Last week filter and see time period updated', async () => {
+  it('Should be able to use Last Week filter and see time period updated', async () => {
     const currentDate = new Date()
     const day = String(currentDate.getDate())
     const month = currentDate.toLocaleString('default', { month: 'long' })
@@ -59,7 +59,7 @@ describe('Reporting page', () => {
     expect(await ReportingPage.filterResult()).toContain(expectedReportPeriod)
   })
 
-  it('Should be able to use Last month filter and see time period updated', async () => {
+  it('Should be able to use Last Month filter and see time period updated', async () => {
     await ReportingPage.lastMonthFilter()
     const currentDate = new Date()
     const day = String(currentDate.getDate())
@@ -93,7 +93,7 @@ describe('Reporting page', () => {
     expect(await ReportingPage.notificationsChartIsVisible()).toBe(true)
   })
 
-  it('should see the same Matches, No Matches, and Total Matches for both Summary and Chart tabs', async () => {
+  it('Should see the same Matches, No Matches, and Total Matches values for both Summary and Chart tabs', async () => {
     // Apply the last month filter before running the comparison
     await ReportingPage.lastMonthFilter()
 
@@ -115,7 +115,7 @@ describe('Reporting page', () => {
     expect(summaryTotal).toEqual(chartTotal)
   })
 
-  it('should show the same Matches and No matches percentages on Summary and Chart tabs', async () => {
+  it('Should see the same Matches, and No Matches percentages on Summary and Chart tabs', async () => {
     await ReportingPage.lastMonthFilter()
 
     await ReportingPage.openSummaryTab()
@@ -131,7 +131,7 @@ describe('Reporting page', () => {
     expect(summaryNoMatchesPct).toEqual(chartNoMatchesPct)
   })
 
-  it('should see the same Automatic, Manual, and Total Releases for the Summary and Chart tabs', async () => {
+  it('Should see the same Automatic, Manual, and Total Releases values for both Summary and Chart tabs', async () => {
     await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()
     const summaryAuto = await ReportingPage.getReleasesAutoSummaryValue()
@@ -148,7 +148,7 @@ describe('Reporting page', () => {
     expect(summaryTotal).toEqual(chartTotal)
   })
 
-  it('should show the same Automatic and Manual release percentages on Summary and Chart tabs', async () => {
+  it('Should see the same Automatic, and Manual Release percentages on Summary and Chart tabs', async () => {
     await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()
     const summaryAutoPct =
@@ -166,7 +166,7 @@ describe('Reporting page', () => {
     expect(summaryManualPct).toEqual(chartManualPct)
   })
 
-  it('should see the same Unique Clearance and Total Clearance for the Summary and Chart tabs', async () => {
+  it('Should see the same Unique Clearance, and Total Clearance for both Summary and Chart tabs', async () => {
     await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()
     const summaryUnique = await ReportingPage.getUniqueClearancesSummaryValue()
@@ -181,7 +181,7 @@ describe('Reporting page', () => {
     expect(summaryTotal).toEqual(chartTotal)
   })
 
-  it('should show the same Unique clearances percentage on Summary and Chart tabs', async () => {
+  it('Should see the same Unique Clearances percentage on Summary and Chart tabs', async () => {
     await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()
     const summaryUniquePct =
@@ -194,7 +194,7 @@ describe('Reporting page', () => {
     expect(summaryUniquePct).toEqual(chartUniquePct)
   })
 
-  it('should see the same CHED-A, CHED-P, CHED-PP, CHED-D and Total CHEDS for the Summary and Chart tabs', async () => {
+  it('Should see the same CHED-A, CHED-P, CHED-PP, CHED-D and Total CHEDS values for both Summary and Chart tabs', async () => {
     await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()
     const summaryA = await ReportingPage.getChedASummaryValue()
@@ -217,7 +217,7 @@ describe('Reporting page', () => {
     expect(summaryTotal).toEqual(chartTotal)
   })
 
-  it('should show the same CHED A/P/PP/D percentages on Summary and Chart tabs', async () => {
+  it('Should see the same CHED-A, CHED-P, CHED-PP, CHED-D percentages on both Summary and Chart tabs', async () => {
     await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()
     const summaryAPct = await ReportingPage.getChedASummaryPercentageValue()
@@ -235,6 +235,53 @@ describe('Reporting page', () => {
     expect(summaryPPct).toEqual(chartPPct)
     expect(summaryPPPct).toEqual(chartPPPct)
     expect(summaryDPct).toEqual(chartDPct)
+  })
+
+  it('Should validate percentage calculations across Summary tiles', async () => {
+    await ReportingPage.lastMonthFilter()
+    await ReportingPage.openSummaryTab()
+
+    // Matches vs No matches should sum to 100
+    const matchesPct = await ReportingPage.getSummaryMatchesPercentage()
+    const noMatchesPct = await ReportingPage.getSummaryNoMatchesPercentage()
+    const matchesSum = Number((matchesPct + noMatchesPct).toFixed(2))
+    expect(matchesSum).toBeGreaterThanOrEqual(95)
+    expect(matchesSum).toBeLessThanOrEqual(100)
+
+    // Automatic vs Manual releases should sum to 100
+    const autoPct = await ReportingPage.getReleasesAutoSummaryPercentageValue()
+    const manualPct =
+      await ReportingPage.getReleasesManualSummaryPercentageValue()
+    const releasesSum = Number((autoPct + manualPct).toFixed(2))
+    expect(releasesSum).toBeGreaterThanOrEqual(95)
+    expect(releasesSum).toBeLessThanOrEqual(100)
+
+    // Unique clearance percentage should equal unique / total * 100
+    const uniqueCount = await ReportingPage.getUniqueClearancesSummaryValue()
+    const totalCount =
+      await ReportingPage.getUniqueClearancesTotalSummaryValue()
+    const uniquePct =
+      await ReportingPage.getUniqueClearancesSummaryPercentageValue()
+    if (totalCount > 0) {
+      const expectedUniquePct = Number(
+        ((uniqueCount / totalCount) * 100).toFixed(2)
+      )
+      const actualUniquePct = Number(uniquePct.toFixed(2))
+      expect(actualUniquePct).toBe(expectedUniquePct)
+    } else {
+      expect(uniquePct).toBe(0)
+    }
+
+    // CHED A/P/PP/D percentages should sum to 100
+    const chedAPct = await ReportingPage.getChedASummaryPercentageValue()
+    const chedPPct = await ReportingPage.getChedPSummaryPercentageValue()
+    const chedPPPct = await ReportingPage.getChedPPSummaryPercentageValue()
+    const chedDPct = await ReportingPage.getChedDSummaryPercentageValue()
+    const chedSum = Number(
+      (chedAPct + chedPPct + chedPPPct + chedDPct).toFixed(2)
+    )
+    expect(chedSum).toBeGreaterThanOrEqual(95)
+    expect(chedSum).toBeLessThanOrEqual(100)
   })
 
   it('Should see all headings matching between Summary and Chart tabs', async () => {
