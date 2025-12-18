@@ -22,6 +22,12 @@ class Page {
   async elementIsDisplayed(element) {
     return await element.waitForDisplayed({ timeout: 3000 })
   }
+
+  async getCleanNumber(element) {
+    const text = await element.getText()
+    const cleaned = text.replace(/,/g, '').trim()
+    return Number(cleaned)
+  }
 }
 
 export { Page }
