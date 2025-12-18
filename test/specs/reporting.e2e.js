@@ -85,6 +85,28 @@ describe('Reporting page', () => {
     expect(await ReportingPage.notificationSectionIsVisible()).toBe(true)
   })
 
+  it('Should show CSV download links for No matches and Manual releases and they are clickable', async () => {
+    await ReportingPage.openSummaryTab()
+
+    const noMatchesVisible =
+      await ReportingPage.noMatchesDownloadLinkIsVisible()
+    const noMatchesHref = await ReportingPage.getNoMatchesDownloadHref()
+
+    const manualVisible =
+      await ReportingPage.manualReleasesDownloadLinkIsVisible()
+    const manualHref = await ReportingPage.getManualReleasesDownloadHref()
+
+    expect(noMatchesVisible).toBe(true)
+    expect(typeof noMatchesHref).toBe('string')
+    expect(noMatchesHref.length).toBeGreaterThan(0)
+    expect(noMatchesHref).toMatch(/no-matches\.csv/i)
+
+    expect(manualVisible).toBe(true)
+    expect(typeof manualHref).toBe('string')
+    expect(manualHref.length).toBeGreaterThan(0)
+    expect(manualHref).toMatch(/manual-releases\.csv/i)
+  })
+
   it('Should be able to see all Charts sections under Chart tab', async () => {
     await ReportingPage.openChartTab()
     expect(await ReportingPage.matchesChartIsVisible()).toBe(true)

@@ -482,6 +482,18 @@ class ReportingPage extends Page {
     )
   }
 
+  get noMatchesSummaryDownloadLink() {
+    return $(
+      "//section[@aria-labelledby='matches-summary-heading']//div[contains(@class,'btms-tile')][.//dt[contains(@class,'key') and contains(@class,'nomatch')]]//a"
+    )
+  }
+
+  get manualReleasesSummaryDownloadLink() {
+    return $(
+      "//section[@aria-labelledby='releases-summary-heading']//div[contains(@class,'btms-tile')][.//dt[contains(@class,'key') and contains(@class,'manual')]]//a"
+    )
+  }
+
   open() {
     return super.open('/reporting')
   }
@@ -858,6 +870,24 @@ class ReportingPage extends Page {
 
   async clickNavReportingLink() {
     await this.clickLink(this.navReportingLink)
+  }
+
+  async noMatchesDownloadLinkIsVisible() {
+    return await this.elementIsDisplayed(this.noMatchesSummaryDownloadLink)
+  }
+
+  async manualReleasesDownloadLinkIsVisible() {
+    return await this.elementIsDisplayed(this.manualReleasesSummaryDownloadLink)
+  }
+
+  async getNoMatchesDownloadHref() {
+    const el = await this.noMatchesSummaryDownloadLink
+    return await el.getAttribute('href')
+  }
+
+  async getManualReleasesDownloadHref() {
+    const el = await this.manualReleasesSummaryDownloadLink
+    return await el.getAttribute('href')
   }
 }
 
