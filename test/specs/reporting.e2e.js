@@ -93,185 +93,7 @@ describe('Reporting page', () => {
     expect(await ReportingPage.notificationsChartIsVisible()).toBe(true)
   })
 
-  it('Should see the same Matches, No Matches, and Total Matches values for both Summary and Chart tabs', async () => {
-    // Apply the last month filter before running the comparison
-    await ReportingPage.lastMonthFilter()
-
-    // Go to summary tab and get numbers using page object methods
-    await ReportingPage.openSummaryTab()
-    const summaryMatches = await ReportingPage.getSummaryMatches()
-    const summaryNoMatches = await ReportingPage.getSummaryNoMatches()
-    const summaryTotal = await ReportingPage.getSummaryTotal()
-
-    // Go to chart tab and get numbers using page object methods
-    await ReportingPage.openChartTab()
-    const chartMatches = await ReportingPage.getChartMatches()
-    const chartNoMatches = await ReportingPage.getChartNoMatches()
-    const chartTotal = await ReportingPage.getChartTotal()
-
-    // Compare values
-    expect(summaryMatches).toEqual(chartMatches)
-    expect(summaryNoMatches).toEqual(chartNoMatches)
-    expect(summaryTotal).toEqual(chartTotal)
-  })
-
-  it('Should see the same Matches, and No Matches percentages on Summary and Chart tabs', async () => {
-    await ReportingPage.openSummaryTab()
-    const summaryMatchesPct = await ReportingPage.getSummaryMatchesPercentage()
-    const summaryNoMatchesPct =
-      await ReportingPage.getSummaryNoMatchesPercentage()
-
-    await ReportingPage.openChartTab()
-    const chartMatchesPct = await ReportingPage.getChartMatchesPercentage()
-    const chartNoMatchesPct = await ReportingPage.getChartNoMatchesPercentage()
-
-    expect(summaryMatchesPct).toEqual(chartMatchesPct)
-    expect(summaryNoMatchesPct).toEqual(chartNoMatchesPct)
-  })
-
-  it('Should see the same Automatic, Manual, and Total Releases values for both Summary and Chart tabs', async () => {
-    await ReportingPage.openSummaryTab()
-    const summaryAuto = await ReportingPage.getReleasesAutoSummaryValue()
-    const summaryManual = await ReportingPage.getReleasesManualSummaryValue()
-    const summaryTotal = await ReportingPage.getReleasesTotalSummaryValue()
-
-    await ReportingPage.openChartTab()
-    const chartAuto = await ReportingPage.getReleasesAutoChartValue()
-    const chartManual = await ReportingPage.getReleasesManualChartValue()
-    const chartTotal = await ReportingPage.getReleasesTotalChartValue()
-
-    expect(summaryAuto).toEqual(chartAuto)
-    expect(summaryManual).toEqual(chartManual)
-    expect(summaryTotal).toEqual(chartTotal)
-  })
-
-  it('Should see the same Automatic, and Manual Release percentages on Summary and Chart tabs', async () => {
-    await ReportingPage.openSummaryTab()
-    const summaryAutoPct =
-      await ReportingPage.getReleasesAutoSummaryPercentageValue()
-    const summaryManualPct =
-      await ReportingPage.getReleasesManualSummaryPercentageValue()
-
-    await ReportingPage.openChartTab()
-    const chartAutoPct =
-      await ReportingPage.getReleasesAutoChartPercentageValue()
-    const chartManualPct =
-      await ReportingPage.getReleasesManualChartPercentageValue()
-
-    expect(summaryAutoPct).toEqual(chartAutoPct)
-    expect(summaryManualPct).toEqual(chartManualPct)
-  })
-
-  it('Should see the same Unique Clearance, and Total Clearance for both Summary and Chart tabs', async () => {
-    await ReportingPage.openSummaryTab()
-    const summaryUnique = await ReportingPage.getUniqueClearancesSummaryValue()
-    const summaryTotal =
-      await ReportingPage.getUniqueClearancesTotalSummaryValue()
-
-    await ReportingPage.openChartTab()
-    const chartUnique = await ReportingPage.getUniqueClearancesChartValue()
-    const chartTotal = await ReportingPage.getUniqueClearancesTotalChartValue()
-
-    expect(summaryUnique).toEqual(chartUnique)
-    expect(summaryTotal).toEqual(chartTotal)
-  })
-
-  it('Should see the same Unique Clearances percentage on Summary and Chart tabs', async () => {
-    await ReportingPage.openSummaryTab()
-    const summaryUniquePct =
-      await ReportingPage.getUniqueClearancesSummaryPercentageValue()
-
-    await ReportingPage.openChartTab()
-    const chartUniquePct =
-      await ReportingPage.getUniqueClearancesChartPercentageValue()
-
-    expect(summaryUniquePct).toEqual(chartUniquePct)
-  })
-
-  it('Should see the same CHED-A, CHED-P, CHED-PP, CHED-D and Total CHEDS values for both Summary and Chart tabs', async () => {
-    await ReportingPage.openSummaryTab()
-    const summaryA = await ReportingPage.getChedASummaryValue()
-    const summaryP = await ReportingPage.getChedPSummaryValue()
-    const summaryPP = await ReportingPage.getChedPPSummaryValue()
-    const summaryD = await ReportingPage.getChedDSummaryValue()
-    const summaryTotal = await ReportingPage.getChedTotalSummaryValue()
-
-    await ReportingPage.openChartTab()
-    const chartA = await ReportingPage.getChedAChartValue()
-    const chartP = await ReportingPage.getChedPChartValue()
-    const chartPP = await ReportingPage.getChedPPChartValue()
-    const chartD = await ReportingPage.getChedDChartValue()
-    const chartTotal = await ReportingPage.getChedTotalChartValue()
-
-    expect(summaryA).toEqual(chartA)
-    expect(summaryP).toEqual(chartP)
-    expect(summaryPP).toEqual(chartPP)
-    expect(summaryD).toEqual(chartD)
-    expect(summaryTotal).toEqual(chartTotal)
-  })
-
-  it('Should see the same CHED-A, CHED-P, CHED-PP, CHED-D percentages on both Summary and Chart tabs', async () => {
-    await ReportingPage.openSummaryTab()
-    const summaryAPct = await ReportingPage.getChedASummaryPercentageValue()
-    const summaryPPct = await ReportingPage.getChedPSummaryPercentageValue()
-    const summaryPPPct = await ReportingPage.getChedPPSummaryPercentageValue()
-    const summaryDPct = await ReportingPage.getChedDSummaryPercentageValue()
-
-    await ReportingPage.openChartTab()
-    const chartAPct = await ReportingPage.getChedAChartPercentageValue()
-    const chartPPct = await ReportingPage.getChedPChartPercentageValue()
-    const chartPPPct = await ReportingPage.getChedPPChartPercentageValue()
-    const chartDPct = await ReportingPage.getChedDChartPercentageValue()
-
-    expect(summaryAPct).toEqual(chartAPct)
-    expect(summaryPPct).toEqual(chartPPct)
-    expect(summaryPPPct).toEqual(chartPPPct)
-    expect(summaryDPct).toEqual(chartDPct)
-  })
-
-  it('Should validate percentage calculations across Summary tiles', async () => {
-    await ReportingPage.openSummaryTab()
-
-    const matchesPct = await ReportingPage.getSummaryMatchesPercentage()
-    const noMatchesPct = await ReportingPage.getSummaryNoMatchesPercentage()
-    const matchesSum = Number((matchesPct + noMatchesPct).toFixed(2))
-    expect(matchesSum).toBeGreaterThanOrEqual(95)
-    expect(matchesSum).toBeLessThanOrEqual(100)
-
-    const autoPct = await ReportingPage.getReleasesAutoSummaryPercentageValue()
-    const manualPct =
-      await ReportingPage.getReleasesManualSummaryPercentageValue()
-    const releasesSum = Number((autoPct + manualPct).toFixed(2))
-    expect(releasesSum).toBeGreaterThanOrEqual(95)
-    expect(releasesSum).toBeLessThanOrEqual(100)
-
-    const uniqueCount = await ReportingPage.getUniqueClearancesSummaryValue()
-    const totalCount =
-      await ReportingPage.getUniqueClearancesTotalSummaryValue()
-    const uniquePct =
-      await ReportingPage.getUniqueClearancesSummaryPercentageValue()
-    if (totalCount > 0) {
-      const expectedUniquePct = Number(
-        ((uniqueCount / totalCount) * 100).toFixed(2)
-      )
-      const actualUniquePct = Number(uniquePct.toFixed(2))
-      expect(actualUniquePct).toBe(expectedUniquePct)
-    } else {
-      expect(uniquePct).toBe(0)
-    }
-
-    const chedAPct = await ReportingPage.getChedASummaryPercentageValue()
-    const chedPPct = await ReportingPage.getChedPSummaryPercentageValue()
-    const chedPPPct = await ReportingPage.getChedPPSummaryPercentageValue()
-    const chedDPct = await ReportingPage.getChedDSummaryPercentageValue()
-    const chedSum = Number(
-      (chedAPct + chedPPct + chedPPPct + chedDPct).toFixed(2)
-    )
-    expect(chedSum).toBeGreaterThanOrEqual(95)
-    expect(chedSum).toBeLessThanOrEqual(100)
-  })
-
-  it('Should see all headings matching between Summary and Chart tabs', async () => {
+  it('Should see the same headings for Matches, Releases, Unique Clearances and Pre-Notifications panels across both Summary and Charts Tabs', async () => {
     await ReportingPage.openSummaryTab()
     const summaryTabMatchesHeading =
       await ReportingPage.getSummaryMatchesHeading()
@@ -359,6 +181,162 @@ describe('Reporting page', () => {
     expect(summaryTabChedPPHeading).toEqual(chartTabChedPPHeading)
     expect(summaryTabChedDHeading).toEqual(chartTabChedDHeading)
     expect(summaryTabChedTotalHeading).toEqual(chartTabChedTotalHeading)
+  })
+
+  it('Should see the same values for Matches, Releases, Unique Clearances and Pre-Notifications panels across both Summary and Charts Tabs', async () => {
+    await ReportingPage.lastMonthFilter()
+
+    await ReportingPage.openSummaryTab()
+    const summaryMatches = await ReportingPage.getSummaryMatches()
+    const summaryNoMatches = await ReportingPage.getSummaryNoMatches()
+    const summaryMatchesTotal = await ReportingPage.getSummaryTotal()
+
+    const summaryAuto = await ReportingPage.getReleasesAutoSummaryValue()
+    const summaryManual = await ReportingPage.getReleasesManualSummaryValue()
+    const summaryReleasesTotal =
+      await ReportingPage.getReleasesTotalSummaryValue()
+
+    const summaryClearanceUnique =
+      await ReportingPage.getUniqueClearancesSummaryValue()
+    const summaryClearanceTotal =
+      await ReportingPage.getUniqueClearancesTotalSummaryValue()
+
+    const summaryA = await ReportingPage.getChedASummaryValue()
+    const summaryP = await ReportingPage.getChedPSummaryValue()
+    const summaryPP = await ReportingPage.getChedPPSummaryValue()
+    const summaryD = await ReportingPage.getChedDSummaryValue()
+    const summaryTotal = await ReportingPage.getChedTotalSummaryValue()
+
+    await ReportingPage.openChartTab()
+    const chartMatches = await ReportingPage.getChartMatches()
+    const chartNoMatches = await ReportingPage.getChartNoMatches()
+    const chartMatchesTotal = await ReportingPage.getChartTotal()
+
+    const chartAuto = await ReportingPage.getReleasesAutoChartValue()
+    const chartManual = await ReportingPage.getReleasesManualChartValue()
+    const chartReleasesTotal = await ReportingPage.getReleasesTotalChartValue()
+
+    const chartClearanceUnique =
+      await ReportingPage.getUniqueClearancesChartValue()
+    const chartClearanceTotal =
+      await ReportingPage.getUniqueClearancesTotalChartValue()
+
+    const chartA = await ReportingPage.getChedAChartValue()
+    const chartP = await ReportingPage.getChedPChartValue()
+    const chartPP = await ReportingPage.getChedPPChartValue()
+    const chartD = await ReportingPage.getChedDChartValue()
+    const chartTotal = await ReportingPage.getChedTotalChartValue()
+
+    expect(summaryMatches).toEqual(chartMatches)
+    expect(summaryNoMatches).toEqual(chartNoMatches)
+    expect(summaryMatchesTotal).toEqual(chartMatchesTotal)
+
+    expect(summaryAuto).toEqual(chartAuto)
+    expect(summaryManual).toEqual(chartManual)
+    expect(summaryReleasesTotal).toEqual(chartReleasesTotal)
+
+    expect(summaryClearanceUnique).toEqual(chartClearanceUnique)
+    expect(summaryClearanceTotal).toEqual(chartClearanceTotal)
+
+    expect(summaryA).toEqual(chartA)
+    expect(summaryP).toEqual(chartP)
+    expect(summaryPP).toEqual(chartPP)
+    expect(summaryD).toEqual(chartD)
+    expect(summaryTotal).toEqual(chartTotal)
+  })
+
+  it('Should see the same percentages for Matches, Releases, Unique Clearances and Pre-Notifications panels across both Summary and Charts Tabs', async () => {
+    await ReportingPage.lastMonthFilter()
+
+    await ReportingPage.openSummaryTab()
+    const summaryMatchesPct = await ReportingPage.getSummaryMatchesPercentage()
+    const summaryNoMatchesPct =
+      await ReportingPage.getSummaryNoMatchesPercentage()
+
+    const summaryAutoPct =
+      await ReportingPage.getReleasesAutoSummaryPercentageValue()
+    const summaryManualPct =
+      await ReportingPage.getReleasesManualSummaryPercentageValue()
+
+    const summaryUniquePct =
+      await ReportingPage.getUniqueClearancesSummaryPercentageValue()
+
+    const summaryAPct = await ReportingPage.getChedASummaryPercentageValue()
+    const summaryPPct = await ReportingPage.getChedPSummaryPercentageValue()
+    const summaryPPPct = await ReportingPage.getChedPPSummaryPercentageValue()
+    const summaryDPct = await ReportingPage.getChedDSummaryPercentageValue()
+
+    await ReportingPage.openChartTab()
+    const chartMatchesPct = await ReportingPage.getChartMatchesPercentage()
+    const chartNoMatchesPct = await ReportingPage.getChartNoMatchesPercentage()
+
+    const chartAutoPct =
+      await ReportingPage.getReleasesAutoChartPercentageValue()
+    const chartManualPct =
+      await ReportingPage.getReleasesManualChartPercentageValue()
+
+    const chartUniquePct =
+      await ReportingPage.getUniqueClearancesChartPercentageValue()
+
+    const chartAPct = await ReportingPage.getChedAChartPercentageValue()
+    const chartPPct = await ReportingPage.getChedPChartPercentageValue()
+    const chartPPPct = await ReportingPage.getChedPPChartPercentageValue()
+    const chartDPct = await ReportingPage.getChedDChartPercentageValue()
+
+    expect(summaryMatchesPct).toEqual(chartMatchesPct)
+    expect(summaryNoMatchesPct).toEqual(chartNoMatchesPct)
+
+    expect(summaryAutoPct).toEqual(chartAutoPct)
+    expect(summaryManualPct).toEqual(chartManualPct)
+
+    expect(summaryUniquePct).toEqual(chartUniquePct)
+
+    expect(summaryAPct).toEqual(chartAPct)
+    expect(summaryPPct).toEqual(chartPPct)
+    expect(summaryPPPct).toEqual(chartPPPct)
+    expect(summaryDPct).toEqual(chartDPct)
+  })
+
+  it('Should validate percentage calculations across Summary tiles', async () => {
+    await ReportingPage.openSummaryTab()
+
+    const matchesPct = await ReportingPage.getSummaryMatchesPercentage()
+    const noMatchesPct = await ReportingPage.getSummaryNoMatchesPercentage()
+    const matchesSum = Number((matchesPct + noMatchesPct).toFixed(2))
+    expect(matchesSum).toBeGreaterThanOrEqual(95)
+    expect(matchesSum).toBeLessThanOrEqual(100)
+
+    const autoPct = await ReportingPage.getReleasesAutoSummaryPercentageValue()
+    const manualPct =
+      await ReportingPage.getReleasesManualSummaryPercentageValue()
+    const releasesSum = Number((autoPct + manualPct).toFixed(2))
+    expect(releasesSum).toBeGreaterThanOrEqual(95)
+    expect(releasesSum).toBeLessThanOrEqual(100)
+
+    const uniqueCount = await ReportingPage.getUniqueClearancesSummaryValue()
+    const totalCount =
+      await ReportingPage.getUniqueClearancesTotalSummaryValue()
+    const uniquePct =
+      await ReportingPage.getUniqueClearancesSummaryPercentageValue()
+    if (totalCount > 0) {
+      const expectedUniquePct = Number(
+        ((uniqueCount / totalCount) * 100).toFixed(2)
+      )
+      const actualUniquePct = Number(uniquePct.toFixed(2))
+      expect(actualUniquePct).toBe(expectedUniquePct)
+    } else {
+      expect(uniquePct).toBe(0)
+    }
+
+    const chedAPct = await ReportingPage.getChedASummaryPercentageValue()
+    const chedPPct = await ReportingPage.getChedPSummaryPercentageValue()
+    const chedPPPct = await ReportingPage.getChedPPSummaryPercentageValue()
+    const chedDPct = await ReportingPage.getChedDSummaryPercentageValue()
+    const chedSum = Number(
+      (chedAPct + chedPPct + chedPPPct + chedDPct).toFixed(2)
+    )
+    expect(chedSum).toBeGreaterThanOrEqual(95)
+    expect(chedSum).toBeLessThanOrEqual(100)
   })
 
   it('Should set a custom date range via date pickers and reflect in the results heading', async () => {
