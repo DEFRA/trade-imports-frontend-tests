@@ -26,6 +26,19 @@ class ReportingPage extends Page {
     return $('.govuk-grid-column-three-quarters .govuk-heading-s')
   }
 
+  // Date range inputs and submit
+  get startDateInput() {
+    return $('#startDate')
+  }
+
+  get endDateInput() {
+    return $('#endDate')
+  }
+
+  get updateButton() {
+    return $('.btms-reporting-filters form button[type="submit"]')
+  }
+
   // Tabs
   get summaryTab() {
     return $('#tab_summary-view')
@@ -491,6 +504,14 @@ class ReportingPage extends Page {
 
   async filterResult() {
     return await this.getTextFrom(this.filterResultText)
+  }
+
+  async setDateRange(startDdMmYyyy, endDdMmYyyy) {
+    await this.startDateInput.setValue('')
+    await this.startDateInput.setValue(startDdMmYyyy)
+    await this.endDateInput.setValue('')
+    await this.endDateInput.setValue(endDdMmYyyy)
+    await this.clickLink(this.updateButton)
   }
 
   async openSummaryTab() {
