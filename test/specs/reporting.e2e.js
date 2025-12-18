@@ -340,6 +340,7 @@ describe('Reporting page', () => {
       await ReportingPage.getUniqueClearancesTotalSummaryValue()
     const uniquePct =
       await ReportingPage.getUniqueClearancesSummaryPercentageValue()
+
     if (totalCount > 0) {
       const expectedUniquePct = Number(
         ((uniqueCount / totalCount) * 100).toFixed(2)

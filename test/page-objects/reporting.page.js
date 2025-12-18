@@ -567,7 +567,7 @@ class ReportingPage extends Page {
   }
 
   async getSummaryMatches() {
-    return Number(await this.matchesTileSummary.getText())
+    return await this.getCleanNumber(this.matchesTileSummary)
   }
 
   async getSummaryMatchesPercentage() {
@@ -577,7 +577,7 @@ class ReportingPage extends Page {
   }
 
   async getSummaryNoMatches() {
-    return Number(await this.noMatchesTileSummary.getText())
+    return await this.getCleanNumber(this.noMatchesTileSummary)
   }
 
   async getSummaryNoMatchesPercentage() {
@@ -587,7 +587,7 @@ class ReportingPage extends Page {
   }
 
   async getSummaryTotal() {
-    return Number(await this.totalTileSummary.getText())
+    return await this.getCleanNumber(this.totalTileSummary)
   }
 
   async getSummaryMatchesHeading() {
@@ -603,7 +603,7 @@ class ReportingPage extends Page {
   }
 
   async getChartMatches() {
-    return Number(await this.matchesTileChart.getText())
+    return await this.getCleanNumber(this.matchesTileChart)
   }
 
   async getChartMatchesPercentage() {
@@ -613,7 +613,7 @@ class ReportingPage extends Page {
   }
 
   async getChartNoMatches() {
-    return Number(await this.noMatchesTileChart.getText())
+    return await this.getCleanNumber(this.noMatchesTileChart)
   }
 
   async getChartNoMatchesPercentage() {
@@ -623,7 +623,7 @@ class ReportingPage extends Page {
   }
 
   async getChartTotal() {
-    return Number(await this.totalTileChart.getText())
+    return await this.getCleanNumber(this.totalTileChart)
   }
 
   async getChartMatchesHeading() {
@@ -639,11 +639,11 @@ class ReportingPage extends Page {
   }
 
   async getReleasesAutoSummaryValue() {
-    return Number(await this.releasesAutoSummary.getText())
+    return await this.getCleanNumber(this.releasesAutoSummary)
   }
 
   async getReleasesManualSummaryValue() {
-    return Number(await this.releasesManualSummary.getText())
+    return await this.getCleanNumber(this.releasesManualSummary)
   }
 
   async getReleasesAutoSummaryPercentageValue() {
@@ -657,7 +657,7 @@ class ReportingPage extends Page {
   }
 
   async getReleasesTotalSummaryValue() {
-    return Number(await this.releasesTotalSummary.getText())
+    return await this.getCleanNumber(this.releasesTotalSummary)
   }
 
   async getReleasesAutoSummaryHeading() {
@@ -673,11 +673,11 @@ class ReportingPage extends Page {
   }
 
   async getReleasesAutoChartValue() {
-    return Number(await this.releasesAutoChart.getText())
+    return await this.getCleanNumber(this.releasesAutoChart)
   }
 
   async getReleasesManualChartValue() {
-    return Number(await this.releasesManualChart.getText())
+    return await this.getCleanNumber(this.releasesManualChart)
   }
 
   async getReleasesAutoChartPercentageValue() {
@@ -691,7 +691,7 @@ class ReportingPage extends Page {
   }
 
   async getReleasesTotalChartValue() {
-    return Number(await this.releasesTotalChart.getText())
+    return await this.getCleanNumber(this.releasesTotalChart)
   }
 
   async getReleasesAutoChartHeading() {
@@ -707,7 +707,7 @@ class ReportingPage extends Page {
   }
 
   async getUniqueClearancesSummaryValue() {
-    return Number(await this.uniqueClearancesSummary.getText())
+    return await this.getCleanNumber(this.uniqueClearancesSummary)
   }
 
   async getUniqueClearancesSummaryPercentageValue() {
@@ -716,7 +716,7 @@ class ReportingPage extends Page {
   }
 
   async getUniqueClearancesTotalSummaryValue() {
-    return Number(await this.uniqueClearancesTotalSummary.getText())
+    return await this.getCleanNumber(this.uniqueClearancesTotalSummary)
   }
 
   async getUniqueClearancesSummaryHeading() {
@@ -728,7 +728,7 @@ class ReportingPage extends Page {
   }
 
   async getUniqueClearancesChartValue() {
-    return Number(await this.uniqueClearancesChart.getText())
+    return await this.getCleanNumber(this.uniqueClearancesChart)
   }
 
   async getUniqueClearancesChartPercentageValue() {
@@ -737,7 +737,7 @@ class ReportingPage extends Page {
   }
 
   async getUniqueClearancesTotalChartValue() {
-    return Number(await this.uniqueClearancesTotalChart.getText())
+    return await this.getCleanNumber(this.uniqueClearancesTotalChart)
   }
 
   async getUniqueClearancesChartHeading() {
@@ -749,7 +749,7 @@ class ReportingPage extends Page {
   }
 
   async getChedASummaryValue() {
-    return Number(await this.chedASummary.getText())
+    return await this.getCleanNumber(this.chedASummary)
   }
 
   async getChedASummaryPercentageValue() {
@@ -758,7 +758,7 @@ class ReportingPage extends Page {
   }
 
   async getChedPSummaryValue() {
-    return Number(await this.chedPSummary.getText())
+    return await this.getCleanNumber(this.chedPSummary)
   }
 
   async getChedPSummaryPercentageValue() {
@@ -767,7 +767,7 @@ class ReportingPage extends Page {
   }
 
   async getChedPPSummaryValue() {
-    return Number(await this.chedPPSummary.getText())
+    return await this.getCleanNumber(this.chedPPSummary)
   }
 
   async getChedPPSummaryPercentageValue() {
@@ -776,7 +776,7 @@ class ReportingPage extends Page {
   }
 
   async getChedDSummaryValue() {
-    return Number(await this.chedDSummary.getText())
+    return await this.getCleanNumber(this.chedDSummary)
   }
 
   async getChedDSummaryPercentageValue() {
@@ -785,7 +785,7 @@ class ReportingPage extends Page {
   }
 
   async getChedTotalSummaryValue() {
-    return Number(await this.chedTotalSummary.getText())
+    return await this.getCleanNumber(this.chedTotalSummary)
   }
 
   async getChedAHeading() {
@@ -809,7 +809,7 @@ class ReportingPage extends Page {
   }
 
   async getChedAChartValue() {
-    return Number(await this.chedAChart.getText())
+    return await this.getCleanNumber(this.chedAChart)
   }
 
   async getChedAChartPercentageValue() {
@@ -818,7 +818,7 @@ class ReportingPage extends Page {
   }
 
   async getChedPChartValue() {
-    return Number(await this.chedPChart.getText())
+    return await this.getCleanNumber(this.chedPChart)
   }
 
   async getChedPChartPercentageValue() {
@@ -827,7 +827,7 @@ class ReportingPage extends Page {
   }
 
   async getChedPPChartValue() {
-    return Number(await this.chedPPChart.getText())
+    return await this.getCleanNumber(this.chedPPChart)
   }
 
   async getChedPPChartPercentageValue() {
@@ -836,7 +836,7 @@ class ReportingPage extends Page {
   }
 
   async getChedDChartValue() {
-    return Number(await this.chedDChart.getText())
+    return await this.getCleanNumber(this.chedDChart)
   }
 
   async getChedDChartPercentageValue() {
@@ -845,7 +845,7 @@ class ReportingPage extends Page {
   }
 
   async getChedTotalChartValue() {
-    return Number(await this.chedTotalChart.getText())
+    return await this.getCleanNumber(this.chedTotalChart)
   }
 
   async getChedAChartHeading() {
