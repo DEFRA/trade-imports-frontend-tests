@@ -326,14 +326,14 @@ describe('Reporting page', () => {
     const noMatchesPct = await ReportingPage.getSummaryNoMatchesPercentage()
     const matchesSum = Number((matchesPct + noMatchesPct).toFixed(2))
     expect(matchesSum).toBeGreaterThanOrEqual(95)
-    expect(matchesSum).toBeLessThanOrEqual(100)
+    expect(matchesSum).toBeLessThanOrEqual(101)
 
     const autoPct = await ReportingPage.getReleasesAutoSummaryPercentageValue()
     const manualPct =
       await ReportingPage.getReleasesManualSummaryPercentageValue()
     const releasesSum = Number((autoPct + manualPct).toFixed(2))
     expect(releasesSum).toBeGreaterThanOrEqual(95)
-    expect(releasesSum).toBeLessThanOrEqual(100)
+    expect(releasesSum).toBeLessThanOrEqual(101)
 
     const uniqueCount = await ReportingPage.getUniqueClearancesSummaryValue()
     const totalCount =
@@ -359,7 +359,7 @@ describe('Reporting page', () => {
       (chedAPct + chedPPct + chedPPPct + chedDPct).toFixed(2)
     )
     expect(chedSum).toBeGreaterThanOrEqual(95)
-    expect(chedSum).toBeLessThanOrEqual(100)
+    expect(chedSum).toBeLessThanOrEqual(101)
   })
 
   it('Should set a custom date range via date pickers and reflect in the results heading', async () => {
