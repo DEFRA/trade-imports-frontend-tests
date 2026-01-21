@@ -22,51 +22,63 @@ class LatestActivityPage extends Page {
     return $('h2.govuk-heading-m=IPAFFS')
   }
 
-  get decisionRow() {
+  get decisionCreatedRow() {
     return $(
-      '//table[@aria-label="Latest activity for BTMS"]//td[text()="Decision"]'
+      '//table[@aria-label="Latest activity for BTMS"]//td[contains(normalize-space(.), "Decision created")]'
+    )
+  }
+
+  get decisionSentRow() {
+    return $(
+      '//table[@aria-label="Latest activity for BTMS"]//td[contains(normalize-space(.), "Decision sent")]'
     )
   }
 
   get clearanceRequestRow() {
     return $(
-      '//table[@aria-label="Latest activity for CDS"]//td[text()="Clearance request"]'
+      '//table[@aria-label="Latest activity for CDS"]//td[contains(normalize-space(.), "Clearance request")]'
     )
   }
 
   get finalisationRow() {
     return $(
-      '//table[@aria-label="Latest activity for CDS"]//td[text()="Finalisation"]'
+      '//table[@aria-label="Latest activity for CDS"]//td[normalize-space(.)="Finalisation"]'
     )
   }
 
   get notificationRow() {
     return $(
-      '//table[@aria-label="Latest activity for IPAFFS"]//td[text()="Notification"]'
+      '//table[@aria-label="Latest activity for IPAFFS"]//td[normalize-space(.)="Notification"]'
     )
   }
 
-  get btmsDecisionDate() {
+  get btmsDecisionCreatedDate() {
     return $(
-      '//table[@aria-label="Latest activity for BTMS"]//td[text()="Decision"]/following-sibling::td[1]'
+      '//table[@aria-label="Latest activity for BTMS"]//td[contains(normalize-space(.), "Decision created")]/following-sibling::td[1]'
+    )
+  }
+
+  get btmsDecisionSentDate() {
+    return $(
+      '//table[@aria-label="Latest activity for BTMS"]//td[contains(normalize-space(.), "Decision sent")]/following-sibling::td[1]'
     )
   }
 
   get cdsClearanceRequestDate() {
     return $(
-      '//table[@aria-label="Latest activity for CDS"]//td[text()="Clearance request"]/following-sibling::td[1]'
+      '//table[@aria-label="Latest activity for CDS"]//td[normalize-space(.)="Clearance request"]/following-sibling::td[1]'
     )
   }
 
   get cdsFinalisationDate() {
     return $(
-      '//table[@aria-label="Latest activity for CDS"]//td[text()="Finalisation"]/following-sibling::td[1]'
+      '//table[@aria-label="Latest activity for CDS"]//td[normalize-space(.)="Finalisation"]/following-sibling::td[1]'
     )
   }
 
   get ipaffsNotificationDate() {
     return $(
-      '//table[@aria-label="Latest activity for IPAFFS"]//td[text()="Notification"]/following-sibling::td[1]'
+      '//table[@aria-label="Latest activity for IPAFFS"]//td[normalize-space(.)="Notification"]/following-sibling::td[1]'
     )
   }
 
@@ -82,8 +94,12 @@ class LatestActivityPage extends Page {
     return await this.ipaffsHeader.isDisplayed()
   }
 
-  async isDecisionVisible() {
-    return await this.decisionRow.isDisplayed()
+  async isDecisionCreatedVisible() {
+    return await this.decisionCreatedRow.isDisplayed()
+  }
+
+  async isDecisionSentVisible() {
+    return await this.decisionSentRow.isDisplayed()
   }
 
   async isClearanceRequestVisible() {
@@ -105,7 +121,8 @@ class LatestActivityPage extends Page {
 
   async areAllDatesValid() {
     const results = await Promise.all([
-      this.isValidDate(this.btmsDecisionDate),
+      this.isValidDate(this.btmsDecisionCreatedDate),
+      this.isValidDate(this.btmsDecisionSentDate),
       this.isValidDate(this.cdsClearanceRequestDate),
       this.isValidDate(this.cdsFinalisationDate),
       this.isValidDate(this.ipaffsNotificationDate)
