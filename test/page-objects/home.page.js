@@ -20,7 +20,7 @@ class HomePage extends Page {
   }
 
   get signInBasedOnTestEmail() {
-    return $('//tr[th[text()="front-end-tests@testexample.com"]]//td//a')
+    return $('//tr[th[text()="front-end-tests@example.com"]]//td//a')
   }
 
   async login() {

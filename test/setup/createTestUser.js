@@ -2,7 +2,7 @@ import HomePage from '../page-objects/home.page'
 import { $ } from '@wdio/globals'
 
 const testUser = {
-  email: 'front-end-tests@testexample.com',
+  email: 'front-end-tests@example.com',
   firstName: 'fName',
   lastName: 'lName',
   enrolmentCount: '1',
