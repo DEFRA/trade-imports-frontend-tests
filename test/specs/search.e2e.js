@@ -186,7 +186,7 @@ describe('Search page', () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search('bad search term')
     expect(await SearchPage.getSearchErrorText()).toContain(
-      'Enter an MRN, CHED, GMR or DUCR reference in the correct format'
+      'Enter an MRN, CHED or GMR reference in the correct format'
     )
   })
 
@@ -194,7 +194,7 @@ describe('Search page', () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search('')
     expect(await SearchPage.getSearchErrorText()).toContain(
-      'Enter an MRN, CHED, GMR or DUCR'
+      'Enter an MRN, CHED or GMR'
     )
   })
 
@@ -212,7 +212,7 @@ describe('Search page', () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(invalidGmr)
     expect(await SearchPage.getSearchErrorText()).toContain(
-      `Enter an MRN, CHED, GMR or DUCR reference in the correct format`
+      `Enter an MRN, CHED or GMR reference in the correct format`
     )
   })
 })
