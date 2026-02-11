@@ -35,6 +35,12 @@ class SearchResultsPage extends Page {
     return $('.btms-details')
   }
 
+  get gmrLinkElement() {
+    return $(
+      '//dl[contains(@class,"btms-customs-declaration-summary")]//dt[normalize-space()="GMR"]/following-sibling::dd//a'
+    )
+  }
+
   async getResultText() {
     return await this.getTextFrom(this.resultTextElement)
   }
@@ -45,6 +51,14 @@ class SearchResultsPage extends Page {
 
   async ipaffDeclarationAllResultText() {
     return await this.getResultText(this.ipaffDeclarationAllResultTextElement)
+  }
+
+  async getGmrValue() {
+    return await this.getTextFrom(this.gmrLinkElement)
+  }
+
+  async clickGmrLink() {
+    return await this.clickLink(this.gmrLinkElement)
   }
 
   async getCdsStatus() {

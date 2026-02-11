@@ -206,6 +206,11 @@ describe('CDS Status on GMR and Search Results Page', () => {
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
     )
+    const displayedGmr = await SearchResultsPage.getGmrValue()
+    await SearchResultsPage.clickGmrLink()
+    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
+      `Showing result for\n${displayedGmr}`
+    )
   })
 
   it('should navigate to the correct customs declaration for Finalised - Released', async () => {
@@ -217,6 +222,11 @@ describe('CDS Status on GMR and Search Results Page', () => {
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
     )
+    const displayedGmr = await SearchResultsPage.getGmrValue()
+    await SearchResultsPage.clickGmrLink()
+    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
+      `Showing result for\n${displayedGmr}`
+    )
   })
 
   it('should navigate to the correct customs declaration for Finalised - Released to King’s warehouse', async () => {
@@ -225,6 +235,12 @@ describe('CDS Status on GMR and Search Results Page', () => {
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
+
+    const displayedGmr = await SearchResultsPage.getGmrValue()
+    await SearchResultsPage.clickGmrLink()
+    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
+      `Showing result for\n${displayedGmr}`
+    )
   })
 
   it('should navigate to the correct customs declaration for Finalised - Seized', async () => {
@@ -235,6 +251,11 @@ describe('CDS Status on GMR and Search Results Page', () => {
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
+    )
+    const displayedGmr = await SearchResultsPage.getGmrValue()
+    await SearchResultsPage.clickGmrLink()
+    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
+      `Showing result for\n${displayedGmr}`
     )
   })
 
@@ -247,6 +268,11 @@ describe('CDS Status on GMR and Search Results Page', () => {
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
     )
+    const displayedGmr = await SearchResultsPage.getGmrValue()
+    await SearchResultsPage.clickGmrLink()
+    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
+      `Showing result for\n${displayedGmr}`
+    )
   })
 
   it('should navigate to the correct customs declaration for In progress - Awaiting trader', async () => {
@@ -258,6 +284,11 @@ describe('CDS Status on GMR and Search Results Page', () => {
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
     )
+    const displayedGmr = await SearchResultsPage.getGmrValue()
+    await SearchResultsPage.clickGmrLink()
+    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
+      `Showing result for\n${displayedGmr}`
+    )
   })
 
   it('should navigate to the correct customs declaration for Finalised - Transferred to MSS', async () => {
@@ -266,6 +297,12 @@ describe('CDS Status on GMR and Search Results Page', () => {
     await GmrSearchResultsPage.open(gmrId)
     await GmrSearchResultsPage.clickLinkedMrn(targetMrn)
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
+
+    const displayedGmr = await SearchResultsPage.getGmrValue()
+    await SearchResultsPage.clickGmrLink()
+    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
+      `Showing result for\n${displayedGmr}`
+    )
   })
 
   it('should navigate to the correct customs declaration for Finalised - Cancelled while pre-lodged', async () => {
@@ -276,6 +313,11 @@ describe('CDS Status on GMR and Search Results Page', () => {
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
+    )
+    const displayedGmr = await SearchResultsPage.getGmrValue()
+    await SearchResultsPage.clickGmrLink()
+    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
+      `Showing result for\n${displayedGmr}`
     )
   })
 
@@ -288,6 +330,11 @@ describe('CDS Status on GMR and Search Results Page', () => {
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
     )
+    const displayedGmr = await SearchResultsPage.getGmrValue()
+    await SearchResultsPage.clickGmrLink()
+    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
+      `Showing result for\n${displayedGmr}`
+    )
   })
 
   it('should navigate to the correct customs declaration for In progress', async () => {
@@ -298,6 +345,11 @@ describe('CDS Status on GMR and Search Results Page', () => {
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
+    )
+    const displayedGmr = await SearchResultsPage.getGmrValue()
+    await SearchResultsPage.clickGmrLink()
+    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
+      `Showing result for\n${displayedGmr}`
     )
   })
 
@@ -310,6 +362,11 @@ describe('CDS Status on GMR and Search Results Page', () => {
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
     )
+    const displayedGmr = await SearchResultsPage.getGmrValue()
+    await SearchResultsPage.clickGmrLink()
+    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
+      `Showing result for\n${displayedGmr}`
+    )
   })
 
   it('should navigate to the correct customs declaration for In progress - Awaiting CDS', async () => {
@@ -320,6 +377,11 @@ describe('CDS Status on GMR and Search Results Page', () => {
     expect(await SearchResultsPage.getCdsStatus()).toContain(expectedStatus)
     expect(await SearchResultsPage.getCdsStatusTagColor()).toBe(
       statusColorMap[expectedStatus]
+    )
+    const displayedGmr = await SearchResultsPage.getGmrValue()
+    await SearchResultsPage.clickGmrLink()
+    expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
+      `Showing result for\n${displayedGmr}`
     )
   })
 })
