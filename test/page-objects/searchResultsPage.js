@@ -61,6 +61,12 @@ class SearchResultsPage extends Page {
     return await this.clickLink(this.gmrLinkElement)
   }
 
+  async isGmrLinkDisplayed() {
+    const el = await this.gmrLinkElement
+    if (!(await el.isExisting())) return false
+    return await el.isDisplayed()
+  }
+
   async getCdsStatus() {
     const tags = await this.cdsStatusTagCandidates
     for (const tag of tags) {
