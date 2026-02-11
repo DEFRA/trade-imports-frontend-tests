@@ -41,6 +41,12 @@ class SearchResultsPage extends Page {
     )
   }
 
+  gmrLinkElementForMrn(mrn) {
+    return $(
+      `//details[contains(@class,"btms-details") and @aria-label="${mrn}"]//dt[normalize-space()="GMR"]/following-sibling::dd//a`
+    )
+  }
+
   async getResultText() {
     return await this.getTextFrom(this.resultTextElement)
   }
@@ -63,6 +69,12 @@ class SearchResultsPage extends Page {
 
   async isGmrLinkDisplayed() {
     const el = await this.gmrLinkElement
+    if (!(await el.isExisting())) return false
+    return await el.isDisplayed()
+  }
+
+  async isGmrLinkDisplayedForMrn(mrn) {
+    const el = await this.gmrLinkElementForMrn(mrn)
     if (!(await el.isExisting())) return false
     return await el.isDisplayed()
   }
