@@ -35,5 +35,6 @@ describe('Search Results Page for IUU', () => {
     expect(await SearchResultsPage.getCdsStatus()).toBe(
       'In progress - Awaiting CDS'
     )
+    expect(await SearchResultsPage.isGmrLinkDisplayed()).toBe(false)
   })
 })
