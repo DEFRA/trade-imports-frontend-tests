@@ -1,0 +1,34 @@
+{
+  "gmrId": "GMRA11350004",
+  "haulierEORI": "GB1196193155298",
+  "state": "OPEN",
+  "inspectionRequired": null,
+  "reportToLocations": null,
+  "updatedDateTime": "2026-02-17T09:00:00.353Z",
+  "direction": "UK_INBOUND",
+  "haulierType": "NATO_MOD",
+  "isUnaccompanied": true,
+  "vehicleRegNum": "DN05 VDB",
+  "trailerRegistrationNums": ["V013 WKS", "YT08 NYD"],
+  "containerReferenceNums": null,
+  "actualCrossing": {
+    "localDateTimeOfArrival": "2026-02-17T09:00",
+    "routeId": "19"
+  },
+  "checkedInCrossing": {
+    "localDateTimeOfArrival": "2026-02-17T09:00",
+    "routeId": "19"
+  },
+  "plannedCrossing": {
+    "localDateTimeOfDeparture": "2026-02-17T09:00",
+    "routeId": "19"
+  },
+  "declarations": {
+    "customs": [
+      {
+        "id": "24GBBGBKCDMS135016"
+      }
+    ],
+    "transits": []
+  }
+}
