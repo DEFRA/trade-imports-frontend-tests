@@ -105,7 +105,7 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
     expect(await SearchResultsPage.getResultText()).toContain(mrnId)
   })
 
-  it('Should be able to search by VRN and check heading and title and row count', async () => {
+  it('Should be able to search by VRN and check heading and title and row count and order', async () => {
     const vrnId = 'DN05 VDB'
     await SearchPage.open()
     await SearchPage.search(vrnId)
@@ -119,20 +119,20 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
       'Linked GMRs'
     )
     expect(await VrnTrnSearchResultsPage.getLinkedGmrsCount()).toBe(5)
+
+    const rows = await VrnTrnSearchResultsPage.getLinkedGmrsRowData()
+    const actual = rows.map((r) => [r.gmr, r.linkedDeclarations, r.arrivalText])
+    const expected = [
+      ['GMRA11350007', '1', 'Not arrived'],
+      ['GMRA11350002', '1', '19 February 2026, 10:00'],
+      ['GMRA11350005', '1', '18 February 2026, 09:00'],
+      ['GMRA11350006', '1', '17 February 2026, 11:00'],
+      ['GMRA11350004', '1', '17 February 2026, 09:00']
+    ]
+    expect(actual).toEqual(expected)
   })
 
-  it('Should see Not Arrived listed first after searching by VRN', async () => {
-    const arrivalsVrn =
-      await VrnTrnSearchResultsPage.getLinkedGmrsArrivalTexts()
-    const notArrivedCountVrn = arrivalsVrn.filter(
-      (t) => t === 'Not arrived'
-    ).length
-    expect(
-      arrivalsVrn.slice(0, notArrivedCountVrn).every((t) => t === 'Not arrived')
-    ).toBe(true)
-  })
-
-  it('Should be able to search by TRN and check heading and title and row count', async () => {
+  it('Should be able to search by TRN and check heading and title and row count and order', async () => {
     const trnId = 'YT08 NYD'
     await SearchPage.open()
     await SearchPage.search(trnId)
@@ -146,16 +146,16 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
       'Linked GMRs'
     )
     expect(await VrnTrnSearchResultsPage.getLinkedGmrsCount()).toBe(5)
-  })
 
-  it('Should see Not Arrived listed first after searching by TRN', async () => {
-    const arrivalsTrn =
-      await VrnTrnSearchResultsPage.getLinkedGmrsArrivalTexts()
-    const notArrivedCountTrn = arrivalsTrn.filter(
-      (t) => t === 'Not arrived'
-    ).length
-    expect(
-      arrivalsTrn.slice(0, notArrivedCountTrn).every((t) => t === 'Not arrived')
-    ).toBe(true)
+    const rows = await VrnTrnSearchResultsPage.getLinkedGmrsRowData()
+    const actual = rows.map((r) => [r.gmr, r.linkedDeclarations, r.arrivalText])
+    const expected = [
+      ['GMRA11350007', '1', 'Not arrived'],
+      ['GMRA11350002', '1', '19 February 2026, 10:00'],
+      ['GMRA11350005', '1', '18 February 2026, 09:00'],
+      ['GMRA11350006', '1', '17 February 2026, 11:00'],
+      ['GMRA11350004', '1', '17 February 2026, 09:00']
+    ]
+    expect(actual).toEqual(expected)
   })
 })

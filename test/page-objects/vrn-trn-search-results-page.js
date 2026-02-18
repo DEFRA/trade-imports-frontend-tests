@@ -31,7 +31,7 @@ class VrnTrnSearchResultsPage extends Page {
 
   async getLinkedGmrsCount() {
     await this.elementIsDisplayed(this.linkedGmrsTable)
-    return this.linkedGmrsRows.length
+    return await this.linkedGmrsRows.length
   }
 
   async getLinkedGmrsArrivalTexts() {
@@ -43,39 +43,31 @@ class VrnTrnSearchResultsPage extends Page {
     for (const row of rows) {
       arrivals.push(await row.$('td:nth-child(3)').getText())
     }
-    return arrivals
+    return await arrivals
   }
 
-  async getLinkedGmrsParsedArrivalTimes() {
-    const arrivals = await this.getLinkedGmrsArrivalTexts()
-    const monthIdx = {
-      January: 0,
-      February: 1,
-      March: 2,
-      April: 3,
-      May: 4,
-      June: 5,
-      July: 6,
-      August: 7,
-      September: 8,
-      October: 9,
-      November: 10,
-      December: 11
+  async getLinkedGmrsRowData() {
+    await this.elementIsDisplayed(this.linkedGmrsTable)
+    await browser.waitUntil(
+      async () => {
+        const rows = await $$(
+          '//table[caption[normalize-space(.)="Linked GMRs"]]/tbody/tr'
+        )
+        return rows.length > 0
+      },
+      { timeout: 5000, timeoutMsg: 'Linked GMR rows not found' }
+    )
+    const rows = await $$(
+      '//table[caption[normalize-space(.)="Linked GMRs"]]/tbody/tr'
+    )
+    const data = []
+    for (const row of rows) {
+      const gmr = await row.$('td:nth-child(1) a').getText()
+      const linkedDeclarations = await row.$('td:nth-child(2)').getText()
+      const arrivalText = await row.$('td:nth-child(3)').getText()
+      data.push({ gmr, linkedDeclarations, arrivalText })
     }
-    const parse = (t) => {
-      if (t === 'Not arrived') return null
-      const [datePart, timePart] = t.split(', ')
-      const [dayStr, monthStr, yearStr] = datePart.split(' ')
-      const [hourStr, minuteStr] = timePart.split(':')
-      return new Date(
-        parseInt(yearStr, 10),
-        monthIdx[monthStr],
-        parseInt(dayStr, 10),
-        parseInt(hourStr, 10),
-        parseInt(minuteStr, 10)
-      ).getTime()
-    }
-    return arrivals.map(parse)
+    return data
   }
 }
 export default new VrnTrnSearchResultsPage()
