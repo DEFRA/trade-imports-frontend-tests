@@ -8,7 +8,7 @@ import SearchResultsPage from '../page-objects/searchResultsPage.js'
 import VrnTrnSearchResultsPage from '../page-objects/vrn-trn-search-results-page.js'
 import SearchPage from 'page-objects/search.page.js'
 
-describe('Search Results Page for GMR Page and GMR Links', () => {
+describe('Search Results Page for GMR, VRN and TRN Page', () => {
   before(async () => {
     await sendCdsMessageFromFile('../data/gmr/clearance-gmr.xml')
     await sendCdsMessageFromFile('../data/gmr/clearance-gmr-1.xml')
