@@ -29,6 +29,7 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
     await sendGmrMessageFromFile('../data/gmr/2-gmr-empty-transit.json')
     await sendGmrMessageFromFile('../data/gmr/3-gmr-null-customs.json')
     await sendGmrMessageFromFile('../data/gmr/4-gmr-null-transit.json')
+    await sendGmrMessageFromFile('../data/gmr/5-gmr.json')
     await HomePage.open()
 
     if (!(await SearchPage.sessionActive())) {
@@ -117,6 +118,7 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
     expect(await VrnTrnSearchResultsPage.getLinkedGmrsHeaderText()).toBe(
       'Linked GMRs'
     )
+    expect(await VrnTrnSearchResultsPage.getLinkedGmrsCount()).toBe(5)
   })
 
   it('Should be able to search by TRN', async () => {
@@ -132,5 +134,6 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
     expect(await VrnTrnSearchResultsPage.getLinkedGmrsHeaderText()).toBe(
       'Linked GMRs'
     )
+    expect(await VrnTrnSearchResultsPage.getLinkedGmrsCount()).toBe(5)
   })
 })

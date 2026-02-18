@@ -1,5 +1,5 @@
 {
-  "gmrId": "GMRA11350005",
+  "gmrId": "GMRA11350007",
   "haulierEORI": "GB1196193155298",
   "state": "OPEN",
   "inspectionRequired": null,
@@ -12,7 +12,7 @@
   "trailerRegistrationNums": ["V013 WKS", "YT08 NYD"],
   "containerReferenceNums": null,
   "actualCrossing": {
-    "localDateTimeOfArrival": "2026-02-18T09:00",
+    "localDateTimeOfArrival": null,
     "routeId": "19"
   },
   "checkedInCrossing": {
@@ -24,11 +24,11 @@
     "routeId": "19"
   },
   "declarations": {
-    "customs": null,
-    "transits": [
+    "customs": [
       {
-        "id": "24GBBGBKCDMS135017"
+        "id": "24GBBGBKCDMS135018"
       }
-    ]
+    ],
+    "transits": null
   }
 }
