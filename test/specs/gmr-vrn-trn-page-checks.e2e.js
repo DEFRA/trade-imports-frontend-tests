@@ -119,6 +119,15 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
       'Linked GMRs'
     )
     expect(await VrnTrnSearchResultsPage.getLinkedGmrsCount()).toBe(5)
+
+    const arrivalsVrn =
+      await VrnTrnSearchResultsPage.getLinkedGmrsArrivalTexts()
+    const notArrivedCountVrn = arrivalsVrn.filter(
+      (t) => t === 'Not arrived'
+    ).length
+    expect(
+      arrivalsVrn.slice(0, notArrivedCountVrn).every((t) => t === 'Not arrived')
+    ).toBe(true)
   })
 
   it('Should be able to search by TRN', async () => {
@@ -135,5 +144,14 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
       'Linked GMRs'
     )
     expect(await VrnTrnSearchResultsPage.getLinkedGmrsCount()).toBe(5)
+
+    const arrivalsTrn =
+      await VrnTrnSearchResultsPage.getLinkedGmrsArrivalTexts()
+    const notArrivedCountTrn = arrivalsTrn.filter(
+      (t) => t === 'Not arrived'
+    ).length
+    expect(
+      arrivalsTrn.slice(0, notArrivedCountTrn).every((t) => t === 'Not arrived')
+    ).toBe(true)
   })
 })
