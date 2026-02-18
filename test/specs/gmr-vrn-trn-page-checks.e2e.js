@@ -19,11 +19,13 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
     await sendCdsMessageFromFile(
       '../data/gmr/4-clearance-gmr-transit-null-2.xml'
     )
+    await sendCdsMessageFromFile('../data/gmr/5-clearance.xml')
     await sendIpaffMessageFromFile('../data/gmr/ipaff-gmr.json')
     await sendIpaffMessageFromFile('../data/gmr/1-ipaff-gmr-customs.json')
     await sendIpaffMessageFromFile('../data/gmr/2-ipaff-gmr-transit.json')
     await sendIpaffMessageFromFile('../data/gmr/3-ipaff-gmr-customs-null.json')
     await sendIpaffMessageFromFile('../data/gmr/4-ipaff-gmr-transit-null.json')
+    await sendIpaffMessageFromFile('../data/gmr/5-ipaff.json')
     await sendGmrMessageFromFile('../data/gmr/gmr.json')
     await sendGmrMessageFromFile('../data/gmr/1-gmr-empty-customs.json')
     await sendGmrMessageFromFile('../data/gmr/2-gmr-empty-transit.json')
@@ -132,6 +134,22 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
     expect(actual).toEqual(expected)
   })
 
+  it('Should be able to navigate to GMR and MRN page from VRN search', async () => {
+    const vrnId = 'DN05 VDB'
+    await SearchPage.open()
+    await SearchPage.search(vrnId)
+    const rows = await VrnTrnSearchResultsPage.getLinkedGmrsRowData()
+    const firstGmrId = rows[0]?.gmr
+    await VrnTrnSearchResultsPage.clickFirstLinkedGmr()
+    expect(await GmrSearchResultsPage.getPageTitle()).toBe(
+      `Showing result for ${firstGmrId} - Border Trade Matching Service`
+    )
+    const mrnRows = await GmrSearchResultsPage.getLinkedMrnData()
+    const firstMrnId = mrnRows[0]?.mrn
+    await GmrSearchResultsPage.clickFirstLinkedMrn()
+    expect(await SearchResultsPage.getResultText()).toContain(firstMrnId)
+  })
+
   it('Should be able to search by TRN and check heading and title and row count and order', async () => {
     const trnId = 'YT08 NYD'
     await SearchPage.open()
@@ -157,5 +175,21 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
       ['GMRA11350004', '1', '17 February 2026, 09:00']
     ]
     expect(actual).toEqual(expected)
+  })
+
+  it('Should be able to navigate to GMR and MRN page from TRN search', async () => {
+    const trnId = 'YT08 NYD'
+    await SearchPage.open()
+    await SearchPage.search(trnId)
+    const rows = await VrnTrnSearchResultsPage.getLinkedGmrsRowData()
+    const firstGmrId = rows[0]?.gmr
+    await VrnTrnSearchResultsPage.clickFirstLinkedGmr()
+    expect(await GmrSearchResultsPage.getPageTitle()).toBe(
+      `Showing result for ${firstGmrId} - Border Trade Matching Service`
+    )
+    const mrnRows = await GmrSearchResultsPage.getLinkedMrnData()
+    const firstMrnId = mrnRows[0]?.mrn
+    await GmrSearchResultsPage.clickFirstLinkedMrn()
+    expect(await SearchResultsPage.getResultText()).toContain(firstMrnId)
   })
 })

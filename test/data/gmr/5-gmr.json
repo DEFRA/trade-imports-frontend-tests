@@ -4,7 +4,7 @@
   "state": "OPEN",
   "inspectionRequired": null,
   "reportToLocations": null,
-  "updatedDateTime": "2026-02-18T09:00:00.353Z",
+  "updatedDateTime": "2026-02-18T10:00:00.353Z",
   "direction": "UK_INBOUND",
   "haulierType": "NATO_MOD",
   "isUnaccompanied": true,
@@ -16,17 +16,17 @@
     "routeId": "19"
   },
   "checkedInCrossing": {
-    "localDateTimeOfArrival": "2026-02-18T09:00",
+    "localDateTimeOfArrival": "2026-02-18T10:00",
     "routeId": "19"
   },
   "plannedCrossing": {
-    "localDateTimeOfDeparture": "2026-02-18T09:00",
+    "localDateTimeOfDeparture": "2026-02-18T10:00",
     "routeId": "19"
   },
   "declarations": {
     "customs": [
       {
-        "id": "24GBBGBKCDMS135018"
+        "id": "24GBBGBKCDMS135020"
       }
     ],
     "transits": null

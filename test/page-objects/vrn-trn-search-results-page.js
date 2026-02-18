@@ -17,6 +17,12 @@ class VrnTrnSearchResultsPage extends Page {
     return $$('//table[caption[normalize-space(.)="Linked GMRs"]]/tbody/tr')
   }
 
+  get firstLinkedGmrAnchor() {
+    return $(
+      '//table[caption[normalize-space(.)="Linked GMRs"]]/tbody/tr[1]/td[1]/a'
+    )
+  }
+
   async getResultText() {
     return await this.getTextFrom(this.resultTextElement)
   }
@@ -68,6 +74,11 @@ class VrnTrnSearchResultsPage extends Page {
       data.push({ gmr, linkedDeclarations, arrivalText })
     }
     return data
+  }
+
+  async clickFirstLinkedGmr() {
+    await this.elementIsDisplayed(this.firstLinkedGmrAnchor)
+    await this.clickLink(this.firstLinkedGmrAnchor)
   }
 }
 export default new VrnTrnSearchResultsPage()
