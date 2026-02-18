@@ -5,6 +5,7 @@ import { sendGmrMessageFromFile } from '../utils/gmrMessageHandler.js'
 import HomePage from 'page-objects/home.page'
 import GmrSearchResultsPage from '../page-objects/gmr-search-results.page.js'
 import SearchResultsPage from '../page-objects/searchResultsPage.js'
+import VrnTrnSearchResultsPage from '../page-objects/vrn-trn-search-results-page.js'
 import SearchPage from 'page-objects/search.page.js'
 
 describe('Search Results Page for GMR Page and GMR Links', () => {
@@ -101,5 +102,35 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
     )
     await GmrSearchResultsPage.clickLinkedMrn(mrnId)
     expect(await SearchResultsPage.getResultText()).toContain(mrnId)
+  })
+
+  it('Should be able to search by VRN', async () => {
+    const vrnId = 'DN05 VDB'
+    await SearchPage.open()
+    await SearchPage.search(vrnId)
+    expect(await VrnTrnSearchResultsPage.getResultText()).toBe(
+      `Showing result for\n${vrnId}`
+    )
+    expect(await VrnTrnSearchResultsPage.getPageTitleText()).toBe(
+      `Showing result for ${vrnId} - Border Trade Matching Service`
+    )
+    expect(await VrnTrnSearchResultsPage.getLinkedGmrsHeaderText()).toBe(
+      'Linked GMRs'
+    )
+  })
+
+  it('Should be able to search by TRN', async () => {
+    const trnId = 'YT08 NYD'
+    await SearchPage.open()
+    await SearchPage.search(trnId)
+    expect(await VrnTrnSearchResultsPage.getResultText()).toBe(
+      `Showing result for\n${trnId}`
+    )
+    expect(await VrnTrnSearchResultsPage.getPageTitleText()).toBe(
+      `Showing result for ${trnId} - Border Trade Matching Service`
+    )
+    expect(await VrnTrnSearchResultsPage.getLinkedGmrsHeaderText()).toBe(
+      'Linked GMRs'
+    )
   })
 })
