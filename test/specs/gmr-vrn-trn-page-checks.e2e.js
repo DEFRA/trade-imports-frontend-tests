@@ -105,26 +105,19 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
     expect(await SearchResultsPage.getResultText()).toContain(mrnId)
   })
 
-  it('Should be able to search by VRN', async () => {
+  it('Should be able to search by VRN and check heading and title and row count', async () => {
     const vrnId = 'DN05 VDB'
     await SearchPage.open()
     await SearchPage.search(vrnId)
     expect(await VrnTrnSearchResultsPage.getResultText()).toBe(
       `Showing result for\n${vrnId}`
     )
-  })
-
-  it('Should see correct title and heading after searching by VRN', async () => {
-    const vrnId = 'DN05 VDB'
     expect(await VrnTrnSearchResultsPage.getPageTitleText()).toBe(
       `Showing result for ${vrnId} - Border Trade Matching Service`
     )
     expect(await VrnTrnSearchResultsPage.getLinkedGmrsHeaderText()).toBe(
       'Linked GMRs'
     )
-  })
-
-  it('Should see upto 5 listed GMRs after searching by VRN', async () => {
     expect(await VrnTrnSearchResultsPage.getLinkedGmrsCount()).toBe(5)
   })
 
@@ -139,26 +132,19 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
     ).toBe(true)
   })
 
-  it('Should be able to search by TRN', async () => {
+  it('Should be able to search by TRN and check heading and title and row count', async () => {
     const trnId = 'YT08 NYD'
     await SearchPage.open()
     await SearchPage.search(trnId)
     expect(await VrnTrnSearchResultsPage.getResultText()).toBe(
       `Showing result for\n${trnId}`
     )
-  })
-
-  it('Should see correct title and heading after searching by TRN', async () => {
-    const trnId = 'YT08 NYD'
     expect(await VrnTrnSearchResultsPage.getPageTitleText()).toBe(
       `Showing result for ${trnId} - Border Trade Matching Service`
     )
     expect(await VrnTrnSearchResultsPage.getLinkedGmrsHeaderText()).toBe(
       'Linked GMRs'
     )
-  })
-
-  it('Should see upto 5 listed GMRs after searching by TRN', async () => {
     expect(await VrnTrnSearchResultsPage.getLinkedGmrsCount()).toBe(5)
   })
 
