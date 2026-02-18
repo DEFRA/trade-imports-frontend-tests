@@ -112,14 +112,23 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
     expect(await VrnTrnSearchResultsPage.getResultText()).toBe(
       `Showing result for\n${vrnId}`
     )
+  })
+
+  it('Should see correct title and heading after searching by VRN', async () => {
+    const vrnId = 'DN05 VDB'
     expect(await VrnTrnSearchResultsPage.getPageTitleText()).toBe(
       `Showing result for ${vrnId} - Border Trade Matching Service`
     )
     expect(await VrnTrnSearchResultsPage.getLinkedGmrsHeaderText()).toBe(
       'Linked GMRs'
     )
-    expect(await VrnTrnSearchResultsPage.getLinkedGmrsCount()).toBe(5)
+  })
 
+  it('Should see upto 5 listed GMRs after searching by VRN', async () => {
+    expect(await VrnTrnSearchResultsPage.getLinkedGmrsCount()).toBe(5)
+  })
+
+  it('Should see Not Arrived listed first after searching by VRN', async () => {
     const arrivalsVrn =
       await VrnTrnSearchResultsPage.getLinkedGmrsArrivalTexts()
     const notArrivedCountVrn = arrivalsVrn.filter(
@@ -137,14 +146,23 @@ describe('Search Results Page for GMR Page and GMR Links', () => {
     expect(await VrnTrnSearchResultsPage.getResultText()).toBe(
       `Showing result for\n${trnId}`
     )
+  })
+
+  it('Should see correct title and heading after searching by TRN', async () => {
+    const trnId = 'YT08 NYD'
     expect(await VrnTrnSearchResultsPage.getPageTitleText()).toBe(
       `Showing result for ${trnId} - Border Trade Matching Service`
     )
     expect(await VrnTrnSearchResultsPage.getLinkedGmrsHeaderText()).toBe(
       'Linked GMRs'
     )
-    expect(await VrnTrnSearchResultsPage.getLinkedGmrsCount()).toBe(5)
+  })
 
+  it('Should see upto 5 listed GMRs after searching by TRN', async () => {
+    expect(await VrnTrnSearchResultsPage.getLinkedGmrsCount()).toBe(5)
+  })
+
+  it('Should see Not Arrived listed first after searching by TRN', async () => {
     const arrivalsTrn =
       await VrnTrnSearchResultsPage.getLinkedGmrsArrivalTexts()
     const notArrivedCountTrn = arrivalsTrn.filter(
