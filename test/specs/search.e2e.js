@@ -186,7 +186,7 @@ describe('Search page', () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search('bad search term')
     expect(await SearchPage.getSearchErrorText()).toContain(
-      'Enter an MRN, CHED or GMR reference in the correct format'
+      'BAD SEARCH TERM cannot be found'
     )
   })
 
@@ -212,7 +212,7 @@ describe('Search page', () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(invalidGmr)
     expect(await SearchPage.getSearchErrorText()).toContain(
-      `Enter an MRN, CHED or GMR reference in the correct format`
+      `GMR1000000XX cannot be found`
     )
   })
 })

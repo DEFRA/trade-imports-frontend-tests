@@ -4,7 +4,7 @@
   "state": "OPEN",
   "inspectionRequired": null,
   "reportToLocations": null,
-  "updatedDateTime": "2026-02-17T09:00:00.353Z",
+  "updatedDateTime": "2026-02-17T11:00:00.353Z",
   "direction": "UK_INBOUND",
   "haulierType": "NATO_MOD",
   "isUnaccompanied": true,
@@ -12,15 +12,15 @@
   "trailerRegistrationNums": ["V013 WKS", "YT08 NYD"],
   "containerReferenceNums": null,
   "actualCrossing": {
-    "localDateTimeOfArrival": "2026-02-17T09:00",
+    "localDateTimeOfArrival": "2026-02-17T11:00",
     "routeId": "19"
   },
   "checkedInCrossing": {
-    "localDateTimeOfArrival": "2026-02-17T09:00",
+    "localDateTimeOfArrival": "2026-02-17T11:00",
     "routeId": "19"
   },
   "plannedCrossing": {
-    "localDateTimeOfDeparture": "2026-02-17T09:00",
+    "localDateTimeOfDeparture": "2026-02-17T11:00",
     "routeId": "19"
   },
   "declarations": {
