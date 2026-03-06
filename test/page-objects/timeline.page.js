@@ -5,6 +5,10 @@ class TimelinePage extends Page {
     return super.open('/search')
   }
 
+  get timelineContainer() {
+    return $('.moj-timeline.btms-search-result-timeline')
+  }
+
   get latestTab() {
     return $('#tab_latest-view')
   }
@@ -27,6 +31,19 @@ class TimelinePage extends Page {
 
   async getTimelineInfoMessage() {
     return await this.getTextFrom(this.timelineInfoMessage)
+  }
+
+  async allTimelineText() {
+    const elements = await this.timelineContainer.$$('*')
+    let texts = []
+    for (const el of elements) {
+      const txt = await el.getText()
+      if (txt && txt.trim()) {
+        texts.push(txt.trim())
+      }
+    }
+    texts = texts.filter((t) => !t.includes('\n'))
+    return texts
   }
 }
 
