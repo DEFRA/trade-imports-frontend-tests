@@ -5,6 +5,7 @@ import SearchPage from 'page-objects/search.page'
 import SearchResultsPage from '../page-objects/searchResultsPage'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
+import TimelinePage from '../page-objects/timeline.page.js'
 
 describe('Timeline Search', () => {
   before(async () => {
@@ -32,7 +33,12 @@ describe('Timeline Search', () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
-    // more steps and assertions
+
+    await TimelinePage.clickTimelineTab()
+    await expect(await TimelinePage.timelineInfoMessage).toBeDisplayed()
+    await expect(await TimelinePage.timelineInfoMessage.getText()).toContain(
+      'The timeline includes events from the past 30 days only.'
+    )
   })
 
   it('Should be able to sarch for a Valid MRN that has MRN dropdown', async () => {
@@ -40,6 +46,11 @@ describe('Timeline Search', () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
-    // more steps and assertions
+
+    await TimelinePage.clickTimelineTab()
+    await expect(await TimelinePage.timelineInfoMessage).toBeDisplayed()
+    await expect(await TimelinePage.timelineInfoMessage.getText()).toContain(
+      'The timeline includes events from the past 30 days only.'
+    )
   })
 })
