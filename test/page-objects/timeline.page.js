@@ -21,6 +21,10 @@ class TimelinePage extends Page {
     return $('#tab_timeline-view')
   }
 
+  get timelineMrnDropdown() {
+    return $('#timelineMrn')
+  }
+
   async clickLatestTab() {
     await this.latestTab.click()
   }
@@ -44,6 +48,10 @@ class TimelinePage extends Page {
     }
     texts = texts.filter((t) => !t.includes('\n'))
     return texts
+  }
+
+  async isTimelineMrnDropdownVisible() {
+    return await this.timelineMrnDropdown.isDisplayed()
   }
 }
 

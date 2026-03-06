@@ -121,9 +121,11 @@ describe('Timeline Search', () => {
     expectConsecutiveSubsequence(timelineTexts, expectedOrderForBtmsCds)
     expectConsecutiveSubsequence(timelineTexts, expectedOrderForBtmsError)
     expectConsecutiveSubsequence(timelineTexts, expectedOrderForCdsError)
+
+    await expect(await TimelinePage.isTimelineMrnDropdownVisible()).toBe(false)
   })
 
-  it.skip('Should be able to sarch for a Valid MRN that has MRN dropdown', async () => {
+  it('Should be able to sarch for a Valid MRN that has MRN dropdown', async () => {
     const mrn = '24GBBGBKCDMS135001'
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(mrn)
@@ -134,6 +136,7 @@ describe('Timeline Search', () => {
     await expect(await TimelinePage.timelineInfoMessage.getText()).toContain(
       'The timeline includes events from the past 30 days only.'
     )
+    await expect(await TimelinePage.isTimelineMrnDropdownVisible()).toBe(true)
   })
 })
 
