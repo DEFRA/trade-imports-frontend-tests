@@ -13,14 +13,14 @@
       <ServiceHeader>
         <SourceSystem>CDS</SourceSystem>
         <DestinationSystem>ALVS</DestinationSystem>
-        <CorrelationId>CDMS704721</CorrelationId>
-        <ServiceCallTimestamp>2025-12-05T09:01:00.5553237Z</ServiceCallTimestamp>
+        <CorrelationId>CDMA128014</CorrelationId>
+        <ServiceCallTimestamp>2026-03-09T09:00:00.5553237Z</ServiceCallTimestamp>
       </ServiceHeader>
       <Header>
-        <EntryReference>24GBBGBKCDMS135014</EntryReference>
-        <EntryVersionNumber>3</EntryVersionNumber>
-        <PreviousVersionNumber>2</PreviousVersionNumber>
-        <DeclarationUCR>4GB269573944000-PORTACDMS704713</DeclarationUCR>
+        <EntryReference>24GBBGBKCDMA128014</EntryReference>
+        <EntryVersionNumber>2</EntryVersionNumber>
+        <PreviousVersionNumber>1</PreviousVersionNumber>
+        <DeclarationUCR>4GB269573944000-PORTACDMA128014</DeclarationUCR>
         <DeclarationPartNumber />
         <DeclarationType>F</DeclarationType>
         <ArrivalDateTime />
@@ -35,20 +35,13 @@
         <ItemNumber>1</ItemNumber>
         <CustomsProcedureCode>40001CG</CustomsProcedureCode>
         <TaricCommodityCode>1601009105</TaricCommodityCode>
-        <GoodsDescription>SALSICCIA PURO SUINO 24GBBGBKCDMS135014</GoodsDescription>
+        <GoodsDescription>SALSICCIA PURO SUINO</GoodsDescription>
         <ConsigneeId>GB930101485000</ConsigneeId>
         <ConsigneeName>GB930101485000</ConsigneeName>
         <ItemNetMass>50</ItemNetMass>
         <ItemSupplementaryUnits>100</ItemSupplementaryUnits>
         <ItemThirdQuantity />
         <ItemOriginCountryCode>IT</ItemOriginCountryCode>
-        <Document>
-          <DocumentCode>C640</DocumentCode>
-          <DocumentReference>CHEDA.GB.2025.1013501</DocumentReference>
-          <DocumentStatus>AE</DocumentStatus>
-          <DocumentControl>P</DocumentControl>
-          <DocumentQuantity />
-        </Document>
         <Check>
           <CheckCode>H221</CheckCode>
           <DepartmentCode>AHVLA</DepartmentCode>

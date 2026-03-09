@@ -13,13 +13,13 @@
       <ServiceHeader>
         <SourceSystem>CDS</SourceSystem>
         <DestinationSystem>ALVS</DestinationSystem>
-        <CorrelationId>CDMS704711</CorrelationId>
-        <ServiceCallTimestamp>2025-11-05T09:01:00.5553237Z</ServiceCallTimestamp>
+        <CorrelationId>CDMS704722</CorrelationId>
+        <ServiceCallTimestamp>2025-12-05T09:01:00.5553237Z</ServiceCallTimestamp>
       </ServiceHeader>
       <Header>
         <EntryReference>24GBBGBKCDMS135001</EntryReference>
-        <EntryVersionNumber>2</EntryVersionNumber>
-        <PreviousVersionNumber>1</PreviousVersionNumber>
+        <EntryVersionNumber>3</EntryVersionNumber>
+        <PreviousVersionNumber>2</PreviousVersionNumber>
         <DeclarationUCR>4GB269573944000-PORTACDMS704711</DeclarationUCR>
         <DeclarationPartNumber />
         <DeclarationType>F</DeclarationType>
@@ -35,7 +35,7 @@
         <ItemNumber>1</ItemNumber>
         <CustomsProcedureCode>40001CG</CustomsProcedureCode>
         <TaricCommodityCode>1601009105</TaricCommodityCode>
-        <GoodsDescription>SALSICCIA PURO SUINO</GoodsDescription>
+        <GoodsDescription>SALSICCIA PURO SUINO 24GBBGBKCDMS135001</GoodsDescription>
         <ConsigneeId>GB930101485000</ConsigneeId>
         <ConsigneeName>GB930101485000</ConsigneeName>
         <ItemNetMass>50</ItemNetMass>
