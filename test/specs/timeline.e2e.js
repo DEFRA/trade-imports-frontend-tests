@@ -40,7 +40,7 @@ describe('Timeline Search', () => {
       'The timeline includes events from the past 30 days only.'
     )
 
-    const timelineTexts = await TimelinePage.allTimelineText()
+    const timelineTexts = await TimelinePage.allTimelineText(mrn)
 
     const expectedOrderForCdsDecision = [
       'CDS decision request',
@@ -136,6 +136,14 @@ describe('Timeline Search', () => {
       'The timeline includes events from the past 30 days only.'
     )
     await expect(await TimelinePage.isTimelineMrnDropdownVisible()).toBe(true)
+
+    await TimelinePage.selectDropdownAndClickVisibleMoreDetails(mrn)
+    const timelineTexts = await TimelinePage.allTimelineText(mrn)
+
+    const expectedTextForFirstMrn = [
+      'Item 1 - SALSICCIA PURO SUINO 24GBBGBKCDMS135001'
+    ]
+    expectConsecutiveSubsequence(timelineTexts, expectedTextForFirstMrn)
   })
 })
 

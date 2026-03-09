@@ -25,6 +25,10 @@ class TimelinePage extends Page {
     return $('#timelineMrn')
   }
 
+  mrnTimeline(mrn) {
+    return $(`div.mrn-timeline[data-timeline_mrn="${mrn}"]`)
+  }
+
   async clickLatestTab() {
     await this.latestTab.click()
   }
@@ -37,7 +41,8 @@ class TimelinePage extends Page {
     return await this.getTextFrom(this.timelineInfoMessage)
   }
 
-  async allTimelineText() {
+  async allTimelineText(mrn) {
+    await this.elementIsDisplayed(this.mrnTimeline(mrn))
     const elements = await this.timelineContainer.$$('*')
     let texts = []
     for (const el of elements) {
@@ -52,6 +57,19 @@ class TimelinePage extends Page {
 
   async isTimelineMrnDropdownVisible() {
     return await this.timelineMrnDropdown.isDisplayed()
+  }
+
+  async selectDropdownAndClickVisibleMoreDetails(value) {
+    await this.timelineMrnDropdown.selectByVisibleText(value)
+    const links = await $$(
+      'details.govuk-details summary.govuk-details__summary'
+    )
+    for (const link of links) {
+      if (await link.isDisplayed()) {
+        await link.click()
+        break
+      }
+    }
   }
 }
 
