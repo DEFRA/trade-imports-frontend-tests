@@ -47,8 +47,7 @@ describe('Timeline Search', () => {
       'CDS to BTMS',
       'Version',
       '3',
-      'Created',
-      '27 February 2026, 09:05:00'
+      'Created'
     ]
 
     const expectedOrderForChed = [
@@ -58,8 +57,7 @@ describe('Timeline Search', () => {
       'VALIDATED',
       'Decision',
       'Horse Re-entry',
-      'Created',
-      '27 February 2026, 09:15:00'
+      'Created'
     ]
 
     const expectedOrderForCdsFinalisation = [
@@ -69,8 +67,7 @@ describe('Timeline Search', () => {
       'Finalised - Released',
       'Version',
       '3',
-      'Created',
-      '27 February 2026, 09:20:00'
+      'Created'
     ]
 
     const expectedOrderForBtmsTrader = [
