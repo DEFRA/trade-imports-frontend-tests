@@ -3,10 +3,9 @@ import { expect } from '@wdio/globals'
 import HomePage from '../page-objects/home.page'
 import SearchPage from 'page-objects/search.page'
 import SearchResultsPage from '../page-objects/searchResultsPage'
+import TimelinePage from '../page-objects/timeline.page.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
-
-import TimelinePage from '../page-objects/timeline.page.js'
 
 describe('Timeline Search', () => {
   before(async () => {
