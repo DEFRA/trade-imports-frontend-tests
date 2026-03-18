@@ -26,7 +26,7 @@ class TimelinePage extends Page {
   }
 
   mrnTimeline(mrn) {
-    return $(`div.mrn-timeline[data-timeline_mrn="${mrn}"]`)
+    return $(`div.mrn-timeline[data-timeline_ref="${mrn}"]`)
   }
 
   async clickLatestTab() {
