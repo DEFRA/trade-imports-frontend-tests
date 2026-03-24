@@ -46,6 +46,10 @@ class SearchPage extends Page {
   async sessionActive() {
     return await this.signOut.isExisting()
   }
+
+  async isSearchButtonVisible() {
+    return await this.elementIsDisplayed(this.searchButton)
+  }
 }
 
 export default new SearchPage()
