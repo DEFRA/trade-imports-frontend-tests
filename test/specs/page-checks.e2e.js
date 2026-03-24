@@ -94,6 +94,22 @@ describe('Page Redirection', () => {
     )
   })
 
+  it('Should get redirected when going to the Admin Search Results Page without logging in', async () => {
+    await HomePage.openPage(
+      '/admin/search?searchTerm=24GBBGBKCDMS704709&searchType=information'
+    )
+    expect(await HomePage.isGatewayRadioButtonVisible()).toBe(true)
+
+    await HomePage.gatewayLogin()
+    await HomePage.loginRegisteredUser()
+    await HomePage.openPage(
+      '/admin/search?searchTerm=24GBBGBKCDMS704709&searchType=information'
+    )
+    await expect(browser).toHaveTitle(
+      'You do not have the correct permissions to access this service - Border Trade Matching Service'
+    )
+  })
+
   it('Should get redirected when trying to download a manual release report', async () => {
     await HomePage.openPage(
       '/reporting/manual-releases.csv?startDate=24%2F3%2F2026&endDate=24%2F3%2F2026'
