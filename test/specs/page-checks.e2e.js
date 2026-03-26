@@ -82,13 +82,25 @@ describe('Page Redirection', () => {
     expect(await LatestActivityPage.isBtmsHeaderVisible()).toBe(true)
   })
 
-  it('Should get redirected when going to the Admin Search Page without logging in', async () => {
-    await HomePage.openPage('/admin/search')
+  it('Should get redirected when going to the Admin DLQ Page without logging in', async () => {
+    await HomePage.openPage('/admin/dlq')
     expect(await HomePage.isGatewayRadioButtonVisible()).toBe(true)
 
     await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
-    await HomePage.openPage('/admin/search')
+    await HomePage.openPage('/admin/dlq')
+    await expect(browser).toHaveTitle(
+      'You do not have the correct permissions to access this service - Border Trade Matching Service'
+    )
+  })
+
+  it('Should get redirected when going to the Admin messages Page without logging in', async () => {
+    await HomePage.openPage('/admin/messages')
+    expect(await HomePage.isGatewayRadioButtonVisible()).toBe(true)
+
+    await HomePage.gatewayLogin()
+    await HomePage.loginRegisteredUser()
+    await HomePage.openPage('/admin/messages')
     await expect(browser).toHaveTitle(
       'You do not have the correct permissions to access this service - Border Trade Matching Service'
     )
@@ -96,14 +108,14 @@ describe('Page Redirection', () => {
 
   it('Should get redirected when going to the Admin Search Results Page without logging in', async () => {
     await HomePage.openPage(
-      '/admin/search?searchTerm=24GBBGBKCDMS704709&searchType=information'
+      '/admin/messages?searchTerm=24GBBGBKCDMS704709&searchType=information'
     )
     expect(await HomePage.isGatewayRadioButtonVisible()).toBe(true)
 
     await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
     await HomePage.openPage(
-      '/admin/search?searchTerm=24GBBGBKCDMS704709&searchType=information'
+      '/admin/messages?searchTerm=24GBBGBKCDMS704709&searchType=information'
     )
     await expect(browser).toHaveTitle(
       'You do not have the correct permissions to access this service - Border Trade Matching Service'
