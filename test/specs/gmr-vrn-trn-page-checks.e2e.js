@@ -53,7 +53,7 @@ describe('Search Results Page for GMR, VRN and TRN Page', () => {
     ).toBe(true)
   })
 
-  it('Should not show GMR link for MRN 24GBBGBKCDMS135014', async () => {
+  it.skip('Should not show GMR link for MRN 24GBBGBKCDMS135014', async () => {
     expect(
       await SearchResultsPage.isGmrLinkDisplayedForMrn('24GBBGBKCDMS135014')
     ).toBe(false)

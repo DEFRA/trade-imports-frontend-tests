@@ -23,6 +23,10 @@ class HomePage extends Page {
     return $('//tr[th[text()="front-end-tests@example.com"]]//td//a')
   }
 
+  async openPage(path) {
+    return await browser.url(path)
+  }
+
   async login() {
     return await this.clickLink(this.signInLink)
   }
@@ -35,6 +39,14 @@ class HomePage extends Page {
   async loginRegisteredUser() {
     await ensureTestUserExists()
     return await this.clickLink(this.signInBasedOnTestEmail)
+  }
+
+  async isGatewayRadioButtonVisible() {
+    return await this.elementIsDisplayed(this.gatewayRadioButton)
+  }
+
+  async isGatewayRadioButtonVisibleWithoutCheck() {
+    return await this.gatewayRadioButton.isDisplayed()
   }
 }
 

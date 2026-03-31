@@ -83,7 +83,7 @@ class LatestActivityPage extends Page {
   }
 
   async isBtmsHeaderVisible() {
-    return await this.btmsHeader.isDisplayed()
+    return await this.elementIsDisplayed(this.btmsHeader)
   }
 
   async isCdsHeaderVisible() {
