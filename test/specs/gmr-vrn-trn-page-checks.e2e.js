@@ -12,6 +12,7 @@ describe('Search Results Page for GMR, VRN and TRN Page', () => {
   before(async () => {
     await sendCdsMessageFromFile('../data/gmr/clearance-gmr.xml')
     await sendCdsMessageFromFile('../data/gmr/clearance-gmr-1.xml')
+    await sendCdsMessageFromFile('../data/gmr/clearance-gmr-2.xml')
     await sendCdsMessageFromFile('../data/gmr/1-clearance-gmr-customs.xml')
     await sendCdsMessageFromFile('../data/gmr/2-clearance-gmr-transit.xml')
     await sendCdsMessageFromFile('../data/gmr/3-clearance-gmr-customs-null.xml')
@@ -53,9 +54,9 @@ describe('Search Results Page for GMR, VRN and TRN Page', () => {
     ).toBe(true)
   })
 
-  it.skip('Should not show GMR link for MRN 24GBBGBKCDMS135014', async () => {
+  it('Should not show GMR link for MRN 24GBBGBKCDMS135030', async () => {
     expect(
-      await SearchResultsPage.isGmrLinkDisplayedForMrn('24GBBGBKCDMS135014')
+      await SearchResultsPage.isGmrLinkDisplayedForMrn('24GBBGBKCDMS135030')
     ).toBe(false)
   })
 
