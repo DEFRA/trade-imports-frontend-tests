@@ -130,7 +130,7 @@ describe('Timeline Search', () => {
     await TimelinePage.clickTimelineTab()
     await expect(await TimelinePage.timelineInfoMessage).toBeDisplayed()
     await expect(await TimelinePage.timelineInfoMessage.getText()).toContain(
-      'The timeline includes events from the past 30 days only.'
+      'The timeline includes events from the past 180 days only.'
     )
     await expect(await TimelinePage.isTimelineMrnDropdownVisible()).toBe(true)
 
