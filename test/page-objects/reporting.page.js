@@ -519,11 +519,45 @@ class ReportingPage extends Page {
   }
 
   async setDateRange(startDdMmYyyy, endDdMmYyyy) {
-    await this.startDateInput.setValue('')
-    await this.startDateInput.setValue(startDdMmYyyy)
-    await this.endDateInput.setValue('')
-    await this.endDateInput.setValue(endDdMmYyyy)
+    await this.selectDateFromPicker(this.startDateInput, startDdMmYyyy)
+    await this.selectDateFromPicker(this.endDateInput, endDdMmYyyy)
     await this.clickLink(this.updateButton)
+  }
+
+  async selectDateFromPicker(input, ddMmYyyy) {
+    const [day, month, year] = ddMmYyyy.split('/').map(Number)
+
+    const testId = `${day}/${month}/${year}`
+
+    await input.click()
+
+    const dialog = await $('.moj-datepicker__dialog')
+    await dialog.waitForDisplayed()
+
+    const targetMonthYear = new Date(year, month - 1).toLocaleString('default', {
+      month: 'long',
+      year: 'numeric'
+    })
+
+    while (true) {
+      const current = await $('.moj-datepicker__heading').getText()
+      if (current === targetMonthYear) break
+
+      const currentDate = new Date(`1 ${current}`)
+      const targetDate = new Date(year, month - 1)
+
+      const nav =
+        currentDate > targetDate
+          ? await $('button[aria-label="Previous month"]')
+          : await $('button[aria-label="Next month"]')
+
+      await nav.click()
+    }
+  
+    const dayButton = await $(`button[data-testid="${testId}"]`)
+    await dayButton.click()
+
+    await $('button=Select').click()
   }
 
   async openSummaryTab() {
