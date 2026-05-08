@@ -21,20 +21,45 @@ describe('Search Results Page for IUU', () => {
       await HomePage.loginRegisteredUser()
     }
   })
-  it('Should be able to sarch for a Valid MRN and see IUU Checks', async () => {
+
+  it('Should be able to search for a Valid MRN and see IUU Checks', async () => {
     const mrn = '24GBBGBKCDMS836050'
+
     await SearchPage.open()
     await SearchPage.search(mrn)
+
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
-    expect(await CustomDeclaration.getIuuDataAuthroty()).toContain(
-      'Release - IUU inspection complete'
+
+    const customsRows = await CustomDeclaration.getCustomsRows(mrn)
+
+    const customsIuuRows = customsRows.filter((row) => row.authority === 'IUU')
+
+    expect(customsIuuRows).toHaveLength(1)
+
+    expect(customsIuuRows[0]).toEqual(
+      expect.objectContaining({
+        decision: expect.stringContaining('Release - IUU inspection complete')
+      })
     )
-    expect(await chedDeclarationPage.getIuuDataAuthroty()).toContain(
-      'IUU inspection complete'
+
+    const chedRows = await chedDeclarationPage.getChedRows()
+
+    const chedIuuRows = chedRows.filter((row) => {
+      return row.authority.split('\n').includes('IUU')
+    })
+
+    expect(chedIuuRows).toHaveLength(1)
+
+    expect(chedIuuRows[0]).toEqual(
+      expect.objectContaining({
+        decision: expect.stringContaining('IUU inspection complete')
+      })
     )
+
     expect(await SearchResultsPage.getCdsStatus()).toBe(
       'In progress - Awaiting CDS'
     )
+
     expect(await SearchResultsPage.isGmrLinkDisplayed()).toBe(false)
   })
 })
