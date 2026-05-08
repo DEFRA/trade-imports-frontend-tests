@@ -4,7 +4,7 @@ import ReportingPage from '../page-objects/reporting.page'
 import SearchPage from 'page-objects/search.page.js'
 
 describe('Reporting page', () => {
-  it('Should see the correct heading on the "Reporting" page', async () => {
+  beforeEach(async () => {
     await HomePage.open()
 
     if (!(await SearchPage.sessionActive())) {
@@ -14,6 +14,9 @@ describe('Reporting page', () => {
     }
 
     await ReportingPage.clickNavReportingLink()
+  })
+
+  it('Should see the correct heading on the "Reporting" page', async () => {
     await expect(browser).toHaveTitle(
       'BTMS reporting data - Border Trade Matching Service'
     )
