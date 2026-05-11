@@ -89,6 +89,7 @@ describe('Reporting page', () => {
   })
 
   it('Should show CSV download links for No matches and Manual releases and they are clickable', async () => {
+    await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()
 
     const noMatchesVisible =
@@ -323,6 +324,7 @@ describe('Reporting page', () => {
   })
 
   it('Should validate percentage calculations across Summary tiles', async () => {
+    await ReportingPage.lastMonthFilter()
     await ReportingPage.openSummaryTab()
 
     const matchesPct = await ReportingPage.getSummaryMatchesPercentage()
