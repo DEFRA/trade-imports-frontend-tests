@@ -519,11 +519,69 @@ class ReportingPage extends Page {
   }
 
   async setDateRange(startDdMmYyyy, endDdMmYyyy) {
-    await this.startDateInput.setValue('')
-    await this.startDateInput.setValue(startDdMmYyyy)
-    await this.endDateInput.setValue('')
-    await this.endDateInput.setValue(endDdMmYyyy)
+    await this.selectDateFromPicker(this.startDateInput, startDdMmYyyy)
+    await this.selectDateFromPicker(this.endDateInput, endDdMmYyyy)
     await this.clickLink(this.updateButton)
+  }
+
+  async selectDateFromPicker(input, ddMmYyyy) {
+    const parts = ddMmYyyy.split('/').map(Number)
+    const day = parts[0]
+    const month = parts[1]
+    const year = parts[2]
+
+    const wrapper = await input.parentElement()
+
+    const toggle = await wrapper.$('.moj-js-datepicker-toggle')
+    await toggle.waitForClickable()
+    await toggle.click()
+
+    const dialogId = await toggle.getAttribute('aria-controls')
+    const dialog = await $('#' + dialogId)
+
+    await dialog.waitForDisplayed()
+
+    const heading = await dialog.$('.moj-js-datepicker-month-year')
+    await heading.waitForDisplayed()
+
+    const targetDate = new Date(year, month - 1)
+    const targetMonthYear = targetDate.toLocaleString('en-GB', {
+      month: 'long',
+      year: 'numeric'
+    })
+
+    while ((await heading.getText()).trim() !== targetMonthYear) {
+      const current = (await heading.getText()).trim()
+      const currentDate = new Date('1 ' + current)
+
+      let nav = await dialog.$('.moj-js-datepicker-next-month')
+
+      if (currentDate > targetDate) {
+        nav = await dialog.$('.moj-js-datepicker-prev-month')
+      }
+
+      await nav.waitForClickable()
+      await nav.click()
+
+      await browser.waitUntil(
+        async () => (await heading.getText()).trim() !== current,
+        {
+          timeout: 3000,
+          timeoutMsg: 'Date picker month did not change'
+        }
+      )
+    }
+
+    const testId = day + '/' + month + '/' + year
+    const dayButton = await dialog.$('button[data-testid="' + testId + '"]')
+
+    await dayButton.waitForClickable()
+    await dayButton.click()
+
+    await browser.waitUntil(async () => (await input.getValue()) === testId, {
+      timeout: 3000,
+      timeoutMsg: 'Date input value was not updated'
+    })
   }
 
   async openSummaryTab() {
