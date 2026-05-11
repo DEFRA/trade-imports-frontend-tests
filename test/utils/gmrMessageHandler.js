@@ -1,7 +1,7 @@
 import { ServiceBusClient } from '@azure/service-bus'
 import { v4 as uuidv4 } from 'uuid'
 import { WebSocket } from 'ws'
-import proxyAgent from 'proxy-agent'
+import { HttpsProxyAgent } from 'https-proxy-agent'
 import { readFile } from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -21,7 +21,7 @@ export async function sendGmrMessageFromFile(relativePath) {
 }
 
 export async function sendGmrMessage(json, retryOptions = {}) {
-  globalThis.proxy = process.env.HTTP_PROXY
+  globalThis.proxy = process.env.CDP_HTTPS_PROXY
   if (globalThis.proxy) {
     globalThis.testLogger.info({
       event: '[GMR] Global Proxy value is',
@@ -60,14 +60,18 @@ export async function sendGmrMessage(json, retryOptions = {}) {
     globalThis.testLogger.info({
       event: '[GMR] About to set-up agent using proxy'
     })
-    const agent = proxyAgent(globalThis.proxy)
+    const agent = new HttpsProxyAgent(globalThis.proxy)
 
     sbClient = new ServiceBusClient(connectionString, {
+      transportType: 'amqpWebSockets',
       webSocketOptions: {
         webSocket: WebSocket,
         webSocketConstructorOptions: {
           agent
         }
+      },
+      retryOptions: {
+        maxRetries: 2
       }
     })
     globalThis.testLogger.info({
@@ -78,7 +82,12 @@ export async function sendGmrMessage(json, retryOptions = {}) {
     globalThis.testLogger.info({
       event: '[GMR] Creating ServiceBus client without a proxy'
     })
-    sbClient = new ServiceBusClient(connectionString)
+    sbClient = new ServiceBusClient(connectionString, {
+      transportType: 'amqpWebSockets',
+      retryOptions: {
+        maxRetries: 2
+      }
+    })
   }
 
   const sender = sbClient.createSender(queueOrTopicName)

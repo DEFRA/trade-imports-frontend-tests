@@ -1,10 +1,11 @@
-FROM node:22.13.1-slim
+FROM node:25.9.0-slim
 
 ENV TZ="Europe/London"
 
 USER root
 
 RUN apt-get update -qq \
+    && apt-get upgrade -qq \
     && apt-get install -qqy \
     curl \
     zip \
@@ -17,7 +18,11 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 WORKDIR /app
 
 COPY ["package.json", "package-lock.json", "./"]
-RUN npm install
+# esbuild has multiple vulnerabilities, unfixed
+RUN npm install --omit=optional && \
+   rm -f node_modules/esbuild/bin/esbuild && \
+   rm -f node_modules/esbuild/lib/downloaded-* && \
+   rm -rf node_modules/@esbuild
 
 ADD https://dnd2hcwqjlbad.cloudfront.net/binaries/release/latest_unzip/BrowserStackLocal-linux-x64 /root/.browserstack/BrowserStackLocal
 RUN chmod +x /root/.browserstack/BrowserStackLocal
