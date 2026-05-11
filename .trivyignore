@@ -1,2 +1,5 @@
 # These following CVEs are in the latest npm package and are not yet fixed as of 11/05/2026
 CVE-2026-33750
+CVE-2026-42338
+CVE-2026-33671
+CVE-2026-33672

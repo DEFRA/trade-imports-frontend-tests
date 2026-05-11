@@ -19,7 +19,7 @@ This repository runs frontend tests against the `btms-portal-frontend` service.
 
 #### Node.js
 
-Please install [Node.js](http://nodejs.org/) `>= v20` and [npm](https://nodejs.org/) `>= v9`. You will find it
+Please install [Node.js](http://nodejs.org/) `>= v25.9.0` and [npm](https://nodejs.org/) `>= v11.12.1`. You will find it
 easier to use the Node Version Manager [nvm](https://github.com/creationix/nvm)
 
 To use the correct version of Node.js for this application, via nvm:
