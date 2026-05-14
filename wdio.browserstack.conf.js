@@ -33,8 +33,8 @@ export const config = {
           buildName: `trade-imports-frontend-tests-${process.env.ENVIRONMENT}`
         },
         acceptInsecureCerts: true,
-        forceLocal: false,
-        browserstackLocal: true
+        browserstackLocal: true,
+        opts: { forcelocal: false }
       }
     ]
   ],
