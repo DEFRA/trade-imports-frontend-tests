@@ -1,7 +1,7 @@
 import { ServiceBusClient } from '@azure/service-bus'
 import { v4 as uuidv4 } from 'uuid'
 import { WebSocket } from 'ws'
-import { HttpsProxyAgent } from 'https-proxy-agent'
+import { ProxyAgent } from 'proxy-agent'
 import { readFile } from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -58,18 +58,14 @@ export async function sendIpaffsMessage(json, retryOptions = {}) {
     globalThis.testLogger.info({
       event: '[IPAFF] About to set-up agent using proxy'
     })
-    const agent = new HttpsProxyAgent(globalThis.proxy)
+    const agent = new ProxyAgent(globalThis.proxy)
 
     sbClient = new ServiceBusClient(connectionString, {
-      transportType: 'amqpWebSockets',
       webSocketOptions: {
         webSocket: WebSocket,
         webSocketConstructorOptions: {
           agent
         }
-      },
-      retryOptions: {
-        maxRetries: 2
       }
     })
     globalThis.testLogger.info({
@@ -80,12 +76,7 @@ export async function sendIpaffsMessage(json, retryOptions = {}) {
     globalThis.testLogger.info({
       event: '[IPAFF] Creating ServiceBus client without a proxy'
     })
-    sbClient = new ServiceBusClient(connectionString, {
-      transportType: 'amqpWebSockets',
-      retryOptions: {
-        maxRetries: 2
-      }
-    })
+    sbClient = new ServiceBusClient(connectionString)
   }
 
   const sender = sbClient.createSender(queueOrTopicName)
