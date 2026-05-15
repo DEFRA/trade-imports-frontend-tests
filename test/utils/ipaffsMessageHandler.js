@@ -1,7 +1,7 @@
 import { ServiceBusClient } from '@azure/service-bus'
 import { v4 as uuidv4 } from 'uuid'
 import { WebSocket } from 'ws'
-import { ProxyAgent } from 'proxy-agent'
+import { proxyAgent } from 'proxy-agent'
 import { readFile } from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -58,7 +58,7 @@ export async function sendIpaffsMessage(json, retryOptions = {}) {
     globalThis.testLogger.info({
       event: '[IPAFF] About to set-up agent using proxy'
     })
-    const agent = new ProxyAgent(globalThis.proxy)
+    const agent = proxyAgent(globalThis.proxy)
 
     sbClient = new ServiceBusClient(connectionString, {
       webSocketOptions: {
