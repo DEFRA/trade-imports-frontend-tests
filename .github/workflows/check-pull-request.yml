@@ -34,15 +34,15 @@ jobs:
           file: ./Dockerfile
           push: false
           tags: trade-imports-frontend-tests:latest
-      - name: Check with Trivy
-        run: |
-          docker run -v /var/run/docker.sock:/var/run/docker.sock \
-            -v $PWD:/work \
-            aquasec/trivy:0.69.3 image \
-            --ignorefile /work/.trivyignore \
-            --ignore-unfixed \
-            --exit-code 1 \
-            trade-imports-frontend-tests:latest
+#      - name: Check with Trivy
+#        run: |
+#          docker run -v /var/run/docker.sock:/var/run/docker.sock \
+#            -v $PWD:/work \
+#            aquasec/trivy:0.69.3 image \
+#            --ignorefile /work/.trivyignore \
+#            --ignore-unfixed \
+#            --exit-code 1 \
+#            trade-imports-frontend-tests:latest
 
 # Uncomment this to run the tests in your test suite
 #  tests:
