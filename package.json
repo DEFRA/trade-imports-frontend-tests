@@ -61,5 +61,8 @@
     "eslint-plugin-wdio": "8.24.12",
     "husky": "9.1.7",
     "prettier": "3.5.3"
+  },
+  "overrides": {
+    "serialize-javascript": "7.0.5"
   }
 }
