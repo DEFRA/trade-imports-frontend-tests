@@ -86,6 +86,8 @@ export const config = {
   },
   afterTest: async function (_, __, ___) {
     await browser.takeScreenshot()
+  },
+  after: async function (_, __, ___, ____) {
     await browser.closeWindow()
   },
   onComplete: function (exitCode, config, capabilities, results) {
