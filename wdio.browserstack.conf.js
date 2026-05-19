@@ -86,6 +86,7 @@ export const config = {
   },
   afterTest: async function (_, __, ___) {
     await browser.takeScreenshot()
+    browser.close()
   },
   onComplete: function (exitCode, config, capabilities, results) {
     // !Do Not Remove! Required for test status to show correctly in portal.
