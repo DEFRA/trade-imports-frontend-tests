@@ -50,7 +50,7 @@ export const config = {
   bail: 0,
   waitforTimeout: 6000,
   waitforInterval: 300,
-  connectionRetryTimeout: 60000,
+  connectionRetryTimeout: 120000,
   connectionRetryCount: 3,
 
   framework: 'mocha',
