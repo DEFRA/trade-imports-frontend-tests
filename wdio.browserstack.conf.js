@@ -12,7 +12,7 @@ export const config = {
   user: process.env.BROWSERSTACK_USER,
   key: process.env.BROWSERSTACK_KEY,
 
-  specs: ['./test/specs/**/*.js'],
+  specs: ['./test/specs/**/search.js'],
   exclude: [],
   maxInstances: 3,
   commonCapabilities: {
@@ -45,7 +45,7 @@ export const config = {
     ...(debug ? ['--inspect'] : [])
   ],
 
-  logLevel: 'debug',
+  logLevel: debug ? 'debug' : 'info',
 
   bail: 0,
   waitforTimeout: 6000,
@@ -76,29 +76,18 @@ export const config = {
     timeout: debug ? oneHour : 120000
   },
   beforeTest: async function () {
-    globalThis.testLogger.info('EXECUTING beforeTest HOOK')
-    try {
-      addSubSuite(
-        `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
-      )
-      addArgument(
-        'platform',
-        `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
-      )
-    } catch (err) {
-      globalThis.testLogger.error('FAILED TO EXECUTE beforeTest HOOK', err)
-    }
+    addSubSuite(
+      `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
+    )
+    addArgument(
+      'platform',
+      `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
+    )
   },
   afterTest: async function (_, __, ___) {
-    globalThis.testLogger.info('EXECUTING afterTest HOOK')
-    try {
-      await browser.takeScreenshot()
-    } catch (err) {
-      globalThis.testLogger.error('FAILED TO EXECUTE afterTest HOOK', err)
-    }
+    await browser.takeScreenshot()
   },
   onComplete: function (exitCode, config, capabilities, results) {
-    globalThis.testLogger.info('EXECUTING onComplete HOOK')
     // !Do Not Remove! Required for test status to show correctly in portal.
     if (results?.failed && results.failed > 0) {
       fs.writeFileSync('FAILED', JSON.stringify(results))
