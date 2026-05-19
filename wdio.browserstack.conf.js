@@ -12,7 +12,7 @@ export const config = {
   user: process.env.BROWSERSTACK_USER,
   key: process.env.BROWSERSTACK_KEY,
 
-  specs: ['./test/specs/**/search.js'],
+  specs: ['./test/specs/**/search.e2e.js'],
   exclude: [],
   maxInstances: 3,
   commonCapabilities: {
