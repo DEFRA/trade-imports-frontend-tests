@@ -45,12 +45,12 @@ export const config = {
     ...(debug ? ['--inspect'] : [])
   ],
 
-  logLevel: debug ? 'debug' : 'info',
+  logLevel: 'debug',
 
   bail: 0,
   waitforTimeout: 6000,
   waitforInterval: 300,
-  connectionRetryTimeout: 120000,
+  connectionRetryTimeout: 60000,
   connectionRetryCount: 3,
 
   framework: 'mocha',
@@ -76,19 +76,29 @@ export const config = {
     timeout: debug ? oneHour : 120000
   },
   beforeTest: async function () {
-    addSubSuite(
-      `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
-    )
-    addArgument(
-      'platform',
-      `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
-    )
+    globalThis.testLogger.info('EXECUTING beforeTest HOOK')
+    try {
+      addSubSuite(
+        `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
+      )
+      addArgument(
+        'platform',
+        `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
+      )
+    } catch (err) {
+      globalThis.testLogger.error('FAILED TO EXECUTE beforeTest HOOK', err)
+    }
   },
   afterTest: async function (_, __, ___) {
-    await browser.takeScreenshot()
+    globalThis.testLogger.info('EXECUTING afterTest HOOK')
+    try {
+      await browser.takeScreenshot()
+    } catch (err) {
+      globalThis.testLogger.error('FAILED TO EXECUTE afterTest HOOK', err)
+    }
   },
-
   onComplete: function (exitCode, config, capabilities, results) {
+    globalThis.testLogger.info('EXECUTING onComplete HOOK')
     // !Do Not Remove! Required for test status to show correctly in portal.
     if (results?.failed && results.failed > 0) {
       fs.writeFileSync('FAILED', JSON.stringify(results))
