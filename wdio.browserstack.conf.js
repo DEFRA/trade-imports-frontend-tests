@@ -12,7 +12,7 @@ export const config = {
   user: process.env.BROWSERSTACK_USER,
   key: process.env.BROWSERSTACK_KEY,
 
-  specs: ['./test/specs/**/search.e2e.js'],
+  specs: ['./test/specs/**/*.js'],
   exclude: [],
   maxInstances: 3,
   commonCapabilities: {
@@ -86,6 +86,7 @@ export const config = {
   },
   afterTest: async function (_, __, ___) {
     await browser.takeScreenshot()
+    await browser.closeWindow()
   },
   onComplete: function (exitCode, config, capabilities, results) {
     // !Do Not Remove! Required for test status to show correctly in portal.
