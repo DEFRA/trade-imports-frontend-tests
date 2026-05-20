@@ -34,7 +34,8 @@ export const config = {
         },
         acceptInsecureCerts: true,
         browserstackLocal: true,
-        opts: { forcelocal: false }
+        opts: { forcelocal: false },
+        accessibility: false
       }
     ]
   ],
