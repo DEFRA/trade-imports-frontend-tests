@@ -43,7 +43,7 @@
     "@wdio/mocha-framework": "9.27.1",
     "@wdio/spec-reporter": "9.27.1",
     "@wdio/visual-service": "6.3.3",
-    "allure-commandline": "2.38.0",
+    "allure-commandline": "2.39.0",
     "dotenv": "16.5.0",
     "esm-module-alias": "2.2.1",
     "global-agent": "3.0.0",
