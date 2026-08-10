@@ -6,12 +6,12 @@ import SearchResultsPage from '../page-objects/searchResultsPage.js'
 import LatestActivityPage from '../page-objects/latest-activity.page.js'
 import GmrSearchResultsPage from '../page-objects/gmr-search-results.page.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
-import { sendGmrMessageFromFile } from '../utils/gmrMessageHandler.js'
+import { processorPostMatchedGmrFromFile } from '../utils/processorClient.js'
 
 describe('Page Redirection', () => {
   before(async () => {
     await sendCdsMessageFromFile('../data/search/cds.xml')
-    await sendGmrMessageFromFile('../data/gmr/gmr.json')
+    await processorPostMatchedGmrFromFile('../data/gmr/gmr.json')
 
     await HomePage.open()
     if (await SearchPage.sessionActive()) {

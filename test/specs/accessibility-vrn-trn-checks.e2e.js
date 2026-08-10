@@ -6,7 +6,7 @@ import {
 } from '../accessibility-checking.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
-import { sendGmrMessageFromFile } from '../utils/gmrMessageHandler.js'
+import { processorPostMatchedGmrFromFile } from '../utils/processorClient.js'
 
 import HomePage from 'page-objects/home.page'
 import SearchPage from 'page-objects/search.page.js'
@@ -18,7 +18,7 @@ describe('Accessibility Testing for VRN and TRN Page', () => {
     await sendCdsMessageFromFile('../data/gmr/clearance-gmr.xml')
     await sendCdsMessageFromFile('../data/gmr/clearance-gmr-1.xml')
     await sendIpaffMessageFromFile('../data/gmr/ipaff-gmr.json')
-    await sendGmrMessageFromFile('../data/gmr/gmr.json')
+    await processorPostMatchedGmrFromFile('../data/gmr/gmr.json')
 
     await initialiseAccessibilityChecking()
     await HomePage.open()
