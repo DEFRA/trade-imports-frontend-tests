@@ -1,6 +1,6 @@
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
-import { sendGmrMessageFromFile } from '../utils/gmrMessageHandler.js'
+import { processorPostMatchedGmrFromFile } from '../utils/processorClient.js'
 
 import HomePage from 'page-objects/home.page'
 import GmrSearchResultsPage from '../page-objects/gmr-search-results.page.js'
@@ -27,12 +27,16 @@ describe('Search Results Page for GMR, VRN and TRN Page', () => {
     await sendIpaffMessageFromFile('../data/gmr/3-ipaff-gmr-customs-null.json')
     await sendIpaffMessageFromFile('../data/gmr/4-ipaff-gmr-transit-null.json')
     await sendIpaffMessageFromFile('../data/gmr/5-ipaff.json')
-    await sendGmrMessageFromFile('../data/gmr/gmr.json')
-    await sendGmrMessageFromFile('../data/gmr/1-gmr-empty-customs.json')
-    await sendGmrMessageFromFile('../data/gmr/2-gmr-empty-transit.json')
-    await sendGmrMessageFromFile('../data/gmr/3-gmr-null-customs.json')
-    await sendGmrMessageFromFile('../data/gmr/4-gmr-null-transit.json')
-    await sendGmrMessageFromFile('../data/gmr/5-gmr.json')
+    await processorPostMatchedGmrFromFile('../data/gmr/gmr.json')
+    await processorPostMatchedGmrFromFile(
+      '../data/gmr/1-gmr-empty-customs.json'
+    )
+    await processorPostMatchedGmrFromFile(
+      '../data/gmr/2-gmr-empty-transit.json'
+    )
+    await processorPostMatchedGmrFromFile('../data/gmr/3-gmr-null-customs.json')
+    await processorPostMatchedGmrFromFile('../data/gmr/4-gmr-null-transit.json')
+    await processorPostMatchedGmrFromFile('../data/gmr/5-gmr.json')
     await HomePage.open()
 
     if (!(await SearchPage.sessionActive())) {

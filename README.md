@@ -51,6 +51,8 @@ Next, in this repository you will need to add/update your local `.env` file with
 ```bash
 ENVIRONMENT=local
 ServiceBus__Notifications__ConnectionString=<get_this_from_imports_process_terminal_via_cdp>
+TRADE_IMPORTS_PROCESSOR_USER=<trade_imports_processor_user>
+TRADE_IMPORTS_PROCESSOR_KEY=<get_this_from_imports_process_terminal_via_cdp>
 ```
 
 And lastly, run the following command and this should run the tests locally

@@ -5,7 +5,7 @@ import SearchResultsPage from '../page-objects/searchResultsPage.js'
 import GmrSearchResultsPage from '../page-objects/gmr-search-results.page.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
-import { sendGmrMessageFromFile } from '../utils/gmrMessageHandler.js'
+import { processorPostMatchedGmrFromFile } from '../utils/processorClient.js'
 
 describe('CDS Status on GMR and Search Results Page', () => {
   const gmrId = 'GMRA1228A001'
@@ -25,7 +25,7 @@ describe('CDS Status on GMR and Search Results Page', () => {
   }
 
   before(async () => {
-    await sendGmrMessageFromFile('../data/cds_status/0-gmr.json')
+    await processorPostMatchedGmrFromFile('../data/cds_status/0-gmr.json')
     await sendCdsMessageFromFile('../data/cds_status/0-man-released-cr.xml')
     await sendCdsMessageFromFile('../data/cds_status/1-released-cr.xml')
     await sendCdsMessageFromFile('../data/cds_status/2-kings-warehouse-cr.xml')
