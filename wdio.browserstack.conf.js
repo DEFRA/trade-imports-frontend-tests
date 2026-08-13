@@ -45,7 +45,7 @@ export const config = {
     ...(debug ? ['--inspect'] : [])
   ],
 
-  logLevel: debug ? 'debug' : 'info',
+  logLevel: debug ? 'debug' : 'warn',
 
   bail: 0,
   waitforTimeout: 6000,

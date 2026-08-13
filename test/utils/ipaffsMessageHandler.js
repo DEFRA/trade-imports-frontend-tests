@@ -5,7 +5,7 @@ import { ProxyAgent } from 'proxy-agent'
 import { readFile } from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import './logger'
+import './logger.js'
 
 export async function sendIpaffMessageFromFile(relativePath) {
   globalThis.testLogger.info({
