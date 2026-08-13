@@ -8,7 +8,7 @@ import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { processorPostMatchedGmrFromFile } from '../utils/processorClient.js'
 
-import HomePage from 'page-objects/home.page'
+import HomePage from 'page-objects/home.page.js'
 import SearchPage from 'page-objects/search.page.js'
 
 describe('Accessibility Testing for VRN and TRN Page', () => {

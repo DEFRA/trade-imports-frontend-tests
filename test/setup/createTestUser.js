@@ -1,4 +1,4 @@
-import HomePage from '../page-objects/home.page'
+import HomePage from '../page-objects/home.page.js'
 import { $ } from '@wdio/globals'
 
 const testUser = {

@@ -5,8 +5,8 @@ import {
   generateAccessibilityReportIndex
 } from '../accessibility-checking.js'
 
-import HomePage from 'page-objects/home.page'
-import LatestActivityPage from '../page-objects/latest-activity.page'
+import HomePage from 'page-objects/home.page.js'
+import LatestActivityPage from '../page-objects/latest-activity.page.js'
 import SearchPage from 'page-objects/search.page.js'
 
 describe('Accessibility Testing for Latest Activity', () => {
