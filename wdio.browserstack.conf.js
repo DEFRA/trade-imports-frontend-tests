@@ -75,6 +75,25 @@ export const config = {
     ui: 'bdd',
     timeout: debug ? oneHour : 120000
   },
+  onPrepare: function () {
+    // @wdio/cli injects `--import <tsx>` into NODE_OPTIONS (for TypeScript support).
+    // The BrowserStackLocal native binary inherits this env var and rejects it with
+    // "--import is not allowed in NODE_OPTIONS". User onPrepare hooks run before
+    // service hooks, so stripping it here lets the binary start cleanly.
+    // Workers don't need tsx for .js test files.
+    // Upstream bug: https://github.com/webdriverio/webdriverio/issues/15264
+    if (process.env.NODE_OPTIONS) {
+      process.env.NODE_OPTIONS = process.env.NODE_OPTIONS.replace(
+        /--import\s+\S+/g,
+        ''
+      )
+        .replace(/\s+/g, ' ')
+        .trim()
+      if (!process.env.NODE_OPTIONS) {
+        delete process.env.NODE_OPTIONS
+      }
+    }
+  },
   beforeTest: async function () {
     addSubSuite(
       `${browser.capabilities.platformName} ${browser.capabilities.browserName} ${browser.capabilities.browserVersion}`
