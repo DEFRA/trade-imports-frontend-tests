@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { readFile } from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import './logger'
+import './logger.js'
 
 const baseUrl =
   process.env.BASE_URL_TRADE_IMPORTS_PROCESSOR ??
