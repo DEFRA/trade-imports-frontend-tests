@@ -54,7 +54,7 @@ RUN ALLURE_LIB=node_modules/allure-commandline/dist/lib && \
     cp /tmp/jsoup-1.23.1.jar $ALLURE_LIB/jsoup-1.22.2.jar && \
     rm /tmp/jackson-databind-2.22.1.jar /tmp/jsoup-1.23.1.jar
 
-ADD https://dnd2hcwqjlbad.cloudfront.net/binaries/release/latest_unzip/BrowserStackLocal-linux-x64 /root/.browserstack/BrowserStackLocal
+ADD https://dnd2hcwqjlbad.cloudfront.net/binaries/release/latest_unzip/BrowserStackLocal-alpine /root/.browserstack/BrowserStackLocal
 RUN chmod +x /root/.browserstack/BrowserStackLocal
 
 COPY . .
