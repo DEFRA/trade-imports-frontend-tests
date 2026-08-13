@@ -1,8 +1,8 @@
 import { expect } from '@wdio/globals'
 
-import HomePage from '../page-objects/home.page'
-import SearchPage from 'page-objects/search.page'
-import SearchResultsPage from '../page-objects/searchResultsPage'
+import HomePage from '../page-objects/home.page.js'
+import SearchPage from 'page-objects/search.page.js'
+import SearchResultsPage from '../page-objects/searchResultsPage.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 
 describe('Search Results Page for Requires CHED', () => {

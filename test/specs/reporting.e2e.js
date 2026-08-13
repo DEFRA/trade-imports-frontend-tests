@@ -1,6 +1,6 @@
 import { browser, expect } from '@wdio/globals'
-import HomePage from '../page-objects/home.page'
-import ReportingPage from '../page-objects/reporting.page'
+import HomePage from '../page-objects/home.page.js'
+import ReportingPage from '../page-objects/reporting.page.js'
 import SearchPage from 'page-objects/search.page.js'
 
 describe('Reporting page', () => {

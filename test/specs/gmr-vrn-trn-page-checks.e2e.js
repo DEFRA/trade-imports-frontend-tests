@@ -2,7 +2,7 @@ import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { processorPostMatchedGmrFromFile } from '../utils/processorClient.js'
 
-import HomePage from 'page-objects/home.page'
+import HomePage from 'page-objects/home.page.js'
 import GmrSearchResultsPage from '../page-objects/gmr-search-results.page.js'
 import SearchResultsPage from '../page-objects/searchResultsPage.js'
 import VrnTrnSearchResultsPage from '../page-objects/vrn-trn-search-results-page.js'

@@ -8,7 +8,7 @@ import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 import HomePage from '../page-objects/home.page.js'
 import SearchPage from 'page-objects/search.page.js'
-import SearchResultsPage from '../page-objects/searchResultsPage'
+import SearchResultsPage from '../page-objects/searchResultsPage.js'
 import TimelinePage from '../page-objects/timeline.page.js'
 
 describe('Accessibility Testing for Timeline Tab', () => {

@@ -5,8 +5,8 @@ import {
   generateAccessibilityReportIndex
 } from '../accessibility-checking.js'
 
-import HomePage from 'page-objects/home.page'
-import SearchPage from 'page-objects/search.page'
+import HomePage from 'page-objects/home.page.js'
+import SearchPage from 'page-objects/search.page.js'
 
 describe('Accessibility Testing for Signout Page', () => {
   before(async () => {

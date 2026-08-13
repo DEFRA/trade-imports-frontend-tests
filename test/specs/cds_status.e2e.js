@@ -1,6 +1,6 @@
 import { expect } from '@wdio/globals'
-import HomePage from '../page-objects/home.page'
-import SearchPage from 'page-objects/search.page'
+import HomePage from '../page-objects/home.page.js'
+import SearchPage from 'page-objects/search.page.js'
 import SearchResultsPage from '../page-objects/searchResultsPage.js'
 import GmrSearchResultsPage from '../page-objects/gmr-search-results.page.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
