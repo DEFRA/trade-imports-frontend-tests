@@ -83,32 +83,24 @@ describe('Page Redirection', () => {
   })
 
   it('Should get redirected when going to the Admin DLQ Redrive Page without logging in', async () => {
-    await HomePage.openPage(
-      '/admin/redrive?queue=trade_imports_data_upserted_btms-gateway-deadletter'
-    )
+    await HomePage.openPage('/admin/dlq/action')
     expect(await HomePage.isGatewayRadioButtonVisible()).toBe(true)
 
     await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
-    await HomePage.openPage(
-      '/admin/redrive?queue=trade_imports_data_upserted_btms-gateway-deadletter'
-    )
+    await HomePage.openPage('/admin/dlq/action')
     await expect(browser).toHaveTitle(
       'You do not have the correct permissions to access this service - Border Trade Matching Service'
     )
   })
 
   it('Should get redirected when going to the Admin DLQ Confirmation Page without logging in', async () => {
-    await HomePage.openPage(
-      '/admin/redrive-complete?queue=trade_imports_data_upserted_btms-gateway-deadletter'
-    )
+    await HomePage.openPage('/admin/dlq/action-complete')
     expect(await HomePage.isGatewayRadioButtonVisible()).toBe(true)
 
     await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
-    await HomePage.openPage(
-      '/admin/redrive-complete?queue=trade_imports_data_upserted_btms-gateway-deadletter'
-    )
+    await HomePage.openPage('/admin/dlq/action-complete')
     await expect(browser).toHaveTitle(
       'You do not have the correct permissions to access this service - Border Trade Matching Service'
     )
