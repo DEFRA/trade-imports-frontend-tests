@@ -34,7 +34,7 @@ describe('Accessibility Testing for Timeline Tab', () => {
     }
   })
   it('Should check Timeline page for accessibility issues', async () => {
-    const mrn = '26GBBGBKCDMA188026'
+    const mrn = '26GBBGBKCDMA188029'
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
