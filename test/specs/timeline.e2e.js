@@ -45,13 +45,13 @@ describe('Timeline Search', () => {
     const expectedOrderForCdsDecision = [
       'CDS clearance request',
       'CDS to BTMS',
-      'Version',
+      'External version',
       '3',
       'Created'
     ]
 
     const expectedOrderForChed = [
-      'CHEDA.GB.2025.1112814',
+      'CHEDA.GB.2026.1113751',
       'IPAFFS to BTMS',
       'CHED status',
       'VALIDATED',
@@ -75,7 +75,7 @@ describe('Timeline Search', () => {
       'BTMS to CDS',
       'CDS status',
       'In progress - Awaiting trader',
-      'Version',
+      'External version',
       '1',
       'Created'
     ]
@@ -85,7 +85,7 @@ describe('Timeline Search', () => {
       'BTMS to CDS',
       'CDS status',
       'In progress - Awaiting CDS',
-      'Version',
+      'External version',
       '2',
       'Created'
     ]
