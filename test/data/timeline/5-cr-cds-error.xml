@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:oas="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
+    xmlns:oas="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
     <soap:Header>
         <oas:Security soap:role="system" soap:mustUnderstand="true">
             <oas:UsernameToken>
                 <oas:Username>systemID=ALVSHMRCCDS,ou=gsi systems,o=cds</oas:Username>
-                <oas:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">password</oas:Password>
+                <oas:Password
+                    Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">
+                    password</oas:Password>
             </oas:UsernameToken>
         </oas:Security>
     </soap:Header>
     <soap:Body>
-        <ALVSErrorNotificationRequest xmlns="http://alvserrornotification.types.esb.ws.cara.defra.com">
+        <ALVSErrorNotificationRequest
+            xmlns="http://alvserrornotification.types.esb.ws.cara.defra.com">
             <ServiceHeader>
                 <SourceSystem>CDS</SourceSystem>
                 <DestinationSystem>ALVS</DestinationSystem>
@@ -18,12 +22,13 @@
             </ServiceHeader>
             <Header>
                 <SourceCorrelationId>ERROR128017</SourceCorrelationId>
-                <EntryReference>24GBBGBKCDMA128014</EntryReference>
+                <EntryReference>26GBBGBKCDMA188026</EntryReference>
                 <EntryVersionNumber>2</EntryVersionNumber>
             </Header>
             <Error>
                 <ErrorCode>HMRCVAL101</ErrorCode>
-                <ErrorMessage>The EntryReference was not recognised. HMRC is unable to process the decision notification {{TICKET}}{{ITERATION}}.</ErrorMessage>
+                <ErrorMessage>The EntryReference was not recognised. HMRC is unable to process the
+                    decision notification {{TICKET}}{{ITERATION}}.</ErrorMessage>
             </Error>
         </ALVSErrorNotificationRequest>
     </soap:Body>
