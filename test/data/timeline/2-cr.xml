@@ -20,7 +20,7 @@
         <ServiceCallTimestamp>2026-03-09T09:05:00.5553237Z</ServiceCallTimestamp>
       </ServiceHeader>
       <Header>
-        <EntryReference>26GBBGBKCDMA188026</EntryReference>
+        <EntryReference>26GBBGBKCDMA188029</EntryReference>
         <EntryVersionNumber>3</EntryVersionNumber>
         <PreviousVersionNumber>2</PreviousVersionNumber>
         <DeclarationUCR>4GB269573944000-PORTACDMA128014</DeclarationUCR>
@@ -47,7 +47,7 @@
         <ItemOriginCountryCode>IT</ItemOriginCountryCode>
         <Document>
           <DocumentCode>C640</DocumentCode>
-          <DocumentReference>CHEDA.GB.2026.1113751</DocumentReference>
+          <DocumentReference>CHEDA.GB.2026.1113760</DocumentReference>
           <DocumentStatus>AE</DocumentStatus>
           <DocumentControl>P</DocumentControl>
           <DocumentQuantity />

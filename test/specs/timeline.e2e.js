@@ -9,16 +9,23 @@ import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 
 describe('Timeline Search', () => {
   before(async () => {
+    const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
     await sendCdsMessageFromFile('../data/timeline/1-cr-btms-error.xml')
+    await pause(2000)
     await sendCdsMessageFromFile('../data/timeline/2-cr.xml')
+    await pause(2000)
     await sendIpaffMessageFromFile('../data/timeline/3-ched-valid.json')
+    await pause(2000)
     await sendCdsMessageFromFile('../data/timeline/4-released-final.xml', true)
+    await pause(2000)
     await sendCdsMessageFromFile(
       '../data/timeline/5-cr-cds-error.xml',
       false,
       true
     )
+    await pause(2000)
     await sendIpaffMessageFromFile('../data/timeline/6-ched-valid.json')
+    await pause(2000)
 
     await HomePage.open()
     if (!(await SearchPage.sessionActive())) {
@@ -29,7 +36,7 @@ describe('Timeline Search', () => {
   })
 
   it('Should be able to sarch for a Valid MRN that has CDS Decision, BTMS Decision, CHED, CDS Finalisation, BTMS Error, and CDS Error', async () => {
-    const mrn = '26GBBGBKCDMA188026'
+    const mrn = '26GBBGBKCDMA188029'
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
@@ -51,7 +58,7 @@ describe('Timeline Search', () => {
     ]
 
     const expectedOrderForChed = [
-      'CHEDA.GB.2026.1113751',
+      'CHEDA.GB.2026.1113760',
       'IPAFFS to BTMS',
       'CHED status',
       'VALIDATED',
@@ -75,8 +82,10 @@ describe('Timeline Search', () => {
       'BTMS to CDS',
       'CDS status',
       'In progress - Awaiting trader',
-      'External version',
+      'Decision number',
       '1',
+      'External version',
+      '3',
       'Created'
     ]
 
@@ -85,8 +94,10 @@ describe('Timeline Search', () => {
       'BTMS to CDS',
       'CDS status',
       'In progress - Awaiting CDS',
-      'External version',
+      'Decision number',
       '2',
+      'External version',
+      '3',
       'Created'
     ]
 
