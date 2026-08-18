@@ -43,7 +43,7 @@ describe('Timeline Search', () => {
     const timelineTexts = await TimelinePage.allTimelineText(mrn)
 
     const expectedOrderForCdsDecision = [
-      'CDS decision request',
+      'CDS clearance request',
       'CDS to BTMS',
       'Version',
       '3',
