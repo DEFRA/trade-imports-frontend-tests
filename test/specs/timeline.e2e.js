@@ -29,7 +29,7 @@ describe('Timeline Search', () => {
   })
 
   it('Should be able to sarch for a Valid MRN that has CDS Decision, BTMS Decision, CHED, CDS Finalisation, BTMS Error, and CDS Error', async () => {
-    const mrn = '24GBBGBKCDMA128014'
+    const mrn = '26GBBGBKCDMA188026'
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
