@@ -36,14 +36,14 @@ describe('Search page', () => {
     }
   })
 
-  it('Should be able to sarch for a Valid MRN', async () => {
+  it('Should be able to search for a Valid MRN', async () => {
     const mrn = '24GBBGBKCDMS704709'
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
   })
 
-  it('Should be able to sarch for a Valid CHED', async () => {
+  it('Should be able to search for a Valid CHED', async () => {
     const ched = 'CHEDA.GB.2025.1024310'
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(ched)
@@ -57,7 +57,7 @@ describe('Search page', () => {
     }
   })
 
-  it('Should be able to sarch for a Valid DUCR', async () => {
+  it('Should be able to search for a Valid DUCR', async () => {
     const ducr = '4GB269573944000-PORTACDMS704709'
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(ducr)
@@ -124,7 +124,7 @@ describe('Search page', () => {
     )
   })
 
-  it('Should be able to sarch for a Valid MRN and see CHED-PP Document References', async () => {
+  it('Should be able to search for a Valid MRN and see CHED-PP Document References', async () => {
     const mrn = '24GBBGBKCDMS965015'
     await SearchPage.open()
     await SearchPage.search(mrn)

@@ -17,7 +17,7 @@ describe('Search Results Page for Requires CHED', () => {
       await HomePage.loginRegisteredUser()
     }
   })
-  it('Should be able to sarch for a Valid MRN and see Replace CHED status', async () => {
+  it('Should be able to search for a Valid MRN and see Replace CHED status', async () => {
     const mrn = '25GBAZ34DF56882007'
     await SearchPage.open()
     await SearchPage.search(mrn)

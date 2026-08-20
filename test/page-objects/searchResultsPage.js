@@ -1,3 +1,4 @@
+import { browser } from '@wdio/globals'
 import { Page } from './page.js'
 
 class SearchResultsPage extends Page {
@@ -48,7 +49,18 @@ class SearchResultsPage extends Page {
   }
 
   async getResultText() {
+    await this.waitForResultsPage()
     return await this.getTextFrom(this.resultTextElement)
+  }
+
+  async waitForResultsPage() {
+    await browser.waitUntil(
+      async () => (await browser.getUrl()).includes('/search-result'),
+      {
+        timeout: 10000,
+        timeoutMsg: 'Did not navigate to the search results page'
+      }
+    )
   }
 
   async customDeclarationAllResultText() {
