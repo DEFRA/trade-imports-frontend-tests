@@ -31,7 +31,7 @@ describe('Search Results Page for Split Consignment', () => {
       await HomePage.loginRegisteredUser()
     }
   })
-  it('Should be able to sarch for a Valid MRN and see IUU Checks', async () => {
+  it('Should be able to search for a Valid MRN and see IUU Checks', async () => {
     const mrn = '24GBBGBKCDMS895003'
     await SearchPage.open()
     await SearchPage.search(mrn)

@@ -1,3 +1,4 @@
+import { browser } from '@wdio/globals'
 import { Page } from './page.js'
 
 class SearchPage extends Page {
@@ -37,6 +38,10 @@ class SearchPage extends Page {
 
   async signout() {
     await this.clickLink(this.signOut)
+    await browser.waitUntil(async () => !(await this.signOut.isExisting()), {
+      timeout: 5000,
+      timeoutMsg: 'Sign out link did not disappear after clicking'
+    })
   }
 
   async clickNavSearchLink() {
@@ -44,7 +49,7 @@ class SearchPage extends Page {
   }
 
   async sessionActive() {
-    return await this.signOut.isExisting()
+    return await this.signOut.isDisplayed()
   }
 
   async isSearchButtonVisible() {

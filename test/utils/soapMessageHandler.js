@@ -3,6 +3,19 @@ import { readFile } from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+const baseUrl =
+  process.env.BASE_URL_BTMS_GATEWAY ??
+  (process.env.ENVIRONMENT === 'local'
+    ? 'http://localhost:8080'
+    : `https://btms-gateway.api.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`)
+
+const endpointPath = (isFinalised, isError) =>
+  isFinalised
+    ? '/ITSW/CDS/NotifyFinalisedStateCDSFacadeService'
+    : isError
+      ? '/ITSW/CDS/ALVSCDSErrorNotificationService'
+      : '/ITSW/CDS/SubmitImportDocumentCDSFacadeService'
+
 export async function sendCdsMessageFromFile(
   relativePath,
   isFinalised = false,
@@ -22,27 +35,7 @@ export async function sendSoapRequest(
   isError = false,
   retryOptions = {}
 ) {
-  let url
-
-  if (isFinalised) {
-    if (process.env.ENVIRONMENT === 'local') {
-      url = `http://localhost:8080/ITSW/CDS/NotifyFinalisedStateCDSFacadeService`
-    } else {
-      url = `https://btms-gateway.api.${process.env.ENVIRONMENT}.cdp-int.defra.cloud/ITSW/CDS/NotifyFinalisedStateCDSFacadeService`
-    }
-  } else if (isError) {
-    if (process.env.ENVIRONMENT === 'local') {
-      url = `http://localhost:8080/ITSW/CDS/ALVSCDSErrorNotificationService`
-    } else {
-      url = `https://btms-gateway.api.${process.env.ENVIRONMENT}.cdp-int.defra.cloud/ITSW/CDS/ALVSCDSErrorNotificationService`
-    }
-  } else {
-    if (process.env.ENVIRONMENT === 'local') {
-      url = `http://localhost:8080/ITSW/CDS/SubmitImportDocumentCDSFacadeService`
-    } else {
-      url = `https://btms-gateway.api.${process.env.ENVIRONMENT}.cdp-int.defra.cloud/ITSW/CDS/SubmitImportDocumentCDSFacadeService`
-    }
-  }
+  const url = `${baseUrl}${endpointPath(isFinalised, isError)}`
 
   const {
     timeoutMs = 15000,
@@ -60,7 +53,12 @@ export async function sendSoapRequest(
     try {
       const response = await request(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/xml' },
+        headers: {
+          'Content-Type': 'application/xml',
+          ...(process.env.CDP_API_KEY
+            ? { 'X-API-Key': process.env.CDP_API_KEY }
+            : {})
+        },
         body: soapEnvelope
       })
 

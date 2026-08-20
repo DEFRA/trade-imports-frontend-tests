@@ -35,7 +35,7 @@ describe('Timeline Search', () => {
     }
   })
 
-  it('Should be able to sarch for a Valid MRN that has CDS Decision, BTMS Decision, CHED, CDS Finalisation, BTMS Error, and CDS Error', async () => {
+  it('Should be able to search for a Valid MRN that has CDS Decision, BTMS Decision, CHED, CDS Finalisation, BTMS Error, and CDS Error', async () => {
     const mrn = '26GBBGBKCDMA188029'
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(mrn)
@@ -132,7 +132,7 @@ describe('Timeline Search', () => {
     await expect(await TimelinePage.isTimelineMrnDropdownVisible()).toBe(false)
   })
 
-  it('Should be able to sarch for a Valid MRN that has MRN dropdown', async () => {
+  it('Should be able to search for a Valid MRN that has MRN dropdown', async () => {
     const mrn = '24GBBGBKCDMS135001'
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(mrn)
