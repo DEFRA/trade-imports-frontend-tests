@@ -7,15 +7,17 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import './logger.js'
 
-export async function sendIpaffMessageFromFile(relativePath) {
+export async function sendIpaffMessageFromFile(relativePath, subs = {}) {
   globalThis.testLogger.info({
     event: '[IPAFF] About to send an IPAFF message'
   })
   const __filename = fileURLToPath(import.meta.url)
   const __dirname = path.dirname(__filename)
   const filePath = path.resolve(__dirname, relativePath)
-  const fileContent = await readFile(filePath, 'utf-8')
-  const json = JSON.parse(fileContent)
+  const json = JSON.parse(await readFile(filePath, 'utf-8'))
+  if (subs.ched) {
+    json.referenceNumber = subs.ched
+  }
   await new Promise((resolve) => setTimeout(resolve, 500))
   return await sendIpaffsMessage(json)
 }

@@ -16,15 +16,54 @@ const endpointPath = (isFinalised, isError) =>
       ? '/ITSW/CDS/ALVSCDSErrorNotificationService'
       : '/ITSW/CDS/SubmitImportDocumentCDSFacadeService'
 
+/**
+ *  - `mrn`          -> the value in <EntryReference>
+ *  - `ducr`         -> the value in <DeclarationUCR>
+ *  - `correlationId`-> the value in <CorrelationId>
+ *  - `ched`         -> the value in a single <DocumentReference>
+ *  - `cheds`        -> the values in <DocumentReference> in document order
+ */
+const replaceAll = (text, from, to) => text.split(from).join(to)
+
+const applySubstitutions = (xml, subs = {}) => {
+  let out = xml
+
+  const replaceFieldTag = (tag, value) => {
+    const match = out.match(new RegExp(`<${tag}>([^<]+)</${tag}>`))
+    if (match && value) {
+      out = replaceAll(out, match[1], value)
+    }
+  }
+
+  replaceFieldTag('EntryReference', subs.mrn)
+  replaceFieldTag('DeclarationUCR', subs.ducr)
+  replaceFieldTag('CorrelationId', subs.correlationId)
+  replaceFieldTag('DocumentReference', subs.ched)
+
+  if (Array.isArray(subs.cheds)) {
+    const refs = [
+      ...out.matchAll(/<DocumentReference>([^<]+)<\/DocumentReference>/g)
+    ]
+    refs.forEach((match, index) => {
+      if (subs.cheds[index]) out = replaceAll(out, match[1], subs.cheds[index])
+    })
+  }
+  return out
+}
+
 export async function sendCdsMessageFromFile(
   relativePath,
+  subs = {},
   isFinalised = false,
   isError = false
 ) {
   const __filename = fileURLToPath(import.meta.url)
   const __dirname = path.dirname(__filename)
   const soapFilePath = path.resolve(__dirname, relativePath)
-  const soapEnvelope = await readFile(soapFilePath, 'utf-8')
+  const soapEnvelope = applySubstitutions(
+    await readFile(soapFilePath, 'utf-8'),
+    subs
+  )
   await new Promise((resolve) => setTimeout(resolve, 500))
   return await sendSoapRequest(soapEnvelope, isFinalised, isError)
 }

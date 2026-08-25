@@ -53,6 +53,12 @@ ENVIRONMENT=local
 ServiceBus__Notifications__ConnectionString=<get_this_from_imports_process_terminal_via_cdp>
 TRADE_IMPORTS_PROCESSOR_USER=<trade_imports_processor_user>
 TRADE_IMPORTS_PROCESSOR_KEY=<get_this_from_imports_process_terminal_via_cdp>
+TRADE_IMPORTS_DATA_API_USER=<trade_imports_data_api_user>
+TRADE_IMPORTS_DATA_API_KEY=<get_this_from_imports_process_terminal_via_cdp>
+BASE_URL_TRADE_IMPORTS_PROCESSOR=
+BASE_URL_BTMS_GATEWAY=
+BASE_URL_TRADE_IMPORTS_DATA_API=
+CDP_API_KEY=
 ```
 
 And lastly, run the following command and this should run the tests locally

@@ -8,26 +8,99 @@ import CustomDeclarationPage from '../page-objects/custom-declaration.page.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
 import { processorPostMatchedGmrFromFile } from '../utils/processorClient.js'
+import {
+  generateMrn,
+  generateGmr,
+  generateChed,
+  generateChedPp,
+  generateDucr,
+  generateVrn,
+  generateTrn,
+  generateCorrelationId
+} from '../utils/id-generator.js'
 
 describe('Search page', () => {
-  const gmrId = 'GMRA11350001'
+  const cdsMrn = generateMrn()
+  const cdsDucr = generateDucr()
+  const cdsChed = generateChed()
+
+  const e03Mrn = generateMrn()
+  const e03Ched = generateChed()
+
+  const chedPpMrn = generateMrn()
+  const chedPpRefs = [generateChedPp(), generateChedPp(), generateChedPp()]
+
+  const gmrId = generateGmr()
+  const customsMrn = generateMrn()
+  const transitMrn = generateMrn()
+  const gmrChed = generateChed()
+  const vrn = generateVrn()
+  const trn = generateTrn()
+  const trn2 = generateTrn()
 
   before(async () => {
-    await sendCdsMessageFromFile('../data/search/cds.xml')
-    await sendCdsMessageFromFile('../data/gmr/clearance-gmr.xml')
+    await sendCdsMessageFromFile('../data/search/cds.xml', {
+      mrn: cdsMrn,
+      ducr: cdsDucr,
+      ched: cdsChed,
+      correlationId: generateCorrelationId()
+    })
+    await sendIpaffMessageFromFile('../data/search/ipaff.json', {
+      ched: cdsChed
+    })
+
+    await sendCdsMessageFromFile('../data/e03/e03.xml', {
+      mrn: e03Mrn,
+      ched: e03Ched,
+      correlationId: generateCorrelationId()
+    })
+    await sendIpaffMessageFromFile('../data/e03/e03.json', {
+      ched: e03Ched
+    })
+
     await sendCdsMessageFromFile(
-      '../data/CHED-PP/C085_check/clearance-request.xml'
+      '../data/CHED-PP/C085_check/clearance-request.xml',
+      {
+        mrn: chedPpMrn,
+        cheds: chedPpRefs,
+        correlationId: generateCorrelationId()
+      }
     )
-    await sendCdsMessageFromFile('../data/e03/e03.xml')
+    await sendIpaffMessageFromFile(
+      '../data/CHED-PP/C085_check/9115-ched.json',
+      {
+        ched: chedPpRefs[0]
+      }
+    )
+    await sendIpaffMessageFromFile(
+      '../data/CHED-PP/C085_check/CO85-ched.json',
+      {
+        ched: chedPpRefs[1]
+      }
+    )
+    await sendIpaffMessageFromFile(
+      '../data/CHED-PP/C085_check/N851-ched.json',
+      {
+        ched: chedPpRefs[2]
+      }
+    )
 
-    await sendIpaffMessageFromFile('../data/search/ipaff.json')
-    await sendIpaffMessageFromFile('../data/gmr/ipaff-gmr.json')
-    await sendIpaffMessageFromFile('../data/CHED-PP/C085_check/9115-ched.json')
-    await sendIpaffMessageFromFile('../data/CHED-PP/C085_check/CO85-ched.json')
-    await sendIpaffMessageFromFile('../data/CHED-PP/C085_check/N851-ched.json')
-    await sendIpaffMessageFromFile('../data/e03/e03.json')
+    await sendCdsMessageFromFile('../data/gmr/clearance-gmr.xml', {
+      mrn: customsMrn,
+      ched: gmrChed,
+      correlationId: generateCorrelationId()
+    })
+    await sendIpaffMessageFromFile('../data/gmr/ipaff-gmr.json', {
+      ched: gmrChed
+    })
+    await processorPostMatchedGmrFromFile('../data/gmr/gmr.json', {
+      gmrId,
+      customs: [customsMrn],
+      transits: [transitMrn],
+      vrn,
+      trns: [trn2, trn]
+    })
 
-    await processorPostMatchedGmrFromFile('../data/gmr/gmr.json')
     await HomePage.open()
     if (!(await SearchPage.sessionActive())) {
       await HomePage.login()
@@ -37,31 +110,26 @@ describe('Search page', () => {
   })
 
   it('Should be able to search for a Valid MRN', async () => {
-    const mrn = '24GBBGBKCDMS704709'
     await SearchPage.clickNavSearchLink()
-    await SearchPage.search(mrn)
-    expect(await SearchResultsPage.getResultText()).toContain(mrn)
+    await SearchPage.search(cdsMrn)
+    expect(await SearchResultsPage.getResultText()).toContain(cdsMrn)
   })
 
   it('Should be able to search for a Valid CHED', async () => {
-    const ched = 'CHEDA.GB.2025.1024310'
     await SearchPage.clickNavSearchLink()
-    await SearchPage.search(ched)
-    expect(await SearchResultsPage.getResultText()).toContain(ched)
+    await SearchPage.search(cdsChed)
+    expect(await SearchResultsPage.getResultText()).toContain(cdsChed)
 
     const customDeclarationCheds = ['CHED Status', 'New']
     for (const ched of customDeclarationCheds) {
-      expect(
-        await CustomDeclarationPage.getAllText('CHEDA.GB.2025.1024310')
-      ).toContain(ched)
+      expect(await CustomDeclarationPage.getAllText(cdsChed)).toContain(ched)
     }
   })
 
   it('Should be able to search for a Valid DUCR', async () => {
-    const ducr = '4GB269573944000-PORTACDMS704709'
     await SearchPage.clickNavSearchLink()
-    await SearchPage.search(ducr)
-    expect(await SearchResultsPage.getResultText()).toContain(ducr)
+    await SearchPage.search(cdsDucr)
+    expect(await SearchResultsPage.getResultText()).toContain(cdsDucr)
   })
 
   it('should be able to search for a valid GMR and check GMR headings', async () => {
@@ -84,24 +152,22 @@ describe('Search page', () => {
   it('should display correct vehicle details for a valid GMR', async () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(gmrId)
-    expect(await GmrSearchResultsPage.getVehicleRegistrationNumber()).toBe(
-      'DN05 VDB'
-    )
+    expect(await GmrSearchResultsPage.getVehicleRegistrationNumber()).toBe(vrn)
     expect(
       (await GmrSearchResultsPage.getTrailerRegistrationNumbers()).sort()
-    ).toEqual(['V013 WKS', 'YT08 NYD'].sort())
+    ).toEqual([trn2, trn].sort())
   })
 
   it('should display correct linked customs declaration details for a valid GMR', async () => {
     const mrnData = await GmrSearchResultsPage.getLinkedMrnData()
     const expectedRows = [
       {
-        mrn: '24GBBGBKCDMS135001',
+        mrn: customsMrn,
         cdsStatus: 'In progress - Awaiting IPAFFS',
         btmsDecision: 'Hold - Decision not given'
       },
       {
-        mrn: '24GBBGBKCDMS13500Z',
+        mrn: transitMrn,
         cdsStatus: 'Unknown',
         btmsDecision: 'Unknown'
       }
@@ -125,20 +191,12 @@ describe('Search page', () => {
   })
 
   it('Should be able to search for a Valid MRN and see CHED-PP Document References', async () => {
-    const mrn = '24GBBGBKCDMS965015'
     await SearchPage.open()
-    await SearchPage.search(mrn)
-    expect(await SearchResultsPage.getResultText()).toContain(mrn)
+    await SearchPage.search(chedPpMrn)
+    expect(await SearchResultsPage.getResultText()).toContain(chedPpMrn)
 
-    const customDeclarationCheds = [
-      'CHEDPP.GB.2025.1050050',
-      'CHEDPP.GB.2025.1050051',
-      'CHEDPP.GB.2025.1050052'
-    ]
-    for (const ched of customDeclarationCheds) {
-      expect(
-        await CustomDeclarationPage.getAllText('24GBBGBKCDMS965015')
-      ).toContain(ched)
+    for (const ched of chedPpRefs) {
+      expect(await CustomDeclarationPage.getAllText(chedPpMrn)).toContain(ched)
     }
 
     expect(await SearchResultsPage.getCdsStatus()).toBe(
@@ -147,9 +205,8 @@ describe('Search page', () => {
   })
 
   it('Should assert on the CDS status for E03', async () => {
-    const mrn = '24GBBGBKCDMS704712'
     await SearchPage.open()
-    await SearchPage.search(mrn)
+    await SearchPage.search(e03Mrn)
     expect(await SearchResultsPage.getCdsStatus()).toContain('In progress')
     const allText = await SearchResultsPage.customDeclarationAllResultText()
     const normalised = allText.replace(/\s+/g, ' ').trim()

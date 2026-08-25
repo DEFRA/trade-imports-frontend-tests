@@ -6,25 +6,83 @@ import SearchResultsPage from '../page-objects/searchResultsPage.js'
 import TimelinePage from '../page-objects/timeline.page.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { sendIpaffMessageFromFile } from '../utils/ipaffsMessageHandler.js'
+import { processorPostMatchedGmrFromFile } from '../utils/processorClient.js'
+import {
+  generateMrn,
+  generateGmr,
+  generateChed,
+  generateCorrelationId
+} from '../utils/id-generator.js'
 
 describe('Timeline Search', () => {
+  const mrn = generateMrn()
+  const ched = generateChed()
+  const correlationId = generateCorrelationId()
+
+  const dropdownMrn = generateMrn()
+  const dropdownMrn2 = generateMrn()
+  const dropdownMrn3 = generateMrn()
+  const dropdownGmr = generateGmr()
+  const dropdownChed = generateChed()
+
   before(async () => {
     const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-    await sendCdsMessageFromFile('../data/timeline/1-cr-btms-error.xml')
+    await sendCdsMessageFromFile('../data/timeline/1-cr-btms-error.xml', {
+      mrn,
+      correlationId
+    })
     await pause(2000)
-    await sendCdsMessageFromFile('../data/timeline/2-cr.xml')
+    await sendCdsMessageFromFile('../data/timeline/2-cr.xml', {
+      mrn,
+      ched,
+      correlationId: generateCorrelationId()
+    })
     await pause(2000)
-    await sendIpaffMessageFromFile('../data/timeline/3-ched-valid.json')
+    await sendIpaffMessageFromFile('../data/timeline/3-ched-valid.json', {
+      ched
+    })
     await pause(2000)
-    await sendCdsMessageFromFile('../data/timeline/4-released-final.xml', true)
+    await sendCdsMessageFromFile(
+      '../data/timeline/4-released-final.xml',
+      { mrn, correlationId: generateCorrelationId() },
+      true
+    )
     await pause(2000)
     await sendCdsMessageFromFile(
       '../data/timeline/5-cr-cds-error.xml',
+      { mrn, correlationId: generateCorrelationId() },
       false,
       true
     )
     await pause(2000)
-    await sendIpaffMessageFromFile('../data/timeline/6-ched-valid.json')
+    await sendIpaffMessageFromFile('../data/timeline/6-ched-valid.json', {
+      ched
+    })
+    await pause(2000)
+
+    await sendCdsMessageFromFile('../data/gmr/clearance-gmr.xml', {
+      mrn: dropdownMrn,
+      ched: dropdownChed,
+      correlationId: generateCorrelationId()
+    })
+    await sendCdsMessageFromFile('../data/gmr/clearance-gmr-1.xml', {
+      mrn: dropdownMrn2,
+      ched: dropdownChed,
+      correlationId: generateCorrelationId()
+    })
+    await sendCdsMessageFromFile('../data/gmr/clearance-gmr-2.xml', {
+      mrn: dropdownMrn3,
+      ched: dropdownChed,
+      correlationId: generateCorrelationId()
+    })
+    await sendIpaffMessageFromFile('../data/gmr/ipaff-gmr.json', {
+      ched: dropdownChed
+    })
+    await processorPostMatchedGmrFromFile('../data/gmr/gmr.json', {
+      gmrId: dropdownGmr,
+      customs: [dropdownMrn],
+      transits: [generateMrn()]
+    })
     await pause(2000)
 
     await HomePage.open()
@@ -36,7 +94,6 @@ describe('Timeline Search', () => {
   })
 
   it('Should be able to search for a Valid MRN that has CDS Decision, BTMS Decision, CHED, CDS Finalisation, BTMS Error, and CDS Error', async () => {
-    const mrn = '26GBBGBKCDMA188029'
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(mrn)
     expect(await SearchResultsPage.getResultText()).toContain(mrn)
@@ -58,7 +115,7 @@ describe('Timeline Search', () => {
     ]
 
     const expectedOrderForChed = [
-      'CHEDA.GB.2026.1113760',
+      ched,
       'IPAFFS to BTMS',
       'CHED status',
       'VALIDATED',
@@ -107,7 +164,7 @@ describe('Timeline Search', () => {
       'Error',
       'ALVSVAL318',
       'Message',
-      'Item 1 has no document code. BTMS requires at least one item document. Your request with correlation ID CDMA128014 has been terminated.',
+      `Item 1 has no document code. BTMS requires at least one item document. Your request with correlation ID ${correlationId} has been terminated.`,
       'Created'
     ]
 
@@ -133,10 +190,9 @@ describe('Timeline Search', () => {
   })
 
   it('Should be able to search for a Valid MRN that has MRN dropdown', async () => {
-    const mrn = '24GBBGBKCDMS135001'
     await SearchPage.clickNavSearchLink()
-    await SearchPage.search(mrn)
-    expect(await SearchResultsPage.getResultText()).toContain(mrn)
+    await SearchPage.search(dropdownMrn)
+    expect(await SearchResultsPage.getResultText()).toContain(dropdownMrn)
 
     await TimelinePage.clickTimelineTab()
     await expect(await TimelinePage.timelineInfoMessage).toBeDisplayed()
@@ -145,11 +201,11 @@ describe('Timeline Search', () => {
     )
     await expect(await TimelinePage.isTimelineMrnDropdownVisible()).toBe(true)
 
-    await TimelinePage.selectDropdownAndClickVisibleMoreDetails(mrn)
-    const timelineTexts = await TimelinePage.allTimelineText(mrn)
+    await TimelinePage.selectDropdownAndClickVisibleMoreDetails(dropdownMrn)
+    const timelineTexts = await TimelinePage.allTimelineText(dropdownMrn)
 
     const expectedTextForFirstMrn = [
-      'Item 1 - SALSICCIA PURO SUINO 24GBBGBKCDMS135001'
+      `Item 1 - SALSICCIA PURO SUINO ${dropdownMrn}`
     ]
     expectConsecutiveSubsequence(timelineTexts, expectedTextForFirstMrn)
   })
