@@ -7,11 +7,26 @@ import LatestActivityPage from '../page-objects/latest-activity.page.js'
 import GmrSearchResultsPage from '../page-objects/gmr-search-results.page.js'
 import { sendCdsMessageFromFile } from '../utils/soapMessageHandler.js'
 import { processorPostMatchedGmrFromFile } from '../utils/processorClient.js'
+import {
+  generateMrn,
+  generateGmr,
+  generateCorrelationId
+} from '../utils/id-generator.js'
 
 describe('Page Redirection', () => {
+  const mrn = generateMrn()
+  const gmrId = generateGmr()
+
   before(async () => {
-    await sendCdsMessageFromFile('../data/search/cds.xml')
-    await processorPostMatchedGmrFromFile('../data/gmr/gmr.json')
+    await sendCdsMessageFromFile('../data/search/cds.xml', {
+      mrn,
+      correlationId: generateCorrelationId()
+    })
+    await processorPostMatchedGmrFromFile('../data/gmr/gmr.json', {
+      gmrId,
+      customs: [mrn],
+      transits: [generateMrn()]
+    })
 
     await HomePage.open()
     if (await SearchPage.sessionActive()) {
@@ -37,26 +52,24 @@ describe('Page Redirection', () => {
   })
 
   it('Should get redirected when going to the Search Results Page for an MRN without logging in', async () => {
-    await HomePage.openPage('/search-result?searchTerm=24GBBGBKCDMS704709')
+    await HomePage.openPage(`/search-result?searchTerm=${mrn}`)
     expect(await HomePage.isGatewayRadioButtonVisible()).toBe(true)
 
     await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
-    await HomePage.openPage('/search-result?searchTerm=24GBBGBKCDMS704709')
-    expect(await SearchResultsPage.getResultText()).toContain(
-      '24GBBGBKCDMS704709'
-    )
+    await HomePage.openPage(`/search-result?searchTerm=${mrn}`)
+    expect(await SearchResultsPage.getResultText()).toContain(mrn)
   })
 
   it('Should get redirected when going to the Search Results Page for an GMR without logging in', async () => {
-    await HomePage.openPage('/gmr-search-result?searchTerm=GMRA11350001')
+    await HomePage.openPage(`/gmr-search-result?searchTerm=${gmrId}`)
     expect(await HomePage.isGatewayRadioButtonVisible()).toBe(true)
 
     await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
-    await HomePage.openPage('/gmr-search-result?searchTerm=GMRA11350001')
+    await HomePage.openPage(`/gmr-search-result?searchTerm=${gmrId}`)
     expect(await GmrSearchResultsPage.getDisplayedGmr()).toBe(
-      `Showing result for\nGMRA11350001`
+      `Showing result for\n${gmrId}`
     )
   })
 
@@ -132,14 +145,14 @@ describe('Page Redirection', () => {
 
   it('Should get redirected when going to the Admin Search Results Page without logging in', async () => {
     await HomePage.openPage(
-      '/admin/messages?searchTerm=24GBBGBKCDMS704709&searchType=information'
+      `/admin/messages?searchTerm=${mrn}&searchType=information`
     )
     expect(await HomePage.isGatewayRadioButtonVisible()).toBe(true)
 
     await HomePage.gatewayLogin()
     await HomePage.loginRegisteredUser()
     await HomePage.openPage(
-      '/admin/messages?searchTerm=24GBBGBKCDMS704709&searchType=information'
+      `/admin/messages?searchTerm=${mrn}&searchType=information`
     )
     await expect(browser).toHaveTitle(
       'You do not have the correct permissions to access this service - Border Trade Matching Service'
