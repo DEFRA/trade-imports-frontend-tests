@@ -23,9 +23,10 @@ describe('Accessibility Testing for VRN and TRN Page', () => {
   const mrn = generateMrn()
   const transitMrn = generateMrn()
   const gmrId = generateGmr()
-  const ched = generateChed()
+  let ched
 
   before(async () => {
+    ched = await generateChed()
     await sendCdsMessageFromFile('../data/gmr/clearance-gmr.xml', {
       mrn,
       ched,

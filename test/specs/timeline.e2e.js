@@ -16,17 +16,19 @@ import {
 
 describe('Timeline Search', () => {
   const mrn = generateMrn()
-  const ched = generateChed()
+  let ched
   const correlationId = generateCorrelationId()
 
   const dropdownMrn = generateMrn()
   const dropdownMrn2 = generateMrn()
   const dropdownMrn3 = generateMrn()
   const dropdownGmr = generateGmr()
-  const dropdownChed = generateChed()
+  let dropdownChed
 
   before(async () => {
     const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+    ched = await generateChed()
+    dropdownChed = await generateChed()
     await sendCdsMessageFromFile('../data/timeline/1-cr-btms-error.xml', {
       mrn,
       correlationId

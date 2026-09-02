@@ -18,10 +18,11 @@ import TimelinePage from '../page-objects/timeline.page.js'
 
 describe('Accessibility Testing for Timeline Tab', () => {
   const mrn = generateMrn()
-  const ched = generateChed()
+  let ched
   const correlationId = generateCorrelationId()
 
   before(async () => {
+    ched = await generateChed()
     await sendCdsMessageFromFile('../data/timeline/1-cr-btms-error.xml', {
       mrn,
       correlationId

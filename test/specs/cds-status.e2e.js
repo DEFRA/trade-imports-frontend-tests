@@ -19,7 +19,7 @@ import {
 describe('CDS Status on GMR and Search Results Page', () => {
   const gmrId = generateGmr()
   const mrns = Array.from({ length: 13 }, generateMrn)
-  const cheds = Array.from({ length: 13 }, generateChed)
+  let cheds
 
   // Each of these fixtures may have a:
   // -cr.xml - Clearance Request
@@ -63,6 +63,10 @@ describe('CDS Status on GMR and Search Results Page', () => {
   }
 
   before(async () => {
+    cheds = []
+    for (let i = 0; i < 13; i++) {
+      cheds.push(await generateChed())
+    }
     await processorPostMatchedGmrFromFile('../data/cds_status/0-gmr.json', {
       gmrId,
       customs: mrns.slice(0, 12),

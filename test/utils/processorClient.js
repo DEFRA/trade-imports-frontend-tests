@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { readFile } from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { dataApiClientGetRelatedDeclarations } from './dataApiClient.js'
 import './logger.js'
 
 const baseUrl =
@@ -39,19 +40,6 @@ const assertCredentials = () => {
   }
 }
 
-const dataApiBaseUrl =
-  process.env.BASE_URL_TRADE_IMPORTS_DATA_API ??
-  `https://trade-imports-data-api.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`
-
-const dataApiHeaders = () => ({
-  Authorization:
-    'Basic ' +
-    Buffer.from(
-      `${process.env.TRADE_IMPORTS_DATA_API_USER}:${process.env.TRADE_IMPORTS_DATA_API_KEY}`
-    ).toString('base64'),
-  ...(process.env.CDP_API_KEY ? { 'X-API-Key': process.env.CDP_API_KEY } : {})
-})
-
 export async function waitForDeclaration(mrn, timeoutMs = 20000) {
   globalThis.testLogger?.info?.({
     event: 'Waiting for declaration',
@@ -59,14 +47,10 @@ export async function waitForDeclaration(mrn, timeoutMs = 20000) {
   })
   const start = Date.now()
   while (Date.now() - start < timeoutMs) {
-    const resp = await fetch(
-      `${dataApiBaseUrl}/related-import-declarations?mrn=${encodeURIComponent(mrn)}`,
-      { headers: dataApiHeaders() }
-    )
-    if (resp.ok) {
-      const body = await resp.json()
+    try {
+      const body = await dataApiClientGetRelatedDeclarations(mrn)
       if ((body.customsDeclarations || []).length > 0) return
-    } else {
+    } catch {
       globalThis.testLogger?.info?.({
         event: 'Declaration not yet found',
         mrn

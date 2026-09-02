@@ -22,9 +22,10 @@ describe('Accessibility Testing for GMR Page', () => {
   const gmrId = generateGmr()
   const mrn = generateMrn()
   const transitMrn = generateMrn()
-  const ched = generateChed()
+  let ched
 
   before(async () => {
+    ched = await generateChed()
     await sendCdsMessageFromFile('../data/gmr/clearance-gmr.xml', {
       mrn,
       ched,
