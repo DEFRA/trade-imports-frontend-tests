@@ -13,6 +13,7 @@ if (debug) {
 
 export const config = {
   runner: 'local',
+  autoXvfb: false,
   specs: ['./test/specs/**/*.e2e.js'],
   exclude: [],
   maxInstances: 1,

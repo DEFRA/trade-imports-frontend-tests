@@ -23,32 +23,40 @@ describe('Search Results Page for GMR, VRN and TRN Page', () => {
   const customsMrn = generateMrn()
   const transitMrn = generateMrn()
   const mainGmrId = generateGmr()
-  const mainChed = generateChed()
+  let mainChed
 
   const gmr2Mrn = generateMrn()
-  const gmr2Ched = generateChed()
+  let gmr2Ched
 
   const customsEmptyGmr = generateGmr()
   const customsEmptyMrn = generateMrn()
-  const customsEmptyChed = generateChed()
+  let customsEmptyChed
 
   const transitEmptyGmr = generateGmr()
   const transitEmptyMrn = generateMrn()
-  const transitEmptyChed = generateChed()
+  let transitEmptyChed
 
   const customsNullGmr = generateGmr()
   const customsNullMrn = generateMrn()
-  const customsNullChed = generateChed()
+  let customsNullChed
 
   const transitNullGmr = generateGmr()
   const transitNullMrn = generateMrn()
-  const transitNullChed = generateChed()
+  let transitNullChed
 
   const onlyCustomsGmr = generateGmr()
   const onlyCustomsMrn = generateMrn()
-  const onlyCustomsChed = generateChed()
+  let onlyCustomsChed
 
   before(async () => {
+    mainChed = await generateChed()
+    gmr2Ched = await generateChed()
+    customsEmptyChed = await generateChed()
+    transitEmptyChed = await generateChed()
+    customsNullChed = await generateChed()
+    transitNullChed = await generateChed()
+    onlyCustomsChed = await generateChed()
+
     await sendCdsMessageFromFile('../data/gmr/clearance-gmr.xml', {
       mrn: customsMrn,
       ched: mainChed,

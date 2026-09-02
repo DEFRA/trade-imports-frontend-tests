@@ -22,23 +22,31 @@ import {
 describe('Search page', () => {
   const cdsMrn = generateMrn()
   const cdsDucr = generateDucr()
-  const cdsChed = generateChed()
+  let cdsChed
 
   const e03Mrn = generateMrn()
-  const e03Ched = generateChed()
+  let e03Ched
 
   const chedPpMrn = generateMrn()
-  const chedPpRefs = [generateChedPp(), generateChedPp(), generateChedPp()]
+  let chedPpRefs
 
   const gmrId = generateGmr()
   const customsMrn = generateMrn()
   const transitMrn = generateMrn()
-  const gmrChed = generateChed()
+  let gmrChed
   const vrn = generateVrn()
   const trn = generateTrn()
   const trn2 = generateTrn()
 
   before(async () => {
+    cdsChed = await generateChed()
+    e03Ched = await generateChed()
+    chedPpRefs = []
+    for (let i = 0; i < 3; i++) {
+      chedPpRefs.push(await generateChedPp())
+    }
+    gmrChed = await generateChed()
+
     await sendCdsMessageFromFile('../data/search/cds.xml', {
       mrn: cdsMrn,
       ducr: cdsDucr,
