@@ -10,7 +10,7 @@ bootstrap()
 global.GLOBAL_AGENT.HTTP_PROXY = process.env.HTTP_PROXY
 
 browserstackConfig.services[0][1].opts = {
-  binarypath: '/root/.browserstack/BrowserStackLocal',
+  binarypath: '/app/.browserstack/BrowserStackLocal',
   proxyHost: 'localhost',
   proxyPort: 3128
 }
