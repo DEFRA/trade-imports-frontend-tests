@@ -6,9 +6,13 @@ class Ched extends Page {
     return $('details[aria-label="' + ched + '"]')
   }
 
-  notificationRows() {
+  tracesChedTable(reference) {
+    return $('details[aria-label="' + reference + '"] table.btms-traces-ched')
+  }
+
+  notificationRows(reference) {
     return browser.$$(
-      'details[aria-label^="CHED"] table.btms-notification tbody tr'
+      'details[aria-label="' + reference + '"] table.btms-notification tbody tr'
     )
   }
 
@@ -16,8 +20,8 @@ class Ched extends Page {
     return await this.getTextFrom(this.allText(ched))
   }
 
-  async getChedRows() {
-    const rows = await this.notificationRows()
+  async getChedRows(reference) {
+    const rows = await this.notificationRows(reference)
     const rowData = []
 
     for (const row of rows) {

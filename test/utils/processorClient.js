@@ -140,3 +140,32 @@ export async function processorPostMatchedGmrFromFile(relativePath, subs = {}) {
   }
   return { declarationIds, results }
 }
+
+export async function processorPostTracesChedFromFile(relativePath, subs = {}) {
+  assertCredentials()
+  globalThis.testLogger.info({
+    event: '[TRACES CHED] About to send a TRACES CHED message from file',
+    relativePath
+  })
+  const __filename = fileURLToPath(import.meta.url)
+  const __dirname = path.dirname(__filename)
+  const filePath = path.resolve(__dirname, relativePath)
+  const json = JSON.parse(await readFile(filePath, 'utf-8'))
+
+  if (subs.ched) json.exchangedDocument.identifier = subs.ched
+
+  const traceId = uuidv4().replace(/-/g, '')
+  const req = fetch(`${baseUrl}/dev/traces-cheds`, {
+    method: 'POST',
+    body: JSON.stringify(json),
+    headers: withHeaders({ 'x-cdp-request-id': traceId })
+  })
+
+  const response = await makeRequest(req)
+  globalThis.testLogger.info({
+    event: '[TRACES CHED] Successfully POSTed TRACES CHED to processor',
+    traceId,
+    status: response.status
+  })
+  return { traceId, response }
+}
