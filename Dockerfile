@@ -11,19 +11,26 @@ RUN apk update && \
     curl \
     aws-cli
 
-# Upgrade npm, then patch its bundled brace-expansion, tar, undici, and ip-address, which npm
-# ships at vulnerable versions (brace-expansion 5.0.7 / tar 7.5.19 / undici 6.27.0 / ip-address 10.2.0)
-# that cannot be fixed via package.json overrides on a global install.
-RUN npm install -g npm@12.0.1 && \
+# Upgrade npm, then patch the packages npm bundles at vulnerable versions (brace-expansion 5.0.9 /
+# tar 7.5.22 / undici 6.28.0 / ip-address 10.5.0 / postcss-selector-parser 7.1.4) that cannot be
+# fixed via package.json overrides on a global install. The base image ships npm twice
+# (/usr/local/lib/node_modules and /home/node/.npm-global/lib/node_modules); patch both, as
+# either copy can be the one npm resolves.
+RUN npm install -g npm@12.2.0 && \
     NPM_NM=$(npm root -g)/npm/node_modules && \
-    npm pack --pack-destination /tmp brace-expansion@5.0.9 tar@7.5.22 undici@6.28.0 ip-address@10.3.1 && \
-    rm -rf $NPM_NM/brace-expansion $NPM_NM/tar $NPM_NM/undici $NPM_NM/ip-address && \
-    mkdir $NPM_NM/brace-expansion $NPM_NM/tar $NPM_NM/undici $NPM_NM/ip-address && \
-    tar xzf /tmp/brace-expansion-5.0.9.tgz --strip-components=1 -C $NPM_NM/brace-expansion && \
+    ROOT_NPM_NM=/usr/local/lib/node_modules/npm/node_modules && \
+    npm pack --pack-destination /tmp brace-expansion@5.0.12 tar@7.5.22 undici@6.28.1 ip-address@10.7.3 postcss-selector-parser@7.1.6 && \
+    rm -rf $NPM_NM/brace-expansion $NPM_NM/tar $NPM_NM/undici $NPM_NM/ip-address $NPM_NM/postcss-selector-parser && \
+    mkdir $NPM_NM/brace-expansion $NPM_NM/tar $NPM_NM/undici $NPM_NM/ip-address $NPM_NM/postcss-selector-parser && \
+    tar xzf /tmp/brace-expansion-5.0.12.tgz --strip-components=1 -C $NPM_NM/brace-expansion && \
     tar xzf /tmp/tar-7.5.22.tgz --strip-components=1 -C $NPM_NM/tar && \
-    tar xzf /tmp/undici-6.28.0.tgz --strip-components=1 -C $NPM_NM/undici && \
-    tar xzf /tmp/ip-address-10.3.1.tgz --strip-components=1 -C $NPM_NM/ip-address && \
-    rm /tmp/brace-expansion-5.0.9.tgz /tmp/tar-7.5.22.tgz /tmp/undici-6.28.0.tgz /tmp/ip-address-10.3.1.tgz
+    tar xzf /tmp/undici-6.28.1.tgz --strip-components=1 -C $NPM_NM/undici && \
+    tar xzf /tmp/ip-address-10.7.3.tgz --strip-components=1 -C $NPM_NM/ip-address && \
+    tar xzf /tmp/postcss-selector-parser-7.1.6.tgz --strip-components=1 -C $NPM_NM/postcss-selector-parser && \
+    for p in brace-expansion tar undici ip-address postcss-selector-parser; do \
+      rm -rf $ROOT_NPM_NM/$p && cp -r $NPM_NM/$p $ROOT_NPM_NM/$p; \
+    done && \
+    rm /tmp/brace-expansion-5.0.12.tgz /tmp/tar-7.5.22.tgz /tmp/undici-6.28.1.tgz /tmp/ip-address-10.7.3.tgz /tmp/postcss-selector-parser-7.1.6.tgz
 
 WORKDIR /app
 
@@ -35,23 +42,36 @@ RUN npm install --omit=optional && \
    rm -rf node_modules/@esbuild
 
 # Patch vulnerable JARs bundled inside allure-commandline that cannot be upgraded
-# via npm (allure bundles specific Jackson/jsoup versions in its dist):
-# - jackson-databind 2.22.0 -> 2.22.1 (CVE-2026-54515, CVE-2026-59889)
-# - jsoup 1.22.2 -> 1.23.1 (CVE-2026-71497)
+# via npm (allure bundles specific Jackson/FreeMarker/jsoup versions in its dist):
+# - jackson-core 2.22.0 -> 2.22.3 (CVE-2026-89407, CVE-2026-89425)
+# - jackson-databind 2.22.1 -> 2.22.3 (CVE-2026-68497, CVE-2026-91776, CVE-2026-91777,
+#   CVE-2026-19032, CVE-2026-83557)
+# - freemarker 2.3.34 -> 2.3.35 (CVE-2026-84939)
+# - jsoup 1.23.1 -> 1.23.2 (CVE-2026-75140)
 # The allure launcher hardcodes jar filenames in its CLASSPATH, so we overwrite
 # the old jar files with fixed content rather than adding new files.
 RUN ALLURE_LIB=node_modules/allure-commandline/dist/lib && \
     JIRA_LIB=node_modules/allure-commandline/dist/plugins/jira-plugin/lib && \
     XRAY_LIB=node_modules/allure-commandline/dist/plugins/xray-plugin/lib && \
-    curl -sSL -o /tmp/jackson-databind-2.22.1.jar \
-      https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.22.1/jackson-databind-2.22.1.jar && \
-    curl -sSL -o /tmp/jsoup-1.23.1.jar \
-      https://repo1.maven.org/maven2/org/jsoup/jsoup/1.23.1/jsoup-1.23.1.jar && \
-    cp /tmp/jackson-databind-2.22.1.jar $ALLURE_LIB/jackson-databind-2.22.0.jar && \
-    cp /tmp/jackson-databind-2.22.1.jar $JIRA_LIB/jackson-databind-2.22.0.jar && \
-    cp /tmp/jackson-databind-2.22.1.jar $XRAY_LIB/jackson-databind-2.22.0.jar && \
-    cp /tmp/jsoup-1.23.1.jar $ALLURE_LIB/jsoup-1.22.2.jar && \
-    rm /tmp/jackson-databind-2.22.1.jar /tmp/jsoup-1.23.1.jar
+    MVN=https://repo1.maven.org/maven2 && \
+    curl -sSL -o /tmp/jackson-core-2.22.3.jar \
+      $MVN/com/fasterxml/jackson/core/jackson-core/2.22.3/jackson-core-2.22.3.jar && \
+    curl -sSL -o /tmp/jackson-databind-2.22.3.jar \
+      $MVN/com/fasterxml/jackson/core/jackson-databind/2.22.3/jackson-databind-2.22.3.jar && \
+    curl -sSL -o /tmp/freemarker-2.3.35.jar \
+      $MVN/org/freemarker/freemarker/2.3.35/freemarker-2.3.35.jar && \
+    curl -sSL -o /tmp/jsoup-1.23.2.jar \
+      $MVN/org/jsoup/jsoup/1.23.2/jsoup-1.23.2.jar && \
+    cp /tmp/jackson-core-2.22.3.jar $ALLURE_LIB/jackson-core-2.22.0.jar && \
+    cp /tmp/jackson-core-2.22.3.jar $JIRA_LIB/jackson-core-2.22.0.jar && \
+    cp /tmp/jackson-core-2.22.3.jar $XRAY_LIB/jackson-core-2.22.0.jar && \
+    cp /tmp/jackson-databind-2.22.3.jar $ALLURE_LIB/jackson-databind-2.22.0.jar && \
+    cp /tmp/jackson-databind-2.22.3.jar $JIRA_LIB/jackson-databind-2.22.0.jar && \
+    cp /tmp/jackson-databind-2.22.3.jar $XRAY_LIB/jackson-databind-2.22.0.jar && \
+    cp /tmp/freemarker-2.3.35.jar $ALLURE_LIB/freemarker-2.3.34.jar && \
+    cp /tmp/freemarker-2.3.35.jar $JIRA_LIB/freemarker-2.3.34.jar && \
+    cp /tmp/jsoup-1.23.2.jar $ALLURE_LIB/jsoup-1.22.2.jar && \
+    rm /tmp/jackson-core-2.22.3.jar /tmp/jackson-databind-2.22.3.jar /tmp/freemarker-2.3.35.jar /tmp/jsoup-1.23.2.jar
 
 ADD https://dnd2hcwqjlbad.cloudfront.net/binaries/release/latest_unzip/BrowserStackLocal-alpine /app/.browserstack/BrowserStackLocal
 
