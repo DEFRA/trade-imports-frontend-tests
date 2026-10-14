@@ -11,9 +11,10 @@ class Ched extends Page {
   }
 
   notificationRows(reference) {
-    return browser.$$(
-      'details[aria-label="' + reference + '"] table.btms-notification tbody tr'
-    )
+    const selector = reference
+      ? `details[aria-label="${reference}"] table.btms-notification tbody tr`
+      : 'table.btms-notification tbody tr'
+    return browser.$$(selector)
   }
 
   async getAllText(ched) {
