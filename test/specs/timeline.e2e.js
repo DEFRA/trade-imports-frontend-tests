@@ -208,6 +208,24 @@ describe('Timeline Search', () => {
       `Item 1 - SALSICCIA PURO SUINO ${dropdownMrn}`
     ]
     expectConsecutiveSubsequence(timelineTexts, expectedTextForFirstMrn)
+
+    await SearchPage.clickNavSearchLink()
+    await SearchPage.search(dropdownMrn2)
+    expect(await SearchResultsPage.getResultText()).toContain(dropdownMrn2)
+
+    await TimelinePage.clickTimelineTab()
+    expect(await TimelinePage.getTimelineInfoMessage()).toContain(
+      'The timeline includes events from the past 180 days only.'
+    )
+    await expect(await TimelinePage.isTimelineMrnDropdownVisible()).toBe(true)
+
+    await TimelinePage.selectDropdownAndClickVisibleMoreDetails(dropdownMrn2)
+    const timelineTexts2 = await TimelinePage.allTimelineText(dropdownMrn2)
+
+    const expectedTextForFirstMrn2 = [
+      `Item 1 - SALSICCIA PURO SUINO ${dropdownMrn2}`
+    ]
+    expectConsecutiveSubsequence(timelineTexts2, expectedTextForFirstMrn2)
   })
 })
 
