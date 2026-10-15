@@ -208,6 +208,68 @@ describe('Timeline Search', () => {
       `Item 1 - SALSICCIA PURO SUINO ${dropdownMrn}`
     ]
     expectConsecutiveSubsequence(timelineTexts, expectedTextForFirstMrn)
+
+    await SearchPage.clickNavSearchLink()
+    await SearchPage.search(dropdownMrn2)
+    expect(await SearchResultsPage.getResultText()).toContain(dropdownMrn2)
+
+    await TimelinePage.clickTimelineTab()
+    expect(await TimelinePage.getTimelineInfoMessage()).toContain(
+      'The timeline includes events from the past 180 days only.'
+    )
+    await expect(await TimelinePage.isTimelineMrnDropdownVisible()).toBe(true)
+
+    await TimelinePage.selectDropdownAndClickVisibleMoreDetails(dropdownMrn2)
+    const timelineTexts2 = await TimelinePage.allTimelineText(dropdownMrn2)
+
+    const expectedTextForFirstMrn2 = [
+      `Item 1 - SALSICCIA PURO SUINO ${dropdownMrn2}`
+    ]
+    expectConsecutiveSubsequence(timelineTexts2, expectedTextForFirstMrn2)
+  })
+
+  it('Should be able to search for a Valid MRN and apply Custom Declaration filters', async () => {
+    await SearchPage.clickNavSearchLink()
+    await SearchPage.search(dropdownMrn)
+    expect(await SearchResultsPage.getResultText()).toContain(dropdownMrn)
+
+    await SearchPage.clickLatestTab()
+    const initialVisibleDeclarationRowsCount =
+      await SearchPage.visibleDeclarationRowsCount()
+    expect(initialVisibleDeclarationRowsCount).toBeGreaterThan(0)
+
+    await SearchPage.selectDeclarationMatchFilter('No')
+    expect(await SearchPage.getDeclarationNoItemsMessage()).toContain(
+      'There are no items that match the filters selected.'
+    )
+    expect(await SearchPage.visibleDeclarationRowsCount()).toBe(0)
+
+    await SearchPage.selectDeclarationMatchFilter('Show all')
+    await expect(await SearchPage.visibleDeclarationRowsCount()).toBe(
+      initialVisibleDeclarationRowsCount
+    )
+  })
+
+  it('Should be able to search for a Valid MRN and apply IPAFF filters', async () => {
+    await SearchPage.clickNavSearchLink()
+    await SearchPage.search(dropdownMrn)
+    expect(await SearchResultsPage.getResultText()).toContain(dropdownMrn)
+
+    await SearchPage.clickLatestTab()
+    const initialVisibleNotificationRowsCount =
+      await SearchPage.visibleNotificationRowsCount()
+    expect(initialVisibleNotificationRowsCount).toBeGreaterThan(0)
+
+    await SearchPage.selectNotificationAuthorityFilter('POAO')
+    expect(await SearchPage.getNotificationNoItemsMessage()).toContain(
+      'There are no commodities that match the filters selected.'
+    )
+    expect(await SearchPage.visibleNotificationRowsCount()).toBe(0)
+
+    await SearchPage.selectNotificationAuthorityFilter('Show all')
+    await expect(await SearchPage.visibleNotificationRowsCount()).toBe(
+      initialVisibleNotificationRowsCount
+    )
   })
 })
 

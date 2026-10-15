@@ -1,0 +1,38 @@
+{
+  "$model": "defra/certificate-internal/1",
+  "$type": "ched",
+  "lastUpdated": "2026-03-09T09:15:00.5553237Z",
+  "exchangedDocument": {
+    "identifier": "CHEDA.GB.2025.2000001",
+    "documentStatusCode": "1",
+    "secondSignatoryAuthentication": {
+      "typeCode": "1",
+      "includedClause": [
+        {
+          "identifier": "DECISION_CONCLUSION",
+          "content": "ACCEPTABLE_FOR_FREE_CIRCULATION"
+        }
+      ]
+    }
+  },
+  "specifiedConsignment": {
+    "includedConsignmentItem": [
+      {
+        "includedTradeLineItem": [
+          {
+            "sequenceNumeric": 1,
+            "scientificName": "Salmo salar",
+            "netWeight": { "content": "1000", "unitCode": "KGM" },
+            "applicableClassification": [
+              {
+                "systemId": "CN",
+                "classCode": { "value": "03019985" },
+                "className": ["Atlantic salmon"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

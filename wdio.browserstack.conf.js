@@ -13,7 +13,8 @@ export const config = {
   key: process.env.BROWSERSTACK_KEY,
 
   specs: ['./test/specs/**/*.js'],
-  exclude: [],
+  exclude:
+    process.env.PROFILE === 'NO_TRACES' ? ['./test/specs/traces/**/*.js'] : [],
   maxInstances: 3,
   commonCapabilities: {
     'bstack:options': {
