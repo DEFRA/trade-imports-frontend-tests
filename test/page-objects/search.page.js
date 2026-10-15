@@ -26,6 +26,34 @@ class SearchPage extends Page {
     return $('a.govuk-service-navigation__link[href="/search"]')
   }
 
+  get latestTab() {
+    return $('#tab_latest-view')
+  }
+
+  get declarationMatchFilter() {
+    return $('#match')
+  }
+
+  get declarationNoItemsMessage() {
+    return $(
+      '//*[@id="latest-view"]//table[contains(@class,"btms-declaration")]/preceding-sibling::div[contains(@class,"govuk-inset-text")][1]'
+    )
+  }
+
+  get notificationAuthorityFilter() {
+    return $('#chedAuthority')
+  }
+
+  get notificationNoItemsMessage() {
+    return $(
+      '//*[@id="latest-view"]//table[contains(@class,"btms-notification")]/preceding-sibling::div[contains(@class,"govuk-inset-text")][1]'
+    )
+  }
+
+  get visibleDeclarationRows() {
+    return $('#latest-view table.btms-declaration tbody').$$('tr:not([hidden])')
+  }
+
   async search(input) {
     await this.elementIsDisplayed(this.searchInputField)
     await this.searchInputField.setValue(input)
@@ -46,6 +74,36 @@ class SearchPage extends Page {
 
   async clickNavSearchLink() {
     await this.clickLink(this.navSearchLink)
+  }
+
+  async clickLatestTab() {
+    await this.clickLink(this.latestTab)
+  }
+
+  async selectDeclarationMatchFilter(value) {
+    await this.declarationMatchFilter.selectByVisibleText(value)
+  }
+
+  async selectNotificationAuthorityFilter(value) {
+    await this.notificationAuthorityFilter.selectByVisibleText(value)
+  }
+
+  async getDeclarationNoItemsMessage() {
+    return await this.getTextFrom(this.declarationNoItemsMessage)
+  }
+
+  async getNotificationNoItemsMessage() {
+    return await this.getTextFrom(this.notificationNoItemsMessage)
+  }
+
+  async visibleDeclarationRowsCount() {
+    return (await this.visibleDeclarationRows).length
+  }
+
+  async visibleNotificationRowsCount() {
+    return $('#latest-view table.btms-notification tbody').$$(
+      'tr:not([hidden])'
+    ).length
   }
 
   async sessionActive() {

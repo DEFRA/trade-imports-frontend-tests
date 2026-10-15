@@ -227,6 +227,50 @@ describe('Timeline Search', () => {
     ]
     expectConsecutiveSubsequence(timelineTexts2, expectedTextForFirstMrn2)
   })
+
+  it('Should be able to search for a Valid MRN and apply Custom Declaration filters', async () => {
+    await SearchPage.clickNavSearchLink()
+    await SearchPage.search(dropdownMrn)
+    expect(await SearchResultsPage.getResultText()).toContain(dropdownMrn)
+
+    await SearchPage.clickLatestTab()
+    const initialVisibleDeclarationRowsCount =
+      await SearchPage.visibleDeclarationRowsCount()
+    expect(initialVisibleDeclarationRowsCount).toBeGreaterThan(0)
+
+    await SearchPage.selectDeclarationMatchFilter('No')
+    expect(await SearchPage.getDeclarationNoItemsMessage()).toContain(
+      'There are no items that match the filters selected.'
+    )
+    expect(await SearchPage.visibleDeclarationRowsCount()).toBe(0)
+
+    await SearchPage.selectDeclarationMatchFilter('Show all')
+    await expect(await SearchPage.visibleDeclarationRowsCount()).toBe(
+      initialVisibleDeclarationRowsCount
+    )
+  })
+
+  it('Should be able to search for a Valid MRN and apply IPAFF filters', async () => {
+    await SearchPage.clickNavSearchLink()
+    await SearchPage.search(dropdownMrn)
+    expect(await SearchResultsPage.getResultText()).toContain(dropdownMrn)
+
+    await SearchPage.clickLatestTab()
+    const initialVisibleNotificationRowsCount =
+      await SearchPage.visibleNotificationRowsCount()
+    expect(initialVisibleNotificationRowsCount).toBeGreaterThan(0)
+
+    await SearchPage.selectNotificationAuthorityFilter('POAO')
+    expect(await SearchPage.getNotificationNoItemsMessage()).toContain(
+      'There are no commodities that match the filters selected.'
+    )
+    expect(await SearchPage.visibleNotificationRowsCount()).toBe(0)
+
+    await SearchPage.selectNotificationAuthorityFilter('Show all')
+    await expect(await SearchPage.visibleNotificationRowsCount()).toBe(
+      initialVisibleNotificationRowsCount
+    )
+  })
 })
 
 function expectConsecutiveSubsequence(arr, subseq) {
