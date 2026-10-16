@@ -73,9 +73,7 @@ describe('TRACES CHED search results page filter tests', () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(mrn)
 
-    expect(
-      await ChedDeclarationPage.tracesChedTable(tracesChed).isExisting()
-    ).toBe(true)
+    await expect(ChedDeclarationPage.tracesChedTable(tracesChed)).toExist()
 
     const authorityFilter = $('#authority')
     await authorityFilter.waitForDisplayed({ timeout: 5000 })
@@ -109,6 +107,15 @@ describe('TRACES CHED search results page filter tests', () => {
         timeoutMsg:
           'Selecting an MRN did not hide the other declaration timeline'
       }
+    )
+
+    const tracesChedEntry = TimelinePage.tracesChedTimelineEntry(tracesChed)
+    await tracesChedEntry.waitForDisplayed({ timeout: 5000 })
+    await expect(tracesChedEntry.$('.timeline-detail-label')).toHaveText(
+      'CHED status'
+    )
+    await expect(tracesChedEntry.$('.btms-timeline-event-source')).toHaveText(
+      'TRACES to BTMS'
     )
   })
 })
