@@ -29,6 +29,12 @@ class TimelinePage extends Page {
     return $(`div.mrn-timeline[data-timeline_ref="${mrn}"]`)
   }
 
+  tracesChedTimelineEntry(reference) {
+    return $(
+      `//div[contains(@class, "moj-timeline__item")][.//h2//span[normalize-space()="${reference}"]]`
+    )
+  }
+
   async clickLatestTab() {
     await this.latestTab.click()
   }
