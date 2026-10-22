@@ -11,7 +11,8 @@ import {
   generateMrn,
   generateGmr,
   generateChed,
-  generateCorrelationId
+  generateCorrelationId,
+  convertChedForIpaff
 } from '../utils/id-generator.js'
 
 describe('Timeline Search', () => {
@@ -36,7 +37,7 @@ describe('Timeline Search', () => {
     await pause(2000)
     await sendCdsMessageFromFile('../data/timeline/2-cr.xml', {
       mrn,
-      ched,
+      ched: convertChedForIpaff(ched),
       correlationId: generateCorrelationId()
     })
     await pause(2000)
@@ -201,13 +202,62 @@ describe('Timeline Search', () => {
     )
     await expect(await TimelinePage.isTimelineMrnDropdownVisible()).toBe(true)
 
-    await TimelinePage.selectDropdownAndClickVisibleMoreDetails(dropdownMrn)
     const timelineTexts = await TimelinePage.allTimelineText(dropdownMrn)
+
+    const expectedOrderForCdsDecision = [
+      'CDS clearance request',
+      'CDS to BTMS',
+      'External version',
+      '3',
+      'Created'
+    ]
+
+    const expectedOrderForChed = [
+      dropdownChed,
+      'IPAFFS to BTMS',
+      'CHED status',
+      'SUBMITTED',
+      'Created'
+    ]
+
+    const expectedOrderForBtmsTrader = [
+      'BTMS decision',
+      'BTMS to CDS',
+      'CDS status',
+      'In progress - Awaiting trader',
+      'Decision number',
+      '1',
+      'External version',
+      '3',
+      'Created'
+    ]
+
+    const expectedOrderForBtmsIpaffs = [
+      'BTMS decision',
+      'BTMS to CDS',
+      'CDS status',
+      'In progress - Awaiting IPAFFS',
+      'Decision number',
+      '2',
+      'External version',
+      '3',
+      'Created'
+    ]
+
+    expectConsecutiveSubsequence(timelineTexts, expectedOrderForCdsDecision)
+    expectConsecutiveSubsequence(timelineTexts, expectedOrderForChed)
+    expectConsecutiveSubsequence(timelineTexts, expectedOrderForBtmsTrader)
+    expectConsecutiveSubsequence(timelineTexts, expectedOrderForBtmsIpaffs)
+
+    await TimelinePage.selectDropdownAndClickVisibleMoreDetails(dropdownMrn)
+
+    const timelineExpandedTexts =
+      await TimelinePage.allTimelineText(dropdownMrn)
 
     const expectedTextForFirstMrn = [
       `Item 1 - SALSICCIA PURO SUINO ${dropdownMrn}`
     ]
-    expectConsecutiveSubsequence(timelineTexts, expectedTextForFirstMrn)
+    expectConsecutiveSubsequence(timelineExpandedTexts, expectedTextForFirstMrn)
 
     await SearchPage.clickNavSearchLink()
     await SearchPage.search(dropdownMrn2)

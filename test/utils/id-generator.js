@@ -74,6 +74,12 @@ export const generateChed = () => generateChedOf('CHEDA')
 export const generateChedP = () => generateChedOf('CHEDP')
 export const generateChedPp = () => generateChedOf('CHEDPP')
 
+export const convertChedForIpaff = (ched = '') => {
+  const suffix = String(ched).match(/(\d{7})[VR]?$/i)?.[1]
+  if (!suffix) return ched
+  return `GBCHD2026.${suffix}`
+}
+
 export const generateDucr = () =>
   `4GB${str(DIGITS, 12)}-PORTACDMS${str(ALNUM, 6)}`
 
