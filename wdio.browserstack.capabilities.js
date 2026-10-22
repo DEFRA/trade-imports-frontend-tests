@@ -4,6 +4,7 @@ export const browserStackCapabilities = [
   // windows
   {
     browserName: 'Chrome',
+    'goog:loggingPrefs': { browser: 'ALL' },
     'wdio-ics:options': {
       logName: 'win-chrome'
     },
@@ -17,6 +18,7 @@ export const browserStackCapabilities = [
   },
   {
     browserName: 'Edge',
+    'goog:loggingPrefs': { browser: 'ALL' },
     'wdio-ics:options': {
       logName: 'win-edge'
     },
@@ -31,6 +33,7 @@ export const browserStackCapabilities = [
   // macOS
   {
     browserName: 'Chrome',
+    'goog:loggingPrefs': { browser: 'ALL' },
     'wdio-ics:options': {
       logName: 'osx-chrome'
     },
