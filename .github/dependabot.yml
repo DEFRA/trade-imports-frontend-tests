@@ -65,3 +65,17 @@ updates:
 
     reviewers:
       - DEFRA/trade-data-matching
+
+  ###########################################################
+  # DOCKER BASE IMAGE (keeps the pinned Node version patched)
+  ###########################################################
+  - package-ecosystem: docker
+    directory: /
+
+    schedule:
+      interval: daily
+      time: "00:00"
+      timezone: "Europe/London"
+
+    reviewers:
+      - DEFRA/trade-data-matching
