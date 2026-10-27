@@ -12,25 +12,25 @@ RUN apk update && \
     aws-cli
 
 # Upgrade npm, then patch the packages npm bundles at vulnerable versions (brace-expansion 5.0.9 /
-# tar 7.5.22 / undici 6.28.0 / ip-address 10.5.0 / postcss-selector-parser 7.1.4) that cannot be
+# tar 7.5.22 / undici 6.28.1 / ip-address 10.7.3 / postcss-selector-parser 7.1.4) that cannot be
 # fixed via package.json overrides on a global install. The base image ships npm twice
 # (/usr/local/lib/node_modules and /home/node/.npm-global/lib/node_modules); patch both, as
 # either copy can be the one npm resolves.
 RUN npm install -g npm@12.2.0 && \
     NPM_NM=$(npm root -g)/npm/node_modules && \
     ROOT_NPM_NM=/usr/local/lib/node_modules/npm/node_modules && \
-    npm pack --pack-destination /tmp brace-expansion@5.0.12 tar@7.5.22 undici@6.28.1 ip-address@10.7.3 postcss-selector-parser@7.1.6 && \
+    npm pack --pack-destination /tmp brace-expansion@5.0.12 tar@7.5.22 undici@6.29.1 ip-address@10.7.4 postcss-selector-parser@7.1.6 && \
     rm -rf $NPM_NM/brace-expansion $NPM_NM/tar $NPM_NM/undici $NPM_NM/ip-address $NPM_NM/postcss-selector-parser && \
     mkdir $NPM_NM/brace-expansion $NPM_NM/tar $NPM_NM/undici $NPM_NM/ip-address $NPM_NM/postcss-selector-parser && \
     tar xzf /tmp/brace-expansion-5.0.12.tgz --strip-components=1 -C $NPM_NM/brace-expansion && \
     tar xzf /tmp/tar-7.5.22.tgz --strip-components=1 -C $NPM_NM/tar && \
-    tar xzf /tmp/undici-6.28.1.tgz --strip-components=1 -C $NPM_NM/undici && \
-    tar xzf /tmp/ip-address-10.7.3.tgz --strip-components=1 -C $NPM_NM/ip-address && \
+    tar xzf /tmp/undici-6.29.1.tgz --strip-components=1 -C $NPM_NM/undici && \
+    tar xzf /tmp/ip-address-10.7.4.tgz --strip-components=1 -C $NPM_NM/ip-address && \
     tar xzf /tmp/postcss-selector-parser-7.1.6.tgz --strip-components=1 -C $NPM_NM/postcss-selector-parser && \
     for p in brace-expansion tar undici ip-address postcss-selector-parser; do \
       rm -rf $ROOT_NPM_NM/$p && cp -r $NPM_NM/$p $ROOT_NPM_NM/$p; \
     done && \
-    rm /tmp/brace-expansion-5.0.12.tgz /tmp/tar-7.5.22.tgz /tmp/undici-6.28.1.tgz /tmp/ip-address-10.7.3.tgz /tmp/postcss-selector-parser-7.1.6.tgz
+    rm /tmp/brace-expansion-5.0.12.tgz /tmp/tar-7.5.22.tgz /tmp/undici-6.29.1.tgz /tmp/ip-address-10.7.4.tgz /tmp/postcss-selector-parser-7.1.6.tgz
 
 WORKDIR /app
 
