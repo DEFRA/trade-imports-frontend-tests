@@ -12,7 +12,8 @@ export const browserStackCapabilities = [
       resolution: '1920x1080',
       browserVersion: 'latest',
       os: 'Windows',
-      osVersion: '11'
+      osVersion: '11',
+      networkLogs: 'true'
     }
   },
   {
@@ -25,7 +26,8 @@ export const browserStackCapabilities = [
       resolution: '1920x1080',
       browserVersion: 'latest',
       os: 'Windows',
-      osVersion: '11'
+      osVersion: '11',
+      networkLogs: 'true'
     }
   },
   // macOS
@@ -39,7 +41,8 @@ export const browserStackCapabilities = [
       resolution: '1920x1080',
       browserVersion: 'latest',
       os: 'OS X',
-      osVersion: 'Sonoma' // Changed from 'Sequoia'
+      osVersion: 'Sonoma', // Changed from 'Sequoia'
+      networkLogs: 'true'
     }
   }
 ]
