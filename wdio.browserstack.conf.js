@@ -18,7 +18,8 @@ export const config = {
   maxInstances: 3,
   commonCapabilities: {
     'bstack:options': {
-      buildName: `trade-imports-frontend-tests-${process.env.ENVIRONMENT}`
+      buildName: `trade-imports-frontend-tests-${process.env.ENVIRONMENT}`,
+      networkLogs: true
     }
   },
   capabilities: browserStackCapabilities,
