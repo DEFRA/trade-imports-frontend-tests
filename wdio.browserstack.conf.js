@@ -19,7 +19,7 @@ export const config = {
   commonCapabilities: {
     'bstack:options': {
       buildName: `trade-imports-frontend-tests-${process.env.ENVIRONMENT}`,
-      networkLogs: true
+      networkLogs: 'true'
     }
   },
   capabilities: browserStackCapabilities,
