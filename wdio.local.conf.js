@@ -18,11 +18,12 @@ export const config = {
   exclude: [],
   maxInstances: 1,
   capabilities: debug
-    ? [{ browserName: 'chrome' }]
+    ? [{ browserName: 'chrome', 'goog:loggingPrefs': { browser: 'ALL' } }]
     : [
         {
           maxInstances: 1,
           browserName: 'chrome',
+          'goog:loggingPrefs': { browser: 'ALL' },
           'goog:chromeOptions': {
             args: [
               '--no-sandbox',
@@ -59,6 +60,7 @@ export const config = {
   ],
   mochaOpts: {
     ui: 'bdd',
+    require: ['./test/utils/console-guard.js'],
     timeout: debug ? oneHour : 60000
   },
   beforeTest: async function () {
