@@ -85,6 +85,9 @@
     "@browserstack/ai-sdk-node": {
       "uuid": "11.1.1"
     },
-    "fast-xml-parser": "5.12.0"
+    "fast-xml-parser": "5.12.0",
+    "glob": "14.0.2",
+    "minimatch": "11.0.1",
+    "@puppeteer/browsers": "3.2.6"
   }
 }
