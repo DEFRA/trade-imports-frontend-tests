@@ -75,7 +75,7 @@ export const config = {
   ],
   mochaOpts: {
     ui: 'bdd',
-    // require: ['./test/utils/console-guard.js'],
+    // require: ['./test/utils/console-guard.js'], //disabling for now
     timeout: debug ? oneHour : 120000
   },
   onPrepare: function () {
