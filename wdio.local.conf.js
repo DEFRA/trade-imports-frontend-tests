@@ -60,7 +60,7 @@ export const config = {
   ],
   mochaOpts: {
     ui: 'bdd',
-    require: ['./test/utils/console-guard.js'],
+    // require: ['./test/utils/console-guard.js'],
     timeout: debug ? oneHour : 60000
   },
   beforeTest: async function () {
