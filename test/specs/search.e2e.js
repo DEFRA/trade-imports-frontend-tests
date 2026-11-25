@@ -259,7 +259,7 @@ describe('Search page', () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search('')
     expect(await SearchPage.getSearchErrorText()).toContain(
-      'Enter an MRN, CHED, GMR, VRN or TRN reference'
+      'Enter an MRN, CHED, IUU, GMR, VRN or TRN reference'
     )
   })
 
