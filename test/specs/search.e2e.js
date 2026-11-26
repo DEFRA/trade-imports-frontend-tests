@@ -261,7 +261,7 @@ describe('Search page', () => {
     const iuuOption = process.env.PROFILE === 'NO_TRACES' ? '' : ', IUU'
     expect(await SearchPage.getSearchErrorText()).toContain(
       `Enter an MRN, CHED${iuuOption}, GMR, VRN or TRN reference`
-    )    
+    )
   })
 
   it('should see error message saying valid GMR not found', async () => {
