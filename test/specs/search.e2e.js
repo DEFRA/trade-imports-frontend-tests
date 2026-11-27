@@ -258,8 +258,9 @@ describe('Search page', () => {
   it('Should see error message when searching for empty search term', async () => {
     await SearchPage.clickNavSearchLink()
     await SearchPage.search('')
+    const iuuOption = process.env.PROFILE === 'NO_TRACES' ? '' : ', IUU'
     expect(await SearchPage.getSearchErrorText()).toContain(
-      'Enter an MRN, CHED, IUU, GMR, VRN or TRN reference'
+      `Enter an MRN, CHED${iuuOption}, GMR, VRN or TRN reference`
     )
   })
 
