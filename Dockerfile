@@ -11,14 +11,15 @@ RUN apk update && \
     curl \
     aws-cli
 
-# Upgrade npm, then patch the vulnerable packages bundled with the global CLI.
-# The project package.json overrides apply only to project dependencies.
-# The earlier patches replace brace-expansion 5.0.9, tar 7.5.22, undici 6.28.1,
-# ip-address 10.7.3 and postcss-selector-parser 7.1.4.
-# Also replace glob 13.0.6 (CVE-2026-118773) and minimatch 10.2.5 (CVE-2026-118764).
-# glob 14 needs path-scurry 3, and minimatch 11 needs nonrecursive-glob-match.
-# Patch both npm copies under /usr/local/lib/node_modules and
-# /home/node/.npm-global/lib/node_modules, as either can be the one npm resolves.
+# The image contains two npm installations. Trivy scans the dependencies
+# bundled with both, and package.json overrides only apply to the project.
+# Both npm installations use the versions pinned in PACKAGES for
+# brace-expansion, tar, undici, ip-address, postcss-selector-parser,
+# glob and minimatch.
+# glob 14.0.2 fixes CVE-2026-118773 and requires path-scurry 3.
+# minimatch 11.0.1 fixes CVE-2026-118764 and requires
+# @isaacs/nonrecursive-glob-match. Both dependencies are bundled alongside
+# the patched packages so npm can load them at runtime.
 RUN set -e; \
     npm install -g npm@12.2.0; \
     PATCH_DIR=$(mktemp -d); \
