@@ -11,8 +11,14 @@ RUN apk update && \
     curl \
     aws-cli
 
-# npm bundles its own dependencies, so patch both global installations.
+# Upgrade npm, then patch the vulnerable packages bundled with the global CLI.
+# The project package.json overrides apply only to project dependencies.
+# The earlier patches replace brace-expansion 5.0.9, tar 7.5.22, undici 6.28.1,
+# ip-address 10.7.3 and postcss-selector-parser 7.1.4.
+# Also replace glob 13.0.6 (CVE-2026-118773) and minimatch 10.2.5 (CVE-2026-118764).
 # glob 14 needs path-scurry 3, and minimatch 11 needs nonrecursive-glob-match.
+# Patch both npm copies under /usr/local/lib/node_modules and
+# /home/node/.npm-global/lib/node_modules, as either can be the one npm resolves.
 RUN set -e; \
     npm install -g npm@12.2.0; \
     PATCH_DIR=$(mktemp -d); \
